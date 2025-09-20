@@ -43,12 +43,15 @@
 		"@tiptap/core": "^3.4.4",
 		"@tiptap/pm": "^3.4.4",
 		"@tiptap/starter-kit": "^3.4.4",
+		"@types/bcrypt": "^6.0.0",
+		"bcrypt": "^6.0.0",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
 		"googleapis": "^159.0.0",
 		"lodash-es": "^4.17.21",
 		"nodemailer": "^7.0.6",
 		"stripe": "^18.5.0",
+		"svelte-forms-lib": "^2.0.1",
 		"yup": "^1.7.0"
 	}
 }

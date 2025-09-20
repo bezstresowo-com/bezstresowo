@@ -1,1 +1,4 @@
-export type Props = { content?: string; onUpdate?: (content: string) => void };
+export interface Props {
+	content?: string;
+	onUpdate?: (content: string) => void;
+}

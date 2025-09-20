@@ -18,7 +18,6 @@ function parseTranslation(locale: Locale, key: string, vars?: Record<string, str
 	}
 
 	const keys = key.split('.');
-	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	let text = translationFile as any;
 	for (const k of keys) {
 		try {
