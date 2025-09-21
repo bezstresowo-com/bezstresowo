@@ -1,10 +1,14 @@
+# bezstresowo.org
+
 [![Netlify Status](https://api.netlify.com/api/v1/badges/22ddfc27-a96c-43d5-a7e2-bee82035821d/deploy-status)](https://app.netlify.com/projects/bezstresowo/deploys)
 
-# sv
+[Admin Auth](./ADMIN_AUTH.md)
+
+## sv
 
 Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
 
-## Creating a project
+### Creating a project
 
 If you're seeing this, you've probably already done this step. Congrats!
 
@@ -16,7 +20,7 @@ npx sv create
 npx sv create my-app
 ```
 
-## Developing
+### Developing
 
 Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
 
@@ -27,7 +31,7 @@ npm run dev
 npm run dev -- --open
 ```
 
-## Building
+### Building
 
 To create a production version of your app:
 
