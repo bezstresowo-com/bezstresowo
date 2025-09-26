@@ -1,12 +1,12 @@
-import { ADMIN_PASSWORD } from '$env/static/private';
+import { ADMIN_PASSWORD_HASH } from '$env/static/private';
+import { HttpStatus } from '$shared/enums/http-status';
 import { setAdminAuthCookie } from '$shared/server/functions/admin-auth.js';
 import { validateBody } from '$shared/server/functions/validate-body.js';
-import bcrypt from 'bcrypt';
+import { createHash } from 'crypto';
 
 import { json } from '@sveltejs/kit';
 
 import { LoginRequestDto } from './model';
-import { HttpStatus } from '$shared/enums/http-status';
 
 export async function POST({ request, cookies }) {
 	const body = await request.json();
@@ -18,9 +18,10 @@ export async function POST({ request, cookies }) {
 		dto: { password }
 	} = validationResult;
 
-	const bcryptMatch = await bcrypt.compare(password, ADMIN_PASSWORD);
-	// TODO: make it work with only bcrypt
-	if (bcryptMatch || password === 'RVerpmaSNESC') {
+	const hash = createHash('sha256');
+	hash.update(password);
+	const passwordHash = hash.digest('hex');
+	if (ADMIN_PASSWORD_HASH === passwordHash) {
 		// Password is correct - set auth cookie
 		setAdminAuthCookie(cookies);
 		return json({ success: true, message: 'Login successful' });

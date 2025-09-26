@@ -3,7 +3,7 @@ import { derived, writable } from 'svelte/store';
 
 import { Locale, TRANSLATIONS } from './model';
 
-export const DEFAULT_LOCALE = Locale.enUK;
+export const DEFAULT_LOCALE = Locale.enUS;
 export const currentLocale = writable(DEFAULT_LOCALE);
 
 export const translate = derived(currentLocale, ($currentLocale) => (key: string, vars = {}) => {

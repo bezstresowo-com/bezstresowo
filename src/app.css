@@ -1,3 +1,16 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@theme {
+	--color-primary: oklch(0.3225 0.0523 257.54);
+	--color-secondary: oklch(0.8987 0.0929 81.52);
+	--color-accent: oklch(0.7817 0.1465 83.03);
+	--color-success: oklch(0.552 0.1234 157.01);
+	--color-warning: oklch(0.8442 0.172159 84.9338);
+	--color-danger: oklch(0.5915 0.202 21.24);
+}
+
+.roboto {
+	font-family: 'Roboto', sans-serif;
+}
