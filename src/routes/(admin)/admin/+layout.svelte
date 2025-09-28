@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
 	import { HttpMethod } from '$shared/enums/http-method';
 	import type { Props } from './layout.model';
 
@@ -7,13 +8,12 @@
 
 	async function handleLogout() {
 		try {
-			const response = await fetch('/api/admin/logout', {
+			const response = await fetch(resolve('/api/admin/logout'), {
 				method: HttpMethod.DELETE
 			});
 
 			if (response.ok) {
-				// Redirect to login page after successful logout
-				goto('/admin/login');
+				goto(resolve('/(admin)/admin/login'));
 			} else {
 				console.error('Logout failed');
 			}

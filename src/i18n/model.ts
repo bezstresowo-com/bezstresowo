@@ -1,3 +1,5 @@
+import { asset } from '$app/paths';
+
 import enUK from './translations/en-US.json';
 import plPL from './translations/pl-PL.json';
 import ukUA from './translations/uk-UA.json';
@@ -21,21 +23,21 @@ export const LOCALES_MAP: Record<
 	[Locale.enUS]: {
 		label: 'language.english.label',
 		icon: {
-			src: '/flags/us.svg',
+			src: asset('/flags/us.svg'),
 			alt: 'language.english.alt'
 		}
 	},
 	[Locale.plPL]: {
 		label: 'language.polish.label',
 		icon: {
-			src: '/flags/pl.svg',
+			src: asset('/flags/pl.svg'),
 			alt: 'language.polish.alt'
 		}
 	},
 	[Locale.ukUA]: {
 		label: 'language.ukrainian.label',
 		icon: {
-			src: '/flags/ua.svg',
+			src: asset('/flags/ua.svg'),
 			alt: 'language.ukrainian.alt'
 		}
 	}

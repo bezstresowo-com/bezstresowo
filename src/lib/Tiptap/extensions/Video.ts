@@ -39,7 +39,7 @@ export const Video = Node.create({
 		return ({ node }) => {
 			const div = document.createElement('div');
 			div.className = 'aspect-video';
-			
+
 			const video = document.createElement('video');
 			video.src = node.attrs.src;
 			video.controls = node.attrs.controls;
@@ -47,7 +47,7 @@ export const Video = Node.create({
 			video.style.height = node.attrs.height;
 			video.preload = node.attrs.preload;
 			video.style.maxWidth = '100%';
-			
+
 			div.append(video);
 			return {
 				dom: div

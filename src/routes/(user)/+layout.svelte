@@ -2,17 +2,18 @@
 	import { translate } from '$i18n';
 	import { LanguageSelect } from '$lib';
 	import { HEADER_PATHS } from './model';
+	import { resolve } from '$app/paths';
 
 	let { children } = $props();
 </script>
 
 <header class="fixed top-0 left-0 w-full bg-primary p-4">
 	<div class="mx-auto flex max-w-[1280px] items-center gap-4">
-		<a class="text-2xl font-bold text-accent" href="/home">Bezstresowo</a>
+		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>Bezstresowo</a>
 
 		<span class="flex-auto"></span>
 
-		{#each HEADER_PATHS as { href, label }}
+		{#each HEADER_PATHS as { href, label }, i (i)}
 			<a
 				{href}
 				class="font-bold text-secondary decoration-secondary decoration-2 underline-offset-4 hover:underline"

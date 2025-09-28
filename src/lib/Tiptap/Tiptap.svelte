@@ -51,13 +51,15 @@
 		if (isNil(editor)) return;
 
 		// Show options for URL or file upload
-		const choice = window.confirm('Click OK to enter a video URL, or Cancel to upload a file from your computer');
-		
+		const choice = window.confirm(
+			'Click OK to enter a video URL, or Cancel to upload a file from your computer'
+		);
+
 		if (choice) {
 			// URL input
 			const existingVideoSrc = editor.getAttributes('video').src;
 			const videoSrc = window.prompt('Video URL', existingVideoSrc);
-			
+
 			if (videoSrc) {
 				insertVideoWithSrc(videoSrc);
 			}
@@ -70,7 +72,7 @@
 	function handleFileUpload(event: Event) {
 		const target = event.target as HTMLInputElement;
 		const file = target.files?.[0];
-		
+
 		if (file && file.type.startsWith('video/')) {
 			// Create a local URL for the uploaded video file
 			const videoSrc = URL.createObjectURL(file);
@@ -78,14 +80,14 @@
 		} else if (file) {
 			alert('Please select a valid video file.');
 		}
-		
+
 		// Reset the input
 		target.value = '';
 	}
 
 	function insertVideoWithSrc(videoSrc: string) {
 		if (isNil(editor)) return;
-		
+
 		if (editor.isActive('video')) {
 			editor.commands.updateAttributes('video', { src: videoSrc });
 		} else {

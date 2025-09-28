@@ -1,18 +1,20 @@
+import { resolve } from '$app/paths';
+
 export const HEADER_PATHS = [
 	{
 		label: 'user.header.items.home',
-		href: '/home'
+		href: resolve('/(user)/home')
 	},
 	{
 		label: 'user.header.items.blog',
-		href: '/blog'
+		href: resolve('/(user)/blog')
 	},
 	{
 		label: 'user.header.items.shop',
-		href: '/shop'
+		href: resolve('/(user)/shop')
 	},
 	{
 		label: 'user.header.items.reservations',
-		href: '/reservations'
+		href: resolve('/(user)/reservations')
 	}
 ];

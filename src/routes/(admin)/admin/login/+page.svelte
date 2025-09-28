@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { resolve } from '$app/paths';
+	import { translate } from '$i18n';
 	import { HttpMethod } from '$shared/enums/http-method';
 	import { getBaseHeaders } from '$shared/functions/get-base-headers';
 	import { isEmpty, isNil } from 'lodash-es';
@@ -34,7 +36,7 @@
 			isLoading = true;
 
 			try {
-				const response = await fetch('/api/admin/login', {
+				const response = await fetch(resolve('/api/admin/login'), {
 					method: HttpMethod.POST,
 					headers: getBaseHeaders(),
 					body: JSON.stringify({ password: values.password })
@@ -42,11 +44,10 @@
 
 				const result = await response.json();
 
-				if (response.ok && result.success) {
-					// Redirect to admin dashboard
-					goto('/admin');
+				if (response.ok) {
+					goto(resolve('/(admin)/admin'));
 				} else {
-					httpError = result.message || 'Login failed';
+					httpError = result.message;
 				}
 			} catch (err) {
 				httpError = 'An error occurred during login';
@@ -106,7 +107,7 @@
 			{#if !isNil(httpError)}
 				<div class="rounded-md bg-red-50 p-4">
 					<div class="text-sm text-red-700">
-						{httpError}
+						{$translate(httpError)}
 					</div>
 				</div>
 			{/if}

@@ -62,7 +62,7 @@
 			class="rounded-lg border-2 border-secondary bg-primary p-2 text-secondary"
 		>
 			<Select.Viewport class="flex flex-col gap-4">
-				{#each ITEMS as { value, label, disabled }}
+				{#each ITEMS as { value, label, disabled }, i (i + value)}
 					<Select.Item {value} {label} {disabled}>
 						{#snippet children({ selected })}
 							<div
