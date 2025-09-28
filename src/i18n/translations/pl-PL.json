@@ -1,0 +1,50 @@
+{
+	"language": {
+		"english": {
+			"label": "English",
+			"alt": "Flaga języka angielskiego"
+		},
+		"polish": {
+			"label": "Polski",
+			"alt": "Flaga języka polskiego"
+		},
+		"ukrainian": {
+			"label": "Українська",
+			"alt": "Flaga języka ukraińskiego"
+		}
+	},
+
+	"user": {
+		"header": {
+			"items": {
+				"home": "Strona główna",
+				"blog": "Blog",
+				"shop": "Sklep",
+				"reservations": "Rezerwacje"
+			}
+		},
+		"home": {},
+		"shop": {},
+		"blog": {},
+		"reservations": {}
+	},
+
+	"admin": {
+		"blog": {}
+	},
+
+	"api": {
+		"contact": {
+			"errors": {
+				"general": "Nie udało się wysłać prośby o kontakt. Spróbuj ponownie."
+			}
+		},
+		"admin": {
+			"login": {
+				"errors": {
+					"invalidPassword": "Nieprawidłowe hasło."
+				}
+			}
+		}
+	}
+}

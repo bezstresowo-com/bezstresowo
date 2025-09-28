@@ -8,10 +8,37 @@ export enum Locale {
 	ukUA = 'uk-UA'
 }
 
-export const LOCALES_MAP: Record<Locale, { label: string; icon: string }> = {
-	[Locale.enUS]: { label: 'language.english', icon: '/flags/us.svg' },
-	[Locale.plPL]: { label: 'language.polish', icon: '/flags/pl.svg' },
-	[Locale.ukUA]: { label: 'language.ukrainian', icon: '/flags/ua.svg' }
+export const LOCALES_MAP: Record<
+	Locale,
+	{
+		label: string;
+		icon: {
+			src: string;
+			alt: string;
+		};
+	}
+> = {
+	[Locale.enUS]: {
+		label: 'language.english.label',
+		icon: {
+			src: '/flags/us.svg',
+			alt: 'language.english.alt'
+		}
+	},
+	[Locale.plPL]: {
+		label: 'language.polish.label',
+		icon: {
+			src: '/flags/pl.svg',
+			alt: 'language.polish.alt'
+		}
+	},
+	[Locale.ukUA]: {
+		label: 'language.ukrainian.label',
+		icon: {
+			src: '/flags/ua.svg',
+			alt: 'language.ukrainian.alt'
+		}
+	}
 };
 
 export const TRANSLATIONS = {
@@ -19,3 +46,19 @@ export const TRANSLATIONS = {
 	[Locale.plPL]: plPL,
 	[Locale.ukUA]: ukUA
 };
+
+export function getUserPreferredLocale(): Locale {
+	const userPreferredLangs = navigator.languages || [navigator.language];
+	const supportedLocales = Object.values(Locale);
+
+	for (const lang of userPreferredLangs) {
+		const baseLang = lang.slice(0, 2);
+		const matchedLocale = supportedLocales.find((supported) => supported.startsWith(baseLang));
+
+		if (matchedLocale) {
+			return matchedLocale;
+		}
+	}
+
+	return Locale.enUS;
+}

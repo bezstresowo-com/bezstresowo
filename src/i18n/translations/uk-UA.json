@@ -1,0 +1,50 @@
+{
+	"language": {
+		"english": {
+			"label": "English",
+			"alt": "Прапор англійської мови"
+		},
+		"polish": {
+			"label": "Polski",
+			"alt": "Прапор польської мови"
+		},
+		"ukrainian": {
+			"label": "Українська",
+			"alt": "Прапор української мови"
+		}
+	},
+
+	"user": {
+		"header": {
+			"items": {
+				"home": "Головна",
+				"blog": "Блог",
+				"shop": "Магазин",
+				"reservations": "Бронювання"
+			}
+		},
+		"home": {},
+		"shop": {},
+		"blog": {},
+		"reservations": {}
+	},
+
+	"admin": {
+		"blog": {}
+	},
+
+	"api": {
+		"contact": {
+			"errors": {
+				"general": "Не вдалося надіслати запит на контакт. Спробуйте ще раз."
+			}
+		},
+		"admin": {
+			"login": {
+				"errors": {
+					"invalidPassword": "Неправильний пароль."
+				}
+			}
+		}
+	}
+}
