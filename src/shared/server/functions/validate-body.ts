@@ -2,7 +2,7 @@ import { type ClassConstructor, plainToInstance } from 'class-transformer';
 import { validate } from 'class-validator';
 
 import { json } from '@sveltejs/kit';
-import { HttpStatus } from '$shared/enums/http-status';
+import { HttpStatus } from '$shared/global/enums/http-status';
 
 type ValidationResult<T> =
 	| {

@@ -1,6 +1,6 @@
-import { HttpStatus } from '$shared/enums/http-status.js';
+import { HttpStatus } from '$shared/global/enums/http-status.js';
 import { clearAdminAuthCookie } from '$shared/server/functions/admin-auth';
-import type { HttpStatusResponse } from '$shared/types/http.js';
+import type { HttpStatusResponse } from '$shared/global/types/http.js';
 import { json } from '@sveltejs/kit';
 
 export async function DELETE({ cookies }) {

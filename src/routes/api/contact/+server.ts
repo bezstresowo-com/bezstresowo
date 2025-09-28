@@ -1,5 +1,5 @@
 import { EMAIL_SENDER } from '$env/static/private';
-import { HttpStatus } from '$shared/enums/http-status';
+import { HttpStatus } from '$shared/global/enums/http-status';
 import { validateBody } from '$shared/server/functions/validate-body';
 import { EmailService } from '$shared/server/services/email-service/email-service';
 
@@ -7,7 +7,7 @@ import { json } from '@sveltejs/kit';
 
 import { ContactRequestDto } from './model';
 
-import type { HttpErrorResponse, HttpStatusResponse } from '$shared/types/http';
+import type { HttpErrorResponse, HttpStatusResponse } from '$shared/global/types/http';
 
 export async function POST({ request }) {
 	const validationResult = await validateBody(await request.json(), ContactRequestDto);
