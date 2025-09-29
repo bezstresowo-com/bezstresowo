@@ -62,14 +62,32 @@
 	{#each FORM_FIELDS_ORDER as key, i (i + key)}
 		{#if FORM_FIELDS[key].element === 'input'}
 			<div>
-				<label for=""></label>
-				<input type="text" />
+				<label for={key}>{$translate(`user.contactForm.${key}.label`)}</label>
+				<input
+					id={key}
+					name={key}
+					type={FORM_FIELDS[key].type}
+					value={$form[key]}
+					onchange={handleChange}
+					onblur={handleChange}
+				/>
 			</div>
 		{:else if FORM_FIELDS[key].element === 'textarea'}
 			<div>
-				<label for={key}></label>
-				<input id={key} name={key}  />
+				<label for={key}>{$translate(`user.contactForm.${key}.label`)}</label>
+				<textarea
+					id={key}
+					name={key}
+					value={$form[key]}
+					onchange={handleChange}
+					onblur={handleChange}
+				></textarea>
 			</div>
+		{/if}
+		{#if $errors[key] && $touched[key]}
+			{#each $errors[key] as error, j (j + error)}
+				<small class="text-sm text-red-500">{$translate(error)}</small>
+			{/each}
 		{/if}
 	{/each}
 
