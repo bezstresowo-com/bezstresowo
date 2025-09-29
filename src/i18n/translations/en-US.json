@@ -75,8 +75,8 @@
 					"errors": {
 						"matches": "Subject is invalid",
 						"required": "Subject is required",
-						"min": "Temat jest za krótki",
-						"max": "Temat jest za długi"
+						"min": "Subject is too short",
+						"max": "Subject is too long"
 					}
 				},
 				"message": {
