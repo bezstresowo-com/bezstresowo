@@ -15,6 +15,13 @@
 	},
 
 	"user": {
+		"pages": {
+			"home": {},
+			"shop": {},
+			"blog": {},
+			"reservations": {}
+		},
+
 		"header": {
 			"items": {
 				"home": "Strona główna",
@@ -23,10 +30,8 @@
 				"reservations": "Rezerwacje"
 			}
 		},
-		"home": {},
-		"shop": {},
-		"blog": {},
-		"reservations": {}
+
+		"contactForm": {}
 	},
 
 	"admin": {

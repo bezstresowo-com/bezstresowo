@@ -1,18 +1,66 @@
 import * as yup from 'yup';
-const prefix = 'contactForm.form';
+
+const prefix = 'user.contactForm.fields';
 
 export const SCHEMA = yup.object().shape({
-	name: yup.string().required(`${prefix}.name.errors.required`),
-	companyName: yup.string().required(`${prefix}.companyName.errors.required`),
+	name: yup
+		.string()
+		.required(`${prefix}.name.errors.required`)
+		.min(1, `${prefix}.name.errors.min`)
+		.max(100, `${prefix}.name.errors.max`),
+	surname: yup
+		.string()
+		.required(`${prefix}.surname.errors.required`)
+		.min(1, `${prefix}.surname.errors.min`)
+		.max(100, `${prefix}.surname.errors.max`),
 	email: yup
 		.string()
-		.email(`${prefix}.email.errors.invalid`)
+		.email(`${prefix}.email.errors.email`)
 		.required(`${prefix}.email.errors.required`),
 	phone: yup
 		.string()
-		.matches(/^[\d+\-\s]+$/, `${prefix}.phone.errors.invalid`)
+		.matches(/^[\d+\-\s]+$/, `${prefix}.phone.errors.matches`)
 		.required(`${prefix}.phone.errors.required`),
-	message: yup.string().required(`${prefix}.message.errors.required`)
+	subject: yup
+		.string()
+		.required(`${prefix}.subject.errors.required`)
+		.min(10, `${prefix}.subject.errors.min`)
+		.max(150, `${prefix}.subject.errors.max`),
+	message: yup
+		.string()
+		.required(`${prefix}.message.errors.required`)
+		.min(100, `${prefix}.message.errors.min`)
+		.max(10_000, `${prefix}.message.errors.max`)
 });
 
 export type ContactFormValue = yup.InferType<typeof SCHEMA>;
+
+export const FORM_INITIAL_VALUE: ContactFormValue = {
+	email: '',
+	message: '',
+	name: '',
+	phone: '',
+	subject: '',
+	surname: ''
+};
+
+export const FORM_FIELDS: Record<
+	keyof ContactFormValue,
+	{ type: 'input' | 'textarea'; placement: 'full' | 'shared' }
+> = {
+	name: { type: 'input', placement: 'shared' },
+	surname: { type: 'input', placement: 'shared' },
+	email: { type: 'input', placement: 'full' },
+	phone: { type: 'input', placement: 'full' },
+	subject: { type: 'input', placement: 'full' },
+	message: { type: 'textarea', placement: 'full' }
+};
+
+export const FORM_FIELDS_ORDER: (keyof ContactFormValue)[] = [
+	'name',
+	'surname',
+	'email',
+	'phone',
+	'subject',
+	'message'
+];

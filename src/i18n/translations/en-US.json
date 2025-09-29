@@ -15,6 +15,13 @@
 	},
 
 	"user": {
+		"pages": {
+			"home": {},
+			"shop": {},
+			"blog": {},
+			"reservations": {}
+		},
+
 		"header": {
 			"items": {
 				"home": "Home",
@@ -23,10 +30,65 @@
 				"reservations": "Reservations"
 			}
 		},
-		"home": {},
-		"shop": {},
-		"blog": {},
-		"reservations": {}
+
+		"contactForm": {
+			"title": "",
+			"submit": "",
+			"fields": {
+				"name": {
+					"label": "",
+					"placeholder": "",
+					"errors": {
+						"required": "",
+						"min": "",
+						"max": ""
+					}
+				},
+				"surname": {
+					"label": "",
+					"placeholder": "",
+					"errors": {
+						"required": "",
+						"min": "",
+						"max": ""
+					}
+				},
+				"email": {
+					"label": "",
+					"placeholder": "",
+					"errors": {
+						"email": "",
+						"required": ""
+					}
+				},
+				"phone": {
+					"label": "",
+					"placeholder": "",
+					"errors": {
+						"matches": "",
+						"required": ""
+					}
+				},
+				"subject": {
+					"label": "",
+					"placeholder": "",
+					"errors": {
+						"required": "",
+						"min": "",
+						"max": ""
+					}
+				},
+				"message": {
+					"label": "",
+					"placeholder": "",
+					"errors": {
+						"required": "",
+						"min": "",
+						"max": ""
+					}
+				}
+			}
+		}
 	},
 
 	"admin": {

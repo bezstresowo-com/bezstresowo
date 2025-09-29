@@ -15,6 +15,13 @@
 	},
 
 	"user": {
+		"pages": {
+			"home": {},
+			"shop": {},
+			"blog": {},
+			"reservations": {}
+		},
+
 		"header": {
 			"items": {
 				"home": "Головна",
@@ -23,10 +30,8 @@
 				"reservations": "Бронювання"
 			}
 		},
-		"home": {},
-		"shop": {},
-		"blog": {},
-		"reservations": {}
+
+		"contactForm": {}
 	},
 
 	"admin": {

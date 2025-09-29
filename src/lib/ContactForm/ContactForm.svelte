@@ -1,16 +1,68 @@
 <!-- TODO: @Vyvr - use yup and craeteFormSvelte to create a form, use bits-ui whenever needed (probably not) glhf -->
 <script lang="ts">
-	import type { ContactRequestDto } from '$api/contact/model';
 	import { resolve } from '$app/paths';
 	import { createForm } from 'svelte-forms-lib';
-	import * as yup from 'yup';
+	import { FORM_INITIAL_VALUE, SCHEMA } from './model';
+	import { HttpMethod } from '$shared/global/enums/http-method';
+	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
+	import { HttpStatus } from '$shared/global/enums/http-status';
+	import type { HttpErrorResponse } from '$shared/global/types/http';
+	import { translate } from '$i18n';
+	import type { ContactRequestDto } from '$api/contact/model';
 
-const ENDPOINT_PATH = resolve('/api/contact');
+	let isLoading = $state(false);
+	let generalError = $state<string | null>(null);
 
-const prefix = 'contactForm.form';
+	const {
+		form,
+		errors,
+		touched,
+		state: formState,
+		handleChange,
+		handleSubmit,
+		handleReset
+	} = createForm({
+		initialValues: FORM_INITIAL_VALUE,
+		validationSchema: SCHEMA,
+		async onSubmit({ email, message, name, phone, subject, surname }) {
+			isLoading = true;
+			try {
+				const body = JSON.stringify({
+					email,
+					tel: phone,
+					name,
+					subject,
+					surname,
+					message
+				} satisfies ContactRequestDto);
 
+				const response = await fetch(resolve('/api/contact'), {
+					method: HttpMethod.POST,
+					headers: getBaseHeaders(),
+					body
+				});
+
+				if (response.status !== HttpStatus.OK) {
+					generalError = ((await response.json()) as HttpErrorResponse).message;
+				} else {
+					handleReset();
+				}
+			} catch (error) {
+				console.log(error);
+			} finally {
+				isLoading = false;
+			}
+		}
+	});
 </script>
 
-<div>
-	<p>Hello World</p>
-</div>
+<form onsubmit={handleSubmit}>
+	<div class="text-lg font-bold">{$translate('user.contactForm.title')}</div>
+
+	<div>
+		<label for=""></label>
+		<input type="text" />
+	</div>
+
+	<button type="submit">{$translate('user.contactForm.submit')}</button>
+</form>
