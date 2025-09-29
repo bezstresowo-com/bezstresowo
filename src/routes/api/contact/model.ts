@@ -12,7 +12,7 @@ export class ContactRequestDto {
 	surname: string;
 
 	@IsDefined()
-	@IsPhoneNumber()
+	@IsPhoneNumber(undefined, {message: 'api.contact.errors.tel'})
 	tel: string;
 
 	@IsDefined()

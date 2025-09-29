@@ -98,7 +98,8 @@
 	"api": {
 		"contact": {
 			"errors": {
-				"general": "Nie udało się wysłać prośby o kontakt. Spróbuj ponownie."
+				"general": "Nie udało się wysłać prośby o kontakt. Spróbuj ponownie.",
+				"tel": "Niepoprawny numer telefonu."
 			}
 		},
 		"admin": {

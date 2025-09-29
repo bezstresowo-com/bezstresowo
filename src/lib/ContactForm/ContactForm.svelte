@@ -1,7 +1,7 @@
 <!-- TODO: @Vyvr - use yup and craeteFormSvelte to create a form, use bits-ui whenever needed (probably not) glhf -->
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { createForm } from 'svelte-forms-lib';
+	import { createForm, key } from 'svelte-forms-lib';
 	import { FORM_FIELDS, FORM_FIELDS_ORDER, FORM_INITIAL_VALUE, SCHEMA } from './model';
 	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
@@ -43,12 +43,13 @@
 				});
 
 				if (response.status !== HttpStatus.OK) {
+		  // console.log(await response.json().errors.message)
 					generalError = ((await response.json()) as HttpErrorResponse).message;
 				} else {
 					handleReset();
 				}
 			} catch (error) {
-				console.log(error);
+				console.log((error as Error).message);
 			} finally {
 				isLoading = false;
 			}
@@ -58,7 +59,6 @@
 
 <form onsubmit={handleSubmit}>
 	<div class="text-lg font-bold">{$translate('user.contactForm.title')}</div>
-
 	{#each FORM_FIELDS_ORDER as key, i (i + key)}
 		{#if FORM_FIELDS[key].element === 'input'}
 			<div>
@@ -85,11 +85,16 @@
 			</div>
 		{/if}
 		{#if $errors[key] && $touched[key]}
-			{#each $errors[key] as error, j (j + error)}
-				<small class="text-sm text-red-500">{$translate(error)}</small>
-			{/each}
+				<small class="text-sm text-red-500">{$translate($errors[key])}</small>
 		{/if}
 	{/each}
 
-	<button type="submit">{$translate('user.contactForm.submit')}</button>
+	{#if generalError}
+		<small class="text-sm text-red-500">{generalError}</small>
+	{/if}
+
+	<button
+		class="rounded-full bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
+		type="submit">{$translate('user.contactForm.submit')}</button
+	>
 </form>

@@ -74,7 +74,9 @@
 					"placeholder": "Enter the subject",
 					"errors": {
 						"matches": "Subject is invalid",
-						"required": "Subject is required"
+						"required": "Subject is required",
+						"min": "Temat jest za krótki",
+						"max": "Temat jest za długi"
 					}
 				},
 				"message": {
@@ -97,7 +99,8 @@
 	"api": {
 		"contact": {
 			"errors": {
-				"general": "Your contact request couldn't be sent. Please try again."
+				"general": "Your contact request couldn't be sent. Please try again.",
+				"tel": "Niepoprawny numer telefonu."
 			}
 		},
 		"admin": {
