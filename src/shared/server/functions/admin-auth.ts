@@ -1,19 +1,36 @@
 import type { Cookies } from '@sveltejs/kit';
 import { dev } from '$app/environment';
+import jwt from 'jsonwebtoken';
+import { isNil } from 'lodash-es';
+import { JWT_EXP_INTERVAL_MS, JWT_SECRET, COOKIE_MAX_AGE_S } from '$env/static/private';
+import { resolve } from '$app/paths';
+
+interface JwtPayload {
+	iat: number;
+	exp: number;
+}
 
 const ADMIN_SESSION_COOKIE = 'admin_session';
-const SESSION_SECRET = 'admin_authenticated'; // In production, this should be a proper signed JWT or encrypted token
 
 /**
  * Sets the admin authentication cookie
  */
 export function setAdminAuthCookie(cookies: Cookies) {
-	cookies.set(ADMIN_SESSION_COOKIE, SESSION_SECRET, {
+	const cookieMaxAge = Number(COOKIE_MAX_AGE_S.replaceAll('_', ''));
+	const tokenExpInterval = Number(JWT_EXP_INTERVAL_MS.replaceAll('_', ''));
+	const now = Date.now();
+	const tokenExpiresAt = now + tokenExpInterval;
+
+	const token = jwt.sign({ iat: now, exp: tokenExpiresAt } satisfies JwtPayload, JWT_SECRET, {
+		algorithm: 'HS512'
+	});
+
+	cookies.set(ADMIN_SESSION_COOKIE, token, {
 		path: '/',
 		httpOnly: true,
 		secure: !dev,
 		sameSite: 'strict',
-		maxAge: 60 * 60 * 24 * 7 // 7 days
+		maxAge: cookieMaxAge
 	});
 }
 
@@ -33,8 +50,18 @@ export function clearAdminAuthCookie(cookies: Cookies) {
  * Checks if the user is authenticated as admin
  */
 export function isAdminAuthenticated(cookies: Cookies) {
-	const sessionCookie = cookies.get(ADMIN_SESSION_COOKIE);
-	return sessionCookie === SESSION_SECRET;
+	const token = cookies.get(ADMIN_SESSION_COOKIE);
+
+	if (isNil(token)) {
+		return false;
+	}
+
+	const tokenExpInterval = Number(JWT_EXP_INTERVAL_MS.replaceAll('_', ''));
+	const { iat, exp } = jwt.verify(token, JWT_SECRET, { algorithms: ['HS512'] }) as JwtPayload;
+
+	const now = Date.now();
+	if (iat > now || exp < now || Math.abs(iat - exp) !== tokenExpInterval) return false;
+	return true;
 }
 
 /**
@@ -45,7 +72,7 @@ export function requireAdminAuth(cookies: Cookies) {
 		throw new Response(null, {
 			status: 302,
 			headers: {
-				location: '/admin/login'
+				location: resolve('/(admin)/admin/login')
 			}
 		});
 	}

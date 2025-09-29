@@ -1,10 +1,9 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { HttpMethod } from '$shared/enums/http-method';
-	import type { Props } from './layout.model';
+	import { HttpMethod } from '$shared/global/enums/http-method';
 
-	let { children, data }: Props = $props();
+	let { children, data } = $props();
 
 	async function handleLogout() {
 		try {
@@ -24,32 +23,27 @@
 </script>
 
 <div class="min-h-screen bg-gray-50">
-	{#if data.isAuthenticated}
-		<!-- Admin Header with Logout -->
-		<header class="border-b bg-white shadow-sm">
-			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div class="flex h-16 items-center justify-between">
-					<div class="flex items-center">
-						<h1 class="text-xl font-semibold text-gray-900">Admin Panel</h1>
-					</div>
-					<div class="flex items-center space-x-4">
+	<header class="border-b bg-white shadow-sm">
+		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+			<div class="flex h-16 items-center justify-between">
+				<div class="flex items-center">
+					<h1 class="text-lg font-bold">Bezstresowo Admin Panel</h1>
+				</div>
+				<div class="flex items-center space-x-4">
+					{#if data.isAuthenticated}
 						<button
 							onclick={handleLogout}
 							class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
 						>
 							Logout
 						</button>
-					</div>
+					{/if}
 				</div>
 			</div>
-		</header>
+		</div>
+	</header>
 
-		<!-- Admin Content -->
-		<main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-			{@render children()}
-		</main>
-	{:else}
-		<!-- Login page content -->
+	<main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
 		{@render children()}
-	{/if}
+	</main>
 </div>
