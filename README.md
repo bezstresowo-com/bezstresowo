@@ -1,6 +1,6 @@
 # bezstresowo.org
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/22ddfc27-a96c-43d5-a7e2-bee82035821d/deploy-status)](https://app.netlify.com/projects/bezstresowo/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6bb2ac70-4969-4416-9a92-c02ebf965186/deploy-status)](https://app.netlify.com/projects/bezstresowo/deploys)
 
 [Admin Auth](./ADMIN_AUTH.md)
 

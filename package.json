@@ -4,15 +4,24 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-		"dev": "vite dev",
-		"build": "vite build",
+		"dev": "prisma generate && prisma migrate deploy && vite dev",
+		"build": "prisma generate && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
-		"lint:fix": "prettier --check --write . && eslint . --fix"
+		"lint:fix": "prettier --check --write . && eslint . --fix",
+		"prisma:generate": "prisma generate",
+		"prisma:migrate:dev": "prisma migrate dev",
+		"prisma:migrate:deploy": "prisma migrate deploy",
+		"prisma:migrate:reset": "prisma migrate reset",
+		"prisma:db:pull": "prisma db pull",
+		"prisma:db:push": "prisma db push",
+		"prisma:studio": "prisma studio",
+		"prisma:validate": "prisma validate",
+		"prisma:format": "prisma format"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -41,6 +50,8 @@
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
+		"@aws-sdk/client-s3": "^3.896.0",
+		"@prisma/client": "^6.7.0",
 		"@tiptap/core": "^3.4.4",
 		"@tiptap/pm": "^3.4.4",
 		"@tiptap/starter-kit": "^3.4.4",
@@ -51,8 +62,12 @@
 		"googleapis": "^159.0.0",
 		"lodash-es": "^4.17.21",
 		"nodemailer": "^7.0.6",
+		"prisma": "^6.7.0",
 		"stripe": "^18.5.0",
 		"svelte-forms-lib": "^2.0.1",
 		"yup": "^1.7.0"
+	},
+	"prisma": {
+		"schema": "./prisma"
 	}
 }
