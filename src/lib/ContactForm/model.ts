@@ -46,14 +46,14 @@ export const FORM_INITIAL_VALUE: ContactFormValue = {
 
 export const FORM_FIELDS: Record<
 	keyof ContactFormValue,
-	{ type: 'input' | 'textarea'; placement: 'full' | 'shared' }
+	{ type: 'text' | 'email'; element: 'input' | 'textarea'; placement: 'full' | 'shared' }
 > = {
-	name: { type: 'input', placement: 'shared' },
-	surname: { type: 'input', placement: 'shared' },
-	email: { type: 'input', placement: 'full' },
-	phone: { type: 'input', placement: 'full' },
-	subject: { type: 'input', placement: 'full' },
-	message: { type: 'textarea', placement: 'full' }
+	name: { element: 'input', placement: 'shared' },
+	surname: { element: 'input', placement: 'shared' },
+	email: { element: 'input', placement: 'full' },
+	phone: { element: 'input', placement: 'full' },
+	subject: { element: 'input', placement: 'full' },
+	message: { element: 'textarea', placement: 'full' }
 };
 
 export const FORM_FIELDS_ORDER: (keyof ContactFormValue)[] = [

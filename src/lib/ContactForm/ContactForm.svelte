@@ -2,7 +2,7 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { createForm } from 'svelte-forms-lib';
-	import { FORM_INITIAL_VALUE, SCHEMA } from './model';
+	import { FORM_FIELDS, FORM_FIELDS_ORDER, FORM_INITIAL_VALUE, SCHEMA } from './model';
 	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { HttpStatus } from '$shared/global/enums/http-status';
@@ -59,10 +59,19 @@
 <form onsubmit={handleSubmit}>
 	<div class="text-lg font-bold">{$translate('user.contactForm.title')}</div>
 
-	<div>
-		<label for=""></label>
-		<input type="text" />
-	</div>
+	{#each FORM_FIELDS_ORDER as key, i (i + key)}
+		{#if FORM_FIELDS[key].element === 'input'}
+			<div>
+				<label for=""></label>
+				<input type="text" />
+			</div>
+		{:else if FORM_FIELDS[key].element === 'textarea'}
+			<div>
+				<label for={key}></label>
+				<input id={key} name={key}  />
+			</div>
+		{/if}
+	{/each}
 
 	<button type="submit">{$translate('user.contactForm.submit')}</button>
 </form>
