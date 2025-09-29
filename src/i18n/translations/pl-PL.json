@@ -31,7 +31,64 @@
 			}
 		},
 
-		"contactForm": {}
+		"contactForm": {
+			"title": "Napisz do mnie",
+			"submit": "Zatwierdź",
+			"fields": {
+				"name": {
+					"label": "Imię",
+					"placeholder": "Wprowadź swoje imię",
+					"errors": {
+						"required": "Imię jest wymagane",
+						"min": "Imię jest za krótkie",
+						"max": "Imię jest za długie"
+					}
+				},
+				"surname": {
+					"label": "Nazwisko",
+					"placeholder": "Wprowadź swoje nazwisko",
+					"errors": {
+						"required": "Nazwisko jest wymagane",
+						"min": "Nazwisko jest za krótkie",
+						"max": "Nazwisko jest za długie"
+					}
+				},
+				"email": {
+					"label": "Email",
+					"placeholder": "Wprowadź swój email",
+					"errors": {
+						"email": "Nieprawidłowy email",
+						"required": "Email jest wymagany"
+					}
+				},
+				"phone": {
+					"label": "Telefon",
+					"placeholder": "Wprowadź swój numer telefonu",
+					"errors": {
+						"matches": "Nieprawidłowy format numeru telefonu",
+						"required": "Numer telefonu jest wymagany"
+					}
+				},
+				"subject": {
+					"label": "Temat",
+					"placeholder": "Wprowadź temat wiadomości",
+					"errors": {
+						"required": "Temat jest wymagany",
+						"min": "Temat jest za krótki",
+						"max": "Temat jest za długi"
+					}
+				},
+				"message": {
+					"label": "Wiadomość",
+					"placeholder": "Wprowadź swoją wiadomość",
+					"errors": {
+						"required": "Wiadomość jest wymagana",
+						"min": "Wiadomość jest za krótka",
+						"max": "Wiadomość jest za długa"
+					}
+				}
+			}
+		}
 	},
 
 	"admin": {

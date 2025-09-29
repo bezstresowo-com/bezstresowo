@@ -32,59 +32,58 @@
 		},
 
 		"contactForm": {
-			"title": "",
-			"submit": "",
+			"title": "Contact me",
+			"submit": "Submit",
 			"fields": {
 				"name": {
-					"label": "",
-					"placeholder": "",
+					"label": "Name",
+					"placeholder": "Enter your name",
 					"errors": {
-						"required": "",
-						"min": "",
-						"max": ""
+						"required": "Name is required",
+						"min": "Name too short",
+						"max": "Name too long"
 					}
 				},
 				"surname": {
-					"label": "",
-					"placeholder": "",
+					"label": "Surname",
+					"placeholder": "Enter your surname",
 					"errors": {
-						"required": "",
-						"min": "",
-						"max": ""
+						"required": "Surname is required",
+						"min": "Surname too short",
+						"max": "Surname too long"
 					}
 				},
 				"email": {
-					"label": "",
-					"placeholder": "",
+					"label": "email",
+					"placeholder": "Enter your email",
 					"errors": {
-						"email": "",
-						"required": ""
+						"email": "Email is invalid",
+						"required": "Email is required"
 					}
 				},
 				"phone": {
-					"label": "",
-					"placeholder": "",
+					"label": "Phone",
+					"placeholder": "Enter your phone number",
 					"errors": {
-						"matches": "",
-						"required": ""
+						"matches": "Phone number is invalid",
+						"required": "Phone number is required"
 					}
 				},
 				"subject": {
-					"label": "",
-					"placeholder": "",
+					"label": "Subject",
+					"placeholder": "Enter the subject",
 					"errors": {
-						"required": "",
-						"min": "",
-						"max": ""
+						"matches": "Subject is invalid",
+						"required": "Subject is required"
 					}
 				},
 				"message": {
-					"label": "",
-					"placeholder": "",
+					"label": "Message",
+					"placeholder": "Enter your message",
 					"errors": {
-						"required": "",
-						"min": "",
-						"max": ""
+						"required": "Message is required",
+						"min": "Message is too short",
+						"max": "Message is too long"
 					}
 				}
 			}
