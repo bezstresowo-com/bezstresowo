@@ -1,4 +1,4 @@
 export interface Props {
 	content?: string;
-	onUpdate?: (content: string) => void;
+	onUpdate?: (html: string, addedFiles: Record<string, File>) => void;
 }

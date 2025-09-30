@@ -15,7 +15,7 @@
 	let editor: Editor | null = null;
 	let editorState: { editor: Editor | null } = $state({ editor: null });
 
-	let addedFiles: { [id: string]: File } = $state({});
+	let addedFiles: Record<string, File> = $state({});
 
 	function onFileHandlerEvent(currentEditor: Editor, files: File[], pos: number) {
 		files.forEach((file) => {
@@ -84,7 +84,7 @@
 			onUpdate: ({ editor }) => {
 				const html = editor.getHTML();
 				content = html;
-				onUpdate?.(html);
+				onUpdate?.(html, addedFiles);
 				editorState = { editor };
 			},
 			onSelectionUpdate: ({ editor }) => {
