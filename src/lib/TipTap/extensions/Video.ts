@@ -15,17 +15,14 @@ export const Video = Node.create({
 	},
 	addAttributes() {
 		return {
+			id: {
+				default: null
+			},
 			src: {
 				default: null
 			},
 			controls: {
 				default: true
-			},
-			width: {
-				default: '100%'
-			},
-			height: {
-				default: 'auto'
 			},
 			preload: {
 				default: 'metadata'
@@ -38,15 +35,14 @@ export const Video = Node.create({
 	addNodeView() {
 		return ({ node }) => {
 			const div = document.createElement('div');
-			div.className = 'aspect-video';
+			div.classList = 'w-full flex items-center justify-center';
 
 			const video = document.createElement('video');
+			video.id = node.attrs.id;
 			video.src = node.attrs.src;
 			video.controls = node.attrs.controls;
-			video.style.width = node.attrs.width;
-			video.style.height = node.attrs.height;
 			video.preload = node.attrs.preload;
-			video.style.maxWidth = '100%';
+			video.classList = 'object-contain w-fit aspect-keep max-h-80 mx-auto';
 
 			div.append(video);
 			return {
