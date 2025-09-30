@@ -29,7 +29,7 @@ export const SCHEMA = yup.object().shape({
 	message: yup
 		.string()
 		.required(`${prefix}.message.errors.required`)
-		.min(100, `${prefix}.message.errors.min`)
+		.min(10, `${prefix}.message.errors.min`)
 		.max(10_000, `${prefix}.message.errors.max`)
 });
 

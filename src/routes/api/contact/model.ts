@@ -1,31 +1,36 @@
-import { IsDefined, IsEmail, IsPhoneNumber, IsString, Length } from 'class-validator';
+import { IsDefined, IsEmail, IsPhoneNumber, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class ContactRequestDto {
-	@IsDefined()
-	@IsString()
-	@Length(1, 100)
+	@IsDefined({ message: 'api.validation.errors.IsDefined' })
+	@IsString({ message: 'api.validation.errors.IsString' })
+	@MinLength(1, { message: 'api.validation.errors.MinLength@{"length":1}' })
+	@MaxLength(100, { message: 'api.validation.errors.MaxLength@{"length":100}' })
 	name: string;
 
-	@IsDefined()
-	@IsString()
-	@Length(1, 100)
+	@IsDefined({ message: 'api.validation.errors.IsDefined' })
+	@IsString({ message: 'api.validation.errors.IsString' })
+	@MinLength(1, { message: 'api.validation.errors.MinLength@{"length":1}' })
+	@MaxLength(100, { message: 'api.validation.errors.MaxLength@{"length":100}' })
 	surname: string;
 
-	@IsDefined()
-	@IsPhoneNumber(undefined, {message: 'api.contact.errors.tel'})
+	@IsDefined({ message: 'api.validation.errors.IsDefined' })
+	@IsString({ message: 'api.validation.errors.IsString' })
+	@IsPhoneNumber(undefined, { message: 'api.validation.errors.IsPhoneNumber' })
 	tel: string;
 
-	@IsDefined()
-	@IsEmail()
+	@IsDefined({ message: 'api.validation.errors.IsDefined' })
+	@IsEmail(undefined, { message: 'api.validation.errors.IsEmail' })
 	email: string;
 
-	@IsDefined()
-	@IsString()
-	@Length(10, 150)
+	@IsDefined({ message: 'api.validation.errors.IsDefined' })
+	@IsString({ message: 'api.validation.errors.IsString' })
+	@MinLength(10, { message: 'api.validation.errors.MinLength@{"length":10}' })
+	@MaxLength(150, { message: 'api.validation.errors.MaxLength@{"length":150}' })
 	subject: string;
 
-	@IsDefined()
-	@IsString()
-	@Length(100, 10000)
+	@IsDefined({ message: 'api.validation.errors.IsDefined' })
+	@IsString({ message: 'api.validation.errors.IsString' })
+	@MinLength(10, { message: 'api.validation.errors.MinLength@{"length":10}' })
+	@MaxLength(10_000, { message: 'api.validation.errors.MaxLength@{"length":10000}' })
 	message: string;
 }

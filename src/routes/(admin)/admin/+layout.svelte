@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { HttpMethod } from '$shared/enums/http-method';
+	import { HttpMethod } from '$shared/global/enums/http-method';
 	import type { Props } from './layout.model';
 
 	let { children, data }: Props = $props();

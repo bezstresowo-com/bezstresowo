@@ -1,14 +1,13 @@
-<!-- TODO: @Vyvr - use yup and craeteFormSvelte to create a form, use bits-ui whenever needed (probably not) glhf -->
 <script lang="ts">
 	import { resolve } from '$app/paths';
-	import { createForm, key } from 'svelte-forms-lib';
+	import { createForm } from 'svelte-forms-lib';
 	import { FORM_FIELDS, FORM_FIELDS_ORDER, FORM_INITIAL_VALUE, SCHEMA } from './model';
-	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { HttpStatus } from '$shared/global/enums/http-status';
 	import type { HttpErrorResponse } from '$shared/global/types/http';
 	import { translate } from '$i18n';
 	import type { ContactRequestDto } from '$api/contact/model';
+	import { HttpMethod } from '$shared/global/enums/http-method';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
@@ -42,14 +41,22 @@
 					body
 				});
 
-				if (response.status !== HttpStatus.OK) {
-		  // console.log(await response.json().errors.message)
-					generalError = ((await response.json()) as HttpErrorResponse).message;
-				} else {
-					handleReset();
+				switch (response.status) {
+					case HttpStatus.OK:
+						generalError = null;
+						handleReset();
+						break;
+
+					case HttpStatus.BAD_REQUEST:
+						console.log({ response });
+						break;
+
+					case HttpStatus.INTERNAL_SERVER_ERROR:
+						console.log({ response });
+						break;
 				}
 			} catch (error) {
-				console.log((error as Error).message);
+				console.log(`General fetch error: ${(error as Error).message}`);
 			} finally {
 				isLoading = false;
 			}
@@ -59,6 +66,7 @@
 
 <form onsubmit={handleSubmit}>
 	<div class="text-lg font-bold">{$translate('user.contactForm.title')}</div>
+
 	{#each FORM_FIELDS_ORDER as key, i (i + key)}
 		{#if FORM_FIELDS[key].element === 'input'}
 			<div>
@@ -67,7 +75,7 @@
 					id={key}
 					name={key}
 					type={FORM_FIELDS[key].type}
-					value={$form[key]}
+					bind:value={$form[key]}
 					onchange={handleChange}
 					onblur={handleChange}
 				/>
@@ -78,23 +86,21 @@
 				<textarea
 					id={key}
 					name={key}
-					value={$form[key]}
+					bind:value={$form[key]}
 					onchange={handleChange}
 					onblur={handleChange}
 				></textarea>
 			</div>
 		{/if}
+
 		{#if $errors[key] && $touched[key]}
-				<small class="text-sm text-red-500">{$translate($errors[key])}</small>
+			<small class="text-sm text-red-500">{$translate($errors[key])}</small>
 		{/if}
 	{/each}
 
 	{#if generalError}
-		<small class="text-sm text-red-500">{generalError}</small>
+		<small class="text-sm text-red-500">{$translate(generalError)}</small>
 	{/if}
 
-	<button
-		class="rounded-full bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-700"
-		type="submit">{$translate('user.contactForm.submit')}</button
-	>
+	<button type="submit" class="">{$translate('user.contactForm.submit')}</button>
 </form>

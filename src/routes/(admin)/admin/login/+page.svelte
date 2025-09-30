@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { translate } from '$i18n';
-	import { HttpMethod } from '$shared/enums/http-method';
-	import { getBaseHeaders } from '$shared/functions/get-base-headers';
+	import { HttpMethod } from '$shared/global/enums/http-method';
+	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { isEmpty, isNil } from 'lodash-es';
 	import { onDestroy } from 'svelte';
 	import { createForm } from 'svelte-forms-lib';

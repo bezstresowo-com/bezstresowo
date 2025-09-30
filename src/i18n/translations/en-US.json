@@ -13,7 +13,6 @@
 			"alt": "Ukrainian language flag"
 		}
 	},
-
 	"user": {
 		"pages": {
 			"home": {},
@@ -21,7 +20,6 @@
 			"blog": {},
 			"reservations": {}
 		},
-
 		"header": {
 			"items": {
 				"home": "Home",
@@ -30,7 +28,6 @@
 				"reservations": "Reservations"
 			}
 		},
-
 		"contactForm": {
 			"title": "Contact me",
 			"submit": "Submit",
@@ -91,16 +88,23 @@
 			}
 		}
 	},
-
 	"admin": {
 		"blog": {}
 	},
-
 	"api": {
+		"validation": {
+			"errors": {
+				"MinLength": "Length cannot be lower than {{ length }}",
+				"MaxLength": "Length cannot be greater than {{ length }}",
+				"IsDefined": "Must be defined",
+				"IsPhoneNumber": "Must be a valid phone number",
+				"IsEmail": "Must be a valid email address",
+				"IsString": "Must be a string"
+			}
+		},
 		"contact": {
 			"errors": {
-				"general": "Your contact request couldn't be sent. Please try again.",
-				"tel": "Niepoprawny numer telefonu."
+				"general": "Your contact request couldn't be sent. Please try again."
 			}
 		},
 		"admin": {

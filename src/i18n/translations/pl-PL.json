@@ -13,7 +13,6 @@
 			"alt": "Flaga języka ukraińskiego"
 		}
 	},
-
 	"user": {
 		"pages": {
 			"home": {},
@@ -21,7 +20,6 @@
 			"blog": {},
 			"reservations": {}
 		},
-
 		"header": {
 			"items": {
 				"home": "Strona główna",
@@ -30,14 +28,13 @@
 				"reservations": "Rezerwacje"
 			}
 		},
-
 		"contactForm": {
-			"title": "Napisz do mnie",
-			"submit": "Zatwierdź",
+			"title": "Skontaktuj się ze mną",
+			"submit": "Wyślij",
 			"fields": {
 				"name": {
 					"label": "Imię",
-					"placeholder": "Wprowadź swoje imię",
+					"placeholder": "Wpisz swoje imię",
 					"errors": {
 						"required": "Imię jest wymagane",
 						"min": "Imię jest za krótkie",
@@ -46,7 +43,7 @@
 				},
 				"surname": {
 					"label": "Nazwisko",
-					"placeholder": "Wprowadź swoje nazwisko",
+					"placeholder": "Wpisz swoje nazwisko",
 					"errors": {
 						"required": "Nazwisko jest wymagane",
 						"min": "Nazwisko jest za krótkie",
@@ -54,25 +51,26 @@
 					}
 				},
 				"email": {
-					"label": "Email",
-					"placeholder": "Wprowadź swój email",
+					"label": "E-mail",
+					"placeholder": "Wpisz swój adres e-mail",
 					"errors": {
-						"email": "Nieprawidłowy email",
-						"required": "Email jest wymagany"
+						"email": "Adres e-mail jest nieprawidłowy",
+						"required": "Adres e-mail jest wymagany"
 					}
 				},
 				"phone": {
 					"label": "Telefon",
-					"placeholder": "Wprowadź swój numer telefonu",
+					"placeholder": "Wpisz swój numer telefonu",
 					"errors": {
-						"matches": "Nieprawidłowy format numeru telefonu",
+						"matches": "Numer telefonu jest nieprawidłowy",
 						"required": "Numer telefonu jest wymagany"
 					}
 				},
 				"subject": {
 					"label": "Temat",
-					"placeholder": "Wprowadź temat wiadomości",
+					"placeholder": "Wpisz temat",
 					"errors": {
+						"matches": "Temat jest nieprawidłowy",
 						"required": "Temat jest wymagany",
 						"min": "Temat jest za krótki",
 						"max": "Temat jest za długi"
@@ -80,7 +78,7 @@
 				},
 				"message": {
 					"label": "Wiadomość",
-					"placeholder": "Wprowadź swoją wiadomość",
+					"placeholder": "Wpisz swoją wiadomość",
 					"errors": {
 						"required": "Wiadomość jest wymagana",
 						"min": "Wiadomość jest za krótka",
@@ -90,16 +88,23 @@
 			}
 		}
 	},
-
 	"admin": {
 		"blog": {}
 	},
-
 	"api": {
+		"validation": {
+			"errors": {
+				"MinLength": "Długość nie może być mniejsza niż {{ length }}",
+				"MaxLength": "Długość nie może być większa niż {{ length }}",
+				"IsDefined": "Musi być zdefiniowane",
+				"IsPhoneNumber": "Musi być prawidłowym numerem telefonu",
+				"IsEmail": "Musi być prawidłowym adresem e-mail",
+				"IsString": "Musi być ciągiem znaków"
+			}
+		},
 		"contact": {
 			"errors": {
-				"general": "Nie udało się wysłać prośby o kontakt. Spróbuj ponownie.",
-				"tel": "Niepoprawny numer telefonu."
+				"general": "Twoje zapytanie kontaktowe nie mogło zostać wysłane. Spróbuj ponownie."
 			}
 		},
 		"admin": {
