@@ -1,7 +1,14 @@
 export interface HttpStatusResponse {
-	status: string | 'ok';
+	status: 'ok';
 }
 
 export interface HttpErrorResponse {
 	message: string;
+}
+
+export interface HttpValidationErrorResponse {
+	errors: {
+		field: string;
+		messages: string[];
+	}[];
 }
