@@ -36,12 +36,12 @@ export const SCHEMA = yup.object().shape({
 export type ContactFormValue = yup.InferType<typeof SCHEMA>;
 
 export const FORM_INITIAL_VALUE: ContactFormValue = {
-	email: '',
-	message: '',
-	name: '',
-	phone: '',
-	subject: '',
-	surname: ''
+	email: 'maciou41@gmail.com',
+	message: 'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+	name: 'Maciej',
+	phone: '333333333',
+	subject: 'testtesttest',
+	surname: 'Luciski'
 };
 
 export const FORM_FIELDS: Record<
