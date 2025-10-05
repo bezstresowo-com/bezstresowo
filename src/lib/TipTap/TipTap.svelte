@@ -221,6 +221,6 @@
 
 	<div
 		bind:this={element}
-		class="editor prose prose-lg min-h-[200px] max-w-none px-4 pt-2 pb-4 focus-within:outline-none [&_.ProseMirror]:min-h-[150px] [&_.ProseMirror]:pt-0 [&_.ProseMirror]:outline-none [&_.ProseMirror_h1]:my-3 [&_.ProseMirror_h1:first-child]:mt-0 [&_.ProseMirror_h2]:my-2 [&_.ProseMirror_h2:first-child]:mt-0 [&_.ProseMirror_li]:my-0 [&_.ProseMirror_ol]:my-2 [&_.ProseMirror_p]:my-2 [&_.ProseMirror_p:first-child]:mt-0 [&_.ProseMirror_ul]:my-2 [&_.ProseMirror-selectednode]:outline-1 [&_.ProseMirror-selectednode]:outline-primary"
+		class="prose prose-lg max-w-none px-4 pt-2 pb-4 focus-within:outline-none [&_.ProseMirror]:min-h-[200px] [&_.ProseMirror]:aspect-video [&_.ProseMirror]:pt-0 [&_.ProseMirror]:outline-none [&_.ProseMirror_h1]:my-3 [&_.ProseMirror_h1:first-child]:mt-0 [&_.ProseMirror_h2]:my-2 [&_.ProseMirror_h2:first-child]:mt-0 [&_.ProseMirror_li]:my-0 [&_.ProseMirror_ol]:my-2 [&_.ProseMirror_p]:my-2 [&_.ProseMirror_p:first-child]:mt-0 [&_.ProseMirror_ul]:my-2 [&_.ProseMirror-selectednode]:outline-1 [&_.ProseMirror-selectednode]:outline-primary"
 	></div>
 </div>

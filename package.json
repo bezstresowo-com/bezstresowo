@@ -66,6 +66,7 @@
 		"lodash-es": "^4.17.21",
 		"nodemailer": "^7.0.6",
 		"prisma": "^6.7.0",
+		"reflect-metadata": "^0.2.2",
 		"stripe": "^18.5.0",
 		"svelte-forms-lib": "^2.0.1",
 		"uuid": "^13.0.0",

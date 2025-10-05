@@ -1,7 +1,7 @@
 import { ADMIN_PASSWORD_HASH } from '$env/static/private';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { setAdminAuthCookie } from '$shared/server/functions/admin-auth.js';
-import { validateBody } from '$shared/server/functions/validate-body.js';
+import { validateRequestData } from '$shared/server/functions/validate-body.js';
 import { createHash } from 'crypto';
 
 import { json } from '@sveltejs/kit';
@@ -10,7 +10,7 @@ import { LoginRequestDto } from './model';
 import type { HttpErrorResponse, HttpStatusResponse } from '$shared/global/types/http';
 
 export async function POST({ request, cookies }) {
-	const validationResult = await validateBody(await request.json(), LoginRequestDto);
+	const validationResult = await validateRequestData(await request.json(), LoginRequestDto);
 	if (validationResult.type === 'error') {
 		return validationResult.response;
 	}

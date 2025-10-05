@@ -24,7 +24,7 @@
 
 <div class="min-h-screen bg-gray-50">
 	<header class="border-b bg-white shadow-sm">
-		<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+		<div class="mx-auto max-w-7xl px-4">
 			<div class="flex h-16 items-center justify-between">
 				<div class="flex items-center">
 					<h1 class="text-lg font-bold">Bezstresowo Admin Panel</h1>
@@ -43,7 +43,7 @@
 		</div>
 	</header>
 
-	<main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+	<main class="mx-auto max-w-7xl p-4">
 		{@render children()}
 	</main>
 </div>

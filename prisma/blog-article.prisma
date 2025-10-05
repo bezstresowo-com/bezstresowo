@@ -1,7 +1,7 @@
 model BlogArticle {
   id        String   @id @default(uuid())
   title     String
-  content   String?
+  content   String
   mediaUrls String[]
 
   createdAt DateTime @default(now())
