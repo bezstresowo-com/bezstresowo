@@ -3,17 +3,9 @@
 	import { Select } from 'bits-ui';
 	import { onDestroy } from 'svelte';
 	import type { Unsubscriber } from 'svelte/store';
+	import { ITEMS } from './model';
 
 	const UNSUBS: Unsubscriber[] = [];
-
-	const ITEMS: {
-		value: Locale;
-		label: string;
-		disabled?: boolean;
-	}[] = Object.values(Locale).map((locale) => ({
-		label: LOCALES_MAP[locale].label,
-		value: locale
-	}));
 
 	let open = $state(false);
 	let selectedValue = $state<Locale>($currentLocale);

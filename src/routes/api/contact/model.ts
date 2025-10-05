@@ -4,14 +4,22 @@ import { IsDefined, IsEmail, IsPhoneNumber, IsString, MaxLength, MinLength } fro
 export class ContactRequestDto {
 	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
 	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(1, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":1}` })
-	@MaxLength(100, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":100}` })
+	@MinLength(1, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@${JSON.stringify({ length: 1 })}`
+	})
+	@MaxLength(100, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@${JSON.stringify({ length: 100 })}`
+	})
 	name: string;
 
 	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
 	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(1, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":1}` })
-	@MaxLength(100, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":100}` })
+	@MinLength(1, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@${JSON.stringify({ length: 1 })}`
+	})
+	@MaxLength(100, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@${JSON.stringify({ length: 100 })}`
+	})
 	surname: string;
 
 	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
@@ -25,15 +33,21 @@ export class ContactRequestDto {
 
 	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
 	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(10, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":10}` })
-	@MaxLength(150, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":150}` })
+	@MinLength(10, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@${JSON.stringify({ length: 10 })}`
+	})
+	@MaxLength(150, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@${JSON.stringify({ length: 150 })}`
+	})
 	subject: string;
 
 	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
 	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(10, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":10}` })
+	@MinLength(10, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@${JSON.stringify({ length: 10 })}`
+	})
 	@MaxLength(10_000, {
-		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":10000}`
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@${JSON.stringify({ length: 10_000 })}`
 	})
 	message: string;
 }

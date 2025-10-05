@@ -16,7 +16,7 @@ type ValidationResult<T> =
 			dto: T;
 	  };
 
-export async function validateRequestData<T extends object>(
+export async function validateRequest<T extends object>(
 	data: object,
 	cls: ClassConstructor<T>
 ): Promise<ValidationResult<T>> {

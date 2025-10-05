@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import { isNil } from 'lodash-es';
 import { JWT_EXP_INTERVAL_MS, JWT_SECRET, COOKIE_MAX_AGE_S } from '$env/static/private';
 import { resolve } from '$app/paths';
+import { HttpStatus } from '$shared/global/enums/http-status';
 
 interface JwtPayload {
 	iat: number;
@@ -70,7 +71,7 @@ export function isAdminAuthenticated(cookies: Cookies) {
 export function requireAdminAuth(cookies: Cookies) {
 	if (!isAdminAuthenticated(cookies)) {
 		throw new Response(null, {
-			status: 302,
+			status: HttpStatus.FOUND,
 			headers: {
 				location: resolve('/(admin)/admin/login')
 			}

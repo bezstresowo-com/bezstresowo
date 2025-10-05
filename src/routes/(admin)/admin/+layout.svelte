@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { translate } from '$i18n';
+	import LanguageSelect from '$lib/LanguageSelect/LanguageSelect.svelte';
 	import { HttpMethod } from '$shared/global/enums/http-method';
 
 	let { children, data } = $props();
@@ -27,17 +29,21 @@
 		<div class="mx-auto max-w-7xl px-4">
 			<div class="flex h-16 items-center justify-between">
 				<div class="flex items-center">
-					<h1 class="text-lg font-bold">Bezstresowo Admin Panel</h1>
+					<h1 class="text-lg font-bold">{$translate('admin.title')}</h1>
 				</div>
-				<div class="flex items-center space-x-4">
+				<div class="flex items-center space-x-2">
 					{#if data.isAuthenticated}
 						<button
 							onclick={handleLogout}
-							class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
+							class="inline-flex cursor-pointer items-center rounded-md border border-transparent bg-danger px-4 py-2 text-sm font-medium text-white"
 						>
-							Logout
+							{$translate('admin.logout')}
 						</button>
 					{/if}
+
+					<div class="rounded-md bg-primary px-4 py-2">
+						<LanguageSelect />
+					</div>
 				</div>
 			</div>
 		</div>

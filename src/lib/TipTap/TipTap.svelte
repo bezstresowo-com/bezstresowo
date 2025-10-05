@@ -8,51 +8,62 @@
 	import { Video } from './extensions/Video';
 	import FileHandler from '@tiptap/extension-file-handler';
 	import { v4 } from 'uuid';
+	import { resolve } from '$app/paths';
+	import { HttpMethod } from '$shared/global/enums/http-method';
+	import type { CreateMediaResponseDto } from '$api/admin/media/[id]/model';
 
 	let { content = '', onUpdate }: Props = $props();
 
 	let element: HTMLDivElement | null = null;
 	let editor: Editor | null = null;
 	let editorState: { editor: Editor | null } = $state({ editor: null });
+	let addedMedia = $state<Record<string, string>>({});
 
-	let addedFiles: Record<string, File> = $state({});
+	async function onFileHandlerEvent(currentEditor: Editor, files: File[], pos: number) {
+		await Promise.all(
+			files.map(async (file) => {
+				let type = '';
+				switch (true) {
+					case !isNil(file.type.match(/image\/.*/)):
+						type = 'image';
+						break;
 
-	function onFileHandlerEvent(currentEditor: Editor, files: File[], pos: number) {
-		files.forEach((file) => {
-			const fileReader = new FileReader();
+					case !isNil(file.type.match(/video\/.*/)):
+						type = 'video';
+						break;
 
-			let type = '';
-			switch (true) {
-				case !isNil(file.type.match(/image\/.*/)):
-					type = 'image';
-					break;
+					default:
+						alert('Unsupported file!');
+						return;
+				}
 
-				case !isNil(file.type.match(/video\/.*/)):
-					type = 'video';
-					break;
-
-				default:
-					alert('Unsupported file!');
-					return;
-			}
-
-			const id = v4();
-			addedFiles[id] = file;
-			fileReader.readAsDataURL(file);
-			fileReader.onload = () => {
+				const id = v4();
+				const formData = new FormData();
+				formData.append('file', file);
+				const response = await fetch(
+					resolve('/api/admin/media/[id]', {
+						id
+					}),
+					{
+						method: HttpMethod.POST,
+						body: formData
+					}
+				);
+				const { url } = (await response.json()) as CreateMediaResponseDto;
+				addedMedia[id] = url;
 				currentEditor
 					.chain()
 					.insertContentAt(pos, {
 						type,
 						attrs: {
 							id,
-							src: fileReader.result
+							src: url
 						}
 					})
 					.focus()
 					.run();
-			};
-		});
+			})
+		);
 	}
 
 	onMount(() => {
@@ -84,19 +95,27 @@
 			onUpdate: ({ editor }) => {
 				const html = editor.getHTML();
 				content = html;
-				onUpdate?.(html, addedFiles);
+				onUpdate?.(html, addedMedia);
 				editorState = { editor };
 			},
 			onSelectionUpdate: ({ editor }) => {
 				editorState = { editor };
 			},
-			onDelete(props) {
+			async onDelete(props) {
 				if (
 					props.type === 'node' &&
 					(props.node.type.name === 'image' || props.node.type.name === 'video')
 				) {
 					const id = props.node.attrs['id'] as string;
-					delete addedFiles[id];
+					await fetch(
+						resolve('/api/admin/media/[id]', {
+							id
+						}),
+						{
+							method: HttpMethod.DELETE
+						}
+					);
+					delete addedMedia[id];
 				}
 			}
 		});
@@ -221,6 +240,6 @@
 
 	<div
 		bind:this={element}
-		class="prose prose-lg max-w-none px-4 pt-2 pb-4 focus-within:outline-none [&_.ProseMirror]:min-h-[200px] [&_.ProseMirror]:aspect-video [&_.ProseMirror]:pt-0 [&_.ProseMirror]:outline-none [&_.ProseMirror_h1]:my-3 [&_.ProseMirror_h1:first-child]:mt-0 [&_.ProseMirror_h2]:my-2 [&_.ProseMirror_h2:first-child]:mt-0 [&_.ProseMirror_li]:my-0 [&_.ProseMirror_ol]:my-2 [&_.ProseMirror_p]:my-2 [&_.ProseMirror_p:first-child]:mt-0 [&_.ProseMirror_ul]:my-2 [&_.ProseMirror-selectednode]:outline-1 [&_.ProseMirror-selectednode]:outline-primary"
+		class="prose prose-lg max-w-none px-4 pt-2 pb-4 focus-within:outline-none [&_.ProseMirror]:aspect-video [&_.ProseMirror]:min-h-[200px] [&_.ProseMirror]:pt-0 [&_.ProseMirror]:outline-none [&_.ProseMirror_h1]:my-3 [&_.ProseMirror_h1:first-child]:mt-0 [&_.ProseMirror_h2]:my-2 [&_.ProseMirror_h2:first-child]:mt-0 [&_.ProseMirror_li]:my-0 [&_.ProseMirror_ol]:my-2 [&_.ProseMirror_p]:my-2 [&_.ProseMirror_p:first-child]:mt-0 [&_.ProseMirror_ul]:my-2 [&_.ProseMirror-selectednode]:outline-1 [&_.ProseMirror-selectednode]:outline-primary"
 	></div>
 </div>
