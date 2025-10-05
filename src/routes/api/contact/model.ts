@@ -1,31 +1,39 @@
-import { IsDefined, IsEmail, IsPhoneNumber, IsString, Length } from 'class-validator';
+import { VALIDATION_ERRORS_TRANSLATION_PREFIX } from '$shared/server/consts';
+import { IsDefined, IsEmail, IsPhoneNumber, IsString, MaxLength, MinLength } from 'class-validator';
 
 export class ContactRequestDto {
-	@IsDefined()
-	@IsString()
-	@Length(1, 100)
+	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
+	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
+	@MinLength(1, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":1}` })
+	@MaxLength(100, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":100}` })
 	name: string;
 
-	@IsDefined()
-	@IsString()
-	@Length(1, 100)
+	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
+	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
+	@MinLength(1, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":1}` })
+	@MaxLength(100, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":100}` })
 	surname: string;
 
-	@IsDefined()
-	@IsPhoneNumber()
+	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
+	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
+	@IsPhoneNumber(undefined, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsPhoneNumber` })
 	tel: string;
 
-	@IsDefined()
-	@IsEmail()
+	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
+	@IsEmail(undefined, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsEmail` })
 	email: string;
 
-	@IsDefined()
-	@IsString()
-	@Length(10, 150)
+	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
+	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
+	@MinLength(10, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":10}` })
+	@MaxLength(150, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":150}` })
 	subject: string;
 
-	@IsDefined()
-	@IsString()
-	@Length(100, 10000)
+	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
+	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
+	@MinLength(10, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":10}` })
+	@MaxLength(10_000, {
+		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":10000}`
+	})
 	message: string;
 }
