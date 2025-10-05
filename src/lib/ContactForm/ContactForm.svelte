@@ -41,30 +41,30 @@
 					body
 				});
 
-        if (response.ok) {
-          generalError = null;
-          handleReset();
-        } else {
-          const errorResponse: HttpErrorResponse = await response.json();
-          console.log(errorResponse[0].message);
-          generalError = errorResponse.message;
-        }
+        // @TODO: WIP - do konsultacji general errory itp.
+        // if (response.ok) {
+        //   generalError = null;
+        //   handleReset();
+        // } else {
+        //   const errorResponse: HttpErrorResponse = await response.json();
+        //   console.log(errorResponse[0].message);
+        //   generalError = errorResponse.message;
+        // }
 
+				switch (response.status) {
+					case HttpStatus.OK:
+						generalError = null;
+						handleReset();
+						break;
 
-				// switch (response.status) {
-				// 	case HttpStatus.OK:
-				// 		generalError = null;
-				// 		handleReset();
-				// 		break;
+					case HttpStatus.BAD_REQUEST:
+						console.log({ response });
+						break;
 
-				// 	case HttpStatus.BAD_REQUEST:
-				// 		console.log({ response });
-				// 		break;
-
-				// 	case HttpStatus.INTERNAL_SERVER_ERROR:
-				// 		console.log({ response });
-				// 		break;
-				// }
+					case HttpStatus.INTERNAL_SERVER_ERROR:
+						console.log({ response });
+						break;
+				}
 			} catch (error) {
 				console.log(`General fetch error: ${(error as Error).message}`);
 			} finally {
