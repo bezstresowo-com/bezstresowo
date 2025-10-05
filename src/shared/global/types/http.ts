@@ -4,7 +4,7 @@ import { Type } from 'class-transformer';
 import { IsInt, IsOptional, Min } from 'class-validator';
 
 export interface HttpStatusResponse {
-	status: string | 'ok';
+	status: 'ok';
 }
 
 export interface HttpErrorResponse {
@@ -29,4 +29,11 @@ export interface PaginatedDataResponseDto<T> {
 	data: T[];
 	page: number;
 	size: number;
+}
+
+export interface HttpValidationErrorResponse {
+	errors: {
+		field: string;
+		messages: string[];
+	}[];
 }

@@ -13,8 +13,13 @@
 			"alt": "Ukrainian language flag"
 		}
 	},
-
 	"user": {
+		"pages": {
+			"home": {},
+			"shop": {},
+			"blog": {},
+			"reservations": {}
+		},
 		"header": {
 			"items": {
 				"home": "Home",
@@ -23,17 +28,80 @@
 				"reservations": "Reservations"
 			}
 		},
-		"home": {},
-		"shop": {},
-		"blog": {},
-		"reservations": {}
+		"contactForm": {
+			"title": "Contact me",
+			"submit": "Submit",
+			"fields": {
+				"name": {
+					"label": "Name",
+					"placeholder": "Enter your name",
+					"errors": {
+						"required": "Name is required",
+						"min": "Name too short",
+						"max": "Name too long"
+					}
+				},
+				"surname": {
+					"label": "Surname",
+					"placeholder": "Enter your surname",
+					"errors": {
+						"required": "Surname is required",
+						"min": "Surname too short",
+						"max": "Surname too long"
+					}
+				},
+				"email": {
+					"label": "email",
+					"placeholder": "Enter your email",
+					"errors": {
+						"email": "Email is invalid",
+						"required": "Email is required"
+					}
+				},
+				"phone": {
+					"label": "Phone",
+					"placeholder": "Enter your phone number",
+					"errors": {
+						"matches": "Phone number is invalid",
+						"required": "Phone number is required"
+					}
+				},
+				"subject": {
+					"label": "Subject",
+					"placeholder": "Enter the subject",
+					"errors": {
+						"matches": "Subject is invalid",
+						"required": "Subject is required",
+						"min": "Subject is too short",
+						"max": "Subject is too long"
+					}
+				},
+				"message": {
+					"label": "Message",
+					"placeholder": "Enter your message",
+					"errors": {
+						"required": "Message is required",
+						"min": "Message is too short",
+						"max": "Message is too long"
+					}
+				}
+			}
+		}
 	},
-
 	"admin": {
 		"blog": {}
 	},
-
 	"api": {
+		"validation": {
+			"errors": {
+				"MinLength": "Length cannot be lower than {{ length }}",
+				"MaxLength": "Length cannot be greater than {{ length }}",
+				"IsDefined": "Must be defined",
+				"IsPhoneNumber": "Must be a valid phone number",
+				"IsEmail": "Must be a valid email address",
+				"IsString": "Must be a string"
+			}
+		},
 		"contact": {
 			"errors": {
 				"general": "Your contact request couldn't be sent. Please try again."
