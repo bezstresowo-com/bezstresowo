@@ -31,7 +31,7 @@
 	} = createForm({
 		initialValues: formInitialValue,
 		validationSchema: formValidationSchema,
-		async onSubmit(values) {
+		async onSubmit({ password }) {
 			httpError = null;
 			isLoading = true;
 
@@ -39,7 +39,7 @@
 				const response = await fetch(resolve('/api/admin/login'), {
 					method: HttpMethod.POST,
 					headers: getBaseHeaders(),
-					body: JSON.stringify({ password: values.password })
+					body: JSON.stringify({ password })
 				});
 
 				const result = await response.json();

@@ -1,16 +1,14 @@
 import { ADMIN_PASSWORD_HASH } from '$env/static/private';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { setAdminAuthCookie } from '$shared/server/functions/admin-auth.js';
-import { validateBody } from '$shared/server/functions/validate-body.js';
+import { buildErrorResponse, buildOkResponse } from '$shared/server/functions/build-response';
+import { validateRequest } from '$shared/server/functions/validate-body.js';
 import { createHash } from 'crypto';
 
-import { json } from '@sveltejs/kit';
-
 import { LoginRequestDto } from './model';
-import type { HttpErrorResponse, HttpStatusResponse } from '$shared/global/types/http';
 
-export async function POST({ request, cookies }) {
-	const validationResult = await validateBody(await request.json(), LoginRequestDto);
+export async function POST({ request, cookies, route }) {
+	const validationResult = await validateRequest(await request.json(), LoginRequestDto);
 	if (validationResult.type === 'error') {
 		return validationResult.response;
 	}
@@ -22,10 +20,8 @@ export async function POST({ request, cookies }) {
 	const passwordHash = hash.digest('hex');
 	if (ADMIN_PASSWORD_HASH === passwordHash) {
 		setAdminAuthCookie(cookies);
-		return json({ status: 'ok' } satisfies HttpStatusResponse, { status: HttpStatus.OK });
+		return buildOkResponse();
 	} else {
-		return json({ message: 'api.admin.login.errors.invalidPassword' } satisfies HttpErrorResponse, {
-			status: HttpStatus.UNAUTHORIZED
-		});
+		return buildErrorResponse(route, request, HttpStatus.UNAUTHORIZED);
 	}
 }

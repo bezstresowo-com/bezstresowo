@@ -1,10 +1,11 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
+	import { translate } from '$i18n';
+	import LanguageSelect from '$lib/LanguageSelect/LanguageSelect.svelte';
 	import { HttpMethod } from '$shared/global/enums/http-method';
-	import type { Props } from './layout.model';
 
-	let { children, data }: Props = $props();
+	let { children, data } = $props();
 
 	async function handleLogout() {
 		try {
@@ -24,32 +25,31 @@
 </script>
 
 <div class="min-h-screen bg-gray-50">
-	{#if data.isAuthenticated}
-		<!-- Admin Header with Logout -->
-		<header class="border-b bg-white shadow-sm">
-			<div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-				<div class="flex h-16 items-center justify-between">
-					<div class="flex items-center">
-						<h1 class="text-xl font-semibold text-gray-900">Admin Panel</h1>
-					</div>
-					<div class="flex items-center space-x-4">
+	<header class="border-b bg-white shadow-sm">
+		<div class="mx-auto max-w-7xl px-4">
+			<div class="flex h-16 items-center justify-between">
+				<div class="flex items-center">
+					<h1 class="text-lg font-bold">{$translate('admin.title')}</h1>
+				</div>
+				<div class="flex items-center space-x-2">
+					{#if data.isAuthenticated}
 						<button
 							onclick={handleLogout}
-							class="inline-flex items-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
+							class="inline-flex cursor-pointer items-center rounded-md border border-transparent bg-danger px-4 py-2 text-sm font-medium text-white"
 						>
-							Logout
+							{$translate('admin.logout')}
 						</button>
+					{/if}
+
+					<div class="rounded-md bg-primary px-4 py-2">
+						<LanguageSelect />
 					</div>
 				</div>
 			</div>
-		</header>
+		</div>
+	</header>
 
-		<!-- Admin Content -->
-		<main class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-			{@render children()}
-		</main>
-	{:else}
-		<!-- Login page content -->
+	<main class="mx-auto max-w-7xl p-4">
 		{@render children()}
-	{/if}
+	</main>
 </div>

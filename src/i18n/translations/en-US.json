@@ -89,13 +89,20 @@
 		}
 	},
 	"admin": {
-		"blog": {}
+		"title": "Bezstresowo Admin Panel",
+		"availableResources": "Below are all available resources you can manage:",
+		"logout": "Logout",
+		"blog": {
+			"label": "Blog Articles"
+		}
 	},
 	"api": {
 		"validation": {
 			"errors": {
 				"MinLength": "Length cannot be lower than {{ length }}",
 				"MaxLength": "Length cannot be greater than {{ length }}",
+				"Min": "Length cannot be lower than {{ length }}",
+				"Max": "Length cannot be greater than {{ length }}",
 				"IsDefined": "Must be defined",
 				"IsPhoneNumber": "Must be a valid phone number",
 				"IsEmail": "Must be a valid email address",
@@ -103,14 +110,65 @@
 			}
 		},
 		"contact": {
-			"errors": {
-				"general": "Your contact request couldn't be sent. Please try again."
+			"POST": {
+				"errors": {
+					"INTERNAL_SERVER_ERROR": "Your contact request couldn't be sent. Please try again."
+				}
 			}
 		},
 		"admin": {
+			"blog": {
+				"GET": {
+					"errors": {
+						"INTERNAL_SERVER_ERROR": "An error occured while fetching your blog articles"
+					}
+				},
+				"POST": {
+					"errors": {
+						"INTERNAL_SERVER_ERROR": "An error occured while creating your blog article"
+					}
+				},
+				"[id]": {
+					"GET": {
+						"errors": {
+							"INTERNAL_SERVER_ERROR": "An error occured while fetching your blog article {{ id }}",
+							"NOT_FOUND": "Blog article with id {{ id }} doesn't exits"
+						}
+					},
+					"PUT": {
+						"errors": {
+							"NOT_FOUND": "Blog article with id {{ id }} doesn't exits",
+							"INTERNAL_SERVER_ERROR": "An error occured while updating your blog article {{ id }}"
+						}
+					},
+					"DELETE": {
+						"errors": {
+							"NOT_FOUND": "Blog article with id {{ id }} doesn't exits",
+							"INTERNAL_SERVER_ERROR": "An error occured while deleting your blog article {{ id }}"
+						}
+					}
+				}
+			},
 			"login": {
-				"errors": {
-					"invalidPassword": "Invalid password."
+				"POST": {
+					"errors": {
+						"UNAUTHORIZED": "Authentication failed."
+					}
+				}
+			},
+			"media": {
+				"[id]": {
+					"POST": {
+						"errors": {
+							"NOT_ACCEPTABLE": "Amount of files found ({{ found }}) does not fit in range {{ min }} - {{ max }}",
+							"INTERNAL_SERVER_ERROR": "An error occured while saving your media {{ id }}"
+						}
+					},
+					"DELETE": {
+						"errors": {
+							"INTERNAL_SERVER_ERROR": "An error occured while deleting your media {{ id }}"
+						}
+					}
 				}
 			}
 		}

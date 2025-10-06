@@ -9,7 +9,7 @@
 </script>
 
 <header class="fixed top-0 left-0 w-full bg-primary p-4">
-	<div class="mx-auto flex max-w-[1280px] items-center gap-4">
+	<div class="mx-auto flex max-w-7xl items-center gap-4">
 		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>Bezstresowo</a>
 
 		<span class="flex-auto"></span>
@@ -27,13 +27,13 @@
 </header>
 
 <main class="content bg-background p-4">
-	<div class="mx-auto max-w-[1280px]">
+	<div class="mx-auto max-w-7xl">
 		{@render children?.()}
 	</div>
 </main>
 
 <footer class="bg-primary p-4 text-accent">
-	<div class="mx-auto flex max-w-[1280px] items-center gap-4">
+	<div class="mx-auto flex max-w-7xl items-center gap-4">
 		<div class="max-w-54">
 			<p class="text-pretty">Centrum Psychoterapii Bezstresowo OLESYA HAIDUK</p>
 		</div>

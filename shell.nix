@@ -9,6 +9,15 @@ pkgs.mkShell {
     nodejs_24
   ];
 
+  # for prisma-engines (6.7.0)
+  env = with pkgs; {
+    PRISMA_FORMAT_BINARY = "${prisma-engines}/bin/prisma-fmt";
+    PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
+    PRISMA_QUERY_ENGINE_LIBRARY = "${prisma-engines}/lib/libquery_engine.node";
+    PRISMA_SCHEMA_ENGINE_BINARY = "${prisma-engines}/bin/schema-engine";
+    PRISMA_INTROSPECTION_ENGINE_BINARY = "${prisma-engines}/bin/introspection-engine";
+  };
+
   shellHook = ''
     export SHELL=${pkgs.zsh}/bin/zsh
     export ZDOTDIR=$(pwd)/.zshrc.d

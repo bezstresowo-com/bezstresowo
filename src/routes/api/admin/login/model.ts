@@ -1,8 +1,9 @@
-import { VALIDATION_ERRORS_TRANSLATION_PREFIX } from '$shared/server/consts';
-import { IsDefined, IsString } from 'class-validator';
+import { validators } from '$shared/server/validators';
+
+const { IsDefined, IsString } = validators;
 
 export class LoginRequestDto {
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
+	@IsDefined()
+	@IsString()
 	password: string;
 }

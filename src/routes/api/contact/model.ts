@@ -1,39 +1,38 @@
-import { VALIDATION_ERRORS_TRANSLATION_PREFIX } from '$shared/server/consts';
-import { IsDefined, IsEmail, IsPhoneNumber, IsString, MaxLength, MinLength } from 'class-validator';
+import { validators } from '$shared/server/validators';
+
+const { IsDefined, IsEmail, IsPhoneNumber, IsString, MaxLength, MinLength } = validators;
 
 export class ContactRequestDto {
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(1, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":1}` })
-	@MaxLength(100, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":100}` })
+	@IsDefined()
+	@IsString()
+	@MinLength(1)
+	@MaxLength(100)
 	name: string;
 
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(1, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":1}` })
-	@MaxLength(100, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":100}` })
+	@IsDefined()
+	@IsString()
+	@MinLength(1)
+	@MaxLength(100)
 	surname: string;
 
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@IsPhoneNumber(undefined, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsPhoneNumber` })
+	@IsDefined()
+	@IsString()
+	@IsPhoneNumber(undefined)
 	tel: string;
 
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsEmail(undefined, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsEmail` })
+	@IsDefined()
+	@IsEmail(undefined)
 	email: string;
 
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(10, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":10}` })
-	@MaxLength(150, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":150}` })
+	@IsDefined()
+	@IsString()
+	@MinLength(10)
+	@MaxLength(150)
 	subject: string;
 
-	@IsDefined({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsDefined` })
-	@IsString({ message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.IsString` })
-	@MinLength(10, { message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MinLength@{"length":10}` })
-	@MaxLength(10_000, {
-		message: `${VALIDATION_ERRORS_TRANSLATION_PREFIX}.MaxLength@{"length":10000}`
-	})
+	@IsDefined()
+	@IsString()
+	@MinLength(10)
+	@MaxLength(10_000)
 	message: string;
 }

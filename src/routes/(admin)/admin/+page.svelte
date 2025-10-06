@@ -1,12 +1,26 @@
-<svelte:head>
-	<title>Admin Dashboard</title>
-</svelte:head>
+<script lang="ts">
+	import { PATHS } from './model';
+	import { translate } from '$i18n';
+</script>
 
-<div class="px-4 py-6 sm:px-0">
-	<div class="h-96 rounded-lg border-4 border-dashed border-gray-200 p-8">
-		<div class="text-center">
-			<h1 class="mb-4 text-2xl font-bold text-gray-900">Welcome to Admin Dashboard</h1>
-			<p class="text-gray-600">You are successfully authenticated as an administrator.</p>
-		</div>
-	</div>
+<div class="w-full rounded-xl border border-gray-200 bg-white p-6 shadow-md">
+	<h1 class="mb-5 text-3xl font-bold text-gray-800">
+		{$translate('admin.availableResources')}
+	</h1>
+
+	<ul class="space-y-2">
+		{#each PATHS as { href, label }}
+			<li>
+				<a
+					{href}
+					class="block rounded-lg px-4 py-2 text-lg font-medium text-gray-700
+                 transition-colors duration-150
+                 ease-in-out hover:bg-gray-50 hover:text-gray-900
+                 focus:ring-2 focus:ring-indigo-400 focus:outline-none"
+				>
+					{$translate(label)}
+				</a>
+			</li>
+		{/each}
+	</ul>
 </div>
