@@ -6,9 +6,6 @@ import { buildErrorResponse } from '$shared/server/functions/build-response';
 import type { Handle } from '@sveltejs/kit';
 
 export const handle: Handle = async ({ event, resolve: resolveEvent }) => {
-	// TODO: remove after testing
-	return resolveEvent(event);
-
 	// Protect all /api/admin routes
 	if (event.route.id?.startsWith(resolve('/api/admin'))) {
 		const isLoggedIn = isAdminAuthenticated(event.cookies);
