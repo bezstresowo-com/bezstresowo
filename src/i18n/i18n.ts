@@ -14,11 +14,7 @@ export const translate = derived(
 		}
 );
 
-function parseTranslation(
-	locale: Locale,
-	translationString: string,
-	vars?: Record<string, string>
-) {
+function parseTranslation(locale: Locale, translationString: string, vars?: Record<string, any>) {
 	const translationFile = TRANSLATIONS[locale];
 
 	if (isNil(translationFile)) {
@@ -50,7 +46,7 @@ function parseTranslation(
 	if (!isNil(vars)) {
 		Object.keys(vars).map((k) => {
 			const regex = new RegExp(`{{\\s*${k}\\s*}}`, 'g');
-			text = text.replace(regex, vars[k]);
+			text = text.replace(regex, `${vars[k]}`);
 		});
 	}
 

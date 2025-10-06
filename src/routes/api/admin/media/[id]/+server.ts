@@ -12,13 +12,11 @@ export async function POST({ params, request, route }) {
 	const allFileEntries = formData.getAll('file') as (string | File)[];
 	const files = allFileEntries.filter((entry): entry is File => entry instanceof File);
 
-	if (files.length === 0) {
-		return buildErrorResponse(route, request, HttpStatus.NOT_ACCEPTABLE);
-	}
-
-	const maxFiles = 1;
-	if (files.length > maxFiles) {
-		return buildErrorResponse(route, request, HttpStatus.PAYLOAD_TOO_LARGE, { max: maxFiles });
+	const min = 1;
+	const max = 1;
+	const found = files.length;
+	if (found < min || found > max) {
+		return buildErrorResponse(route, request, HttpStatus.NOT_ACCEPTABLE, { min, max, found });
 	}
 
 	try {

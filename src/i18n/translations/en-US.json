@@ -160,8 +160,7 @@
 				"[id]": {
 					"POST": {
 						"errors": {
-							"NOT_ACCEPTABLE": "No files to process found",
-							"PAYLOAD_TOO_LARGE": "Too many files sent. Max is {{ max }}",
+							"NOT_ACCEPTABLE": "Amount of files found ({{ found }}) does not fit in range {{ min }} - {{ max }}",
 							"INTERNAL_SERVER_ERROR": "An error occured while saving your media {{ id }}"
 						}
 					},
