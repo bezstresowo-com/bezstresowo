@@ -1,18 +1,7 @@
 import type { PaginatedDataResponseDto } from '$shared/global/types/http';
 import type { BlogArticle } from '@prisma/client';
 
-export class GetBlogArticlesPaginatedResponseDto implements PaginatedDataResponseDto<BlogArticle> {
-	data: {
-		id: string;
-		title: string;
-		content: string;
-		relatedMediaIds: string[];
-		createdAt: Date;
-		updatedAt: Date;
-	}[];
-	page: number;
-	size: number;
-}
+export type GetBlogArticlesPaginatedResponseDto = PaginatedDataResponseDto<BlogArticle>;
 
 export class PostBlogArticleRequestDto
 	implements Omit<BlogArticle, 'id' | 'mediaUrls' | 'createdAt' | 'updatedAt'>
@@ -22,6 +11,4 @@ export class PostBlogArticleRequestDto
 	relatedMediaIds: string[];
 }
 
-export class PostBlogArticleResponseDto {
-	id: string;
-}
+export type PostBlogArticleResponseDto = BlogArticle;

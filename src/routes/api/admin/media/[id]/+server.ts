@@ -1,32 +1,24 @@
 import { HttpStatus } from '$shared/global/enums/http-status.js';
-import type { HttpErrorResponse, HttpStatusResponse } from '$shared/global/types/http';
 import { S3Service } from '$shared/server/services/s3/s3-service.js';
-import { json } from '@sveltejs/kit';
 import type { CreateMediaResponseDto } from './model';
+import {
+	buildErrorResponse,
+	buildOkResponse,
+	buildResponse
+} from '$shared/server/functions/build-response';
 
-export async function POST({ params, request }) {
-	const ERROR_PREFIX = 'api.admin.media.[id].POST.errors';
-
+export async function POST({ params, request, route }) {
 	const formData = await request.formData();
 	const allFileEntries = formData.getAll('file') as (string | File)[];
 	const files = allFileEntries.filter((entry): entry is File => entry instanceof File);
 
 	if (files.length === 0) {
-		return json(
-			{
-				message: `${ERROR_PREFIX}.NOT_ACCEPTABLE`
-			} satisfies HttpErrorResponse,
-			{ status: HttpStatus.NOT_ACCEPTABLE }
-		);
+		return buildErrorResponse(route, request, HttpStatus.NOT_ACCEPTABLE);
 	}
 
-	if (files.length > 1) {
-		return json(
-			{
-				message: `${ERROR_PREFIX}.PAYLOAD_TOO_LARGE`
-			} satisfies HttpErrorResponse,
-			{ status: HttpStatus.PAYLOAD_TOO_LARGE }
-		);
+	const maxFiles = 1;
+	if (files.length > maxFiles) {
+		return buildErrorResponse(route, request, HttpStatus.PAYLOAD_TOO_LARGE, { max: maxFiles });
 	}
 
 	try {
@@ -35,21 +27,22 @@ export async function POST({ params, request }) {
 		const arrayBuffer = await file.arrayBuffer();
 		const buffer = Buffer.from(arrayBuffer);
 		const { url } = await s3.uploadFile(buffer, params.id, file.type);
-		return json({ url } satisfies CreateMediaResponseDto, { status: HttpStatus.OK });
+		return buildResponse<CreateMediaResponseDto>({ url });
 	} catch (error) {
 		console.error(error);
 
-		return json(
-			{
-				message: `${ERROR_PREFIX}.INTERNAL_SERVER_ERROR`
-			} satisfies HttpErrorResponse,
-			{ status: HttpStatus.INTERNAL_SERVER_ERROR }
-		);
+		return buildErrorResponse(route, request, HttpStatus.INTERNAL_SERVER_ERROR, { id: params.id });
 	}
 }
 
-export async function DELETE({ params }) {
-	const s3Service = new S3Service();
-	await s3Service.deleteFile(params.id);
-	return json({ status: 'ok' } satisfies HttpStatusResponse, { status: HttpStatus.OK });
+export async function DELETE({ params, route, request }) {
+	try {
+		const s3Service = new S3Service();
+		await s3Service.deleteFile(params.id);
+		return buildOkResponse();
+	} catch (error) {
+		console.error(error);
+
+		return buildErrorResponse(route, request, HttpStatus.INTERNAL_SERVER_ERROR, { id: params.id });
+	}
 }

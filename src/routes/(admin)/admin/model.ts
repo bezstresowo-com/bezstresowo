@@ -1,0 +1,8 @@
+import { resolve } from '$app/paths';
+
+export const PATHS = [
+	{
+		href: resolve('/(admin)/admin/blog'),
+		label: 'admin.blog.label'
+	}
+] as const;

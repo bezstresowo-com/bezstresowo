@@ -1,12 +1,8 @@
-import { HttpStatus } from '$shared/global/enums/http-status.js';
 import { clearAdminAuthCookie } from '$shared/server/functions/admin-auth';
-import type { HttpStatusResponse } from '$shared/global/types/http.js';
-import { json } from '@sveltejs/kit';
+import { buildOkResponse } from '$shared/server/functions/build-response.js';
 
 export async function DELETE({ cookies }) {
 	// Clear the admin auth cookie
 	clearAdminAuthCookie(cookies);
-	return json({ status: 'ok' } satisfies HttpStatusResponse, {
-		status: HttpStatus.OK
-	});
+	return buildOkResponse();
 }

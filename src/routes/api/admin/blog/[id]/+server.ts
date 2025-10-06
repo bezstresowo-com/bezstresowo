@@ -3,16 +3,21 @@ import { validateRequest } from '$shared/server/functions/validate-body.js';
 import { isNil } from 'lodash-es';
 
 import { PrismaClient } from '@prisma/client';
-import { json } from '@sveltejs/kit';
 
-import { PutBlogArticleRequestDto, PutBlogArticleResponseDto } from './model.js';
+import {
+	PutBlogArticleRequestDto,
+	type PutBlogArticleResponseDto,
+	type GetBlogArticleResponseDto
+} from './model.js';
 
-import type { HttpErrorResponse, HttpStatusResponse } from '$shared/global/types/http.js';
 import { S3Service } from '$shared/server/services/s3/s3-service.js';
+import {
+	buildErrorResponse,
+	buildOkResponse,
+	buildResponse
+} from '$shared/server/functions/build-response.js';
 
-export async function GET({ params }) {
-	const ERROR_PREFIX = 'api.admin.blog.[id].GET.errors';
-
+export async function GET({ params, route, request }) {
 	try {
 		const prisma = new PrismaClient();
 		const blogArticle = await prisma.blogArticle.findFirst({
@@ -20,30 +25,18 @@ export async function GET({ params }) {
 		});
 
 		if (isNil(blogArticle)) {
-			return json(
-				{
-					message: ''
-				} satisfies HttpErrorResponse,
-				{ status: HttpStatus.NOT_FOUND }
-			);
+			return buildErrorResponse(route, request, HttpStatus.NOT_FOUND, { id: params.id });
 		}
+
+		return buildResponse<GetBlogArticleResponseDto>(blogArticle);
 	} catch (error) {
 		console.error(error);
 
-		return json(
-			{
-				message: `${ERROR_PREFIX}.INTERNAL_SERVER_ERROR@${JSON.stringify({ id: params.id })}`
-			} satisfies HttpErrorResponse,
-			{
-				status: HttpStatus.INTERNAL_SERVER_ERROR
-			}
-		);
+		return buildErrorResponse(route, request, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
 
-export async function PUT({ params, request }) {
-	const ERROR_PREFIX = 'api.admin.blog.[id].PUT.errors';
-
+export async function PUT({ params, request, route }) {
 	try {
 		const validationResult = await validateRequest(await request.json(), PutBlogArticleRequestDto);
 		if (validationResult.type === 'error') {
@@ -57,14 +50,7 @@ export async function PUT({ params, request }) {
 		});
 
 		if (isNil(foundBlogArticle)) {
-			return json(
-				{
-					message: `${ERROR_PREFIX}.NOT_FOUND@${JSON.stringify({ id: params.id })}`
-				} satisfies HttpErrorResponse,
-				{
-					status: HttpStatus.NOT_FOUND
-				}
-			);
+			return buildErrorResponse(route, request, HttpStatus.NOT_FOUND, { id: params.id });
 		}
 
 		const updatedBlogArticle = await prisma.blogArticle.update({
@@ -73,26 +59,16 @@ export async function PUT({ params, request }) {
 			},
 			data: dto
 		});
-		return json({
-			id: updatedBlogArticle.id
-		} satisfies PutBlogArticleResponseDto);
+
+		return buildResponse<PutBlogArticleResponseDto>(updatedBlogArticle);
 	} catch (error) {
 		console.error(error);
 
-		return json(
-			{
-				message: `${ERROR_PREFIX}.INTERNAL_SERVER_ERROR@${JSON.stringify({ id: params.id })}`
-			} satisfies HttpErrorResponse,
-			{
-				status: HttpStatus.INTERNAL_SERVER_ERROR
-			}
-		);
+		return buildErrorResponse(route, request, HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 }
 
-export async function DELETE({ params }) {
-	const ERROR_PREFIX = 'api.admin.blog.[id].DELETE.errors';
-
+export async function DELETE({ params, route, request }) {
 	try {
 		const prisma = new PrismaClient();
 		const foundBlogArticle = await prisma.blogArticle.findFirst({
@@ -100,14 +76,7 @@ export async function DELETE({ params }) {
 		});
 
 		if (isNil(foundBlogArticle)) {
-			return json(
-				{
-					message: `${ERROR_PREFIX}.NOT_FOUND@${JSON.stringify({ id: params.id })}`
-				} satisfies HttpErrorResponse,
-				{
-					status: HttpStatus.NOT_FOUND
-				}
-			);
+			return buildErrorResponse(route, request, HttpStatus.NOT_FOUND, { id: params.id });
 		}
 
 		const s3 = new S3Service();
@@ -118,17 +87,13 @@ export async function DELETE({ params }) {
 		);
 
 		await prisma.blogArticle.delete({ where: { id: params.id } });
-		return json({ status: 'ok' } satisfies HttpStatusResponse, { status: HttpStatus.OK });
+
+		return buildOkResponse();
 	} catch (error) {
 		console.error(error);
 
-		return json(
-			{
-				message: `${ERROR_PREFIX}.INTERNAL_SERVER_ERROR@${JSON.stringify({ id: params.id })}`
-			} satisfies HttpErrorResponse,
-			{
-				status: HttpStatus.INTERNAL_SERVER_ERROR
-			}
-		);
+		return buildErrorResponse(route, request, HttpStatus.INTERNAL_SERVER_ERROR, {
+			id: params.id
+		});
 	}
 }

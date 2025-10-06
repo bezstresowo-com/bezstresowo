@@ -6,6 +6,8 @@ import { validate } from 'class-validator';
 
 import { json } from '@sveltejs/kit';
 
+import type { HttpValidationErrorResponse } from '$shared/global/types/http';
+
 type ValidationResult<T> =
 	| {
 			type: 'error';
@@ -34,7 +36,7 @@ export async function validateRequest<T extends object>(
 						field: err.property,
 						messages: Object.values(err.constraints ?? {})
 					}))
-				},
+				} satisfies HttpValidationErrorResponse,
 				{ status: HttpStatus.BAD_REQUEST }
 			)
 		};

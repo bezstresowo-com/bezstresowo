@@ -1,13 +1,6 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
+	import { PATHS } from './model';
 	import { translate } from '$i18n';
-
-	const PATHS = [
-		{
-			href: resolve('/(admin)/admin/blog'),
-			label: 'admin.blog.label'
-		}
-	] as const;
 </script>
 
 <div class="w-full rounded-xl border border-gray-200 bg-white p-6 shadow-md">
