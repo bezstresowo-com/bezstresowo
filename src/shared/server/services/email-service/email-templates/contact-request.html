@@ -6,12 +6,7 @@
 	</head>
 	<body>
 		<div>
-			<p>New message from {{ name }} {{ surname }}</p>
-
-			<p>
-				<b> Subject: </b> <br />
-				<i>{{ subject }}</i>
-			</p>
+			<p>New message from {{ nameAndSurname}}</p>
 
 			<p>
 				<b>Message:</b><br />
@@ -21,7 +16,7 @@
 			<p><b>Contact information:</b></p>
 
 			<ul>
-				<li>Name & surname: {{ name }} {{ surname }}</li>
+				<li>Name & surname: {{ nameAndSurname}}</li>
 				<li>E-mail address: <a href="mailto:{{ email }}">{{ email }}</a></li>
 				<li>Phone number: <a href="tel:{{ tel }}">{{ tel }}</a></li>
 			</ul>

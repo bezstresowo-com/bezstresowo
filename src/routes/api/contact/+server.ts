@@ -13,16 +13,14 @@ export async function POST({ request, route }) {
 			return validationResult.response;
 		}
 
-		const { email, message, name, surname, subject, tel } = validationResult.dto;
+		const { email, message, nameAndSurname, tel } = validationResult.dto;
 
-		await new EmailService(EMAIL_SENDER, `New contact request from ${name} ${surname}`, [
+		await new EmailService(EMAIL_SENDER, `New contact request from ${nameAndSurname}`, [
 			email
 		]).contactRequest({
 			email,
 			message,
-			name,
-			surname,
-			subject,
+			nameAndSurname,
 			tel
 		});
 

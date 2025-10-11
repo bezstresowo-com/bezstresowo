@@ -30,28 +30,28 @@
 		},
 		"contactForm": {
 			"title": "Skontaktuj się ze mną",
+			"subtitle": "Skontaktuj się, aby umówić konsultację lub zadać pytania.",
+			"infoTitle": "Informacje kontaktowe",
 			"submit": "Wyślij",
+			"contactInformations": {
+				"phone": "Telefon",
+				"email": "Email",
+				"hours": "Godziny otwarcia",
+				"hoursWeek": "Poniedziałek - Piątek: ",
+				"hoursSat": "Sobota: "
+			},
 			"fields": {
-				"name": {
-					"label": "Imię",
-					"placeholder": "Wpisz swoje imię",
+				"nameAndSurname": {
+					"label": "Twoje Imię i Nazwisko",
+					"placeholder": "Wpisz swoje imię i nazwisko",
 					"errors": {
-						"required": "Imię jest wymagane",
-						"min": "Imię jest za krótkie",
-						"max": "Imię jest za długie"
-					}
-				},
-				"surname": {
-					"label": "Nazwisko",
-					"placeholder": "Wpisz swoje nazwisko",
-					"errors": {
-						"required": "Nazwisko jest wymagane",
-						"min": "Nazwisko jest za krótkie",
-						"max": "Nazwisko jest za długie"
+						"required": "Imię i nazwisko jest wymagane",
+						"min": "Imię i nazwisko jest za krótkie",
+						"max": "Imię i nazwisko jest za długie"
 					}
 				},
 				"email": {
-					"label": "E-mail",
+					"label": "Twój E-mail",
 					"placeholder": "Wpisz swój adres e-mail",
 					"errors": {
 						"email": "Adres e-mail jest nieprawidłowy",
@@ -59,25 +59,15 @@
 					}
 				},
 				"phone": {
-					"label": "Telefon",
+					"label": "Twój Telefon",
 					"placeholder": "Wpisz swój numer telefonu",
 					"errors": {
 						"matches": "Numer telefonu jest nieprawidłowy",
 						"required": "Numer telefonu jest wymagany"
 					}
 				},
-				"subject": {
-					"label": "Temat",
-					"placeholder": "Wpisz temat",
-					"errors": {
-						"matches": "Temat jest nieprawidłowy",
-						"required": "Temat jest wymagany",
-						"min": "Temat jest za krótki",
-						"max": "Temat jest za długi"
-					}
-				},
 				"message": {
-					"label": "Wiadomość",
+					"label": "Jak mogę Ci pomóc?",
 					"placeholder": "Wpisz swoją wiadomość",
 					"errors": {
 						"required": "Wiadomość jest wymagana",

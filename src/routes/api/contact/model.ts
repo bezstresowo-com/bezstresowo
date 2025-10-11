@@ -6,14 +6,8 @@ export class ContactRequestDto {
 	@IsDefined()
 	@IsString()
 	@MinLength(1)
-	@MaxLength(100)
-	name: string;
-
-	@IsDefined()
-	@IsString()
-	@MinLength(1)
-	@MaxLength(100)
-	surname: string;
+	@MaxLength(250)
+	nameAndSurname: string;
 
 	@IsDefined()
 	@IsString()
@@ -23,12 +17,6 @@ export class ContactRequestDto {
 	@IsDefined()
 	@IsEmail(undefined)
 	email: string;
-
-	@IsDefined()
-	@IsString()
-	@MinLength(10)
-	@MaxLength(150)
-	subject: string;
 
 	@IsDefined()
 	@IsString()
