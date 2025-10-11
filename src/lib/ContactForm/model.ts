@@ -33,9 +33,9 @@ export const SCHEMA = yup.object().shape({
 		.max(10_000, `${prefix}.message.errors.max`)
 });
 
-export type ContactFormValue = yup.InferType<typeof SCHEMA>;
+export type FormValue = yup.InferType<typeof SCHEMA>;
 
-export const FORM_INITIAL_VALUE: ContactFormValue = {
+export const FORM_INITIAL_VALUE: FormValue = {
 	email: 'maciou41@gmail.com',
 	message: 'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
 	name: 'Maciej',
@@ -45,7 +45,7 @@ export const FORM_INITIAL_VALUE: ContactFormValue = {
 };
 
 export const FORM_FIELDS: Record<
-	keyof ContactFormValue,
+	keyof FormValue,
 	{ type: 'text' | 'email' | 'tel'; element: 'input' | 'textarea'; placement: 'full' | 'shared' }
 > = {
 	name: { type: 'text', element: 'input', placement: 'shared' },
@@ -56,7 +56,7 @@ export const FORM_FIELDS: Record<
 	message: { type: 'text', element: 'textarea', placement: 'full' }
 };
 
-export const FORM_FIELDS_ORDER: (keyof ContactFormValue)[] = [
+export const FORM_FIELDS_ORDER: (keyof FormValue)[] = [
 	'name',
 	'surname',
 	'email',

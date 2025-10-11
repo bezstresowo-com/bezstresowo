@@ -92,11 +92,43 @@
 		"title": "Bezstresowo Admin Panel",
 		"availableResources": "Below are all available resources you can manage:",
 		"logout": "Logout",
+		"login": {
+			"title": "Admin Login",
+			"description": "Enter your admin password to continue",
+			"form": {
+				"submit": "Sign in",
+				"submitLoading": "Signing in...",
+				"fields": {
+					"password": {
+						"label": "Password",
+						"placeholder": "Admin password"
+					}
+				}
+			}
+		},
 		"blog": {
-			"label": "Blog Articles"
+			"label": "Blog Articles",
+			"dialog": {
+				"trigger": "Create new",
+				"title": "Create new blog article",
+				"description": "Create a new blog article that will be featured on your blog",
+				"form": {
+					"fields": {
+						"title": {
+							"label": "Blog title",
+							"placeholder": "Your blog article title",
+							"errors": {
+								"required": "Title is required",
+								"max": "Maximum length of title is {{ max }}"
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"api": {
+		"generalError": "An unknown error occured while fetching data",
 		"validation": {
 			"errors": {
 				"MinLength": "Length cannot be lower than {{ length }}",

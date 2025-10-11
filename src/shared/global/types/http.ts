@@ -24,7 +24,7 @@ export class PaginationParamsDto {
 	@Type(() => Number)
 	@IsInt()
 	@Min(1)
-	size: number = 10;
+	size: number = 25;
 }
 
 export interface PaginatedDataResponseDto<T> {

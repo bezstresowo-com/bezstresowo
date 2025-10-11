@@ -128,7 +128,7 @@
 
 <div class="relative overflow-hidden rounded-lg border border-gray-300 bg-white">
 	{#if !isNil(editorState?.editor)}
-		<div class="border-b border-gray-200 bg-gray-50 px-3 py-2">
+		<div class="sticky z-1000 w-full border-b border-gray-200 bg-gray-50 px-3 py-2">
 			<div class="flex flex-wrap gap-1">
 				<button
 					onclick={editorState.editor.chain().focus().toggleHeading({ level: 1 }).run}
@@ -240,6 +240,6 @@
 
 	<div
 		bind:this={element}
-		class="prose prose-lg max-w-none px-4 pt-2 pb-4 focus-within:outline-none [&_.ProseMirror]:aspect-video [&_.ProseMirror]:min-h-[200px] [&_.ProseMirror]:pt-0 [&_.ProseMirror]:outline-none [&_.ProseMirror_h1]:my-3 [&_.ProseMirror_h1:first-child]:mt-0 [&_.ProseMirror_h2]:my-2 [&_.ProseMirror_h2:first-child]:mt-0 [&_.ProseMirror_li]:my-0 [&_.ProseMirror_ol]:my-2 [&_.ProseMirror_p]:my-2 [&_.ProseMirror_p:first-child]:mt-0 [&_.ProseMirror_ul]:my-2 [&_.ProseMirror-selectednode]:outline-1 [&_.ProseMirror-selectednode]:outline-primary"
+		class="prose max-w-none overflow-auto px-4 py-4 focus-within:outline-none [&_.ProseMirror]:aspect-video [&_.ProseMirror]:min-h-[200px] [&_.ProseMirror]:pt-0 [&_.ProseMirror]:outline-none [&_.ProseMirror_h1]:my-3 [&_.ProseMirror_h1:first-child]:mt-0 [&_.ProseMirror_h2]:my-2 [&_.ProseMirror_h2:first-child]:mt-0 [&_.ProseMirror_li]:my-0 [&_.ProseMirror_ol]:my-2 [&_.ProseMirror_p]:my-2 [&_.ProseMirror_p:first-child]:mt-0 [&_.ProseMirror_ul]:my-2 [&_.ProseMirror-selectednode]:outline-1 [&_.ProseMirror-selectednode]:outline-primary"
 	></div>
 </div>

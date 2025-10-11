@@ -7,7 +7,7 @@ export class PutBlogArticleRequestDto
 {
 	title: string;
 	content: string;
-	relatedMediaIds: string[];
+	mediaIds: string[];
 }
 
 export type PutBlogArticleResponseDto = BlogArticle;

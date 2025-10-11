@@ -8,7 +8,7 @@ export class PostBlogArticleRequestDto
 {
 	title: string;
 	content: string;
-	relatedMediaIds: string[];
+	mediaIds: string[];
 }
 
 export type PostBlogArticleResponseDto = BlogArticle;
