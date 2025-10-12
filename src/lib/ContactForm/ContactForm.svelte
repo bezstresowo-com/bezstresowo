@@ -1,13 +1,22 @@
 <script lang="ts">
 	import { resolve } from '$app/paths';
 	import { createForm } from 'svelte-forms-lib';
-	import { FORM_FIELDS, FORM_FIELDS_ORDER, FORM_INITIAL_VALUE, SCHEMA } from './model';
+	import {
+		FIELD_MAP,
+		FORM_FIELDS,
+		FORM_FIELDS_ORDER,
+		FORM_INITIAL_VALUE,
+		SCHEMA,
+		type BackendErrorResponse,
+		type ContactFormValue
+	} from './model';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { HttpStatus } from '$shared/global/enums/http-status';
 	import { translate } from '$i18n';
 	import type { ContactRequestDto } from '$api/contact/model';
 	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { CONTACT_INFO } from './contactInfo';
+	import toast, { Toaster } from 'svelte-5-french-toast';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
@@ -39,32 +48,35 @@
 					body
 				});
 
-				// @TODO: WIP - do konsultacji general errory itp.
-				// if (response.ok) {
-				//   generalError = null;
-				//   handleReset();
-				// } else {
-				//   const errorResponse: HttpErrorResponse = await response.json();
-				//   console.log(errorResponse[0].message);
-				//   generalError = errorResponse.message;
-				// }
-
-				const resBody = await response.json();
+				const resBody: BackendErrorResponse = await response.json().catch(() => ({}));
 
 				switch (response.status) {
 					case HttpStatus.OK:
 						generalError = null;
 						handleReset();
+						toast.success($translate('user.contactForm.toast.success'));
 						break;
-					case HttpStatus.BAD_REQUEST:
-						console.log({ resBody });
+
+					case HttpStatus.BAD_REQUEST: {
+						const serverErrors = resBody?.errors ?? [];
+						if (serverErrors.length) {
+							for (const { field, messages } of serverErrors) {
+								const key = FIELD_MAP[field] ?? (field as keyof ContactFormValue);
+								const msg = messages?.[0];
+								errors.update((e) => ({ ...e, [key]: msg }));
+								touched.update((t) => ({ ...t, [key]: true }));
+							}
+						}
 						break;
+					}
+
 					case HttpStatus.INTERNAL_SERVER_ERROR:
-						console.log({ resBody });
+						toast.error($translate('user.contactForm.toast.error'));
 						break;
 				}
 			} catch (error) {
 				console.log(`General fetch error: ${(error as Error).message}`);
+				toast.error($translate('user.contactForm.toast.error'));
 			} finally {
 				isLoading = false;
 			}
@@ -230,4 +242,5 @@
 			{/if}
 		</form>
 	</div>
+	<Toaster />
 </section>

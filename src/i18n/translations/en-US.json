@@ -33,13 +33,17 @@
 			"subtitle": "Contact me to schedule a consultation or ask questions.",
 			"infoTitle": "Contact informations",
 			"submit": "Submit",
-      "contactInformations": {
-        "phone": "Phone",
-        "email": "Email",
-        "hours": "Opening hours",
-        "hoursWeek": "Monday - Friday: ",
-        "hoursSat":"Saturday: "
-      },
+			"toast": {
+				"success": "Your message has been sent!",
+				"error": "A server error occurred. Please try again later."
+			},
+			"contactInformations": {
+				"phone": "Phone",
+				"email": "Email",
+				"hours": "Opening hours",
+				"hoursWeek": "Monday - Friday: ",
+				"hoursSat": "Saturday: "
+			},
 			"fields": {
 				"nameAndSurname": {
 					"label": "Your Name and Surname",

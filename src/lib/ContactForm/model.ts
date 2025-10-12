@@ -29,7 +29,7 @@ export const FORM_INITIAL_VALUE: ContactFormValue = {
 	email: '',
 	message: '',
 	nameAndSurname: '',
-	phone: '',
+	phone: ''
 };
 
 export const FORM_FIELDS: Record<
@@ -48,3 +48,13 @@ export const FORM_FIELDS_ORDER: (keyof ContactFormValue)[] = [
 	'phone',
 	'message'
 ];
+
+export const FIELD_MAP: Record<string, keyof ContactFormValue> = {
+	tel: 'phone',
+	nameAndSurname: 'nameAndSurname',
+	email: 'email',
+	message: 'message'
+};
+
+export type BackendError = { field: string; messages: string[] };
+export type BackendErrorResponse = { errors?: BackendError[]; message?: string };
