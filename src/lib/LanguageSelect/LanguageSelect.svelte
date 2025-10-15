@@ -51,7 +51,7 @@
 	<Select.Portal>
 		<Select.Content
 			sideOffset={8}
-			class="rounded-lg border-2 border-secondary bg-primary p-2 text-secondary"
+			class="z-[70] rounded-lg border-2 border-secondary bg-primary p-2 text-secondary"
 		>
 			<Select.Viewport class="flex flex-col gap-4">
 				{#each ITEMS as { value, label, disabled }, i (i + value)}
