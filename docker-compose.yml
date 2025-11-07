@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: bezstresowo-database
+    environment:
+      POSTGRES_DB: bezstresowo
+      POSTGRES_USER: bezstresowo
+      POSTGRES_PASSWORD: supersecret
+      TZ: Europe/Warsaw
+    ports:
+      - '5432:5432'
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
