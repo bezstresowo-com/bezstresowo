@@ -158,7 +158,7 @@
 		</div>
 
 		<!-- Right: Form -->
-		<form onsubmit={handleSubmit} class="relative p-6 sm:p-8">
+		<form onsubmit={handleSubmit} class="p-6 sm:p-8">
 			<div class="space-y-5">
 				{#each FORM_FIELDS_ORDER as key, i (i + key)}
 					{#if FORM_FIELDS[key].element === 'input'}
@@ -219,7 +219,7 @@
 			{#if isLoading}
 				<div
 					role="status"
-					class="absolute inset-0 z-10 grid place-items-center rounded-2xl bg-white/70"
+					class="absolute inset-0 grid place-items-center rounded-2xl bg-white/70"
 				>
 					<svg
 						aria-hidden="true"
