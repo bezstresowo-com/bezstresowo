@@ -1,11 +1,11 @@
 <script lang="ts">
-  import { translate } from '$i18n';
-  import { LanguageSelect } from '$lib';
-  import { HEADER_PATHS } from './model';
-  import { resolve } from '$app/paths';
+	import { translate } from '$i18n';
+	import { LanguageSelect } from '$lib';
+	import { HEADER_PATHS } from './model';
+	import { resolve } from '$app/paths';
 
-  let menuOpen = $state(false);
-
+	let menuOpen = $state(false);
+	let selectedPath = $state(HEADER_PATHS[0].href);
 </script>
 
 <!-- Desktop: header -->
@@ -18,8 +18,8 @@
 		{#each HEADER_PATHS as { href, label }, i (i)}
 			<a
 				{href}
-				class="font-bold text-secondary decoration-secondary decoration-2 underline-offset-4 hover:underline"
-				>{$translate(label)}</a
+				class={`${selectedPath === href ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline`}
+				onclick={() => (selectedPath = href)}>{$translate(label)}</a
 			>
 		{/each}
 
@@ -79,10 +79,10 @@
 			{#each HEADER_PATHS as { href, label }, i (i)}
 				<a
 					{href}
-					class="rounded-md px-2 py-2 text-lg font-semibold text-secondary hover:underline"
-					onclick={() => (menuOpen = false)}
-				>
-					{$translate(label)}
+					class={`${selectedPath === href ? 'text-secondary' : 'text-white'}  px-2 py-2 text-lg text-secondary hover:underline`}
+
+					onclick={() => (selectedPath = href, menuOpen = false)}
+					>{$translate(label)}
 				</a>
 			{/each}
 
