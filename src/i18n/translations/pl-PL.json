@@ -89,7 +89,75 @@
 		}
 	},
 	"admin": {
-		"blog": {}
+		"title": "Panel Administratora Bezstresowo",
+		"availableResources": "Poniżej znajdują się wszystkie zasoby, którymi możesz zarządzać:",
+		"logout": "Wyloguj",
+		"login": {
+			"title": "Logowanie Administratora",
+			"description": "Wprowadź hasło administratora, aby kontynuować",
+			"form": {
+				"submit": "Zaloguj się",
+				"submitLoading": "Logowanie...",
+				"fields": {
+					"password": {
+						"label": "Hasło",
+						"placeholder": "Hasło administratora"
+					}
+				}
+			}
+		},
+		"blog": {
+			"label": "Artykuły na blogu",
+			"back": "Wróć",
+			"emptyState": {
+				"title": "Brak artykułów na blogu",
+				"description": "Zacznij od utworzenia pierwszego artykułu używając przycisku powyżej."
+			},
+			"actions": {
+				"delete": "Usuń",
+				"edit": "Edytuj"
+			},
+			"notifications": {
+				"createSuccess": "Artykuł został pomyślnie utworzony!",
+				"createError": "Nie udało się utworzyć artykułu. Spróbuj ponownie.",
+				"updateSuccess": "Artykuł został pomyślnie zaktualizowany!",
+				"updateError": "Nie udało się zaktualizować artykułu. Spróbuj ponownie.",
+				"deleteSuccess": "Artykuł został pomyślnie usunięty!",
+				"deleteError": "Nie udało się usunąć artykułu. Spróbuj ponownie."
+			},
+			"deleteDialog": {
+				"title": "Usuń artykuł na blogu",
+				"description": "Czy na pewno chcesz usunąć ten artykuł? Ta akcja nie może być cofnięta.",
+				"confirmLabel": "Wpisz 'delete' aby potwierdzić",
+				"confirmPlaceholder": "delete",
+				"confirmError": "Proszę wpisać 'delete' aby potwierdzić",
+				"confirm": "Usuń artykuł",
+				"cancel": "Anuluj"
+			},
+			"dialog": {
+				"trigger": "Utwórz nowy",
+				"triggerUpdate": "Edytuj",
+				"title": "Utwórz nowy artykuł na blogu",
+				"titleUpdate": "Zaktualizuj artykuł na blogu",
+				"description": "Utwórz nowy artykuł, który będzie wyświetlany na Twoim blogu",
+				"descriptionUpdate": "Zaktualizuj artykuł na blogu",
+				"submit": "Utwórz",
+				"submitUpdate": "Zaktualizuj",
+				"cancel": "Anuluj",
+				"form": {
+					"fields": {
+						"title": {
+							"label": "Tytuł bloga",
+							"placeholder": "Tytuł twojego artykułu",
+							"errors": {
+								"required": "Tytuł jest wymagany",
+								"max": "Maksymalna długość tytułu to {{ max }}"
+							}
+						}
+					}
+				}
+			}
+		}
 	},
 	"api": {
 		"validation": {

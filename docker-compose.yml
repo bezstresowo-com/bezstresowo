@@ -1,0 +1,19 @@
+services:
+  db:
+    image: postgres:latest
+    container_name: bezstresowo-postgresql
+    restart: 'no'
+
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: super_secret_password
+      POSTGRES_DB: postgres
+
+    ports:
+      - '5432:5432'
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/18/docker
+
+volumes:
+  postgres_data:

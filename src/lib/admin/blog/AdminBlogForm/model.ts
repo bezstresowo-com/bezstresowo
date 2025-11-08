@@ -27,4 +27,3 @@ export const FORM_FIELDS: Record<
 };
 
 export const FORM_FIELDS_ORDER: (keyof FormValue)[] = ['title'];
-

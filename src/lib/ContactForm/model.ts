@@ -37,7 +37,8 @@ export type FormValue = yup.InferType<typeof SCHEMA>;
 
 export const FORM_INITIAL_VALUE: FormValue = {
 	email: 'maciou41@gmail.com',
-	message: 'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
+	message:
+		'testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest',
 	name: 'Maciej',
 	phone: '333333333',
 	subject: 'testtesttest',

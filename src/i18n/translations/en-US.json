@@ -108,10 +108,42 @@
 		},
 		"blog": {
 			"label": "Blog Articles",
+			"back": "Back",
+			"emptyState": {
+				"title": "No blog articles yet",
+				"description": "Get started by creating your first blog article using the button above."
+			},
+			"actions": {
+				"delete": "Delete",
+				"edit": "Edit"
+			},
+			"notifications": {
+				"createSuccess": "Blog article created successfully!",
+				"createError": "Failed to create blog article. Please try again.",
+				"updateSuccess": "Blog article updated successfully!",
+				"updateError": "Failed to update blog article. Please try again.",
+				"deleteSuccess": "Blog article deleted successfully!",
+				"deleteError": "Failed to delete blog article. Please try again."
+			},
+			"deleteDialog": {
+				"title": "Delete Blog Article",
+				"description": "Are you sure you want to delete this blog article? This action cannot be undone.",
+				"confirmLabel": "Type 'delete' to confirm",
+				"confirmPlaceholder": "delete",
+				"confirmError": "Please type 'delete' to confirm",
+				"confirm": "Delete Article",
+				"cancel": "Cancel"
+			},
 			"dialog": {
 				"trigger": "Create new",
+				"triggerUpdate": "Edit",
 				"title": "Create new blog article",
+				"titleUpdate": "Update blog article",
 				"description": "Create a new blog article that will be featured on your blog",
+				"descriptionUpdate": "Update the blog article",
+				"submit": "Create",
+				"submitUpdate": "Update",
+				"cancel": "Cancel",
 				"form": {
 					"fields": {
 						"title": {

@@ -131,6 +131,7 @@
 		<div class="sticky z-1000 w-full border-b border-gray-200 bg-gray-50 px-3 py-2">
 			<div class="flex flex-wrap gap-1">
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleHeading({ level: 1 }).run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'heading',
@@ -142,6 +143,7 @@
 					H1
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleHeading({ level: 2 }).run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'heading',
@@ -153,6 +155,7 @@
 					H2
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleHeading({ level: 3 }).run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'heading',
@@ -164,6 +167,7 @@
 					H3
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleHeading({ level: 4 }).run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'heading',
@@ -175,6 +179,7 @@
 					H4
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().setParagraph().run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'paragraph'
@@ -185,6 +190,7 @@
 					P
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleBold().run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'bold'
@@ -195,6 +201,7 @@
 					<strong>B</strong>
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleItalic().run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'italic'
@@ -205,6 +212,7 @@
 					<em>I</em>
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleUnderline().run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'underline'
@@ -215,6 +223,7 @@
 					<span class="underline">U</span>
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleBulletList().run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'bulletList'
@@ -225,6 +234,7 @@
 					Unordered List
 				</button>
 				<button
+					type="button"
 					onclick={editorState.editor.chain().focus().toggleOrderedList().run}
 					class="rounded border px-3 py-1 text-sm font-medium transition-colors {editorState.editor.isActive(
 						'orderedList'

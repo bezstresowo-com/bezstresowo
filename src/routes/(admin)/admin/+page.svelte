@@ -9,7 +9,7 @@
 	</h1>
 
 	<ul class="space-y-2">
-		{#each PATHS as { href, label }}
+		{#each PATHS as { href, label } (href)}
 			<li>
 				<a
 					{href}
