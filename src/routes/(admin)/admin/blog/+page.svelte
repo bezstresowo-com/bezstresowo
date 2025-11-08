@@ -232,46 +232,44 @@
 	</div>
 
 	<!-- Pagination -->
-	{#if totalPages > 1}
-		<div class="mt-8 flex justify-center">
-			<Pagination.Root
-				count={blogPosts.data.data.length}
-				perPage={paginationParams.size}
-				page={paginationParams.page}
-				onPageChange={(page) => handlePageChange(page)}
-			>
-				{#snippet children({ pages, currentPage })}
-					<div class="flex items-center gap-2">
-						<Pagination.PrevButton
-							class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-						>
-							<i class="fa-solid fa-chevron-left"></i>
-						</Pagination.PrevButton>
+	<div class="mt-8 flex justify-center">
+		<Pagination.Root
+			count={blogPosts.data.data.length}
+			perPage={paginationParams.size}
+			page={paginationParams.page}
+			onPageChange={(page) => handlePageChange(page)}
+		>
+			{#snippet children({ pages, currentPage })}
+				<div class="flex items-center gap-2">
+					<Pagination.PrevButton
+						class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+					>
+						<i class="fa-solid fa-chevron-left"></i>
+					</Pagination.PrevButton>
 
-						{#each pages as page, i (i)}
-							{#if page.type === 'ellipsis'}
-								<span class="px-2 text-gray-500">...</span>
-							{:else}
-								<Pagination.Page
-									{page}
-									class="rounded-md border px-3 py-2 text-sm font-medium transition-colors {page.value ===
-									currentPage
-										? 'border-blue-500 bg-blue-500 text-white'
-										: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'}"
-								>
-									{page.value}
-								</Pagination.Page>
-							{/if}
-						{/each}
+					{#each pages as page, i (i)}
+						{#if page.type === 'ellipsis'}
+							<span class="px-2 text-gray-500">...</span>
+						{:else}
+							<Pagination.Page
+								{page}
+								class="rounded-md border px-3 py-2 text-sm font-medium transition-colors {page.value ===
+								currentPage
+									? 'border-blue-500 bg-blue-500 text-white'
+									: 'border-gray-300 bg-white text-gray-700 hover:bg-gray-50'}"
+							>
+								{page.value}
+							</Pagination.Page>
+						{/if}
+					{/each}
 
-						<Pagination.NextButton
-							class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
-						>
-							<i class="fa-solid fa-chevron-right"></i>
-						</Pagination.NextButton>
-					</div>
-				{/snippet}
-			</Pagination.Root>
-		</div>
-	{/if}
+					<Pagination.NextButton
+						class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+					>
+						<i class="fa-solid fa-chevron-right"></i>
+					</Pagination.NextButton>
+				</div>
+			{/snippet}
+		</Pagination.Root>
+	</div>
 {/if}
