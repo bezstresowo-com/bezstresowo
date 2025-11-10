@@ -1,15 +1,15 @@
 {
 	"language": {
 		"english": {
-			"label": "English",
+			"label": "EN",
 			"alt": "Flaga języka angielskiego"
 		},
 		"polish": {
-			"label": "Polski",
+			"label": "PL",
 			"alt": "Flaga języka polskiego"
 		},
 		"ukrainian": {
-			"label": "Українська",
+			"label": "UA",
 			"alt": "Flaga języka ukraińskiego"
 		}
 	},
