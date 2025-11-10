@@ -31,7 +31,7 @@
 
 <!-- Mobile: hamburger button-->
 <button
-	class="fixed top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-md text-secondary md:hidden"
+	class="fixed top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-md text-accent md:hidden"
 	aria-label="Open menu"
 	onclick={() => (menuOpen = !menuOpen)}
 >
