@@ -38,8 +38,12 @@
 	{open}
 	items={ITEMS}
 >
-	<Select.Trigger class="flex cursor-pointer items-center gap-2 bg-accent text-primary rounded-xl px-[12px] py-[5px]">
-		<i class="fa fa-globe"></i>
+	<Select.Trigger
+		class="flex cursor-pointer items-center gap-2 rounded-xl bg-accent px-[12px] py-[5px] text-primary"
+	>
+		<span>
+			<i class="fa fa-globe"></i>
+		</span>
 		{$translate(selectedLabel)}
 	</Select.Trigger>
 
@@ -53,7 +57,7 @@
 					<Select.Item {value} {label} {disabled}>
 						{#snippet children({ selected })}
 							<div
-								class={`flex cursor-pointer items-center p-[5px] gap-4 rounded-lg hover:bg-background/30 ${selected ? 'bg-background/15' : ''}`}
+								class={`flex cursor-pointer items-center gap-4 rounded-lg p-[5px] hover:bg-background/30 ${selected ? 'bg-background/15' : ''}`}
 							>
 								<img
 									class="aspect-video h-4 object-cover"

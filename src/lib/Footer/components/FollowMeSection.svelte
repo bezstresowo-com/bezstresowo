@@ -6,7 +6,7 @@
 <div>
 	<div class="mb-3 text-secondary">{$translate('user.footer.followMeHeader')}</div>
 	<div class="flex gap-3">
-		{#each FOLLOW_ME_LINKS as { icon, label, href }}
+		{#each FOLLOW_ME_LINKS as { icon, label, href } (href)}
 			<a
 				{href}
 				aria-label={label}

@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:latest
-    container_name: bezstresowo-database
+    container_name: bezstresowo-postgresql
     environment:
       POSTGRES_DB: bezstresowo
       POSTGRES_USER: bezstresowo
@@ -16,7 +16,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+    restart: no
 
 volumes:
   postgres_data:

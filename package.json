@@ -4,7 +4,6 @@
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
-    "predev": "docker compose up -d",
 		"dev": "prisma generate && prisma migrate deploy && vite dev",
 		"build": "prisma generate && vite build",
 		"preview": "vite preview",
