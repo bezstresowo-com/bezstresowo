@@ -28,6 +28,16 @@
 				"reservations": "Reservations"
 			}
 		},
+		"footer": {
+      "contactHeader": "Contact",
+      "fastLinksHeader": "Fast links",
+      "followMeHeader": "Follow me",
+			"fastLinks": {
+				"privacyPolicy": "Privacy policy",
+				"termsOfService": "Terms of service",
+				"faq": "FAQ"
+			}
+		},
 		"contactForm": {
 			"title": "Contact me",
 			"subtitle": "Contact me to schedule a consultation or ask questions.",

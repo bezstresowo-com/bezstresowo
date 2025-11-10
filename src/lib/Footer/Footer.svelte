@@ -1,37 +1,16 @@
 <script lang="ts">
-
+	import { CONTACT_ELEMENTS, FAST_LINKS, FOLLOW_ME_LINKS } from './model';
+	import { translate } from '$i18n';
+	import ContactSection from './components/ContactSection.svelte';
+	import FastLinksSection from './components/FastLinksSection.svelte';
+	import FollowMeSection from './components/FollowMeSection.svelte';
 </script>
 
-<footer class="bg-primary text-accent">
-	<div class="mx-auto max-w-7xl px-4 py-6">
-		<div class="flex flex-col gap-4 md:flex-row md:items-center md:gap-8">
-			<div class="w-full text-center md:w-auto md:max-w-54 md:text-left">
-				<p class="text-pretty">Centrum Psychoterapii Bezstresowo OLESYA HAIDUK</p>
-			</div>
-
-			<div class="w-full text-center md:w-auto md:max-w-60 md:text-left">
-				<p class="break-keep">
-					<b>NIP:</b> 7282877722
-				</p>
-				<p class="break-keep">
-					<b>REGON:</b> 526600299
-				</p>
-			</div>
-
-			<div class="w-full text-center md:w-auto md:max-w-60 md:text-left">
-				<p class="break-keep">
-					<b>Tel.:</b>
-					<a class="underline-offset-4 hover:underline" href="tel:+48795819910">+48 795 819 910</a>
-				</p>
-				<p class="break-keep">
-					<b>E-mail:</b>
-					<a class="underline-offset-4 hover:underline" href="mailto:beztresowo@gmail.com"
-						>beztresowo@gmail.com</a
-					>
-				</p>
-			</div>
-
-			<span class="hidden flex-auto md:block"></span>
-		</div>
+<footer class="bg-primary px-5 py-6">
+	<div class="grid grid-cols-3 pb-6 border-b-1 border-white/30 max-md:flex max-md:flex-col">
+    <ContactSection />
+    <FastLinksSection />
+    <FollowMeSection />
 	</div>
+	<div class="text-center text-white font-thin py-4">© 2025 Psychoterapia. Wszystkie prawa zastrzeżone.</div>
 </footer>
