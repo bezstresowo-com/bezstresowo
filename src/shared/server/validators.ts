@@ -2,18 +2,7 @@ import * as cv from 'class-validator';
 
 export const VALIDATION_MSG_PREFIX = 'api.validation.errors' as const;
 
-export const validators = new Proxy(cv, {
-	get(target, prop: ClassValidatorExportName) {
-		const value = (target as any)[prop];
-		if (typeof value === 'function' && /^[A-Z]/.test(prop)) {
-			return withTranslationMessage(prop, value);
-		}
-		return value;
-	}
-});
-
-type ClassValidatorExportName = keyof typeof cv;
-
+// Helper function to add default translation messages
 // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type
 function withTranslationMessage(name: string, fn: Function) {
 	return (...args: any[]) => {
@@ -21,7 +10,7 @@ function withTranslationMessage(name: string, fn: Function) {
 		const isOptions = typeof lastArg === 'object' && !Array.isArray(lastArg);
 
 		let msgSuffix = '';
-		switch (name as ClassValidatorExportName) {
+		switch (name) {
 			case 'MinLength':
 			case 'MaxLength':
 			case 'Min':
@@ -45,3 +34,19 @@ function withTranslationMessage(name: string, fn: Function) {
 		return fn(...args);
 	};
 }
+
+/* 
+	TODO:
+	Remember to overwrite the validators which need to have custom validation messages
+*/
+export const validators = {
+	...cv,
+	MinLength: withTranslationMessage('MinLength', cv.MinLength),
+	MaxLength: withTranslationMessage('MaxLength', cv.MaxLength),
+	Min: withTranslationMessage('Min', cv.Min),
+	Max: withTranslationMessage('Max', cv.Max),
+	IsDefined: withTranslationMessage('IsDefined', cv.IsDefined),
+	IsPhoneNumber: withTranslationMessage('IsPhoneNumber', cv.IsPhoneNumber),
+	IsEmail: withTranslationMessage('IsEmail', cv.IsEmail),
+	IsString: withTranslationMessage('IsString', cv.IsString)
+};
