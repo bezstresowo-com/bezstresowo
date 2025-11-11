@@ -92,11 +92,79 @@
 		"title": "Bezstresowo Admin Panel",
 		"availableResources": "Below are all available resources you can manage:",
 		"logout": "Logout",
+		"login": {
+			"title": "Admin Login",
+			"description": "Enter your admin password to continue",
+			"form": {
+				"submit": "Sign in",
+				"submitLoading": "Signing in...",
+				"fields": {
+					"password": {
+						"label": "Password",
+						"placeholder": "Admin password"
+					}
+				}
+			}
+		},
 		"blog": {
-			"label": "Blog Articles"
+			"label": "Blog Articles",
+			"back": "Back",
+			"emptyState": {
+				"title": "No blog articles yet",
+				"description": "Get started by creating your first blog article using the button above."
+			},
+			"actions": {
+				"delete": "Delete",
+				"edit": "Edit"
+			},
+			"notifications": {
+				"createSuccess": "Blog article created successfully!",
+				"createError": "Failed to create blog article. Please try again.",
+				"updateSuccess": "Blog article updated successfully!",
+				"updateError": "Failed to update blog article. Please try again.",
+				"deleteSuccess": "Blog article deleted successfully!",
+				"deleteError": "Failed to delete blog article. Please try again."
+			},
+			"deleteDialog": {
+				"title": "Delete Blog Article",
+				"description": "Are you sure you want to delete this blog article? This action cannot be undone.",
+				"confirmLabel": "Type 'delete' to confirm",
+				"confirmPlaceholder": "delete",
+				"confirmError": "Please type 'delete' to confirm",
+				"confirm": "Delete Article",
+				"cancel": "Cancel"
+			},
+			"dialog": {
+				"create": {
+					"trigger": "Create new",
+					"title": "Create new blog article",
+					"description": "Create a new blog article that will be featured on your blog",
+					"submit": "Create"
+				},
+				"update": {
+					"trigger": "Edit",
+					"title": "Update blog article",
+					"description": "Update the blog article",
+					"submit": "Update"
+				},
+				"cancel": "Cancel",
+				"form": {
+					"fields": {
+						"title": {
+							"label": "Blog title",
+							"placeholder": "Your blog article title",
+							"errors": {
+								"required": "Title is required",
+								"max": "Maximum length of title is {{ max }}"
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 	"api": {
+		"generalError": "An unknown error occured while fetching data",
 		"validation": {
 			"errors": {
 				"MinLength": "Length cannot be lower than {{ length }}",

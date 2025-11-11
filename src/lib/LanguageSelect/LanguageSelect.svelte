@@ -39,7 +39,9 @@
 	items={ITEMS}
 >
 	<Select.Trigger class="flex cursor-pointer items-center gap-2 text-secondary">
-		<i class="fa-solid fa-language"></i>
+		<span>
+			<i class="fa-solid fa-language"></i>
+		</span>
 		{$translate(selectedLabel)}
 		<img
 			class="aspect-video h-4 object-cover"

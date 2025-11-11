@@ -19,11 +19,7 @@ export class S3Service {
 		});
 	}
 
-	async uploadFile(
-		file: Buffer,
-		fileName: string,
-		mimetype: string
-	) {
+	async uploadFile(file: Buffer, fileName: string, mimetype: string) {
 		const command = new PutObjectCommand({
 			Bucket: AWS_S3_BUCKET_NAME,
 			Key: fileName,

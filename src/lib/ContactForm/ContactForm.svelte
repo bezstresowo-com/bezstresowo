@@ -4,7 +4,6 @@
 	import { FORM_FIELDS, FORM_FIELDS_ORDER, FORM_INITIAL_VALUE, SCHEMA } from './model';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { HttpStatus } from '$shared/global/enums/http-status';
-	import type { HttpErrorResponse } from '$shared/global/types/http';
 	import { translate } from '$i18n';
 	import type { ContactRequestDto } from '$api/contact/model';
 	import { HttpMethod } from '$shared/global/enums/http-method';
@@ -41,16 +40,6 @@
 					body
 				});
 
-        // @TODO: WIP - do konsultacji general errory itp.
-        // if (response.ok) {
-        //   generalError = null;
-        //   handleReset();
-        // } else {
-        //   const errorResponse: HttpErrorResponse = await response.json();
-        //   console.log(errorResponse[0].message);
-        //   generalError = errorResponse.message;
-        // }
-
 				switch (response.status) {
 					case HttpStatus.OK:
 						generalError = null;
@@ -58,15 +47,15 @@
 						break;
 
 					case HttpStatus.BAD_REQUEST:
-						console.log({ response });
+						console.error({ response });
 						break;
 
 					case HttpStatus.INTERNAL_SERVER_ERROR:
-						console.log({ response });
+						console.error({ response });
 						break;
 				}
 			} catch (error) {
-				console.log(`General fetch error: ${(error as Error).message}`);
+				console.error(`General fetch error: ${(error as Error).message}`);
 			} finally {
 				isLoading = false;
 			}

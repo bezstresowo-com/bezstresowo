@@ -3,7 +3,6 @@
 	import { LanguageSelect } from '$lib';
 	import { HEADER_PATHS } from './model';
 	import { resolve } from '$app/paths';
-	import ContactForm from '$lib/ContactForm/ContactForm.svelte';
 
 	let { children } = $props();
 </script>

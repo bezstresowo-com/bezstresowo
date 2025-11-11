@@ -74,21 +74,23 @@
 	});
 </script>
 
-<svelte:head>
-	<title>Admin Login</title>
-</svelte:head>
-
-<div class="flex min-h-screen items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8">
+<div
+	class="flex h-[calc(100dvh_-_7rem)] items-center justify-center bg-gray-50 px-4 py-12 sm:px-6 lg:px-8"
+>
 	<div class="w-full max-w-md space-y-8">
 		<div>
-			<h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Admin Login</h2>
-			<p class="mt-2 text-center text-sm text-gray-600">Enter your admin password to continue</p>
+			<h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
+				{$translate('admin.login.title')}
+			</h2>
+			<p class="mt-2 text-center text-sm text-gray-600">{$translate('admin.login.description')}</p>
 		</div>
 
 		<form class="mt-8 space-y-6" onsubmit={handleSubmit}>
 			<div class="-space-y-px rounded-md shadow-sm">
 				<div>
-					<label for="password" class="sr-only">Password</label>
+					<label for="password" class="sr-only"
+						>{$translate('admin.login.form.fields.password.label')}</label
+					>
 					<input
 						id="password"
 						name="password"
@@ -98,10 +100,29 @@
 						onchange={handleChange}
 						onblur={handleChange}
 						class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm"
-						placeholder="Admin password"
+						placeholder={$translate('admin.login.form.fields.password.placeholder')}
 						disabled={isLoading}
 					/>
 				</div>
+			</div>
+
+			<div>
+				<button
+					type="submit"
+					disabled={!isValid || isLoading}
+					class="group relative flex w-full cursor-pointer justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
+				>
+					{#if isLoading}
+						<div class="flex items-center justify-center gap-4">
+							{$translate('admin.login.form.submitLoading')}
+							<div
+								class="aspect-square h-6 animate-spin rounded-full border-2 border-solid border-gray-500 border-t-white"
+							></div>
+						</div>
+					{:else}
+						{$translate('admin.login.form.submit')}
+					{/if}
+				</button>
 			</div>
 
 			{#if !isNil(httpError)}
@@ -111,40 +132,6 @@
 					</div>
 				</div>
 			{/if}
-
-			<div>
-				<button
-					type="submit"
-					disabled={!isValid || isLoading}
-					class="group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-				>
-					{#if isLoading}
-						<svg
-							class="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
-							xmlns="http://www.w3.org/2000/svg"
-							fill="none"
-							viewBox="0 0 24 24"
-						>
-							<circle
-								class="opacity-25"
-								cx="12"
-								cy="12"
-								r="10"
-								stroke="currentColor"
-								stroke-width="4"
-							></circle>
-							<path
-								class="opacity-75"
-								fill="currentColor"
-								d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-							></path>
-						</svg>
-						Signing in...
-					{:else}
-						Sign in
-					{/if}
-				</button>
-			</div>
 		</form>
 	</div>
 </div>
