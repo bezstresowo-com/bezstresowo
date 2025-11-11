@@ -70,8 +70,12 @@
 
 <Dialog.Root bind:open onOpenChange={handleOpenChange}>
 	<Dialog.Trigger class="cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold text-white">
-		<i class={isUpdateMode ? 'fa-solid fa-edit' : 'fa-solid fa-plus'}></i>
-		{$translate(isUpdateMode ? 'admin.blog.dialog.triggerUpdate' : 'admin.blog.dialog.trigger')}
+		<span>
+			<i class={isUpdateMode ? 'fa-solid fa-edit' : 'fa-solid fa-plus'}></i>
+		</span>
+		{$translate(
+			isUpdateMode ? 'admin.blog.dialog.update.trigger' : 'admin.blog.dialog.create.trigger'
+		)}
 	</Dialog.Trigger>
 
 	<Dialog.Portal>
@@ -82,14 +86,18 @@
 				<Dialog.Title
 					class="flex w-full items-center justify-center text-xl font-semibold tracking-tight"
 				>
-					{$translate(isUpdateMode ? 'admin.blog.dialog.titleUpdate' : 'admin.blog.dialog.title')}
+					{$translate(
+						isUpdateMode ? 'admin.blog.dialog.update.title' : 'admin.blog.dialog.create.title'
+					)}
 				</Dialog.Title>
 
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description>
 					{$translate(
-						isUpdateMode ? 'admin.blog.dialog.descriptionUpdate' : 'admin.blog.dialog.description'
+						isUpdateMode
+							? 'admin.blog.dialog.update.description'
+							: 'admin.blog.dialog.create.description'
 					)}
 				</Dialog.Description>
 
@@ -147,7 +155,9 @@
 									</span>
 								{/if}
 								{$translate(
-									isUpdateMode ? 'admin.blog.dialog.submitUpdate' : 'admin.blog.dialog.submit'
+									isUpdateMode
+										? 'admin.blog.dialog.update.submit'
+										: 'admin.blog.dialog.create.submit'
 								)}
 							</button>
 						</div>
@@ -156,7 +166,9 @@
 
 				<Dialog.Close class="absolute top-5 right-5 cursor-pointer rounded-md">
 					<div>
-						<i class="fa-solid fa-xmark"></i>
+						<span>
+							<i class="fa-solid fa-xmark"></i>
+						</span>
 						<span class="sr-only">Close</span>
 					</div>
 				</Dialog.Close>

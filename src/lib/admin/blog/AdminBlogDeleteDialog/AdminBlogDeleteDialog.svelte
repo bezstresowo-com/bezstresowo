@@ -35,7 +35,9 @@
 	<Dialog.Trigger
 		class="cursor-pointer rounded-md bg-red-500 px-3 py-1.5 text-sm font-bold text-white hover:bg-red-600"
 	>
-		<i class="fa-solid fa-trash"></i>
+		<span>
+			<i class="fa-solid fa-trash"></i>
+		</span>
 		{$translate('admin.blog.actions.delete')}
 	</Dialog.Trigger>
 
@@ -47,7 +49,9 @@
 				<Dialog.Title
 					class="flex w-full items-center justify-center text-xl font-semibold tracking-tight text-red-600"
 				>
-					<i class="fa-solid fa-triangle-exclamation mr-2"></i>
+					<span>
+						<i class="fa-solid fa-triangle-exclamation mr-2"></i>
+					</span>
 					{$translate('admin.blog.deleteDialog.title')}
 				</Dialog.Title>
 
@@ -105,7 +109,9 @@
 
 				<Dialog.Close class="absolute top-5 right-5 cursor-pointer rounded-md">
 					<div>
-						<i class="fa-solid fa-xmark"></i>
+						<span>
+							<i class="fa-solid fa-xmark"></i>
+						</span>
 						<span class="sr-only">Close</span>
 					</div>
 				</Dialog.Close>

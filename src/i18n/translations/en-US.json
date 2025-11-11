@@ -135,14 +135,18 @@
 				"cancel": "Cancel"
 			},
 			"dialog": {
-				"trigger": "Create new",
-				"triggerUpdate": "Edit",
-				"title": "Create new blog article",
-				"titleUpdate": "Update blog article",
-				"description": "Create a new blog article that will be featured on your blog",
-				"descriptionUpdate": "Update the blog article",
-				"submit": "Create",
-				"submitUpdate": "Update",
+				"create": {
+					"trigger": "Create new",
+					"title": "Create new blog article",
+					"description": "Create a new blog article that will be featured on your blog",
+					"submit": "Create"
+				},
+				"update": {
+					"trigger": "Edit",
+					"title": "Update blog article",
+					"description": "Update the blog article",
+					"submit": "Update"
+				},
 				"cancel": "Cancel",
 				"form": {
 					"fields": {

@@ -135,14 +135,18 @@
 				"cancel": "Anuluj"
 			},
 			"dialog": {
-				"trigger": "Utwórz nowy",
-				"triggerUpdate": "Edytuj",
-				"title": "Utwórz nowy artykuł na blogu",
-				"titleUpdate": "Zaktualizuj artykuł na blogu",
-				"description": "Utwórz nowy artykuł, który będzie wyświetlany na Twoim blogu",
-				"descriptionUpdate": "Zaktualizuj artykuł na blogu",
-				"submit": "Utwórz",
-				"submitUpdate": "Zaktualizuj",
+				"create": {
+					"trigger": "Utwórz nowy",
+					"title": "Utwórz nowy artykuł na blogu",
+					"description": "Utwórz nowy artykuł, który będzie wyświetlany na Twoim blogu",
+					"submit": "Utwórz"
+				},
+				"update": {
+					"trigger": "Edytuj",
+					"title": "Zaktualizuj artykuł na blogu",
+					"description": "Zaktualizuj artykuł na blogu",
+					"submit": "Zaktualizuj"
+				},
 				"cancel": "Anuluj",
 				"form": {
 					"fields": {

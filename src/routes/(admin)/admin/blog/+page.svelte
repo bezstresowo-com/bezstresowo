@@ -8,7 +8,7 @@
 		type LoadableState
 	} from '$shared/global/types/store';
 	import { onMount } from 'svelte';
-	import { fetchBlogPosts, deleteBlogPost, updateBlogPost, createBlogPost } from './model';
+	import { fetchBlogPosts, deleteBlogPost, updateBlogPost, createBlogPost } from './fetch-methods';
 	import { AdminBlogForm, AdminBlogDeleteDialog } from '$lib';
 	import { translate } from '$i18n';
 	import { Pagination } from 'bits-ui';
@@ -141,7 +141,9 @@
 		href={resolve('/admin')}
 		class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
 	>
-		<i class="fa-solid fa-arrow-left mr-2"></i>
+		<span>
+			<i class="fa-solid fa-arrow-left mr-2"></i>
+		</span>
 		{$translate('admin.blog.back')}
 	</a>
 	<div class="flex-auto"></div>
@@ -170,13 +172,17 @@
 {:else if blogPosts.error}
 	<!-- Error state -->
 	<div class="rounded-lg border border-red-200 bg-red-50 p-6 text-center">
-		<i class="fa-solid fa-triangle-exclamation mb-2 text-3xl text-red-500"></i>
+		<span>
+			<i class="fa-solid fa-triangle-exclamation mb-2 text-3xl text-red-500"></i>
+		</span>
 		<p class="text-red-700">{blogPosts.error}</p>
 	</div>
 {:else if blogPosts.data && blogPosts.data.data.length === 0}
 	<!-- Empty state -->
 	<div class="rounded-lg border border-gray-200 bg-gray-50 p-12 text-center">
-		<i class="fa-solid fa-inbox mb-4 text-5xl text-gray-400"></i>
+		<span>
+			<i class="fa-solid fa-inbox mb-4 text-5xl text-gray-400"></i>
+		</span>
 		<h3 class="mb-2 text-xl font-semibold text-gray-700">
 			{$translate('admin.blog.emptyState.title')}
 		</h3>
@@ -199,11 +205,15 @@
 
 				<div class="flex items-center justify-between border-t border-gray-100 pt-4">
 					<div class="text-sm text-gray-500">
-						<i class="fa-solid fa-calendar mr-1"></i>
+						<span>
+							<i class="fa-solid fa-calendar mr-1"></i>
+						</span>
 						{new Date(post.createdAt).toLocaleDateString()}
 						{#if post.updatedAt !== post.createdAt}
 							<span class="ml-2">
-								<i class="fa-solid fa-pen mr-1"></i>
+								<span>
+									<i class="fa-solid fa-pen mr-1"></i>
+								</span>
 								{new Date(post.updatedAt).toLocaleDateString()}
 							</span>
 						{/if}
@@ -244,7 +254,9 @@
 					<Pagination.PrevButton
 						class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
 					>
-						<i class="fa-solid fa-chevron-left"></i>
+						<span>
+							<i class="fa-solid fa-chevron-left"></i>
+						</span>
 					</Pagination.PrevButton>
 
 					{#each pages as page, i (i)}
@@ -266,7 +278,9 @@
 					<Pagination.NextButton
 						class="rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
 					>
-						<i class="fa-solid fa-chevron-right"></i>
+						<span>
+							<i class="fa-solid fa-chevron-right"></i>
+						</span>
 					</Pagination.NextButton>
 				</div>
 			{/snippet}
