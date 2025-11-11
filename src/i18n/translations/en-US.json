@@ -1,15 +1,15 @@
 {
 	"language": {
 		"english": {
-			"label": "English",
+			"label": "EN",
 			"alt": "English language flag"
 		},
 		"polish": {
-			"label": "Polski",
+			"label": "PL",
 			"alt": "Polish language flag"
 		},
 		"ukrainian": {
-			"label": "Українська",
+			"label": "UA",
 			"alt": "Ukrainian language flag"
 		}
 	},
@@ -28,30 +28,44 @@
 				"reservations": "Reservations"
 			}
 		},
+		"footer": {
+      "contactHeader": "Contact",
+      "fastLinksHeader": "Fast links",
+      "followMeHeader": "Follow me",
+			"fastLinks": {
+				"privacyPolicy": "Privacy policy",
+				"termsOfService": "Terms of service",
+				"faq": "FAQ"
+			}
+		},
 		"contactForm": {
 			"title": "Contact me",
+			"subtitle": "Contact me to schedule a consultation or ask questions.",
+			"infoTitle": "Contact informations",
 			"submit": "Submit",
+			"toast": {
+				"success": "Your message has been sent!",
+				"error": "A server error occurred. Please try again later."
+			},
+			"contactInformations": {
+				"phone": "Phone",
+				"email": "Email",
+				"hours": "Opening hours",
+				"hoursWeek": "Monday - Friday: ",
+				"hoursSat": "Saturday: "
+			},
 			"fields": {
-				"name": {
-					"label": "Name",
-					"placeholder": "Enter your name",
+				"nameAndSurname": {
+					"label": "Your Name and Surname",
+					"placeholder": "Enter your name and surname",
 					"errors": {
-						"required": "Name is required",
-						"min": "Name too short",
-						"max": "Name too long"
-					}
-				},
-				"surname": {
-					"label": "Surname",
-					"placeholder": "Enter your surname",
-					"errors": {
-						"required": "Surname is required",
-						"min": "Surname too short",
-						"max": "Surname too long"
+						"required": "Name and surname is required",
+						"min": "Name and surname too short",
+						"max": "Name and surname too long"
 					}
 				},
 				"email": {
-					"label": "email",
+					"label": "Your Email",
 					"placeholder": "Enter your email",
 					"errors": {
 						"email": "Email is invalid",
@@ -59,25 +73,15 @@
 					}
 				},
 				"phone": {
-					"label": "Phone",
+					"label": "Your Phone",
 					"placeholder": "Enter your phone number",
 					"errors": {
 						"matches": "Phone number is invalid",
 						"required": "Phone number is required"
 					}
 				},
-				"subject": {
-					"label": "Subject",
-					"placeholder": "Enter the subject",
-					"errors": {
-						"matches": "Subject is invalid",
-						"required": "Subject is required",
-						"min": "Subject is too short",
-						"max": "Subject is too long"
-					}
-				},
 				"message": {
-					"label": "Message",
+					"label": "How can i help you?",
 					"placeholder": "Enter your message",
 					"errors": {
 						"required": "Message is required",

@@ -38,29 +38,26 @@
 	{open}
 	items={ITEMS}
 >
-	<Select.Trigger class="flex cursor-pointer items-center gap-2 text-secondary">
+	<Select.Trigger
+		class="flex cursor-pointer items-center gap-2 rounded-xl bg-accent px-[12px] py-[5px] text-primary"
+	>
 		<span>
-			<i class="fa-solid fa-language"></i>
+			<i class="fa fa-globe"></i>
 		</span>
 		{$translate(selectedLabel)}
-		<img
-			class="aspect-video h-4 object-cover"
-			src={LOCALES_MAP[selectedValue].icon.src}
-			alt={$translate(LOCALES_MAP[selectedValue].icon.alt)}
-		/>
 	</Select.Trigger>
 
 	<Select.Portal>
 		<Select.Content
 			sideOffset={8}
-			class="rounded-lg border-2 border-secondary bg-primary p-2 text-secondary"
+			class="z-[70] rounded-lg border-2 border-accent bg-primary p-2 text-secondary"
 		>
 			<Select.Viewport class="flex flex-col gap-4">
 				{#each ITEMS as { value, label, disabled }, i (i + value)}
 					<Select.Item {value} {label} {disabled}>
 						{#snippet children({ selected })}
 							<div
-								class={`flex cursor-pointer items-center gap-4 hover:bg-background/30 ${selected ? 'bg-background/15' : ''}`}
+								class={`flex cursor-pointer items-center gap-4 rounded-lg p-[5px] hover:bg-background/30 ${selected ? 'bg-background/15' : ''}`}
 							>
 								<img
 									class="aspect-video h-4 object-cover"

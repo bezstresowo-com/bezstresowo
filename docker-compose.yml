@@ -1,19 +1,22 @@
 services:
-  db:
+  postgres:
     image: postgres:latest
     container_name: bezstresowo-postgresql
-    restart: 'no'
-
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: super_secret_password
-      POSTGRES_DB: postgres
-
+      POSTGRES_DB: bezstresowo
+      POSTGRES_USER: bezstresowo
+      POSTGRES_PASSWORD: supersecret
+      TZ: Europe/Warsaw
     ports:
       - '5432:5432'
-
     volumes:
-      - postgres_data:/var/lib/postgresql/18/docker
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: no
 
 volumes:
   postgres_data:

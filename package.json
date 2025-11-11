@@ -68,6 +68,7 @@
 		"prisma": "^6.7.0",
 		"reflect-metadata": "^0.2.2",
 		"stripe": "^18.5.0",
+		"svelte-5-french-toast": "^2.0.6",
 		"svelte-forms-lib": "^2.0.1",
 		"svelte-sonner": "^1.0.5",
 		"uuid": "^13.0.0",
