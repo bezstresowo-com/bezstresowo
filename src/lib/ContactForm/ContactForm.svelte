@@ -8,7 +8,7 @@
 		FORM_INITIAL_VALUE,
 		SCHEMA,
 		type BackendErrorResponse,
-		type ContactFormValue
+		type FormValue
 	} from './model';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { HttpStatus } from '$shared/global/enums/http-status';
@@ -21,15 +21,7 @@
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
 
-	const {
-		form,
-		errors,
-		touched,
-		state: formState,
-		handleChange,
-		handleSubmit,
-		handleReset
-	} = createForm({
+	const { form, errors, touched, handleChange, handleSubmit, handleReset } = createForm({
 		initialValues: FORM_INITIAL_VALUE,
 		validationSchema: SCHEMA,
 		async onSubmit({ email, message, nameAndSurname, phone }) {
@@ -61,7 +53,7 @@
 						const serverErrors = resBody?.errors ?? [];
 						if (serverErrors.length) {
 							for (const { field, messages } of serverErrors) {
-								const key = FIELD_MAP[field] ?? (field as keyof ContactFormValue);
+								const key = FIELD_MAP[field] ?? (field as keyof FormValue);
 								const msg = messages?.[0];
 								errors.update((e) => ({ ...e, [key]: msg }));
 								touched.update((t) => ({ ...t, [key]: true }));
@@ -217,10 +209,7 @@
 			</div>
 
 			{#if isLoading}
-				<div
-					role="status"
-					class="absolute inset-0 grid place-items-center rounded-2xl bg-white/70"
-				>
+				<div role="status" class="absolute inset-0 grid place-items-center rounded-2xl bg-white/70">
 					<svg
 						aria-hidden="true"
 						class="h-8 w-8 animate-spin fill-primary text-gray-200"

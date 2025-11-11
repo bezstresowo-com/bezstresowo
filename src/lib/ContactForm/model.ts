@@ -25,7 +25,7 @@ export const SCHEMA = yup.object().shape({
 
 export type FormValue = yup.InferType<typeof SCHEMA>;
 
-export const FORM_INITIAL_VALUE: ContactFormValue = {
+export const FORM_INITIAL_VALUE: FormValue = {
 	email: '',
 	message: '',
 	nameAndSurname: '',
@@ -42,14 +42,14 @@ export const FORM_FIELDS: Record<
 	message: { type: 'text', element: 'textarea', placement: 'full' }
 };
 
-export const FORM_FIELDS_ORDER: (keyof ContactFormValue)[] = [
+export const FORM_FIELDS_ORDER: (keyof FormValue)[] = [
 	'nameAndSurname',
 	'email',
 	'phone',
 	'message'
 ];
 
-export const FIELD_MAP: Record<string, keyof ContactFormValue> = {
+export const FIELD_MAP: Record<string, keyof FormValue> = {
 	tel: 'phone',
 	nameAndSurname: 'nameAndSurname',
 	email: 'email',
