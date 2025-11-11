@@ -24,7 +24,7 @@ export async function GET({ url, request, route }) {
 		const { page, size } = validationResult.dto;
 		const prisma = new PrismaClient();
 		const blogArticles = await prisma.blogArticle.findMany({
-			skip: page * size,
+			skip: (page - 1) * size,
 			take: size
 		});
 

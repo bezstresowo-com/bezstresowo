@@ -81,7 +81,7 @@ export async function DELETE({ params, route, request }) {
 
 		const s3 = new S3Service();
 		await Promise.all(
-			foundBlogArticle.relatedMediaIds.map(async (id) => {
+			foundBlogArticle.mediaIds.map(async (id) => {
 				return await s3.deleteFile(id);
 			})
 		);

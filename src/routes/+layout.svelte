@@ -10,6 +10,7 @@
 	} from '$shared/server/functions/local-storage';
 	import { isNil } from 'lodash-es';
 	import type { Unsubscriber } from 'svelte/store';
+	import { Toaster } from 'svelte-sonner';
 
 	let { children } = $props();
 
@@ -38,5 +39,7 @@
 		UNSUBS.forEach((unsub) => unsub());
 	});
 </script>
+
+<Toaster position="bottom-right" />
 
 {@render children?.()}

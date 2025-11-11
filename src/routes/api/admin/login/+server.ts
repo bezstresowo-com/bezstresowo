@@ -14,7 +14,6 @@ export async function POST({ request, cookies, route }) {
 	}
 
 	const { password } = validationResult.dto;
-
 	const hash = createHash('sha256');
 	hash.update(password);
 	const passwordHash = hash.digest('hex');

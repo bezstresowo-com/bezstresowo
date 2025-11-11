@@ -1,8 +1,8 @@
 model BlogArticle {
-  id              String   @id @default(uuid())
-  title           String
-  content         String
-  relatedMediaIds String[]
+  id        String   @id @default(uuid())
+  title     String
+  content   String
+  mediaIds String[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

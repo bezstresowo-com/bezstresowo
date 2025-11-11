@@ -5,7 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "prisma generate && prisma migrate deploy && vite dev",
-		"build": "prisma generate && vite build",
+		"build": "prisma generate && prisma migrate deploy && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -70,6 +70,7 @@
 		"stripe": "^18.5.0",
 		"svelte-5-french-toast": "^2.0.6",
 		"svelte-forms-lib": "^2.0.1",
+		"svelte-sonner": "^1.0.5",
 		"uuid": "^13.0.0",
 		"yup": "^1.7.0"
 	},

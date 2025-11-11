@@ -4,6 +4,10 @@
 
 [Admin Auth](./ADMIN_AUTH.md)
 
+## Design
+
+[Figma](https://www.figma.com/design/t7RGz42pDq1tOJse49RzGg/Bezstresowo-AI?node-id=0-1&p=f&t=SlPPhZyLKD2VFDeP-0)
+
 ## Things to know about this repo
 
 - use `Node 24.7` with `npm 11.5`
