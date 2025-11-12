@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { translate } from '$i18n';
 	import { LanguageSelect } from '$lib';
+	import headerLogo from '$lib/assets/header-logo.svg';
 	import { HEADER_PATHS } from './model';
 	import { resolve } from '$app/paths';
 
@@ -9,9 +10,11 @@
 </script>
 
 <!-- Desktop: header -->
-<header class="fixed top-0 left-0 w-full bg-primary p-4">
+<header class="fixed top-0 left-0 w-full h-[66px] bg-primary p-4">
 	<div class="mx-auto flex max-w-7xl items-center gap-4">
-		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>Bezstresowo</a>
+		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
+			<img src={headerLogo} alt="Bezstresowo Logo" />
+		</a>
 
 		<span class="flex-auto"></span>
 
@@ -27,23 +30,23 @@
 			<LanguageSelect />
 		</div>
 	</div>
+  <!-- Mobile: hamburger button-->
+  <button
+    class="fixed top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-md text-accent md:hidden"
+    aria-label="Open menu"
+    onclick={() => (menuOpen = !menuOpen)}
+  >
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-7 w-7">
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M4 6h16M4 12h16M4 18h16"
+      />
+    </svg>
+  </button>
 </header>
 
-<!-- Mobile: hamburger button-->
-<button
-	class="fixed top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-md text-accent md:hidden"
-	aria-label="Open menu"
-	onclick={() => (menuOpen = !menuOpen)}
->
-	<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-7 w-7">
-		<path
-			stroke-linecap="round"
-			stroke-linejoin="round"
-			stroke-width="2"
-			d="M4 6h16M4 12h16M4 18h16"
-		/>
-	</svg>
-</button>
 
 <!-- Mobile: drawer -->
 {#if menuOpen}
@@ -61,7 +64,7 @@
 				href={resolve('/(user)/home')}
 				onclick={() => (menuOpen = false)}
 			>
-				Bezstresowo
+				<img src={headerLogo} alt="Bezstresowo Logo" />
 			</a>
 			<button class="p-2 text-secondary" aria-label="Close menu" onclick={() => (menuOpen = false)}>
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
@@ -80,8 +83,7 @@
 				<a
 					{href}
 					class={`${selectedPath === href ? 'text-secondary' : 'text-white'}  px-2 py-2 text-lg text-secondary hover:underline`}
-
-					onclick={() => (selectedPath = href, menuOpen = false)}
+					onclick={() => ((selectedPath = href), (menuOpen = false))}
 					>{$translate(label)}
 				</a>
 			{/each}
