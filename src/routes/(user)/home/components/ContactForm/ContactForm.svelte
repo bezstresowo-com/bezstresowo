@@ -17,6 +17,7 @@
 	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { CONTACT_INFO } from './contactInfo';
 	import toast, { Toaster } from 'svelte-5-french-toast';
+	import Button from '$lib/Button/Button.svelte';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
@@ -83,7 +84,7 @@
 	});
 </script>
 
-<section>
+<section id="contact">
 	<!-- Header -->
 	<div class="mx-auto px-4 pt-12 pb-8 text-center">
 		<h1 class="text-3xl font-semibold text-slate-800 sm:text-4xl">
@@ -199,13 +200,13 @@
 					<small class="block text-sm text-danger">{$translate(generalError)}</small>
 				{/if}
 
-				<button
+				<Button
 					type="submit"
 					disabled={isSubmitDisabled}
-					class={`h-12 w-full rounded-lg bg-accent font-medium transition hover:bg-accent/90 ${isSubmitDisabled} ? 'cursor-not-allowed grayscale' : ''`}
+          tailwind="w-full"
 				>
 					{$translate('user.contactForm.submit')}
-				</button>
+				</Button>
 			</div>
 
 			{#if isLoading}

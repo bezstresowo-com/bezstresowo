@@ -1,5 +1,8 @@
 <script lang="ts">
-	import { ContactForm } from '$lib';
+	import ContactForm from "./components/ContactForm/ContactForm.svelte";
+	import HeroSection from "./components/HeroSection/HeroSection.svelte";
+
 </script>
 
+<HeroSection />
 <ContactForm />
