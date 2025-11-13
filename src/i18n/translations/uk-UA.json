@@ -34,6 +34,12 @@
 					"transactionalAnalyst": "Certyfikowany Psychoterapeuta Analizy Transakcyjnej",
 					"couplesTherapist": "Terapeuta Par i Małżeństw",
 					"supervisor": "Superwizor praktyk psychoterapeutycznych"
+				},
+				"customerReviews": {
+					"title": "Opinie klientów",
+					"review1": "\"Dzięki terapii udało nam się odbudować nasze małżeństwo. Polecam z całego serca!\"",
+					"review2": "\"Profesjonalne podejście i ogromne wsparcie. Po raz pierwszy czuję się zrozumiany.\"",
+					"review3": "\"Terapia pomogła mi zrozumieć moje emocje i nauczyć się lepiej komunikować\""
 				}
 			},
 			"shop": {},

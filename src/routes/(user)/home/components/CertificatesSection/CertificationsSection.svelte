@@ -8,7 +8,7 @@
 <section class="bg-white text-primary">
 	<div class="mx-auto px-4 pt-12 pb-8 text-center">
 		<h1 class="text-3xl font-semibold sm:text-4xl">
-			{$translate('user.pages.home.howCanIHelp.title')}
+			{$translate('user.pages.home.certificates.title')}
 		</h1>
 	</div>
 	<div class="mx-auto flex max-w-6xl gap-3 px-4 pb-20 max-md:flex-col">

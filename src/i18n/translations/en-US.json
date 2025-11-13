@@ -34,6 +34,12 @@
 					"transactionalAnalyst": "Certified Transactional Analysis Psychotherapist",
 					"couplesTherapist": "Couples and Marriage Therapist",
 					"supervisor": "Supervisor of Psychotherapeutic Practice"
+				},
+				"customerReviews": {
+					"title": "Customer Reviews",
+					"review1": "\"Thanks to therapy, we were able to rebuild our marriage. I wholeheartedly recommend it!\"",
+					"review2": "\"Professional approach and tremendous support. For the first time, I feel truly understood.\"",
+					"review3": "\"Therapy helped me understand my emotions and learn to communicate better.\""
 				}
 			},
 			"shop": {},
