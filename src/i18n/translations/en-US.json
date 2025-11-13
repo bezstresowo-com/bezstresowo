@@ -40,6 +40,20 @@
 					"review1": "\"Thanks to therapy, we were able to rebuild our marriage. I wholeheartedly recommend it!\"",
 					"review2": "\"Professional approach and tremendous support. For the first time, I feel truly understood.\"",
 					"review3": "\"Therapy helped me understand my emotions and learn to communicate better.\""
+				},
+				"offeredServices": {
+					"title": "Available Services",
+					"learnMore": "Learn more",
+					"services": {
+						"couplesTherapy": {
+							"title": "Couples and Marriage Therapy",
+							"description": "Support in resolving conflicts, improving communication, and rebuilding connection within the relationship. Sessions are held in a safe and supportive environment."
+						},
+						"transactionalTherapy": {
+							"title": "Psychotherapy in the Transactional Analysis Approach",
+							"description": "Individual therapeutic work focused on understanding behavioral patterns, developing self-awareness, and achieving lasting positive changes in life."
+						}
+					}
 				}
 			},
 			"shop": {},

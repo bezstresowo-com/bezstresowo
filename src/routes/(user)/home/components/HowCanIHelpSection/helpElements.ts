@@ -1,7 +1,7 @@
 export const HELP_ELEMENTS = [
   {
     title: 'user.pages.home.howCanIHelp.elements.communication',
-    icon: 'fa-solid fa-heart  '
+    icon: 'fa-solid fa-heart'
   },
   {
     title: 'user.pages.home.howCanIHelp.elements.relationships',

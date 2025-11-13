@@ -5,6 +5,7 @@
 	import CustomerReviewsSection from "./components/CustomerReviewsSection/CustomerReviewsSection.svelte";
 	import HeroSection from "./components/HeroSection/HeroSection.svelte";
 	import HowCanIHelpSection from "./components/HowCanIHelpSection/HowCanIHelpSection.svelte";
+	import ServicesSection from "./components/ServicesSection/ServicesSection.svelte";
 
 </script>
 
@@ -13,4 +14,5 @@
 <AboutMeSection />
 <CertificationsSection />
 <CustomerReviewsSection />
+<ServicesSection />
 <ContactForm />
