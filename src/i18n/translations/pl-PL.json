@@ -15,7 +15,16 @@
 	},
 	"user": {
 		"pages": {
-			"home": {},
+			"home": {
+				"howCanIHelp": {
+					"title": "W czym mogę Ci pomóc?",
+					"elements": {
+						"communication": "Problemy w relachach i komunikacji",
+						"relationships": "Kryzysy małżeńskie i związkowe",
+						"depression": "Lęki, depresja i stres"
+					}
+				}
+			},
 			"shop": {},
 			"blog": {},
 			"reservations": {}
@@ -31,7 +40,7 @@
 		"footer": {
 			"contactHeader": "Kontakt",
 			"fastLinksHeader": "Szybkie linki",
-      "followMeHeader": "Śledź mnie",
+			"followMeHeader": "Śledź mnie",
 			"fastLinks": {
 				"privacyPolicy": "Polityka prywatności",
 				"termsOfService": "Regulamin",

@@ -87,7 +87,7 @@
 <section id="contact">
 	<!-- Header -->
 	<div class="mx-auto px-4 pt-12 pb-8 text-center">
-		<h1 class="text-3xl font-semibold text-slate-800 sm:text-4xl">
+		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
 			{$translate('user.contactForm.title')}
 		</h1>
 		<p class="mx-auto mt-3 max-w-3xl text-slate-600">

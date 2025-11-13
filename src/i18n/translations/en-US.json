@@ -15,7 +15,16 @@
 	},
 	"user": {
 		"pages": {
-			"home": {},
+			"home": {
+				"howCanIHelp": {
+					"title": "How can i help You?",
+					"elements": {
+						"communication": "Relationship and communication issues",
+						"relationships": "Marital and relationship crises",
+						"depression": "Anxiety, depression, and stress"
+					}
+				}
+			},
 			"shop": {},
 			"blog": {},
 			"reservations": {}
@@ -29,9 +38,9 @@
 			}
 		},
 		"footer": {
-      "contactHeader": "Contact",
-      "fastLinksHeader": "Fast links",
-      "followMeHeader": "Follow me",
+			"contactHeader": "Contact",
+			"fastLinksHeader": "Fast links",
+			"followMeHeader": "Follow me",
 			"fastLinks": {
 				"privacyPolicy": "Privacy policy",
 				"termsOfService": "Terms of service",

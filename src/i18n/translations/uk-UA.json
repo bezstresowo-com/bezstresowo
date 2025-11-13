@@ -15,7 +15,16 @@
 	},
 	"user": {
 		"pages": {
-			"home": {},
+			"home": {
+				"howCanIHelp": {
+					"title": "W czym mogę Ci pomóc?",
+					"elements": {
+						"communication": "Problemy w relachach i komunikacji",
+						"relationships": "Kryzysy małżeńskie i związkowe",
+						"depression": "Lęki, depresja i stres"
+					}
+				}
+			},
 			"shop": {},
 			"blog": {},
 			"reservations": {}
