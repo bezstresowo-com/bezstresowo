@@ -28,6 +28,12 @@
 					"title": "About Me",
 					"myNameIs": "My name is Olesya Haiduk.",
 					"description": "I am a psychotherapist in training at the International Transactional Analysis Association. I provide individual and group psychotherapy for adolescents and adults, as well as couples therapy. I work with individuals dealing with eating disorders, anxiety disorders, challenges with identity formation and emotional expression, depression, codependent relationships, low self-esteem, social difficulties, and traumatic experiences. I am also deeply committed to supporting members of the LGBT+ community, offering them a space grounded in acceptance, understanding, and professional care. My work is rooted in the approach of transactional analysis, which focuses on helping clients understand the behavioral patterns present in themselves and their surroundings, especially within communication, as well as the roles we adopt in relationships. I adhere to the ethical code of psychologists and psychotherapists, building with each client a space based on trust, safety, and acceptance. To maintain the highest standards of my work, I continuously develop my skills by participating in courses, conferences, and professional training. I work under regular supervision. My priority is always to provide clients with a safe and supportive environment where they can feel understood and accepted. I am guided by strong ethical principles, deep respect, and genuine dedication. With passion and professionalism, I support individuals in improving their quality of life and in navigating emotional and social challenges. I warmly invite you to reach out and begin a shared journey toward greater well-being and mental health. I offer support to both adults and adolescents, providing care tailored to individual needs."
+				},
+				"certificates": {
+					"title": "Certificates and Qualifications",
+					"transactionalAnalyst": "Certified Transactional Analysis Psychotherapist",
+					"couplesTherapist": "Couples and Marriage Therapist",
+					"supervisor": "Supervisor of Psychotherapeutic Practice"
 				}
 			},
 			"shop": {},
