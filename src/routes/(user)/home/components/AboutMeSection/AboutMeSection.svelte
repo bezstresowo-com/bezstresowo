@@ -9,7 +9,7 @@
 			<img src={aboutMeImage} alt="About Me" class="rounded-lg object-cover" />
 		</div>
 		<div>
-			<h1 class="text-3xl mb-5 text-primary">O mnie</h1>
+			<h1 class="text-3xl mb-5 text-primary">{$translate("user.pages.home.aboutMe.title")}</h1>
 			<div class="text-sm text-primary/80">
 				<p>{$translate("user.pages.home.aboutMe.myNameIs")}</p>
 				<p>{$translate("user.pages.home.aboutMe.description")}</p>
