@@ -7,7 +7,7 @@
 		localStorageGetItem,
 		LocalStorageKey,
 		localStorageSetItem
-	} from '$shared/server/functions/local-storage';
+	} from '$shared/global/functions/local-storage';
 	import { isNil } from 'lodash-es';
 	import type { Unsubscriber } from 'svelte/store';
 	import { Toaster } from 'svelte-sonner';
