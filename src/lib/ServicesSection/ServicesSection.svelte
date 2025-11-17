@@ -4,16 +4,16 @@
 	import { OFFERED_SERVICES } from './offeredServices';
 </script>
 
-<section class="bg-white text-primary">
-	<div class="mx-auto px-4 pt-12 pb-8 text-center">
+<section class="bg-white text-primary pt-20 max-xl:px-4">
+	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold sm:text-4xl">
 			{$translate('user.pages.home.offeredServices.title')}
 		</h1>
 	</div>
-	<div class="mx-auto flex max-w-6xl gap-5 px-4 pb-20 max-md:flex-col">
+	<div class="flex gap-5 max-md:flex-col">
 		{#each OFFERED_SERVICES as { title, description, icon }}
 			<div
-				class="w-auto flex flex-1 flex-col gap-7 rounded-lg border border-accent p-10 text-left"
+				class="flex flex-1 flex-col gap-7 rounded-lg border border-accent p-10 text-left"
 			>
 				<i class={`text-[48px] text-accent ${icon}`}></i>
 				<h3 class="font-bold">{$translate(title)}</h3>

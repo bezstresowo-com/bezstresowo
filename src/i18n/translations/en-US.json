@@ -105,7 +105,7 @@
 					}
 				},
 				"email": {
-					"label": "Your Email",
+					"label": "My email",
 					"placeholder": "Enter your email",
 					"errors": {
 						"email": "Email is invalid",
@@ -113,7 +113,7 @@
 					}
 				},
 				"phone": {
-					"label": "Your Phone",
+					"label": "My phone",
 					"placeholder": "Enter your phone number",
 					"errors": {
 						"matches": "Phone number is invalid",

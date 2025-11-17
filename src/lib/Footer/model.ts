@@ -1,12 +1,12 @@
 export const CONTACT_ELEMENTS = [
   {
     id: 'email',
-    label: 'kontakt@psychoterapia.pl',
+    label: 'beztresowo@gmail.com',
     icon: 'fa-regular fa-envelope'
   },
   {
     id: 'phone',
-    label: '+48 123 456 789',
+    label: '+48 795 819 910',
     icon: 'fa fa-phone'
   },
   {

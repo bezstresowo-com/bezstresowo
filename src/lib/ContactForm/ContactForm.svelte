@@ -84,9 +84,9 @@
 	});
 </script>
 
-<section id="contact">
+<section class="pt-20 max-xl:px-4" id="contact">
 	<!-- Header -->
-	<div class="mx-auto px-4 pt-12 pb-8 text-center">
+	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
 			{$translate('user.contactForm.title')}
 		</h1>
@@ -96,8 +96,10 @@
 	</div>
 
 	<!-- Content -->
-	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 pb-20 lg:grid-cols-2">
+	<div class="mx-auto grid grid-cols-1 gap-10 lg:grid-cols-2">
 		<!-- Left: Contact info -->
+		<!-- @TODO: Do zautomatyzowania chyba -->
+		<!-- @TODO: Spoko by było podzielić na komponenty -->
 		<div class="space-y-6">
 			<h2 class="text-lg font-medium text-slate-700">
 				{$translate('user.contactForm.infoTitle')}
@@ -112,7 +114,11 @@
 					<div class="text-sm font-semibold text-slate-700">
 						{$translate('user.contactForm.fields.phone.label')}
 					</div>
-					<div class="mt-1 text-slate-600">{CONTACT_INFO.phone}</div>
+					<div class="mt-1 text-slate-600">
+						<a class="underline-offset-4 hover:underline" href={`tel:${CONTACT_INFO.phone}`}
+							>{CONTACT_INFO.phone}</a
+						>
+					</div>
 				</div>
 			</div>
 
@@ -125,7 +131,11 @@
 					<div class="text-sm font-semibold text-slate-700">
 						{$translate('user.contactForm.fields.email.label')}
 					</div>
-					<div class="mt-1 break-all text-slate-600">{CONTACT_INFO.email}</div>
+					<div class="mt-1 break-all text-slate-600">
+						<a class="underline-offset-4 hover:underline" href={`mailto:${CONTACT_INFO.email}`}
+							>{CONTACT_INFO.email}</a
+						>
+					</div>
 				</div>
 			</div>
 
@@ -200,11 +210,7 @@
 					<small class="block text-sm text-danger">{$translate(generalError)}</small>
 				{/if}
 
-				<Button
-					type="submit"
-					disabled={isSubmitDisabled}
-          tailwind="w-full"
-				>
+				<Button type="submit" disabled={isSubmitDisabled} tailwind="w-full">
 					{$translate('user.contactForm.submit')}
 				</Button>
 			</div>

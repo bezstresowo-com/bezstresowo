@@ -20,7 +20,7 @@ export async function fetchBlogPosts(
 
 	return await baseFetch<GetBlogArticlesPaginatedResponseDto>(
 		async () =>
-			await fetch(`${resolve('/api/admin/blog')}?${params.toString()}`, {
+			await fetch(`${resolve('/api/blog')}?${params.toString()}`, {
 				method: HttpMethod.GET,
 				headers: {
 					...getBaseHeaders()

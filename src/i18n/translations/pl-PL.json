@@ -106,7 +106,7 @@
 					}
 				},
 				"email": {
-					"label": "Twój E-mail",
+					"label": "Mój e-mail",
 					"placeholder": "Wpisz swój adres e-mail",
 					"errors": {
 						"email": "Adres e-mail jest nieprawidłowy",
@@ -114,7 +114,7 @@
 					}
 				},
 				"phone": {
-					"label": "Twój Telefon",
+					"label": "Mój telefon",
 					"placeholder": "Wpisz swój numer telefonu",
 					"errors": {
 						"matches": "Numer telefonu jest nieprawidłowy",

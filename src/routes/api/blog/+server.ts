@@ -15,9 +15,12 @@ export async function GET({ url, request, route }) {
 	}
 
 	try {
-		const { page, size } = validationResult.dto;
+		const { page, size, sortBy, sortOrder } = validationResult.dto;
 		const prisma = new PrismaClient();
 		const blogArticles = await prisma.blogArticle.findMany({
+			orderBy: {
+				[sortBy as string]: sortOrder
+			},
 			skip: (page - 1) * size,
 			take: size
 		});

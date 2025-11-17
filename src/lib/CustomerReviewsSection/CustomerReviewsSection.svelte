@@ -3,17 +3,17 @@
 	import { REVIEWS } from './reviews';
 </script>
 
-<section class="bg-white text-secondary">
-	<div class="mx-auto grid max-w-6xl bg-primary px-4 pb-5 min-[1170px]:rounded-xl">
-		<div class="mx-auto px-4 pt-12 pb-8 text-center">
+<section class="bg-white text-secondary pt-20">
+	<div class="grid bg-primary px-4 pb-4 min-[1170px]:rounded-xl">
+		<div class="px-4 pt-12 pb-8 text-center">
 			<h1 class="text-3xl sm:text-4xl">Customer Reviews</h1>
 		</div>
-		<div class="mx-auto flex max-w-6xl gap-3 px-4 pb-20 max-lg:flex-col">
+		<div class="flex gap-3 px-4 pb-20 max-lg:flex-col">
 			{#each REVIEWS as { customer, rating, comment }}
 				<div
-					class="flex w-full flex-1 flex-col items-center justify-center gap-5 rounded-lg border border-secondary bg-white/10 p-6"
+					class="flex flex-1 flex-col items-center justify-center gap-5 p-6 rounded-lg border border-secondary bg-white/10"
 				>
-					<div class="flex w-full h-full">
+					<div class="flex w-full">
 						{#each { length: rating } as _, i}
 							<i class="fa-solid fa-star text-xl text-accent" aria-hidden="true"></i>
 						{/each}
