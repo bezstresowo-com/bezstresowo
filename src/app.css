@@ -15,8 +15,3 @@
 .roboto {
 	font-family: 'Roboto', sans-serif;
 }
-
-body,
-html {
-	scroll-behavior: smooth;
-}

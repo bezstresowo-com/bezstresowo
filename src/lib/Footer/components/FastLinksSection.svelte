@@ -1,7 +1,6 @@
 <script lang="ts">
-	import { translate } from "$i18n";
-	import { FAST_LINKS } from "../model";
-
+	import { translate } from '$i18n';
+	import { FAST_LINKS } from '../model';
 </script>
 
 <div class="flex flex-col">

@@ -14,6 +14,7 @@
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import Button from '$lib/Button/Button.svelte';
 	import { fetchBlogPosts } from '$lib/Blog/fetch-methods';
+	import { currentLocale, Locale } from '$i18n';
 
 	let blogPosts = $state<LoadableState<GetBlogArticlesPaginatedResponseDto>>({
 		...DEFAULT_LOADABLE_STATE,
@@ -82,10 +83,12 @@
 			{#each blogPosts.data?.data as post}
 				<article class=" rounded-lg border border-accent p-10 pt-3 pl-3">
 					<div class="text-accent">
-						{new Date(post.createdAt).toLocaleDateString('pl-PL')}
+						{new Date(post.createdAt).toLocaleDateString($currentLocale)}
 					</div>
 					<h2 class="mb-2 text-2xl font-bold">{post.title}</h2>
-					<div class="prose prose-sm mb-4 max-h-60 max-w-none overflow-hidden text-ellipsis text-gray-600">
+					<div
+						class="prose prose-sm mb-4 max-h-60 max-w-none overflow-hidden text-ellipsis text-gray-600"
+					>
 						{@html post.content}
 					</div>
 					<div>

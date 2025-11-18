@@ -41,21 +41,20 @@
 					"review2": "\"Profesjonalne podejście i ogromne wsparcie. Po raz pierwszy czuję się zrozumiany.\"",
 					"review3": "\"Terapia pomogła mi zrozumieć moje emocje i nauczyć się lepiej komunikować\""
 				},
-        "offeredServices": {
-          "title": "Dostępne usługi",
-          "learnMore": "Dowiedz się więcej",
-          "services": {
-            "couplesTherapy": {
-              "title": "Terapia dla par i małżeństw",
-              "description": "Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze."
-            },
-            "transactionalTherapy": {
-              "title": "Psychoterapia w nurcie analizy transakcyjnej",
-              "description": "Indywidualna praca terapeutyczna skupiona na zrozumieniu wzorców zachowań, budowaniu samoświadomości i osiąganiu trwałych zmian w życiu."
-            }
-          }
-        }
-        
+				"offeredServices": {
+					"title": "Dostępne usługi",
+					"learnMore": "Dowiedz się więcej",
+					"services": {
+						"couplesTherapy": {
+							"title": "Terapia dla par i małżeństw",
+							"description": "Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze."
+						},
+						"transactionalTherapy": {
+							"title": "Psychoterapia w nurcie analizy transakcyjnej",
+							"description": "Indywidualna praca terapeutyczna skupiona na zrozumieniu wzorców zachowań, budowaniu samoświadomości i osiąganiu trwałych zmian w życiu."
+						}
+					}
+				}
 			},
 			"shop": {},
 			"blog": {},

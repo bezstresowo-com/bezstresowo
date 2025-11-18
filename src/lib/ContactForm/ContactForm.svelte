@@ -18,6 +18,7 @@
 	import { CONTACT_INFO } from './contactInfo';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import Button from '$lib/Button/Button.svelte';
+	import { ButtonTypes } from '$lib/Button/model';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
@@ -210,7 +211,7 @@
 					<small class="block text-sm text-danger">{$translate(generalError)}</small>
 				{/if}
 
-				<Button type="submit" disabled={isSubmitDisabled} tailwind="w-full">
+				<Button type={ButtonTypes.Submit} disabled={isSubmitDisabled} tailwind="w-full">
 					{$translate('user.contactForm.submit')}
 				</Button>
 			</div>

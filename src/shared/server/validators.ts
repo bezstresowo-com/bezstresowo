@@ -49,5 +49,5 @@ export const validators = {
 	IsPhoneNumber: withTranslationMessage('IsPhoneNumber', cv.IsPhoneNumber),
 	IsEmail: withTranslationMessage('IsEmail', cv.IsEmail),
 	IsString: withTranslationMessage('IsString', cv.IsString),
-  IsIn: withTranslationMessage('IsIn', cv.IsIn),
+	IsIn: withTranslationMessage('IsIn', cv.IsIn)
 };

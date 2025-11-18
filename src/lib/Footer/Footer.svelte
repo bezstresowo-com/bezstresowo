@@ -7,10 +7,12 @@
 </script>
 
 <footer class="bg-primary px-5 py-6">
-	<div class="grid grid-cols-3 pb-6 border-b-1 border-white/30 max-md:flex max-md:flex-col">
-    <ContactSection />
-    <FastLinksSection />
-    <FollowMeSection />
+	<div class="grid grid-cols-3 border-b-1 border-white/30 pb-6 max-md:flex max-md:flex-col">
+		<ContactSection />
+		<FastLinksSection />
+		<FollowMeSection />
 	</div>
-	<div class="text-center text-white font-thin py-4">© 2025 Psychoterapia. Wszystkie prawa zastrzeżone.</div>
+	<div class="py-4 text-center font-thin text-white">
+		© 2025 Psychoterapia. Wszystkie prawa zastrzeżone.
+	</div>
 </footer>

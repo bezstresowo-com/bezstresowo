@@ -1,8 +1,14 @@
 <script lang="ts">
-	import { HeroSection, HowCanIHelpSection, AboutMeSection, CustomerReviewsSection, ServicesSection, ContactForm, Blog, CertificatesSection } from "$lib";
-
-
-
+	import {
+		HeroSection,
+		HowCanIHelpSection,
+		AboutMeSection,
+		CustomerReviewsSection,
+		ServicesSection,
+		ContactForm,
+		Blog,
+		CertificatesSection
+	} from '$lib';
 </script>
 
 <HeroSection />

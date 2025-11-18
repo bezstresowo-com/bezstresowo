@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { translate } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
-	import { OFFERED_SERVICES } from './offeredServices';
+	import { OFFERED_SERVICES } from './model';
 </script>
 
 <section class="bg-white text-primary pt-20 max-xl:px-4">
@@ -11,7 +11,7 @@
 		</h1>
 	</div>
 	<div class="flex gap-5 max-md:flex-col">
-		{#each OFFERED_SERVICES as { title, description, icon }}
+		{#each OFFERED_SERVICES as { title, description, icon }, i(i)}
 			<div
 				class="flex flex-1 flex-col gap-7 rounded-lg border border-accent p-10 text-left"
 			>

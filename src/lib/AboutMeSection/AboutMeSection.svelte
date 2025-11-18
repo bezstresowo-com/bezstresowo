@@ -1,12 +1,12 @@
 <script lang="ts">
 	import { translate } from '$i18n';
-	import aboutMeImage from '$lib/assets/about-me.svg';
+	import { asset } from '$app/paths';
 </script>
 
 <section class="pt-20 max-xl:px-4">
 	<div class="mx-auto grid grid-cols-1 gap-6 lg:grid-cols-2">
 		<div class="flex items-center justify-center">
-			<img src={aboutMeImage} alt="About Me" class="rounded-lg object-cover" />
+			<img src={asset('assets/about-me.svg')} alt="About Me" class="rounded-lg object-cover" />
 		</div>
 		<div>
 			<h1 class="mb-5 text-3xl text-primary">{$translate('user.pages.home.aboutMe.title')}</h1>
