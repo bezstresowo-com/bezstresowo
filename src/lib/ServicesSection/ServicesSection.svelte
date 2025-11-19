@@ -15,7 +15,7 @@
 			<div
 				class="flex flex-1 flex-col gap-7 rounded-lg border border-accent p-10 text-left"
 			>
-				<i class={`text-[48px] text-accent ${icon}`}></i>
+				<i class={`text-5xl text-accent ${icon}`}></i>
 				<h3 class="font-bold">{$translate(title)}</h3>
 				<p>{$translate(description)}</p>
         <Button tailwind="w-full bg-white border border-accent">{$translate("user.pages.home.offeredServices.learnMore")}</Button>

@@ -80,7 +80,7 @@
 		<p class="mt-5 text-lg">{$translate('blog.noPosts')}</p>
 	{:else}
 		<div class="grid w-full grid-cols-3 gap-4 max-lg:flex max-lg:flex-col">
-			{#each blogPosts.data?.data as post}
+			{#each blogPosts.data?.data as post (post.id)}
 				<article class=" rounded-lg border border-accent p-10 pt-3 pl-3">
 					<div class="text-accent">
 						{new Date(post.createdAt).toLocaleDateString($currentLocale)}

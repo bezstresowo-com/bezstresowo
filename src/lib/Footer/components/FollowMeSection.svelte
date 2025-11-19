@@ -10,7 +10,7 @@
 			<a
 				{href}
 				aria-label={label}
-				class="flex size-[30px] items-center justify-center rounded-full bg-accent transition hover:bg-accent/80"
+				class="flex size-8 items-center justify-center rounded-full bg-accent transition hover:bg-accent/80"
 			>
 				<i class="fa-brands text-xl text-primary {icon}"></i>
 			</a>

@@ -5,7 +5,7 @@
 
 <div
 	class="flex h-96 flex-col items-center justify-center bg-cover bg-center text-primary"
-	style={`background-image: url(${asset('assets/hero-image.svg')});`}
+	style={`background-image: url(${asset('assets/hero-image.jpg')});`}
 >
 	<div class="text-center text-5xl text-balance">Znajdź spokój i równowagę w swoim życiu</div>
 	<div class="mt-3 text-center text-xl">Profesjonalna psychoterapia z empatią i zrozumieniem</div>

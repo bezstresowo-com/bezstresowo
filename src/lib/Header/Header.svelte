@@ -10,7 +10,7 @@
 </script>
 
 <!-- Desktop: header -->
-<header class="fixed top-0 left-0 h-[66px] w-full bg-primary p-4">
+<header class="fixed top-0 left-0 h-16 w-full bg-primary p-4">
 	<div class="mx-auto flex max-w-7xl items-center gap-4">
 		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
 			<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" />
@@ -82,7 +82,7 @@
 				<a
 					{href}
 					class={`${selectedPath === href ? 'text-secondary' : 'text-white'}  px-2 py-2 text-lg text-secondary hover:underline`}
-					onclick={() => ((selectedPath = href), (menuOpen = false))}
+					onclick={() => {selectedPath = href; menuOpen = false;}}
 					>{$translate(label)}
 				</a>
 			{/each}
