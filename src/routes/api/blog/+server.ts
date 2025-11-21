@@ -3,7 +3,7 @@ import { HttpStatus } from '$shared/global/enums/http-status';
 import { PaginationParamsDto } from '$shared/global/types/http';
 import { buildErrorResponse, buildResponse } from '$shared/server/functions/build-response';
 import { validateRequest } from '$shared/server/functions/validate-body';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from '$shared/server/services/prisma/prisma-service';
 
 export async function GET({ url, request, route }) {
 	const rawQueryParams = url.searchParams
@@ -16,7 +16,6 @@ export async function GET({ url, request, route }) {
 
 	try {
 		const { page, size, sortBy, sortOrder } = validationResult.dto;
-		const prisma = new PrismaClient();
 		const blogArticles = await prisma.blogArticle.findMany({
 			orderBy: {
 				[sortBy]: sortOrder

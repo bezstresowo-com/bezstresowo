@@ -2,8 +2,6 @@ import { HttpStatus } from '$shared/global/enums/http-status.js';
 import { validateRequest } from '$shared/server/functions/validate-body.js';
 import { isNil } from 'lodash-es';
 
-import { PrismaClient } from '@prisma/client';
-
 import {
 	PutBlogArticleRequestDto,
 	type GetBlogArticleResponseDto,
@@ -16,10 +14,10 @@ import {
 	buildResponse
 } from '$shared/server/functions/build-response.js';
 import { S3Service } from '$shared/server/services/s3/s3-service.js';
+import { prisma } from '$shared/server/services/prisma/prisma-service.js';
 
 export async function GET({ params, route, request }) {
 	try {
-		const prisma = new PrismaClient();
 		const blogArticle = await prisma.blogArticle.findFirst({
 			where: { id: params.id }
 		});
@@ -44,7 +42,6 @@ export async function PUT({ params, request, route }) {
 		}
 		const { dto } = validationResult;
 
-		const prisma = new PrismaClient();
 		const foundBlogArticle = await prisma.blogArticle.findFirst({
 			where: { id: params.id }
 		});
@@ -70,7 +67,6 @@ export async function PUT({ params, request, route }) {
 
 export async function DELETE({ params, route, request }) {
 	try {
-		const prisma = new PrismaClient();
 		const foundBlogArticle = await prisma.blogArticle.findFirst({
 			where: { id: params.id }
 		});
