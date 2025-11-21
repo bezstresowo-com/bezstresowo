@@ -1,248 +1,300 @@
 {
-	"language": {
-		"english": {
-			"label": "EN",
-			"alt": "English language flag"
-		},
-		"polish": {
-			"label": "PL",
-			"alt": "Polish language flag"
-		},
-		"ukrainian": {
-			"label": "UA",
-			"alt": "Ukrainian language flag"
-		}
-	},
-	"user": {
-		"pages": {
-			"home": {},
-			"shop": {},
-			"blog": {},
-			"reservations": {}
-		},
-		"header": {
-			"items": {
-				"home": "Home",
-				"blog": "Blog",
-				"shop": "Shop",
-				"reservations": "Reservations"
-			}
-		},
-		"footer": {
+  "language": {
+    "english": {
+      "label": "EN",
+      "alt": "English language flag"
+    },
+    "polish": {
+      "label": "PL",
+      "alt": "Polish language flag"
+    },
+    "ukrainian": {
+      "label": "UA",
+      "alt": "Ukrainian language flag"
+    }
+  },
+  "user": {
+    "pages": {
+      "home": {
+        "hero": {
+          "primary": "Find peace and balance in your life",
+          "secondary": "Professional psychotherapy with empathy and understanding",
+          "contactMe": "Contact me"
+        },
+        "howCanIHelp": {
+          "title": "How can I help you?",
+          "elements": {
+            "communication": "Relationship and communication issues",
+            "relationships": "Marital and relationship crises",
+            "depression": "Anxiety, depression, and stress"
+          }
+        },
+        "aboutMe": {
+          "title": "About Me",
+          "myNameIs": "My name is Olesya Haiduk.",
+          "description": "I am a psychotherapist in training at the International Transactional Analysis Association. I provide individual and group psychotherapy for adolescents and adults, as well as couples therapy. I work with individuals dealing with eating disorders, anxiety disorders, challenges with identity formation and emotional expression, depression, codependent relationships, low self-esteem, social difficulties, and traumatic experiences. I am also deeply committed to supporting members of the LGBT+ community, offering them a space grounded in acceptance, understanding, and professional care. My work is rooted in the approach of transactional analysis, which focuses on helping clients understand the behavioral patterns present in themselves and their surroundings, especially within communication, as well as the roles we adopt in relationships. I adhere to the ethical code of psychologists and psychotherapists, building with each client a space based on trust, safety, and acceptance. To maintain the highest standards of my work, I continuously develop my skills by participating in courses, conferences, and professional training. I work under regular supervision. My priority is always to provide clients with a safe and supportive environment where they can feel understood and accepted. I am guided by strong ethical principles, deep respect, and genuine dedication. With passion and professionalism, I support individuals in improving their quality of life and in navigating emotional and social challenges. I warmly invite you to reach out and begin a shared journey toward greater well-being and mental health. I offer support to both adults and adolescents, providing care tailored to individual needs."
+        },
+        "certificates": {
+          "title": "Certificates and Qualifications",
+          "transactionalAnalyst": "Certified Transactional Analysis Psychotherapist",
+          "couplesTherapist": "Couples and Marriage Therapist",
+          "supervisor": "Supervisor of Psychotherapeutic Practice"
+        },
+        "customerReviews": {
+          "title": "Customer Reviews",
+          "review1": "\"Thanks to therapy, we were able to rebuild our marriage. I wholeheartedly recommend it!\"",
+          "review2": "\"Professional approach and tremendous support. For the first time, I feel truly understood.\"",
+          "review3": "\"Therapy helped me understand my emotions and learn to communicate better.\""
+        },
+        "offeredServices": {
+          "title": "Available Services",
+          "learnMore": "Learn more",
+          "services": {
+            "couplesTherapy": {
+              "title": "Couples and Marriage Therapy",
+              "description": "Support in resolving conflicts, improving communication, and rebuilding connection within the relationship. Sessions are held in a safe and supportive environment."
+            },
+            "transactionalTherapy": {
+              "title": "Psychotherapy in the Transactional Analysis Approach",
+              "description": "Individual therapeutic work focused on understanding behavioral patterns, developing self-awareness, and achieving lasting positive changes in life."
+            }
+          }
+        },
+        "blog": {
+          "title": "Latest blog posts",
+          "noPosts": "No posts to display",
+          "learnMore": "Read more",
+          "readAllPosts": "View all posts"
+        }
+      },
+      "shop": {},
+      "blog": {},
+      "reservations": {}
+    },
+    "header": {
+      "items": {
+        "home": "Home",
+        "blog": "Blog",
+        "shop": "Shop",
+        "reservations": "Reservations"
+      }
+    },
+    "footer": {
       "contactHeader": "Contact",
-      "fastLinksHeader": "Fast links",
+      "fastLinksHeader": "Quick links",
       "followMeHeader": "Follow me",
-			"fastLinks": {
-				"privacyPolicy": "Privacy policy",
-				"termsOfService": "Terms of service",
-				"faq": "FAQ"
-			}
-		},
-		"contactForm": {
-			"title": "Contact me",
-			"subtitle": "Contact me to schedule a consultation or ask questions.",
-			"infoTitle": "Contact informations",
-			"submit": "Submit",
-			"toast": {
-				"success": "Your message has been sent!",
-				"error": "A server error occurred. Please try again later."
-			},
-			"contactInformations": {
-				"phone": "Phone",
-				"email": "Email",
-				"hours": "Opening hours",
-				"hoursWeek": "Monday - Friday: ",
-				"hoursSat": "Saturday: "
-			},
-			"fields": {
-				"nameAndSurname": {
-					"label": "Your Name and Surname",
-					"placeholder": "Enter your name and surname",
-					"errors": {
-						"required": "Name and surname is required",
-						"min": "Name and surname too short",
-						"max": "Name and surname too long"
-					}
-				},
-				"email": {
-					"label": "Your Email",
-					"placeholder": "Enter your email",
-					"errors": {
-						"email": "Email is invalid",
-						"required": "Email is required"
-					}
-				},
-				"phone": {
-					"label": "Your Phone",
-					"placeholder": "Enter your phone number",
-					"errors": {
-						"matches": "Phone number is invalid",
-						"required": "Phone number is required"
-					}
-				},
-				"message": {
-					"label": "How can i help you?",
-					"placeholder": "Enter your message",
-					"errors": {
-						"required": "Message is required",
-						"min": "Message is too short",
-						"max": "Message is too long"
-					}
-				}
-			}
-		}
-	},
-	"admin": {
-		"title": "Bezstresowo Admin Panel",
-		"availableResources": "Below are all available resources you can manage:",
-		"logout": "Logout",
-		"login": {
-			"title": "Admin Login",
-			"description": "Enter your admin password to continue",
-			"form": {
-				"submit": "Sign in",
-				"submitLoading": "Signing in...",
-				"fields": {
-					"password": {
-						"label": "Password",
-						"placeholder": "Admin password"
-					}
-				}
-			}
-		},
-		"blog": {
-			"label": "Blog Articles",
-			"back": "Back",
-			"emptyState": {
-				"title": "No blog articles yet",
-				"description": "Get started by creating your first blog article using the button above."
-			},
-			"actions": {
-				"delete": "Delete",
-				"edit": "Edit"
-			},
-			"notifications": {
-				"createSuccess": "Blog article created successfully!",
-				"createError": "Failed to create blog article. Please try again.",
-				"updateSuccess": "Blog article updated successfully!",
-				"updateError": "Failed to update blog article. Please try again.",
-				"deleteSuccess": "Blog article deleted successfully!",
-				"deleteError": "Failed to delete blog article. Please try again."
-			},
-			"deleteDialog": {
-				"title": "Delete Blog Article",
-				"description": "Are you sure you want to delete this blog article? This action cannot be undone.",
-				"confirmLabel": "Type 'delete' to confirm",
-				"confirmPlaceholder": "delete",
-				"confirmError": "Please type 'delete' to confirm",
-				"confirm": "Delete Article",
-				"cancel": "Cancel"
-			},
-			"dialog": {
-				"create": {
-					"trigger": "Create new",
-					"title": "Create new blog article",
-					"description": "Create a new blog article that will be featured on your blog",
-					"submit": "Create"
-				},
-				"update": {
-					"trigger": "Edit",
-					"title": "Update blog article",
-					"description": "Update the blog article",
-					"submit": "Update"
-				},
-				"cancel": "Cancel",
-				"form": {
-					"fields": {
-						"title": {
-							"label": "Blog title",
-							"placeholder": "Your blog article title",
-							"errors": {
-								"required": "Title is required",
-								"max": "Maximum length of title is {{ max }}"
-							}
-						}
-					}
-				}
-			}
-		}
-	},
-	"api": {
-		"generalError": "An unknown error occured while fetching data",
-		"validation": {
-			"errors": {
-				"MinLength": "Length cannot be lower than {{ length }}",
-				"MaxLength": "Length cannot be greater than {{ length }}",
-				"Min": "Length cannot be lower than {{ length }}",
-				"Max": "Length cannot be greater than {{ length }}",
-				"IsDefined": "Must be defined",
-				"IsPhoneNumber": "Must be a valid phone number",
-				"IsEmail": "Must be a valid email address",
-				"IsString": "Must be a string"
-			}
-		},
-		"contact": {
-			"POST": {
-				"errors": {
-					"INTERNAL_SERVER_ERROR": "Your contact request couldn't be sent. Please try again."
-				}
-			}
-		},
-		"admin": {
-			"blog": {
-				"GET": {
-					"errors": {
-						"INTERNAL_SERVER_ERROR": "An error occured while fetching your blog articles"
-					}
-				},
-				"POST": {
-					"errors": {
-						"INTERNAL_SERVER_ERROR": "An error occured while creating your blog article"
-					}
-				},
-				"[id]": {
-					"GET": {
-						"errors": {
-							"INTERNAL_SERVER_ERROR": "An error occured while fetching your blog article {{ id }}",
-							"NOT_FOUND": "Blog article with id {{ id }} doesn't exits"
-						}
-					},
-					"PUT": {
-						"errors": {
-							"NOT_FOUND": "Blog article with id {{ id }} doesn't exits",
-							"INTERNAL_SERVER_ERROR": "An error occured while updating your blog article {{ id }}"
-						}
-					},
-					"DELETE": {
-						"errors": {
-							"NOT_FOUND": "Blog article with id {{ id }} doesn't exits",
-							"INTERNAL_SERVER_ERROR": "An error occured while deleting your blog article {{ id }}"
-						}
-					}
-				}
-			},
-			"login": {
-				"POST": {
-					"errors": {
-						"UNAUTHORIZED": "Authentication failed."
-					}
-				}
-			},
-			"media": {
-				"[id]": {
-					"POST": {
-						"errors": {
-							"NOT_ACCEPTABLE": "Amount of files found ({{ found }}) does not fit in range {{ min }} - {{ max }}",
-							"INTERNAL_SERVER_ERROR": "An error occured while saving your media {{ id }}"
-						}
-					},
-					"DELETE": {
-						"errors": {
-							"INTERNAL_SERVER_ERROR": "An error occured while deleting your media {{ id }}"
-						}
-					}
-				}
-			}
-		}
-	}
+      "copyright": "© 2025 Psychotherapy. All rights reserved.",
+      "fastLinks": {
+        "privacyPolicy": "Privacy policy",
+        "termsOfService": "Terms of service",
+        "faq": "FAQ"
+      }
+    },
+    "contactForm": {
+      "title": "Contact me",
+      "subtitle": "Contact me to schedule a consultation or ask questions.",
+      "infoTitle": "Contact information",
+      "submit": "Submit",
+      "toast": {
+        "success": "Your message has been sent!",
+        "error": "A server error occurred. Please try again later."
+      },
+      "contactInformations": {
+        "phone": "Phone",
+        "email": "Email",
+        "hours": "Opening hours",
+        "hoursWeek": "Monday - Friday: ",
+        "hoursSat": "Saturday: "
+      },
+      "fields": {
+        "nameAndSurname": {
+          "label": "Your Name and Surname",
+          "placeholder": "Enter your name and surname",
+          "errors": {
+            "required": "Name and surname is required",
+            "min": "Name and surname too short",
+            "max": "Name and surname too long"
+          }
+        },
+        "email": {
+          "label": "Your email",
+          "placeholder": "Enter your email",
+          "errors": {
+            "email": "Email is invalid",
+            "required": "Email is required"
+          }
+        },
+        "phone": {
+          "label": "Your phone",
+          "placeholder": "Enter your phone number",
+          "errors": {
+            "matches": "Phone number is invalid",
+            "required": "Phone number is required"
+          }
+        },
+        "message": {
+          "label": "How can I help you?",
+          "placeholder": "Enter your message",
+          "errors": {
+            "required": "Message is required",
+            "min": "Message is too short",
+            "max": "Message is too long"
+          }
+        }
+      }
+    }
+  },
+  "admin": {
+    "title": "Bezstresowo Admin Panel",
+    "availableResources": "Below are all available resources you can manage:",
+    "logout": "Logout",
+    "login": {
+      "title": "Admin Login",
+      "description": "Enter your admin password to continue",
+      "form": {
+        "submit": "Sign in",
+        "submitLoading": "Signing in...",
+        "fields": {
+          "password": {
+            "label": "Password",
+            "placeholder": "Admin password"
+          }
+        }
+      }
+    },
+    "blog": {
+      "label": "Blog Articles",
+      "back": "Back",
+      "emptyState": {
+        "title": "No blog articles yet",
+        "description": "Get started by creating your first blog article using the button above."
+      },
+      "actions": {
+        "delete": "Delete",
+        "edit": "Edit"
+      },
+      "notifications": {
+        "createSuccess": "Blog article created successfully!",
+        "createError": "Failed to create blog article. Please try again.",
+        "updateSuccess": "Blog article updated successfully!",
+        "updateError": "Failed to update blog article. Please try again.",
+        "deleteSuccess": "Blog article deleted successfully!",
+        "deleteError": "Failed to delete blog article. Please try again."
+      },
+      "deleteDialog": {
+        "title": "Delete Blog Article",
+        "description": "Are you sure you want to delete this blog article? This action cannot be undone.",
+        "confirmLabel": "Type 'delete' to confirm",
+        "confirmPlaceholder": "delete",
+        "confirmError": "Please type 'delete' to confirm",
+        "confirm": "Delete Article",
+        "cancel": "Cancel"
+      },
+      "dialog": {
+        "create": {
+          "trigger": "Create new",
+          "title": "Create new blog article",
+          "description": "Create a new blog article that will be featured on your blog",
+          "submit": "Create"
+        },
+        "update": {
+          "trigger": "Edit",
+          "title": "Update blog article",
+          "description": "Update the blog article",
+          "submit": "Update"
+        },
+        "cancel": "Cancel",
+        "form": {
+          "fields": {
+            "title": {
+              "label": "Blog title",
+              "placeholder": "Your blog article title",
+              "errors": {
+                "required": "Title is required",
+                "max": "Maximum length of title is {{ max }}"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "api": {
+    "generalError": "An unknown error occurred while fetching data",
+    "validation": {
+      "errors": {
+        "MinLength": "Length cannot be lower than {{ length }}",
+        "MaxLength": "Length cannot be greater than {{ length }}",
+        "Min": "Length cannot be lower than {{ length }}",
+        "Max": "Length cannot be greater than {{ length }}",
+        "IsDefined": "Must be defined",
+        "IsPhoneNumber": "Must be a valid phone number",
+        "IsEmail": "Must be a valid email address",
+        "IsString": "Must be a string"
+      }
+    },
+    "contact": {
+      "POST": {
+        "errors": {
+          "INTERNAL_SERVER_ERROR": "Your contact request couldn't be sent. Please try again."
+        }
+      }
+    },
+    "admin": {
+      "blog": {
+        "GET": {
+          "errors": {
+            "INTERNAL_SERVER_ERROR": "An error occurred while fetching your blog articles"
+          }
+        },
+        "POST": {
+          "errors": {
+            "INTERNAL_SERVER_ERROR": "An error occurred while creating your blog article"
+          }
+        },
+        "[id]": {
+          "GET": {
+            "errors": {
+              "INTERNAL_SERVER_ERROR": "An error occurred while fetching your blog article {{ id }}",
+              "NOT_FOUND": "Blog article with id {{ id }} doesn't exist"
+            }
+          },
+          "PUT": {
+            "errors": {
+              "NOT_FOUND": "Blog article with id {{ id }} doesn't exist",
+              "INTERNAL_SERVER_ERROR": "An error occurred while updating your blog article {{ id }}"
+            }
+          },
+          "DELETE": {
+            "errors": {
+              "NOT_FOUND": "Blog article with id {{ id }} doesn't exist",
+              "INTERNAL_SERVER_ERROR": "An error occurred while deleting your blog article {{ id }}"
+            }
+          }
+        }
+      },
+      "login": {
+        "POST": {
+          "errors": {
+            "UNAUTHORIZED": "Authentication failed."
+          }
+        }
+      },
+      "media": {
+        "[id]": {
+          "POST": {
+            "errors": {
+              "NOT_ACCEPTABLE": "Amount of files found ({{ found }}) does not fit in range {{ min }} - {{ max }}",
+              "INTERNAL_SERVER_ERROR": "An error occurred while saving your media {{ id }}"
+            }
+          },
+          "DELETE": {
+            "errors": {
+              "INTERNAL_SERVER_ERROR": "An error occurred while deleting your media {{ id }}"
+            }
+          }
+        }
+      }
+    }
+  }
 }

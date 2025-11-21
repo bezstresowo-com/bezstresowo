@@ -17,6 +17,8 @@
 	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { CONTACT_INFO } from './contactInfo';
 	import toast, { Toaster } from 'svelte-5-french-toast';
+	import Button from '$lib/Button/Button.svelte';
+	import { ButtonTypes } from '$lib/Button/model';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
@@ -83,10 +85,10 @@
 	});
 </script>
 
-<section>
+<section class="pt-20 max-xl:px-4" id="contact">
 	<!-- Header -->
-	<div class="mx-auto px-4 pt-12 pb-8 text-center">
-		<h1 class="text-3xl font-semibold text-slate-800 sm:text-4xl">
+	<div class="pb-8 text-center">
+		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
 			{$translate('user.contactForm.title')}
 		</h1>
 		<p class="mx-auto mt-3 max-w-3xl text-slate-600">
@@ -95,8 +97,10 @@
 	</div>
 
 	<!-- Content -->
-	<div class="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-4 pb-20 lg:grid-cols-2">
+	<div class="mx-auto grid grid-cols-1 gap-10 lg:grid-cols-2">
 		<!-- Left: Contact info -->
+		<!-- @TODO: Do zautomatyzowania chyba -->
+		<!-- @TODO: Spoko by było podzielić na komponenty -->
 		<div class="space-y-6">
 			<h2 class="text-lg font-medium text-slate-700">
 				{$translate('user.contactForm.infoTitle')}
@@ -109,9 +113,13 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.fields.phone.label')}
+						{$translate('user.contactForm.contactInformations.phone')}
 					</div>
-					<div class="mt-1 text-slate-600">{CONTACT_INFO.phone}</div>
+					<div class="mt-1 text-slate-600">
+						<a class="underline-offset-4 hover:underline" href={`tel:${CONTACT_INFO.phone}`}
+							>{CONTACT_INFO.phone}</a
+						>
+					</div>
 				</div>
 			</div>
 
@@ -122,9 +130,13 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.fields.email.label')}
+						{$translate('user.contactForm.contactInformations.email')}
 					</div>
-					<div class="mt-1 break-all text-slate-600">{CONTACT_INFO.email}</div>
+					<div class="mt-1 break-all text-slate-600">
+						<a class="underline-offset-4 hover:underline" href={`mailto:${CONTACT_INFO.email}`}
+							>{CONTACT_INFO.email}</a
+						>
+					</div>
 				</div>
 			</div>
 
@@ -199,13 +211,9 @@
 					<small class="block text-sm text-danger">{$translate(generalError)}</small>
 				{/if}
 
-				<button
-					type="submit"
-					disabled={isSubmitDisabled}
-					class={`h-12 w-full rounded-lg bg-accent font-medium transition hover:bg-accent/90 ${isSubmitDisabled} ? 'cursor-not-allowed grayscale' : ''`}
-				>
+				<Button type={ButtonTypes.Submit} disabled={isSubmitDisabled} tailwind="w-full">
 					{$translate('user.contactForm.submit')}
-				</button>
+				</Button>
 			</div>
 
 			{#if isLoading}

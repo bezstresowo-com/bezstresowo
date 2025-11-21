@@ -7,7 +7,7 @@
 
 <Header />
 
-<main class="content bg-background p-4">
+<main class="content bg-white">
 	<div class="mx-auto max-w-7xl">
 		{@render children?.()}
 	</div>

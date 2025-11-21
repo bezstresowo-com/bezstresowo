@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { Type } from 'class-transformer';
 import { validators } from '$shared/server/validators';
 
-const { IsInt, IsOptional, Min } = validators;
+const { IsInt, IsOptional, Min, IsIn } = validators;
 
 export interface HttpStatusResponse {
 	status: 'ok';
@@ -12,6 +12,9 @@ export interface HttpStatusResponse {
 export interface HttpErrorResponse {
 	message: string;
 }
+
+const ALLOWED_SORT_BY_VALUES = ['createdAt'] as const;
+const ALLOWED_SORT_ORDER_VALUES = ['asc', 'desc'] as const;
 
 export class PaginationParamsDto {
 	@IsOptional()
@@ -25,6 +28,14 @@ export class PaginationParamsDto {
 	@IsInt()
 	@Min(1)
 	size: number = 25;
+
+	@IsOptional()
+	@IsIn(ALLOWED_SORT_BY_VALUES)
+	sortBy: (typeof ALLOWED_SORT_BY_VALUES)[number] = 'createdAt';
+
+	@IsOptional()
+	@IsIn(ALLOWED_SORT_ORDER_VALUES)
+	sortOrder: (typeof ALLOWED_SORT_ORDER_VALUES)[number] = 'desc';
 }
 
 export interface PaginatedDataResponseDto<T> {
