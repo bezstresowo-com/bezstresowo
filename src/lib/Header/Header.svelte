@@ -10,29 +10,30 @@
 </script>
 
 <!-- Desktop: header -->
-<header class="fixed top-0 left-0 h-16 w-full bg-primary p-4">
-	<div class="mx-auto flex max-w-7xl items-center gap-4">
-		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
-			<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" />
-		</a>
+<header
+	class="fixed top-0 left-0 mx-auto flex h-16 w-full max-w-7xl items-center gap-4 bg-primary p-4"
+>
+	<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
+		<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" />
+	</a>
 
-		<span class="flex-auto"></span>
+	<span class="flex-auto"></span>
 
-		{#each HEADER_PATHS as { href, label } (href)}
-			<a
-				{href}
-				class={`${selectedPath === href ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline`}
-				onclick={() => (selectedPath = href)}>{$translate(label)}</a
-			>
-		{/each}
+	{#each HEADER_PATHS as { href, label } (href)}
+		<a
+			{href}
+			class={`${selectedPath === href ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-md:hidden`}
+			onclick={() => (selectedPath = href)}>{$translate(label)}</a
+		>
+	{/each}
 
-		<div class="hidden md:block">
-			<LanguageSelect />
-		</div>
+	<div class="max-md:hidden">
+		<LanguageSelect />
 	</div>
+
 	<!-- Mobile: hamburger button-->
 	<button
-		class="fixed top-4 right-4 inline-flex h-10 w-10 items-center justify-center rounded-md text-accent md:hidden"
+		class="h-10 w-10 text-accent md:hidden"
 		aria-label="Open menu"
 		onclick={() => (menuOpen = !menuOpen)}
 	>
@@ -82,7 +83,10 @@
 				<a
 					{href}
 					class={`${selectedPath === href ? 'text-secondary' : 'text-white'}  px-2 py-2 text-lg text-secondary hover:underline`}
-					onclick={() => {selectedPath = href; menuOpen = false;}}
+					onclick={() => {
+						selectedPath = href;
+						menuOpen = false;
+					}}
 					>{$translate(label)}
 				</a>
 			{/each}
@@ -93,11 +97,3 @@
 		</nav>
 	</div>
 {/if}
-
-<style lang="css">
-	@media (max-width: 767px) {
-		header .mx-auto > :not(:first-child) {
-			display: none !important;
-		}
-	}
-</style>

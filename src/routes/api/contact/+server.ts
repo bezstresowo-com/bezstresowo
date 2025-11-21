@@ -2,7 +2,7 @@ import { EMAIL_SENDER } from '$env/static/private';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { buildErrorResponse, buildOkResponse } from '$shared/server/functions/build-response';
 import { validateRequest } from '$shared/server/functions/validate-body';
-import { EmailService } from '$shared/server/services/email-service/email-service';
+import { EmailService } from '$shared/server/services/email/email-service';
 
 import { ContactRequestDto } from './model';
 

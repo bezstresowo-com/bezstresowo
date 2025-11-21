@@ -1,11 +1,11 @@
 import { HttpStatus } from '$shared/global/enums/http-status.js';
-import { S3Service } from '$shared/server/services/s3/s3-service.js';
-import type { CreateMediaResponseDto } from './model';
 import {
 	buildErrorResponse,
 	buildOkResponse,
 	buildResponse
 } from '$shared/server/functions/build-response';
+import { S3Service } from '$shared/server/services/s3/s3-service.js';
+import type { CreateMediaResponseDto } from './model';
 
 export async function POST({ params, request, route }) {
 	const formData = await request.formData();

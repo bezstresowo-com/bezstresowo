@@ -11,11 +11,12 @@ export const CONTACT_ELEMENTS = [
 	},
 	{
 		id: 'location',
-		label: 'Warszawa, Polska',
+		label: 'Łódź, Polska',
 		icon: 'fa fa-location-dot'
 	}
 ];
 
+// TODO: make right
 export const FAST_LINKS = [
 	{
 		id: 'privacy-policy',
@@ -34,6 +35,7 @@ export const FAST_LINKS = [
 	}
 ];
 
+// TODO: make right
 export const FOLLOW_ME_LINKS = [
 	{
 		id: 'facebook',

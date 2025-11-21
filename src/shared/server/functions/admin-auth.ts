@@ -1,10 +1,10 @@
-import type { Cookies } from '@sveltejs/kit';
 import { dev } from '$app/environment';
+import { resolve } from '$app/paths';
+import { COOKIE_MAX_AGE_S, JWT_EXP_INTERVAL_MS, JWT_SECRET } from '$env/static/private';
+import { HttpStatus } from '$shared/global/enums/http-status';
+import type { Cookies } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 import { isNil } from 'lodash-es';
-import { JWT_EXP_INTERVAL_MS, JWT_SECRET, COOKIE_MAX_AGE_S } from '$env/static/private';
-import { resolve } from '$app/paths';
-import { HttpStatus } from '$shared/global/enums/http-status';
 
 interface JwtPayload {
 	iat: number;

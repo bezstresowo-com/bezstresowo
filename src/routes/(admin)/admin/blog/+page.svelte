@@ -131,9 +131,9 @@
 		await getBlogPosts(true);
 	});
 
-	const totalPages = $derived(
-		blogPosts.data ? Math.ceil(blogPosts.data.data.length / paginationParams.size) : 1
-	);
+	// const totalPages = $derived(
+	// 	blogPosts.data ? Math.ceil(blogPosts.data.data.length / paginationParams.size) : 1
+	// );
 </script>
 
 <div class="mb-4 flex items-center gap-4">

@@ -1,7 +1,7 @@
 import { EMAIL_APP_PASSWORD, EMAIL_SENDER, EMAIL_SUBJECT_PREFIX } from '$env/static/private';
+import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
 import { createTransport } from 'nodemailer';
 import type { ContactRequestArgs } from './model';
-import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
 
 export class EmailService {
 	private readonly _transport;

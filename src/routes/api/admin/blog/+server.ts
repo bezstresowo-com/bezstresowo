@@ -1,6 +1,8 @@
 import { HttpStatus } from '$shared/global/enums/http-status.js';
 import { PaginationParamsDto } from '$shared/global/types/http.js';
+import { buildErrorResponse, buildResponse } from '$shared/server/functions/build-response.js';
 import { validateRequest } from '$shared/server/functions/validate-body';
+import { prisma } from '$shared/server/services/prisma/prisma-service.js';
 
 import { PrismaClient } from '@prisma/client';
 
@@ -9,7 +11,6 @@ import {
 	PostBlogArticleRequestDto,
 	type PostBlogArticleResponseDto
 } from './model.js';
-import { buildErrorResponse, buildResponse } from '$shared/server/functions/build-response.js';
 
 export async function GET({ url, request, route }) {
 	const rawQueryParams = url.searchParams
@@ -22,7 +23,6 @@ export async function GET({ url, request, route }) {
 
 	try {
 		const { page, size } = validationResult.dto;
-		const prisma = new PrismaClient();
 		const blogArticles = await prisma.blogArticle.findMany({
 			skip: (page - 1) * size,
 			take: size

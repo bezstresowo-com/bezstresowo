@@ -38,28 +38,31 @@
 		const fetchResult = await fetchBlogPosts(paginationParams);
 
 		switch (fetchResult.status) {
-			case 'ok':
+			case 'ok': {
 				const posts = fetchResult.data.data;
 				blogPosts = {
 					...LOADED,
 					data: { ...fetchResult.data, data: posts }
 				};
 				break;
+			}
 
-			case 'error':
+			case 'error': {
 				blogPosts = {
 					...blogPosts,
 					...ERRORED(fetchResult.data.message)
 				};
 				break;
+			}
 
-			default:
+			default: {
 				console.error(fetchResult);
 				blogPosts = {
 					...blogPosts,
 					...ERRORED(fetchResult.error)
 				};
 				break;
+			}
 		}
 	}
 
@@ -71,7 +74,9 @@
 </script>
 
 <section class="bg-white text-primary max-xl:px-4">
-	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl sm:text-4xl">{$translate('user.pages.home.blog.title')}</h1>
+	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl sm:text-4xl">
+		{$translate('user.pages.home.blog.title')}
+	</h1>
 	{#if isLoading}
 		<div class="mx- flex items-center justify-center px-4 pb-20">
 			<LoadingSpinner size="lg" tailwind="mt-5" />

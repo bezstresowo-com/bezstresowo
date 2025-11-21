@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 
-import { Type } from 'class-transformer';
 import { validators } from '$shared/server/validators';
+import { Type } from 'class-transformer';
 
 const { IsInt, IsOptional, Min, IsIn } = validators;
 

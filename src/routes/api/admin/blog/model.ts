@@ -1,6 +1,6 @@
 import type { PaginatedDataResponseDto } from '$shared/global/types/http';
-import type { BlogArticle } from '@prisma/client';
 import { validators } from '$shared/server/validators';
+import type { BlogArticle } from '@prisma/client';
 
 const { IsDefined, IsString, IsArray } = validators;
 

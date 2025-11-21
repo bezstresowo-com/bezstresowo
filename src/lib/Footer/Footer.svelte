@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { CONTACT_ELEMENTS, FAST_LINKS, FOLLOW_ME_LINKS } from './model';
 	import { translate } from '$i18n';
 	import ContactSection from './components/ContactSection.svelte';
 	import FastLinksSection from './components/FastLinksSection.svelte';

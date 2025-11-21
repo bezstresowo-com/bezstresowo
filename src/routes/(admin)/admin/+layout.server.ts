@@ -1,8 +1,8 @@
+import { resolve } from '$app/paths';
+import { HttpStatus } from '$shared/global/enums/http-status';
 import { isAdminAuthenticated } from '$shared/server/functions/admin-auth.js';
 import { redirect } from '@sveltejs/kit';
 import type { LayoutServerLoad } from './$types';
-import { resolve } from '$app/paths';
-import { HttpStatus } from '$shared/global/enums/http-status';
 
 export const load: LayoutServerLoad = async ({ cookies, url }) => {
 	const isAuthenticated = isAdminAuthenticated(cookies);
