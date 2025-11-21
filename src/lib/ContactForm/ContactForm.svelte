@@ -113,7 +113,7 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.fields.phone.label')}
+						{$translate('user.contactForm.contactInformations.phone')}
 					</div>
 					<div class="mt-1 text-slate-600">
 						<a class="underline-offset-4 hover:underline" href={`tel:${CONTACT_INFO.phone}`}
@@ -130,7 +130,7 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.fields.email.label')}
+						{$translate('user.contactForm.contactInformations.email')}
 					</div>
 					<div class="mt-1 break-all text-slate-600">
 						<a class="underline-offset-4 hover:underline" href={`mailto:${CONTACT_INFO.email}`}

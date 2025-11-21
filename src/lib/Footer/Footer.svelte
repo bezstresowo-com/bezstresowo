@@ -13,6 +13,6 @@
 		<FollowMeSection />
 	</div>
 	<div class="py-4 text-center font-thin text-white">
-		© 2025 Psychoterapia. Wszystkie prawa zastrzeżone.
+		{$translate('user.footer.copyright')}
 	</div>
 </footer>

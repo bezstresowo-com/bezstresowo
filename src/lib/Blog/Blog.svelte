@@ -14,7 +14,7 @@
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import Button from '$lib/Button/Button.svelte';
 	import { fetchBlogPosts } from '$lib/Blog/fetch-methods';
-	import { currentLocale, Locale } from '$i18n';
+	import { currentLocale } from '$i18n';
 
 	let blogPosts = $state<LoadableState<GetBlogArticlesPaginatedResponseDto>>({
 		...DEFAULT_LOADABLE_STATE,
@@ -71,13 +71,13 @@
 </script>
 
 <section class="bg-white text-primary max-xl:px-4">
-	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl sm:text-4xl">Najnowsze wpisy z bloga</h1>
+	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl sm:text-4xl">{$translate('user.pages.home.blog.title')}</h1>
 	{#if isLoading}
-		<div class="mx-auto items-center justify-center px-4 pb-20">
+		<div class="mx- flex items-center justify-center px-4 pb-20">
 			<LoadingSpinner size="lg" tailwind="mt-5" />
 		</div>
 	{:else if blogPosts.data?.data?.length === 0}
-		<p class="mt-5 text-lg">{$translate('blog.noPosts')}</p>
+		<p class="mt-5 text-lg">{$translate('user.pages.home.blog.noPosts')}</p>
 	{:else}
 		<div class="grid w-full grid-cols-3 gap-4 max-lg:flex max-lg:flex-col">
 			{#each blogPosts.data?.data as post (post.id)}
@@ -93,7 +93,7 @@
 					</div>
 					<div>
 						<Button tailwind="border-none text-accent bg-white hover:bg-white hover:text-secondary"
-							>Czytaj więcej</Button
+							>{$translate('user.pages.home.blog.learnMore')}</Button
 						>
 					</div>
 				</article>
@@ -101,7 +101,7 @@
 		</div>
 		<div class="flex items-center justify-center pb-10">
 			<Button tailwind="bg-white border border-accent text-primary px-6 py-3 mt-5"
-				>Zobacz wszystkie wpisy</Button
+				>{$translate('user.pages.home.blog.readAllPosts')}</Button
 			>
 		</div>
 	{/if}

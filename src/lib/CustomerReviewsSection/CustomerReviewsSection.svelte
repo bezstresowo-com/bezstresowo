@@ -6,7 +6,7 @@
 <section class="bg-white pt-20 text-secondary">
 	<div class="grid bg-primary px-4 pb-4 min-xl:rounded-xl">
 		<div class="px-4 pt-12 pb-8 text-center">
-			<h1 class="text-3xl sm:text-4xl">Customer Reviews</h1>
+			<h1 class="text-3xl sm:text-4xl">{$translate('user.pages.home.customerReviews.title')}</h1>
 		</div>
 		<div class="flex gap-3 px-4 pb-20 max-lg:flex-col">
 			{#each REVIEWS as { customer, rating, comment }, i (i)}

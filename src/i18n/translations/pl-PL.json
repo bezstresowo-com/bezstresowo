@@ -16,10 +16,15 @@
 	"user": {
 		"pages": {
 			"home": {
+				"hero": {
+					"primary": "Znajdź spokój i równowagę w swoim życiu",
+					"secondary": "Profesjonalna psychoterapia z empatią i zrozumieniem",
+					"contactMe": "Skontaktuj się ze mną"
+				},
 				"howCanIHelp": {
 					"title": "W czym mogę Ci pomóc?",
 					"elements": {
-						"communication": "Problemy w relachach i komunikacji",
+						"communication": "Problemy w relacjach i komunikacji",
 						"relationships": "Kryzysy małżeńskie i związkowe",
 						"depression": "Lęki, depresja i stres"
 					}
@@ -54,6 +59,12 @@
 							"description": "Indywidualna praca terapeutyczna skupiona na zrozumieniu wzorców zachowań, budowaniu samoświadomości i osiąganiu trwałych zmian w życiu."
 						}
 					}
+				},
+				"blog": {
+					"title": "Najnowsze wpisy z bloga",
+					"noPosts": "Brak postów do wyświetlenia",
+					"learnMore": "Czytaj więcej",
+					"readAllPosts": "Zobacz wszystkie wpisy"
 				}
 			},
 			"shop": {},
@@ -72,6 +83,7 @@
 			"contactHeader": "Kontakt",
 			"fastLinksHeader": "Szybkie linki",
 			"followMeHeader": "Śledź mnie",
+			"copyright": "© 2025 Psychoterapia. Wszystkie prawa zastrzeżone.",
 			"fastLinks": {
 				"privacyPolicy": "Polityka prywatności",
 				"termsOfService": "Regulamin",
@@ -88,8 +100,8 @@
 				"error": "Wystąpił błąd serwera. Spróbuj ponownie później."
 			},
 			"contactInformations": {
-				"phone": "Telefon",
-				"email": "Email",
+				"phone": "Mój telefon",
+				"email": "Mój email",
 				"hours": "Godziny otwarcia",
 				"hoursWeek": "Poniedziałek - Piątek: ",
 				"hoursSat": "Sobota: "
@@ -105,7 +117,7 @@
 					}
 				},
 				"email": {
-					"label": "Mój e-mail",
+					"label": "Twój e-mail",
 					"placeholder": "Wpisz swój adres e-mail",
 					"errors": {
 						"email": "Adres e-mail jest nieprawidłowy",
@@ -113,7 +125,7 @@
 					}
 				},
 				"phone": {
-					"label": "Mój telefon",
+					"label": "Twój telefon",
 					"placeholder": "Wpisz swój numer telefonu",
 					"errors": {
 						"matches": "Numer telefonu jest nieprawidłowy",

@@ -19,7 +19,7 @@ export async function GET({ url, request, route }) {
 		const prisma = new PrismaClient();
 		const blogArticles = await prisma.blogArticle.findMany({
 			orderBy: {
-				[sortBy as string]: sortOrder
+				[sortBy]: sortOrder
 			},
 			skip: (page - 1) * size,
 			take: size
