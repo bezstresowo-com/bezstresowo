@@ -32,11 +32,11 @@
 
 		<!-- Mobile: hamburger button-->
 		<button
-			class="h-10 w-10 text-accent md:hidden"
+			class="w-10 cursor-pointer p-2 text-accent md:hidden"
 			aria-label="Open menu"
 			onclick={() => (menuOpen = !menuOpen)}
 		>
-			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-7 w-7">
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="aspect-square w-full">
 				<path
 					stroke-linecap="round"
 					stroke-linejoin="round"
@@ -66,8 +66,13 @@
 			>
 				<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" />
 			</a>
-			<button class="p-2 text-secondary" aria-label="Close menu" onclick={() => (menuOpen = false)}>
-				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-6 w-6">
+
+			<button
+				class="w-10 cursor-pointer p-2 text-secondary"
+				aria-label="Close menu"
+				onclick={() => (menuOpen = false)}
+			>
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="aspect-square w-full">
 					<path
 						stroke-linecap="round"
 						stroke-linejoin="round"
