@@ -10,42 +10,42 @@
 </script>
 
 <!-- Desktop: header -->
-<header
-	class="fixed top-0 left-0 mx-auto flex h-16 w-full max-w-7xl items-center gap-4 bg-primary p-4"
->
-	<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
-		<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" />
-	</a>
+<header class="fixed top-0 left-0 w-full bg-primary">
+	<div class="mx-auto flex h-16 max-w-7xl items-center gap-4 p-4">
+		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
+			<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" />
+		</a>
 
-	<span class="flex-auto"></span>
+		<span class="flex-auto"></span>
 
-	{#each HEADER_PATHS as { href, label } (href)}
-		<a
-			{href}
-			class={`${selectedPath === href ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-md:hidden`}
-			onclick={() => (selectedPath = href)}>{$translate(label)}</a
+		{#each HEADER_PATHS as { href, label } (href)}
+			<a
+				{href}
+				class={`${selectedPath === href ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-md:hidden`}
+				onclick={() => (selectedPath = href)}>{$translate(label)}</a
+			>
+		{/each}
+
+		<div class="max-md:hidden">
+			<LanguageSelect />
+		</div>
+
+		<!-- Mobile: hamburger button-->
+		<button
+			class="h-10 w-10 text-accent md:hidden"
+			aria-label="Open menu"
+			onclick={() => (menuOpen = !menuOpen)}
 		>
-	{/each}
-
-	<div class="max-md:hidden">
-		<LanguageSelect />
+			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-7 w-7">
+				<path
+					stroke-linecap="round"
+					stroke-linejoin="round"
+					stroke-width="2"
+					d="M4 6h16M4 12h16M4 18h16"
+				/>
+			</svg>
+		</button>
 	</div>
-
-	<!-- Mobile: hamburger button-->
-	<button
-		class="h-10 w-10 text-accent md:hidden"
-		aria-label="Open menu"
-		onclick={() => (menuOpen = !menuOpen)}
-	>
-		<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="h-7 w-7">
-			<path
-				stroke-linecap="round"
-				stroke-linejoin="round"
-				stroke-width="2"
-				d="M4 6h16M4 12h16M4 18h16"
-			/>
-		</svg>
-	</button>
 </header>
 
 <!-- Mobile: drawer -->
