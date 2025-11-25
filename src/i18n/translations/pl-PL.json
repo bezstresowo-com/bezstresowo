@@ -67,7 +67,10 @@
 					"readAllPosts": "Zobacz wszystkie wpisy"
 				}
 			},
-			"shop": {},
+			"shop": {
+				"title": "Sklep",
+				"titleDesciption": "Rozwijaj się z moimi produktami"
+			},
 			"blog": {},
 			"reservations": {}
 		},

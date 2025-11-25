@@ -49,3 +49,23 @@ export async function POST({ request }) {
 
 	return json({ received: true });
 }
+
+export async function GET() {
+	const webhookSecret = STRIPE_WHSEC;
+	const stripe = new Stripe(STRIPE_SK, {
+		apiVersion: '2025-11-17.clover' as any
+	});
+
+	if (!webhookSecret) {
+			return json({ error: 'Webhook signature or secret missing' }, { status: 400 });
+		}
+
+	const myProducts: Stripe.Response<Stripe.ApiList<Stripe.Product>> = await stripe.products.list({
+		active: true,
+		expand: ['data.default_price']
+	});
+
+	console.log(myProducts);
+
+	return json({ products: myProducts.data });
+	}
