@@ -67,7 +67,11 @@
 					"readAllPosts": "Переглянути всі публікації"
 				}
 			},
-			"shop": {},
+			"shop": {
+				"title": "Магазин",
+				"titleDescription": "Розвивайтеся з моїми продуктами",
+				"buyNowButton": "Купити зараз"
+			},
 			"blog": {},
 			"reservations": {}
 		},

@@ -69,7 +69,8 @@
 			},
 			"shop": {
 				"title": "Sklep",
-				"titleDesciption": "Rozwijaj się z moimi produktami"
+				"titleDescription": "Rozwijaj się z moimi produktami",
+				"buyNowButton": "Kup teraz"
 			},
 			"blog": {},
 			"reservations": {}

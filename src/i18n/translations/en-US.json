@@ -67,7 +67,11 @@
 					"readAllPosts": "View all posts"
 				}
 			},
-			"shop": {},
+			"shop": {
+				"title": "Shop",
+				"titleDescription": "Grow with my products",
+				"buyNowButton": "Buy now"
+			},
 			"blog": {},
 			"reservations": {}
 		},

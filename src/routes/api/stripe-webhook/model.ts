@@ -10,4 +10,5 @@ export type Product = {
 	description: string;
 	default_price: Stripe.Price;
 	images: string[];
+	metadata?: Stripe.Metadata;
 }
