@@ -70,7 +70,10 @@
 			"shop": {
 				"title": "Sklep",
 				"titleDescription": "Rozwijaj się z moimi produktami",
-				"buyNowButton": "Kup teraz"
+				"buyNowButton": "Kup teraz",
+				"showMore": "pokaż więcej",
+				"showLess": "pokaż mniej",
+				"whatWillYouGet": "Co otrzymasz:"
 			},
 			"blog": {},
 			"reservations": {}

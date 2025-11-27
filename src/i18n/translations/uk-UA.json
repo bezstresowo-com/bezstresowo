@@ -70,7 +70,10 @@
 			"shop": {
 				"title": "Магазин",
 				"titleDescription": "Розвивайтеся з моїми продуктами",
-				"buyNowButton": "Купити зараз"
+				"buyNowButton": "Купити зараз",
+				"showMore": "показати більше",
+				"showLess": "показати менше",
+				"whatWillYouGet": "Що ви отримаєте:"
 			},
 			"blog": {},
 			"reservations": {}

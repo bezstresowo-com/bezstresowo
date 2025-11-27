@@ -70,7 +70,10 @@
 			"shop": {
 				"title": "Shop",
 				"titleDescription": "Grow with my products",
-				"buyNowButton": "Buy now"
+				"buyNowButton": "Buy now",
+				"showMore": "show more",
+				"showLess": "show less",
+				"whatWillYouGet": "What will you get:"
 			},
 			"blog": {},
 			"reservations": {}

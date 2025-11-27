@@ -6,7 +6,8 @@
 		disabled = false,
 		type = ButtonTypes.Button,
 		tailwind = '',
-		href = undefined
+		href = undefined,
+		onclick = undefined
 	}: ButtonProps = $props();
 </script>
 
@@ -21,6 +22,7 @@
 	<button
 		{type}
 		{disabled}
+		{onclick}
 		class={`h-12 cursor-pointer rounded-lg bg-accent font-medium transition hover:bg-accent/70 ${disabled ? 'cursor-not-allowed grayscale' : ''} ${tailwind}`}
 	>
 		{@render children?.()}

@@ -13,10 +13,23 @@
 	import Button from '$lib/Button/Button.svelte';
 
 	const translarionPrefix = 'user.pages.shop';
+	const MAX_DESCRIPTION_LENGTH = 150;
+
 	let products = $state<LoadableState<Product[]>>({
 		...DEFAULT_LOADABLE_STATE,
 		isLoading: true
 	});
+
+	let openedIndex: number | null = $state(null);
+
+	function onOpenFullDescription(index: number) {
+		openedIndex = openedIndex === index ? null : index;
+	}
+
+	function getTruncatedDescription(description: string): string {
+		if (!description || description.length <= MAX_DESCRIPTION_LENGTH) return description;
+		return description.substring(0, MAX_DESCRIPTION_LENGTH) + '...';
+	}
 
 	async function loadProducts() {
 		const fetchResult = await getProducts();
@@ -64,28 +77,58 @@
 		</div>
 	</div>
 
-	<div class="flex flex-wrap justify-center">
+	<div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
 		{#if products.isLoading && !products.data}
-			<LoadingSpinner size="lg" tailwind="mt-10" />
+			<div class="col-span-full flex justify-center">
+				<LoadingSpinner size="lg" tailwind="mt-10" />
+			</div>
 		{:else}
-			{#each products.data as product (product.id)}
+			{#each products.data as product, index (product.id)}
 				<!-- Single product -->
-				<div class="m-2 w-xl rounded-lg border border-secondary p-4 select-none">
+				<div class="flex h-full flex-col rounded-lg border border-secondary p-4 select-none">
 					<!-- Product details -->
-					<div class="border-b-1 border-black/30 pb-6">
+					<div class="flex-grow border-b-1 border-black/30 pb-6">
 						<img
 							src={product.images[0]}
 							alt={product.name}
-							class="image-contain aspect-preserve mb-4 w-xl rounded-xl"
+							class="mb-4 h-48 w-full rounded-xl object-cover"
 						/>
-						<h2 class="text-2xl">{product.name}</h2>
-						<p class="mt-4">{product.description}</p>
-						<ul class="mt-4">
-							{#each product.marketing_features as point, index (index)}
-								<li><i class="fa-solid fa-check text-xl text-accent"></i>{(point as any).name}</li>
-							{/each}
-						</ul>
+						<h2 class="mb-2 text-2xl">{product.name}</h2>
+
+						<div class="mb-4">
+							<p class="text-sm leading-relaxed">
+								{#if openedIndex === index || !product.description || product.description.length <= MAX_DESCRIPTION_LENGTH}
+									{product.description || ''}
+								{:else}
+									{getTruncatedDescription(product.description)}
+								{/if}
+							</p>
+							{#if product.description && product.description.length > MAX_DESCRIPTION_LENGTH}
+								<Button
+									tailwind="text-accent bg-white hover:bg-white hover:text-secondary border-none"
+									onclick={() => onOpenFullDescription(index)}
+								>
+									{openedIndex === index
+										? $translate(`${translarionPrefix}.showLess`)
+										: $translate(`${translarionPrefix}.showMore`)}
+								</Button>
+							{/if}
+						</div>
+
+						{#if product.marketing_features?.length !== 0}
+							<h3 class="mb-2 text-lg font-semibold">
+								{$translate(`${translarionPrefix}.whatWillYouGet`)}
+							</h3>
+							<ul class="mt-2">
+								{#each product.marketing_features as point, pointIndex (pointIndex)}
+									<li class="mb-1 text-sm">
+										<i class="fa-solid fa-check mr-2 text-sm text-accent"></i>{(point as any).name}
+									</li>
+								{/each}
+							</ul>
+						{/if}
 					</div>
+
 					<!-- Product Price -->
 					<div class="mt-4 flex items-center justify-between">
 						<p class="text-2xl text-accent">
