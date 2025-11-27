@@ -8,14 +8,14 @@
 		LOADED,
 		type LoadableState
 	} from '$shared/global/types/store';
-	import type { Product } from '$api/stripe-webhook/model';
+	import type { ProductWithDefaultPrice } from '$api/stripe-webhook/model';
 	import { translate } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 
-	const translarionPrefix = 'user.pages.shop';
+	const translationPrefix = 'user.pages.shop';
 	const MAX_DESCRIPTION_LENGTH = 150;
 
-	let products = $state<LoadableState<Product[]>>({
+	let productsData = $state<LoadableState<ProductWithDefaultPrice[]>>({
 		...DEFAULT_LOADABLE_STATE,
 		isLoading: true
 	});
@@ -33,29 +33,29 @@
 
 	async function loadProducts() {
 		const fetchResult = await getProducts();
-		products = {
-			...products
+		productsData = {
+			...productsData
 		};
 
 		switch (fetchResult.status) {
 			case 'ok':
-				products = {
+				productsData = {
 					...LOADED,
-					data: fetchResult.data.products
+					data: fetchResult.data.data
 				};
 				break;
 
 			case 'error':
-				products = {
-					...products,
+				productsData = {
+					...productsData,
 					...ERRORED(fetchResult.data.message)
 				};
 				break;
 
 			default:
 				console.error(fetchResult);
-				products = {
-					...products,
+				productsData = {
+					...productsData,
 					...ERRORED(fetchResult.error)
 				};
 				break;
@@ -71,19 +71,19 @@
 	<div
 		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90"
 	>
-		<div class="mx-auto text-5xl text-white">{$translate(`${translarionPrefix}.title`)}</div>
+		<div class="mx-auto text-5xl text-white">{$translate(`${translationPrefix}.title`)}</div>
 		<div class="mx-auto mt-5 text-secondary">
-			{$translate(`${translarionPrefix}.titleDescription`)}
+			{$translate(`${translationPrefix}.titleDescription`)}
 		</div>
 	</div>
 
 	<div class="mx-auto grid max-w-7xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
-		{#if products.isLoading && !products.data}
+		{#if productsData.isLoading && !productsData.data}
 			<div class="col-span-full flex justify-center">
 				<LoadingSpinner size="lg" tailwind="mt-10" />
 			</div>
 		{:else}
-			{#each products.data as product, index (product.id)}
+			{#each productsData.data as { product, defaultPrice }, index (product.id)}
 				<!-- Single product -->
 				<div class="flex h-full flex-col rounded-lg border border-secondary p-4 select-none">
 					<!-- Product details -->
@@ -109,15 +109,15 @@
 									onclick={() => onOpenFullDescription(index)}
 								>
 									{openedIndex === index
-										? $translate(`${translarionPrefix}.showLess`)
-										: $translate(`${translarionPrefix}.showMore`)}
+										? $translate(`${translationPrefix}.showLess`)
+										: $translate(`${translationPrefix}.showMore`)}
 								</Button>
 							{/if}
 						</div>
 
 						{#if product.marketing_features?.length !== 0}
 							<h3 class="mb-2 text-lg font-semibold">
-								{$translate(`${translarionPrefix}.whatWillYouGet`)}
+								{$translate(`${translationPrefix}.whatWillYouGet`)}
 							</h3>
 							<ul class="mt-2">
 								{#each product.marketing_features as point, pointIndex (pointIndex)}
@@ -132,13 +132,13 @@
 					<!-- Product Price -->
 					<div class="mt-4 flex items-center justify-between">
 						<p class="text-2xl text-accent">
-							{product.default_price?.unit_amount
-								? product.default_price.unit_amount / 100 + 'zł'
+							{defaultPrice?.unit_amount
+								? defaultPrice.unit_amount / 100 + ' ' + defaultPrice.currency.toUpperCase()
 								: 'N/A'}
 						</p>
 						<Button tailwind="p-4 w-auto inline-flex items-center justify-center"
 							><i class="fa-solid fa-cart-shopping mr-3"></i>{$translate(
-								`${translarionPrefix}.buyNowButton`
+								`${translationPrefix}.buyNowButton`
 							)}</Button
 						>
 					</div>

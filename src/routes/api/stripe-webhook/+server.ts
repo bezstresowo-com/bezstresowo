@@ -57,15 +57,31 @@ export async function GET() {
 	});
 
 	if (!webhookSecret) {
-			return json({ error: 'Webhook signature or secret missing' }, { status: 400 });
-		}
+		return json({ error: 'Webhook signature or secret missing' }, { status: 400 });
+	}
 
 	const myProducts: Stripe.Response<Stripe.ApiList<Stripe.Product>> = await stripe.products.list({
 		active: true,
 		expand: ['data.default_price']
 	});
 
-	console.log(myProducts);
+	const processedProducts = myProducts.data.map(product => {
+		const rawPrice = product.default_price;
 
-	return json({ products: myProducts.data });
-	}
+		if(!rawPrice || typeof rawPrice === 'string' || ('deleted' in rawPrice && rawPrice.deleted)) {
+			return {
+				product,
+				defaultPrice: null
+			}
+		}
+
+		const defaultPrice = rawPrice as Stripe.Price;
+
+		return {
+			product,
+			defaultPrice: defaultPrice
+		};
+	});
+
+	return json({ data: processedProducts });
+}
