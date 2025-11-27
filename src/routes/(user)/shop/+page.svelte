@@ -56,7 +56,7 @@
 
 <div>
 	<div
-		class="flex h-50 flex-col items-center justify-center bg-primary bg-linear-170 from-primary to-white to-1000%"
+		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90"
 	>
 		<div class="mx-auto text-5xl text-white">{$translate(`${translarionPrefix}.title`)}</div>
 		<div class="mx-auto mt-5 text-secondary">
@@ -70,29 +70,29 @@
 		{:else}
 			{#each products.data as product (product.id)}
 				<!-- Single product -->
-				<div class="m-2 w-xl rounded-lg border border-secondary p-4">
+				<div class="m-2 w-xl rounded-lg border border-secondary p-4 select-none">
 					<!-- Product details -->
 					<div class="border-b-1 border-black/30 pb-6">
 						<img
 							src={product.images[0]}
 							alt={product.name}
-							class="image-contain mb-4 aspect-video w-xl rounded-xl"
+							class="image-contain aspect-preserve mb-4 w-xl rounded-xl"
 						/>
 						<h2 class="text-2xl">{product.name}</h2>
 						<p class="mt-4">{product.description}</p>
-						{#if product.metadata?.whatYouGet}
-							<ul class="mt-4">
-								{#each product.metadata.whatYouGet.split(',') as point, index (index)}
-									<li><i class="fa-solid fa-check text-xl text-accent"></i>{point}</li>
-								{/each}
-							</ul>
-						{/if}
+						<ul class="mt-4">
+							{#each product.marketing_features as point, index (index)}
+								<li><i class="fa-solid fa-check text-xl text-accent"></i>{(point as any).name}</li>
+							{/each}
+						</ul>
 					</div>
 					<!-- Product Price -->
 					<div class="mt-4 flex items-center justify-between">
-						<p class="text-accent text-2xl">{product.default_price?.unit_amount
-							? product.default_price.unit_amount / 100 + 'zł'
-							: 'N/A'}</p>
+						<p class="text-2xl text-accent">
+							{product.default_price?.unit_amount
+								? product.default_price.unit_amount / 100 + 'zł'
+								: 'N/A'}
+						</p>
 						<Button tailwind="p-4 w-auto inline-flex items-center justify-center"
 							><i class="fa-solid fa-cart-shopping mr-3"></i>{$translate(
 								`${translarionPrefix}.buyNowButton`
