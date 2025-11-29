@@ -83,5 +83,12 @@ export async function GET() {
 		};
 	});
 
+	const prices: Stripe.Response<Stripe.ApiList<Stripe.Price>> = await stripe.prices.list({
+		active: true,
+		expand: ['data.product']
+	});
+
+	console.log(prices)
+
 	return json({ data: processedProducts });
 }
