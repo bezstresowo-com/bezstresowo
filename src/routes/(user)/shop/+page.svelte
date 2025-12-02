@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { getProducts } from './fetch-methods';
+	import { getProducts, createCheckoutSession } from './fetch-methods';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import {
 		DEFAULT_LOADABLE_STATE,
@@ -21,6 +21,7 @@
 	});
 
 	let openedIndex: number | null = $state(null);
+	let purchaseLoadingIndex: number | null = $state(null);
 
 	function onOpenFullDescription(index: number) {
 		openedIndex = openedIndex === index ? null : index;
@@ -29,6 +30,55 @@
 	function getTruncatedDescription(description: string): string {
 		if (!description || description.length <= MAX_DESCRIPTION_LENGTH) return description;
 		return description.substring(0, MAX_DESCRIPTION_LENGTH) + '...';
+	}
+
+	async function onBuyNow(product: ProductWithDefaultPrice, index: number) {
+		if (!product.defaultPrice) {
+			alert($translate(`${translationPrefix}.noPriceAvailable`));
+			return;
+		}
+
+		purchaseLoadingIndex = index;
+
+		try {
+			const baseUrl = window.location.origin;
+
+			const checkoutResult = await createCheckoutSession({
+				priceId: product.defaultPrice.id,
+				quantity: 1,
+				successUrl: `${baseUrl}/payment-success`,
+				cancelUrl: `${baseUrl}/payment-cancel`
+			});
+
+			switch (checkoutResult.status) {
+				case 'ok': {
+					// Przekieruj do Stripe Checkout
+					if (checkoutResult.data.url) {
+						window.location.href = checkoutResult.data.url;
+					} else {
+						alert('Unable to create checkout session');
+					}
+					break;
+				}
+
+				case 'error':
+					alert($translate('api.error') + ': ' + checkoutResult.data.message);
+					break;
+
+				case 'validationError':
+					alert($translate('api.validationError'));
+					break;
+
+				default:
+					alert($translate('api.generalError'));
+					break;
+			}
+		} catch (error) {
+			console.error('Purchase error:', error);
+			alert($translate('api.generalError'));
+		} finally {
+			purchaseLoadingIndex = null;
+		}
 	}
 
 	async function loadProducts() {
@@ -82,7 +132,7 @@
 			<div class="col-span-full flex justify-center">
 				<LoadingSpinner size="lg" tailwind="mt-10" />
 			</div>
-		{:else}
+		{:else if productsData.data?.length}
 			{#each productsData.data as { product, defaultPrice }, index (product.id)}
 				<!-- Single product -->
 				<div class="flex h-full flex-col rounded-lg border border-secondary p-4 select-none">
@@ -136,11 +186,19 @@
 								? defaultPrice.unit_amount / 100 + ' ' + defaultPrice.currency.toUpperCase()
 								: 'N/A'}
 						</p>
-						<Button tailwind="p-4 w-auto inline-flex items-center justify-center"
-							><i class="fa-solid fa-cart-shopping mr-3"></i>{$translate(
-								`${translationPrefix}.buyNowButton`
-							)}</Button
+						<Button
+							tailwind="p-4 w-auto inline-flex items-center justify-center"
+							disabled={purchaseLoadingIndex === index}
+							onclick={() => onBuyNow({ product, defaultPrice }, index)}
 						>
+							{#if purchaseLoadingIndex === index}
+								<LoadingSpinner size="sm" tailwind="mr-3" />
+								{$translate(`${translationPrefix}.processing`)}
+							{:else}
+								<i class="fa-solid fa-cart-shopping mr-3"></i>
+								{$translate(`${translationPrefix}.buyNowButton`)}
+							{/if}
+						</Button>
 					</div>
 				</div>
 			{/each}

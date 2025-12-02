@@ -37,13 +37,32 @@ export async function POST({ request }) {
 	switch (event.type) {
 		case 'payment_intent.succeeded': {
 			// TODO: delete after testing
-			console.log({ event });
+			console.log('Payment intent succeeded:', event.data.object);
+			break;
+		}
+
+		case 'checkout.session.completed': {
+			const session = event.data.object as Stripe.Checkout.Session;
+			console.log('Checkout session completed:', session);
+
+		 // Tu najprawdopodobniej poleci mail z potwierdzeniem zamowienia
+		 // spoko miejsce rowniez na aktualizacje danych w bazie itp
+
+			break;
+		}
+
+		case 'checkout.session.async_payment_failed': {
+			const session = event.data.object as Stripe.Checkout.Session;
+			console.log('Checkout session payment failed:', session);
+
+			// Obsługa nieudanej płatności
+
 			break;
 		}
 
 		default: {
 			// TODO: delete after testing
-			console.log({ msg: 'Unhandled stripe event', event });
+			console.log({ msg: 'Unhandled stripe event', eventType: event.type, event });
 		}
 	}
 
