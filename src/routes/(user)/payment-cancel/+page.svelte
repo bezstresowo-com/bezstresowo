@@ -5,46 +5,49 @@
 	import { translate } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 
-	const translationPrefix = 'user.pages.shop.paymentCancel';
+	const translationPrefix = 'user.pages.shop.checkoutMessages';
+	let timeLeft = 10;
+
+	$: redirectMessage = $translate(`${translationPrefix}.autoRedirect`, { time: timeLeft });
 
 	onMount(() => {
-		const timer = setTimeout(() => {
-			goto(resolve('/(user)/shop'));
-		}, 10000);
+		const interval = setInterval(() => {
+			timeLeft -= 1;
+			if (timeLeft <= 0) {
+				clearInterval(interval);
+				goto(resolve('/(user)/shop'));
+			}
+		}, 1000);
 
-		return () => clearTimeout(timer);
+		return () => clearInterval(interval);
 	});
 </script>
 
 <svelte:head>
-	<title>{$translate(`${translationPrefix}.title`)}</title>
+	<title>{$translate(`${translationPrefix}.cancelTitle`)}</title>
 </svelte:head>
 
-<div class="flex min-h-screen items-center justify-center bg-gray-50">
-	<div class="mx-auto max-w-md rounded-lg bg-white p-8 text-center shadow-lg">
+<div class="flex min-h-screen items-center justify-center">
+	<div class="mx-auto max-w-md rounded-lg p-8 text-center shadow-lg">
 		<div class="mb-6">
-			<div class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-yellow-100">
-				<i class="fa-solid fa-exclamation-triangle text-3xl text-yellow-600"></i>
-			</div>
-			<h1 class="mb-2 text-2xl font-bold text-gray-900">
-				{$translate(`${translationPrefix}.title`)}
-			</h1>
-			<p class="text-gray-600">
-				{$translate(`${translationPrefix}.message`)}
-			</p>
-		</div>
-
-		<div class="space-y-3">
-			<Button
-				href={resolve('/(user)/shop')}
-				tailwind="w-full"
+			<div
+				class="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-secondary"
 			>
-				{$translate(`${translationPrefix}.backToShop`)}
-			</Button>
-
-			<p class="text-sm text-gray-500">
-				{$translate(`${translationPrefix}.autoRedirect`)}
+				<i class="fa-solid fa-exclamation-triangle text-3xl text-accent"></i>
+			</div>
+			<h1 class="mb-2 text-2xl font-bold text-primary">
+				{$translate(`${translationPrefix}.cancelTitle`)}
+			</h1>
+			<p class="text-primary">
+				{$translate(`${translationPrefix}.cancelDescription`)}
 			</p>
 		</div>
+		<Button href={resolve('/(user)/shop')} tailwind="p-2">
+			{$translate(`${translationPrefix}.backToShop`)}
+		</Button>
+
+		<p class="text-sm text-primary/70 mt-4">
+			{redirectMessage}
+		</p>
 	</div>
 </div>

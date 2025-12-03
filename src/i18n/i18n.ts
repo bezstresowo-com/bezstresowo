@@ -26,7 +26,9 @@ function parseTranslation(locale: Locale, translationString: string, vars?: Reco
 		string | undefined
 	];
 
-	vars = !isNil(inlineVarsString) ? JSON.parse(inlineVarsString) : null;
+	if (!isNil(inlineVarsString)) {
+		vars = { ...vars, ...JSON.parse(inlineVarsString) };
+	}
 
 	const keys = keysString.split('.');
 	let text = translationFile as any;

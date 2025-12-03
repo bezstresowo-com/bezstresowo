@@ -8,9 +8,13 @@
 		LOADED,
 		type LoadableState
 	} from '$shared/global/types/store';
-	import type { ProductWithDefaultPrice } from '$api/stripe-webhook/model';
+	import type { ProductWithDefaultPrice } from '$api/stripe/products/model';
 	import { translate } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
+	import toast, { Toaster } from 'svelte-5-french-toast';
+
+	// @TODO:
+	// - defaultowe zdjecie produktu w przypadku braku zdjęcia
 
 	const translationPrefix = 'user.pages.shop';
 	const MAX_DESCRIPTION_LENGTH = 150;
@@ -41,7 +45,7 @@
 		purchaseLoadingIndex = index;
 
 		try {
-			const baseUrl = window.location.origin;
+			const baseUrl = window.location.origin; // Nie wiem czy powinienem to tak zostawić. SZYMON WYPOWIEDZ SIE XD
 
 			const checkoutResult = await createCheckoutSession({
 				priceId: product.defaultPrice.id,
@@ -52,30 +56,32 @@
 
 			switch (checkoutResult.status) {
 				case 'ok': {
-					// Przekieruj do Stripe Checkout
+					// Przekieruj do Stripe Checkout po udanym stworzeniu sesji
 					if (checkoutResult.data.url) {
 						window.location.href = checkoutResult.data.url;
 					} else {
-						alert('Unable to create checkout session');
+						toast.error($translate(`${translationPrefix}.errors.checkoutError`), {
+							duration: 10000
+						});
 					}
 					break;
 				}
 
 				case 'error':
-					alert($translate('api.error') + ': ' + checkoutResult.data.message);
+					toast.error($translate(`${translationPrefix}.errors.checkoutError`), { duration: 10000 });
 					break;
 
 				case 'validationError':
-					alert($translate('api.validationError'));
+					toast.error($translate(`${translationPrefix}.errors.checkoutError`), { duration: 10000 }); // nie mam pomyslu na validation error a w sumie ten jest nawet adekwatny.
 					break;
 
 				default:
-					alert($translate('api.generalError'));
+					toast.error($translate(`${translationPrefix}.errors.serverError`), { duration: 10000 });
 					break;
 			}
 		} catch (error) {
-			console.error('Purchase error:', error);
-			alert($translate('api.generalError'));
+			console.error('Purchase error:', error); // nie wiem czy chcemty to wrzucac do konsoli, moze do jakiegos pliku? Bylo by nam to w ogole potrzebne?
+			toast.error($translate(`${translationPrefix}.errors.serverError`), { duration: 10000 });
 		} finally {
 			purchaseLoadingIndex = null;
 		}
@@ -188,20 +194,29 @@
 						</p>
 						<Button
 							tailwind="p-4 w-auto inline-flex items-center justify-center"
-							disabled={purchaseLoadingIndex === index}
+							disabled={purchaseLoadingIndex === index || !defaultPrice?.unit_amount}
 							onclick={() => onBuyNow({ product, defaultPrice }, index)}
-						>
-							{#if purchaseLoadingIndex === index}
-								<LoadingSpinner size="sm" tailwind="mr-3" />
-								{$translate(`${translationPrefix}.processing`)}
-							{:else}
-								<i class="fa-solid fa-cart-shopping mr-3"></i>
-								{$translate(`${translationPrefix}.buyNowButton`)}
-							{/if}
+							><div>
+								{#if purchaseLoadingIndex === index}
+									<LoadingSpinner size="sm" />
+								{:else}
+									<span><i class="fa-solid fa-cart-shopping mr-3"></i></span>
+									{$translate(`${translationPrefix}.buyNowButton`)}
+								{/if}
+							</div>
 						</Button>
 					</div>
 				</div>
 			{/each}
+		{:else}
+			<div class="col-span-full mt-10 text-center text-lg text-slate-700">
+				{#if productsData.error}
+					{$translate(`${translationPrefix}.errors.loadError`)}
+				{:else}
+					{$translate(`${translationPrefix}.errors.noProducts`)}
+				{/if}
+			</div>
 		{/if}
 	</div>
+	<Toaster />
 </div>

@@ -73,7 +73,21 @@
 				"buyNowButton": "Buy now",
 				"showMore": "show more",
 				"showLess": "show less",
-				"whatWillYouGet": "What will you get:"
+				"whatWillYouGet": "What will you get:",
+				"errors": {
+					"noProducts": "No products available at the moment. Please check back later.",
+					"loadError": "An error occurred while loading products. Please try again later.",
+					"checkoutError": "An error occurred while initiating the checkout process. Please try again later.",
+					"serverError": "A server error occurred. Please try again later."
+				},
+				"checkoutMessages": {
+					"successTitle": "Purchase Successful",
+					"cancelTitle": "Purchase Canceled",
+					"successDescription": "Thank you for your purchase, you will be redirected to the store website shortly.",
+					"cancelDescription": "You have canceled the purchase process. You can continue shopping in the store.",
+					"backToShop": "Back to Shop",
+					"autoRedirect": "You will be redirected automatically in {{ time }} seconds..."
+				}
 			},
 			"blog": {},
 			"reservations": {}

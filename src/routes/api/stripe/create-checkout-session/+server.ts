@@ -1,9 +1,9 @@
 import { STRIPE_SK } from '$env/static/private';
+import { HttpStatus } from '$shared/global/enums/http-status';
+import { validateRequest } from '$shared/server/functions/validate-body';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 import { CreateCheckoutSessionRequestDto } from './model';
-import { validateRequest } from '$shared/server/functions/validate-body';
-import { HttpStatus } from '$shared/global/enums/http-status';
 
 export async function POST({ request }) {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -11,7 +11,6 @@ export async function POST({ request }) {
 	});
 
 	try {
-		// Walidacja body
 		const body = await request.json();
 		const validationResult = await validateRequest(body, CreateCheckoutSessionRequestDto);
 
@@ -21,7 +20,6 @@ export async function POST({ request }) {
 
 		const { priceId, quantity = 1, successUrl, cancelUrl } = validationResult.dto;
 
-		// Pobierz informacje o cenie produktu
 		const price = await stripe.prices.retrieve(priceId, {
 			expand: ['product']
 		});
@@ -30,14 +28,13 @@ export async function POST({ request }) {
 			return json({ error: 'Price is not active' }, { status: HttpStatus.BAD_REQUEST });
 		}
 
-		// Utwórz Checkout Session
 		const session = await stripe.checkout.sessions.create({
 			payment_method_types: ['card'],
 			line_items: [
 				{
 					price: priceId,
-					quantity: quantity,
-				},
+					quantity: quantity
+				}
 			],
 			mode: 'payment',
 			success_url: successUrl,
@@ -60,7 +57,7 @@ export async function POST({ request }) {
 	} catch (error: any) {
 		console.error('Error creating checkout session:', error);
 		return json(
-			{ error: 'Failed to create checkout session', details: error.message }, 
+			{ error: 'Failed to create checkout session', details: error.message }, // nie tlumacze tego bo i tak to inaczej obsluguje na froncie
 			{ status: HttpStatus.INTERNAL_SERVER_ERROR }
 		);
 	}
