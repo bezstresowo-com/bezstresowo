@@ -39,6 +39,9 @@ export async function POST({ request }) {
 			mode: 'payment',
 			success_url: successUrl,
 			cancel_url: cancelUrl,
+			phone_number_collection: {
+				enabled: true
+			},
 			metadata: {
 				priceId: priceId,
 				productId: (price.product as Stripe.Product).id,
