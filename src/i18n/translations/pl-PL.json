@@ -68,7 +68,9 @@
 				}
 			},
 			"shop": {},
-			"blog": {},
+			"blog": {
+				"title": "Blog"
+			},
 			"reservations": {}
 		},
 		"header": {
@@ -164,6 +166,7 @@
 		},
 		"blog": {
 			"label": "Artykuły na blogu",
+			"description": "Tworz, aktualizuj i usuwaj artykuly na blogu",
 			"back": "Wróć",
 			"emptyState": {
 				"title": "Brak artykułów na blogu",

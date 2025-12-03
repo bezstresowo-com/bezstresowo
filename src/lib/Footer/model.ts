@@ -2,12 +2,14 @@ export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
 		label: 'beztresowo@gmail.com',
-		icon: 'fa-regular fa-envelope'
+		icon: 'fa-regular fa-envelope',
+		href: 'mailto:beztresowo@gmail.com'
 	},
 	{
 		id: 'phone',
 		label: '+48 795 819 910',
-		icon: 'fa fa-phone'
+		icon: 'fa fa-phone',
+		href: 'tel:+48795819910'
 	},
 	{
 		id: 'location',
