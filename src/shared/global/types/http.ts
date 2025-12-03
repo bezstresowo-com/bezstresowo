@@ -42,6 +42,7 @@ export interface PaginatedDataResponseDto<T> {
 	data: T[];
 	page: number;
 	size: number;
+	totalCount: number;
 }
 
 export interface HttpValidationErrorResponse {

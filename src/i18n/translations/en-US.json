@@ -68,7 +68,9 @@
 				}
 			},
 			"shop": {},
-			"blog": {},
+			"blog": {
+				"title": "Blog"
+			},
 			"reservations": {}
 		},
 		"header": {
@@ -164,6 +166,7 @@
 		},
 		"blog": {
 			"label": "Blog Articles",
+			"description": "Create, update and delete blog articles",
 			"back": "Back",
 			"emptyState": {
 				"title": "No blog articles yet",

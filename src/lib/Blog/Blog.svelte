@@ -15,6 +15,15 @@
 	import Button from '$lib/Button/Button.svelte';
 	import { fetchBlogPosts } from '$lib/Blog/fetch-methods';
 	import { currentLocale } from '$i18n';
+	import { resolve } from '$app/paths';
+	import type { BlogProps } from './model';
+	import { Pagination } from 'bits-ui';
+
+	const {
+		title = 'user.pages.home.blog.title',
+		pageSize = 3,
+		isPreview = true
+	}: BlogProps = $props();
 
 	let blogPosts = $state<LoadableState<GetBlogArticlesPaginatedResponseDto>>({
 		...DEFAULT_LOADABLE_STATE,
@@ -31,7 +40,7 @@
 				...LOADING
 			};
 		}
-		paginationParams.size = 3;
+		paginationParams.size = pageSize;
 		paginationParams.sortBy = 'createdAt';
 		paginationParams.sortOrder = 'desc';
 
@@ -66,6 +75,11 @@
 		}
 	}
 
+	function handlePageChange(page: number) {
+		paginationParams.page = page;
+		getBlogPosts();
+	}
+
 	onMount(async () => {
 		isLoading = true;
 		await getBlogPosts(true);
@@ -75,7 +89,7 @@
 
 <section class="bg-white text-primary max-xl:px-4">
 	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl sm:text-4xl">
-		{$translate('user.pages.home.blog.title')}
+		{$translate(title)}
 	</h1>
 	{#if isLoading}
 		<div class="mx- flex items-center justify-center px-4 pb-20">
@@ -86,7 +100,7 @@
 	{:else}
 		<div class="grid w-full grid-cols-3 gap-4 max-lg:flex max-lg:flex-col">
 			{#each blogPosts.data?.data as post (post.id)}
-				<article class=" rounded-lg border border-accent p-10 pt-3 pl-3">
+				<article class=" rounded-lg border border-accent p-4">
 					<div class="text-accent">
 						{new Date(post.createdAt).toLocaleDateString($currentLocale)}
 					</div>
@@ -97,17 +111,74 @@
 						{@html post.content}
 					</div>
 					<div>
-						<Button tailwind="border-none text-accent bg-white hover:bg-white hover:text-secondary"
-							>{$translate('user.pages.home.blog.learnMore')}</Button
+						<Button
+							tailwind="border-none text-accent bg-white hover:bg-white hover:text-secondary"
+							href={resolve('/(user)/blog/[id]', {
+								id: post.id
+							})}
 						>
+							{$translate('user.pages.home.blog.learnMore')}
+						</Button>
 					</div>
 				</article>
 			{/each}
 		</div>
-		<div class="flex items-center justify-center pb-10">
-			<Button tailwind="bg-white border border-accent text-primary px-6 py-3 mt-5"
-				>{$translate('user.pages.home.blog.readAllPosts')}</Button
-			>
-		</div>
+
+		{#if isPreview}
+			<div class="flex items-center justify-center pb-10">
+				<Button
+					tailwind="bg-white border border-accent text-primary px-6 py-3 mt-5"
+					href={resolve('/blog')}
+				>
+					{$translate('user.pages.home.blog.readAllPosts')}
+				</Button>
+			</div>
+		{:else}
+			<!-- Pagination -->
+			<div class="mt-8 flex justify-center pb-10">
+				<Pagination.Root
+					count={Math.floor(blogPosts.data!.totalCount / blogPosts.data!.size)}
+					perPage={paginationParams.size}
+					page={paginationParams.page}
+					onPageChange={(page) => handlePageChange(page)}
+				>
+					{#snippet children({ pages, currentPage })}
+						<div class="flex items-center gap-2">
+							<Pagination.PrevButton
+								class="cursor-pointer rounded-md border border-accent bg-white px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+							>
+								<span>
+									<i class="fa-solid fa-chevron-left"></i>
+								</span>
+							</Pagination.PrevButton>
+
+							{#each pages as page, i (i)}
+								{#if page.type === 'ellipsis'}
+									<span class="cursor-not-allowed px-2 text-accent">...</span>
+								{:else}
+									<Pagination.Page
+										{page}
+										class="cursor-pointer rounded-md border px-3 py-2 text-sm font-medium transition-colors {page.value ===
+										currentPage
+											? 'border-accent bg-accent text-white'
+											: 'border-accent bg-white text-primary hover:bg-accent hover:text-white'}"
+									>
+										{page.value}
+									</Pagination.Page>
+								{/if}
+							{/each}
+
+							<Pagination.NextButton
+								class="cursor-pointer rounded-md border border-accent bg-white px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-accent hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+							>
+								<span>
+									<i class="fa-solid fa-chevron-right"></i>
+								</span>
+							</Pagination.NextButton>
+						</div>
+					{/snippet}
+				</Pagination.Root>
+			</div>
+		{/if}
 	{/if}
 </section>

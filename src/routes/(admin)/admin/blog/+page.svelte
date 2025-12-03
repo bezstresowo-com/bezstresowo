@@ -130,10 +130,6 @@
 	onMount(async () => {
 		await getBlogPosts(true);
 	});
-
-	// const totalPages = $derived(
-	// 	blogPosts.data ? Math.ceil(blogPosts.data.data.length / paginationParams.size) : 1
-	// );
 </script>
 
 <div class="mb-4 flex items-center gap-4">
@@ -244,7 +240,7 @@
 	<!-- Pagination -->
 	<div class="mt-8 flex justify-center">
 		<Pagination.Root
-			count={blogPosts.data.data.length}
+			count={Math.floor(blogPosts.data.totalCount / blogPosts.data.size)}
 			perPage={paginationParams.size}
 			page={paginationParams.page}
 			onPageChange={(page) => handlePageChange(page)}
