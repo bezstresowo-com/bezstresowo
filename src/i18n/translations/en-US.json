@@ -71,7 +71,48 @@
 			"blog": {
 				"title": "Blog"
 			},
-			"reservations": {}
+			"reservations": {
+				"title": "Consultation Reservation",
+				"titleDescription": "Fill out the form to reserve a consultation appointment.",
+				"submit": "Reserve",
+				"nameAndSurname": {
+					"label": "Name and Surname",
+					"placeholder": "Enter your name and surname",
+					"errors": {
+						"required": "Name and surname is required",
+						"min": "Name and surname is too short",
+						"max": "Name and surname is too long"
+					}
+				},
+				"tel": {
+					"label": "Phone number",
+					"placeholder": "Enter your phone number",
+					"errors": {
+						"required": "Phone number is required",
+						"min": "Phone number is too short",
+						"max": "Phone number is too long"
+					}
+				},
+				"email": {
+					"label": "Email address",
+					"placeholder": "Enter your email address",
+					"errors": {
+						"required": "Email address is required",
+						"email": "Email address is invalid"
+					}
+				},
+				"checkInDate": {
+					"label": "Preferred date",
+					"placeholder": "Select consultation date",
+					"errors": {
+						"required": "Date is required"
+					}
+				},
+				"toast": {
+					"success": "Your reservation has been sent!",
+					"error": "A server error occurred. Please try again later."
+				}
+			}
 		},
 		"header": {
 			"items": {
