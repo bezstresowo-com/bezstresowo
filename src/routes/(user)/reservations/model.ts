@@ -2,7 +2,32 @@ import * as yup from 'yup';
 
 export const prefix = 'user.pages.reservations';
 
+export const THERAPY_TYPES = ['individual', 'couples', 'group', 'other'] as const;
+export type TherapyType = (typeof THERAPY_TYPES)[number];
+
+export interface PreferredDate {
+	date: string;
+	timeFrom: string;
+	timeTo: string;
+}
+
 export const SCHEMA = yup.object().shape({
+	therapyType: yup
+		.string()
+		.oneOf(THERAPY_TYPES, `${prefix}.therapyType.errors.invalid`)
+		.required(`${prefix}.therapyType.errors.required`),
+	preferredDates: yup
+		.array()
+		.of(
+			yup.object().shape({
+				date: yup.string().required(`${prefix}.preferredDates.errors.dateRequired`),
+				timeFrom: yup.string().required(`${prefix}.preferredDates.errors.timeFromRequired`),
+				timeTo: yup.string().required(`${prefix}.preferredDates.errors.timeToRequired`)
+			})
+		)
+		.min(1, `${prefix}.preferredDates.errors.min`)
+		.max(5, `${prefix}.preferredDates.errors.max`)
+		.required(`${prefix}.preferredDates.errors.required`),
 	nameAndSurname: yup
 		.string()
 		.required(`${prefix}.nameAndSurname.errors.required`)
@@ -17,40 +42,40 @@ export const SCHEMA = yup.object().shape({
 		.string()
 		.email(`${prefix}.email.errors.email`)
 		.required(`${prefix}.email.errors.required`),
-	checkInDate: yup.string().required(`${prefix}.checkInDate.errors.required`)
+	message: yup
+		.string()
+		.max(500, `${prefix}.message.errors.max`)
+		.when('therapyType', {
+			is: 'other',
+			then: (schema) => schema.required(`${prefix}.message.errors.requiredForOther`),
+			otherwise: (schema) => schema.optional()
+		})
+});
+
+export const createEmptyPreferredDate = (): PreferredDate => ({
+	date: '',
+	timeFrom: '',
+	timeTo: ''
 });
 
 export const FORM_INITIAL_VALUE = {
+	therapyType: '' as TherapyType | '',
+	preferredDates: [createEmptyPreferredDate()] as PreferredDate[],
 	nameAndSurname: '',
 	tel: '',
 	email: '',
-	checkInDate: ''
+	message: ''
 };
 
-export type FormValue = yup.InferType<typeof SCHEMA>;
-
-export const FORM_FIELDS: Record<
-	keyof FormValue,
-	{ type: 'text' | 'email' | 'tel' | 'date'; element: 'input'; placement: 'full' | 'shared' }
-> = {
-	nameAndSurname: { type: 'text', element: 'input', placement: 'shared' },
-	tel: { type: 'tel', element: 'input', placement: 'shared' },
-	email: { type: 'email', element: 'input', placement: 'full' },
-	checkInDate: { type: 'date', element: 'input', placement: 'full' }
-};
-
-export const FORM_FIELDS_ORDER: (keyof FormValue)[] = [
-	'nameAndSurname',
-	'tel',
-	'email',
-	'checkInDate'
-];
+export type FormValue = typeof FORM_INITIAL_VALUE;
 
 export const FIELD_MAP: Record<string, keyof FormValue> = {
+	therapyType: 'therapyType',
+	preferredDates: 'preferredDates',
 	nameAndSurname: 'nameAndSurname',
 	tel: 'tel',
 	email: 'email',
-	checkInDate: 'checkInDate'
+	message: 'message'
 };
 
 export type BackendError = { field: string; messages: string[] };

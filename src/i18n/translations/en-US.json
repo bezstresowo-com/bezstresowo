@@ -75,6 +75,37 @@
 				"title": "Consultation Reservation",
 				"titleDescription": "Fill out the form to reserve a consultation appointment.",
 				"submit": "Reserve",
+				"therapyType": {
+					"label": "Therapy type",
+					"placeholder": "Select therapy type",
+					"options": {
+						"individual": "Individual therapy",
+						"couples": "Couples therapy",
+						"group": "Group therapy",
+						"other": "Other"
+					},
+					"errors": {
+						"required": "Therapy type is required",
+						"invalid": "Please select a valid therapy type"
+					}
+				},
+				"preferredDates": {
+					"label": "Preferred dates",
+					"hint": "You can add 1 to 5 preferred dates with time ranges.",
+					"date": "Date",
+					"timeFrom": "From",
+					"timeTo": "To",
+					"add": "Add another date",
+					"remove": "Remove date",
+					"errors": {
+						"required": "At least one date is required",
+						"min": "You must provide at least one preferred date",
+						"max": "You can provide up to 5 dates",
+						"dateRequired": "Date is required",
+						"timeFromRequired": "Start time is required",
+						"timeToRequired": "End time is required"
+					}
+				},
 				"nameAndSurname": {
 					"label": "Name and Surname",
 					"placeholder": "Enter your name and surname",
@@ -101,11 +132,13 @@
 						"email": "Email address is invalid"
 					}
 				},
-				"checkInDate": {
-					"label": "Preferred date",
-					"placeholder": "Select consultation date",
+				"message": {
+					"label": "Message",
+					"placeholder": "Describe your needs or questions...",
+					"optional": "optional",
 					"errors": {
-						"required": "Date is required"
+						"max": "Message can be up to 500 characters",
+						"requiredForOther": "Message is required for 'Other' therapy type"
 					}
 				},
 				"toast": {
