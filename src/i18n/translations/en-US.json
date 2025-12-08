@@ -103,7 +103,8 @@
 						"max": "You can provide up to 5 dates",
 						"dateRequired": "Date is required",
 						"timeFromRequired": "Start time is required",
-						"timeToRequired": "End time is required"
+						"timeToRequired": "End time is required",
+						"timeOrder": "End time must be later than start time"
 					}
 				},
 				"nameAndSurname": {

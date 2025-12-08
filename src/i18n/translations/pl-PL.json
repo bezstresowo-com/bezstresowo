@@ -103,7 +103,8 @@
 						"max": "Możesz podać maksymalnie 5 terminów",
 						"dateRequired": "Data jest wymagana",
 						"timeFromRequired": "Godzina rozpoczęcia jest wymagana",
-						"timeToRequired": "Godzina zakończenia jest wymagana"
+						"timeToRequired": "Godzina zakończenia jest wymagana",
+						"timeOrder": "Godzina zakończenia musi być późniejsza niż godzina rozpoczęcia"
 					}
 				},
 				"nameAndSurname": {

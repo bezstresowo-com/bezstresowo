@@ -22,7 +22,18 @@ export const SCHEMA = yup.object().shape({
 			yup.object().shape({
 				date: yup.string().required(`${prefix}.preferredDates.errors.dateRequired`),
 				timeFrom: yup.string().required(`${prefix}.preferredDates.errors.timeFromRequired`),
-				timeTo: yup.string().required(`${prefix}.preferredDates.errors.timeToRequired`)
+				timeTo: yup
+					.string()
+					.required(`${prefix}.preferredDates.errors.timeToRequired`)
+					.when('timeFrom', ([timeFrom], schema) =>
+						timeFrom
+							? schema.test(
+									'time-order',
+									`${prefix}.preferredDates.errors.timeOrder`,
+									(timeTo) => !timeTo || timeFrom < timeTo
+								)
+							: schema
+					)
 			})
 		)
 		.min(1, `${prefix}.preferredDates.errors.min`)

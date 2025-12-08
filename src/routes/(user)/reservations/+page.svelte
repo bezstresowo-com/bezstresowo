@@ -30,10 +30,11 @@
 		form,
 		errors,
 		touched,
-		state: formState,
+		isValid,
 		handleChange,
 		handleSubmit,
-		handleReset
+		handleReset,
+		updateValidateField
 	} = createForm({
 		initialValues: FORM_INITIAL_VALUE,
 		validationSchema: SCHEMA,
@@ -115,15 +116,20 @@
 			newDates[index] = { ...newDates[index], [field]: value };
 			return { ...f, preferredDates: newDates };
 		});
+		updateValidateField('preferredDates', $form.preferredDates);
 	}
 
 	let isSubmitDisabled = $derived(() => {
-		return isLoading || !$formState.isValid;
+		return isLoading || !$isValid;
 	});
 
 	let showMessageRequired = $derived(() => {
 		return $form.therapyType === 'other';
 	});
+
+	function handleTherapyTypeChange(value: string) {
+		updateValidateField('therapyType', value);
+	}
 </script>
 
 <div class="h-full">
@@ -147,7 +153,7 @@
 					id="therapyType"
 					name="therapyType"
 					bind:value={$form.therapyType}
-					onchange={handleChange}
+					onchange={(e) => handleTherapyTypeChange(e.currentTarget.value)}
 					onblur={handleChange}
 					class="h-12 w-full rounded-lg border border-primary/30 bg-white px-4 text-primary transition outline-none focus:border-primary"
 				>
@@ -156,7 +162,7 @@
 						<option value={type}>{$translate(`${prefix}.therapyType.options.${type}`)}</option>
 					{/each}
 				</select>
-				{#if $errors.therapyType && $touched.therapyType}
+				{#if $errors.therapyType}
 					<small class="mt-1 block text-sm text-danger">{$translate($errors.therapyType)}</small>
 				{/if}
 			</div>
@@ -171,6 +177,7 @@
 				</p>
 
 				{#each $form.preferredDates as preferredDate, index (index)}
+					{@const dateErrors = $errors.preferredDates?.[index] as { date?: string; timeFrom?: string; timeTo?: string } | undefined}
 					<div class="mb-3 flex flex-wrap gap-2 rounded-lg border border-primary/20 bg-primary/5 p-3">
 						<div class="min-w-[150px] flex-1">
 							<label for={`date-${index}`} class="mb-1 block text-xs text-primary/70">
@@ -183,6 +190,9 @@
 								onchange={(e) => updatePreferredDate(index, 'date', e.currentTarget.value)}
 								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
 							/>
+							{#if dateErrors?.date}
+								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.date)}</small>
+							{/if}
 						</div>
 						<div class="min-w-[100px] flex-1">
 							<label for={`timeFrom-${index}`} class="mb-1 block text-xs text-primary/70">
@@ -195,6 +205,9 @@
 								onchange={(e) => updatePreferredDate(index, 'timeFrom', e.currentTarget.value)}
 								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
 							/>
+							{#if dateErrors?.timeFrom}
+								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.timeFrom)}</small>
+							{/if}
 						</div>
 						<div class="min-w-[100px] flex-1">
 							<label for={`timeTo-${index}`} class="mb-1 block text-xs text-primary/70">
@@ -207,6 +220,9 @@
 								onchange={(e) => updatePreferredDate(index, 'timeTo', e.currentTarget.value)}
 								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
 							/>
+							{#if dateErrors?.timeTo}
+								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.timeTo)}</small>
+							{/if}
 						</div>
 						{#if $form.preferredDates.length > 1}
 							<button
