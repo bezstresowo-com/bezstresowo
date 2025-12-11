@@ -1,8 +1,10 @@
+import { THERAPY_TYPES } from '$shared/global/types/therapy-types';
 import * as yup from 'yup';
+
+export { THERAPY_TYPES };
 
 export const prefix = 'user.pages.reservations';
 
-export const THERAPY_TYPES = ['individual', 'couples', 'group', 'other'] as const;
 export type TherapyType = (typeof THERAPY_TYPES)[number];
 
 export interface PreferredDate {
@@ -69,14 +71,30 @@ export const createEmptyPreferredDate = (): PreferredDate => ({
 	timeTo: ''
 });
 
+// export const FORM_INITIAL_VALUE = {
+// 	therapyType: '' as TherapyType | '',
+// 	preferredDates: [createEmptyPreferredDate()] as PreferredDate[],
+// 	nameAndSurname: '',
+// 	tel: '',
+// 	email: '',
+// 	message: ''
+// };
+
 export const FORM_INITIAL_VALUE = {
-	therapyType: '' as TherapyType | '',
-	preferredDates: [createEmptyPreferredDate()] as PreferredDate[],
-	nameAndSurname: '',
-	tel: '',
-	email: '',
-	message: ''
+	therapyType: 'individual' as TherapyType | '',
+	preferredDates: [
+		{ date: '2025-12-15', timeFrom: '10:00', timeTo: '12:00' },
+		{ date: '2025-12-16', timeFrom: '14:00', timeTo: '16:00' },
+		{ date: '2025-12-17', timeFrom: '09:00', timeTo: '11:00' },
+		{ date: '2025-12-18', timeFrom: '15:00', timeTo: '17:00' },
+		{ date: '2025-12-19', timeFrom: '11:00', timeTo: '13:00' }
+	] as PreferredDate[],
+	nameAndSurname: 'Maciej Luciński',
+	tel: '+48662367877',
+	email: 'maciou41@gmail.com',
+	message: 'Wiadomosc testowa'
 };
+
 
 export type FormValue = typeof FORM_INITIAL_VALUE;
 

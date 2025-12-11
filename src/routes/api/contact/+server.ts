@@ -1,4 +1,3 @@
-import { EMAIL_SENDER } from '$env/static/private';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { buildErrorResponse, buildOkResponse } from '$shared/server/functions/build-response';
 import { validateRequest } from '$shared/server/functions/validate-body';
@@ -15,9 +14,7 @@ export async function POST({ request, route }) {
 
 		const { email, message, nameAndSurname, tel } = validationResult.dto;
 
-		await new EmailService(EMAIL_SENDER, `New contact request from ${nameAndSurname}`, [
-			email
-		]).contactRequest({
+		await new EmailService().contactRequest({
 			email,
 			message,
 			nameAndSurname,

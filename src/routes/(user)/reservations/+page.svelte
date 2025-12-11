@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ReservationsRequestDto } from '$api/reservations/model';
+	import type { ReservationsRequestDto } from '$shared/global/types/therapy-types';
 	import { resolve } from '$app/paths';
 	import { translate } from '$i18n';
 	import type { BackendErrorResponse } from '$lib/ContactForm/model';

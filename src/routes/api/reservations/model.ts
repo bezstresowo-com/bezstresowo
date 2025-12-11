@@ -1,4 +1,7 @@
-import {
+import { validators } from '$shared/server/validators';
+import { THERAPY_TYPES, type TherapyType } from '$shared/global/types/therapy-types';
+
+const {
 	ArrayMaxSize,
 	ArrayMinSize,
 	IsArray,
@@ -11,11 +14,10 @@ import {
 	MaxLength,
 	MinLength,
 	ValidateNested
-} from 'class-validator';
+} = validators;
 import { Type } from 'class-transformer';
 
-export const THERAPY_TYPES = ['individual', 'couples', 'group', 'other'] as const;
-export type TherapyType = (typeof THERAPY_TYPES)[number];
+export { THERAPY_TYPES, type TherapyType };
 
 export class PreferredDateDto {
 	@IsDefined()

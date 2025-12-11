@@ -305,7 +305,11 @@
 				"IsDefined": "Musi być zdefiniowane",
 				"IsPhoneNumber": "Musi być prawidłowym numerem telefonu",
 				"IsEmail": "Musi być prawidłowym adresem e-mail",
-				"IsString": "Musi być ciągiem znaków"
+				"IsString": "Musi być ciągiem znaków",
+				"IsArray": "Musi być tablicą",
+				"IsIn": "Nieprawidłowa wartość",
+				"ArrayMinSize": "Tablica musi zawierać co najmniej {{ length }} elementów",
+				"ArrayMaxSize": "Tablica nie może zawierać więcej niż {{ length }} elementów"
 			}
 		},
 		"contact": {

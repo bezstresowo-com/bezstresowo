@@ -308,7 +308,11 @@
 				"IsDefined": "Must be defined",
 				"IsPhoneNumber": "Must be a valid phone number",
 				"IsEmail": "Must be a valid email address",
-				"IsString": "Must be a string"
+				"IsString": "Must be a string",
+				"IsArray": "Must be an array",
+				"IsIn": "Invalid value",
+				"ArrayMinSize": "Array must contain at least {{ length }} elements",
+				"ArrayMaxSize": "Array cannot contain more than {{ length }} elements"
 			}
 		},
 		"contact": {
