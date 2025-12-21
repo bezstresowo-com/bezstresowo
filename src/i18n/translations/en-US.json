@@ -71,7 +71,82 @@
 			"blog": {
 				"title": "Blog"
 			},
-			"reservations": {}
+			"reservations": {
+				"title": "Consultation Reservation",
+				"titleDescription": "Fill out the form to reserve a consultation appointment.",
+				"submit": "Reserve",
+				"therapyType": {
+					"label": "Therapy type",
+					"placeholder": "Select therapy type",
+					"options": {
+						"individual": "Individual therapy",
+						"couples": "Couples therapy",
+						"group": "Group therapy",
+						"other": "Other"
+					},
+					"errors": {
+						"required": "Therapy type is required",
+						"invalid": "Please select a valid therapy type"
+					}
+				},
+				"preferredDates": {
+					"label": "Preferred dates",
+					"hint": "You can add 1 to 5 preferred dates with time ranges.",
+					"date": "Date",
+					"timeFrom": "From",
+					"timeTo": "To",
+					"add": "Add another date",
+					"remove": "Remove date",
+					"errors": {
+						"required": "At least one date is required",
+						"min": "You must provide at least one preferred date",
+						"max": "You can provide up to 5 dates",
+						"dateRequired": "Date is required",
+						"timeFromRequired": "Start time is required",
+						"timeToRequired": "End time is required",
+						"timeOrder": "End time must be later than start time"
+					}
+				},
+				"nameAndSurname": {
+					"label": "Name and Surname",
+					"placeholder": "Enter your name and surname",
+					"errors": {
+						"required": "Name and surname is required",
+						"min": "Name and surname is too short",
+						"max": "Name and surname is too long"
+					}
+				},
+				"tel": {
+					"label": "Phone number",
+					"placeholder": "Enter your phone number",
+					"errors": {
+						"required": "Phone number is required",
+						"min": "Phone number is too short",
+						"max": "Phone number is too long"
+					}
+				},
+				"email": {
+					"label": "Email address",
+					"placeholder": "Enter your email address",
+					"errors": {
+						"required": "Email address is required",
+						"email": "Email address is invalid"
+					}
+				},
+				"message": {
+					"label": "Message",
+					"placeholder": "Describe your needs or questions...",
+					"optional": "optional",
+					"errors": {
+						"max": "Message can be up to 500 characters",
+						"requiredForOther": "Message is required for 'Other' therapy type"
+					}
+				},
+				"toast": {
+					"success": "Your reservation has been sent!",
+					"error": "A server error occurred. Please try again later."
+				}
+			}
 		},
 		"header": {
 			"items": {
@@ -233,7 +308,11 @@
 				"IsDefined": "Must be defined",
 				"IsPhoneNumber": "Must be a valid phone number",
 				"IsEmail": "Must be a valid email address",
-				"IsString": "Must be a string"
+				"IsString": "Must be a string",
+				"IsArray": "Must be an array",
+				"IsIn": "Invalid value",
+				"ArrayMinSize": "Array must contain at least {{ length }} elements",
+				"ArrayMaxSize": "Array cannot contain more than {{ length }} elements"
 			}
 		},
 		"contact": {

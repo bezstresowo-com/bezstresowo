@@ -35,7 +35,7 @@ function withTranslationMessage(name: string, fn: Function) {
 	};
 }
 
-/* 
+/*
 	TODO:
 	Remember to overwrite the validators which need to have custom validation messages
 */
@@ -49,5 +49,10 @@ export const validators = {
 	IsPhoneNumber: withTranslationMessage('IsPhoneNumber', cv.IsPhoneNumber),
 	IsEmail: withTranslationMessage('IsEmail', cv.IsEmail),
 	IsString: withTranslationMessage('IsString', cv.IsString),
-	IsIn: withTranslationMessage('IsIn', cv.IsIn)
+	IsIn: withTranslationMessage('IsIn', cv.IsIn),
+	IsArray: withTranslationMessage('IsArray', cv.IsArray),
+	IsOptional: cv.IsOptional,
+	ArrayMinSize: withTranslationMessage('ArrayMinSize', cv.ArrayMinSize),
+	ArrayMaxSize: withTranslationMessage('ArrayMaxSize', cv.ArrayMaxSize),
+	ValidateNested: cv.ValidateNested
 };

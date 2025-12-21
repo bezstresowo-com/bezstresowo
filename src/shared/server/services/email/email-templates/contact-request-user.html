@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	</head>
+	<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+		<div style="max-width: 600px; margin: 0 auto; padding: 20px;">
+			<p>Cześć {{ nameAndSurname }}!</p>
+
+			<p>
+				Dziękuję za wiadomość! Otrzymałam Twoje zgłoszenie i postaram się odpowiedzieć
+				najszybciej jak to możliwe.
+			</p>
+
+			<p><b>Twoja wiadomość:</b></p>
+			<blockquote style="border-left: 3px solid #8B5A8C; padding-left: 15px; margin: 15px 0; color: #555;">
+				{{ message }}
+			</blockquote>
+
+			<p><b>Twoje dane kontaktowe:</b></p>
+			<ul>
+				<li>E-mail: {{ email }}</li>
+				<li>Telefon: {{ tel }}</li>
+			</ul>
+
+			<p>
+				Jeśli masz pilne pytania, możesz również skontaktować się ze mną telefonicznie.
+			</p>
+
+			<p style="margin-top: 30px;">
+				Pozdrawiam serdecznie,<br/>
+				<b>Olesya Haiduk</b><br/>
+				Psychoterapeutka
+			</p>
+
+			<hr style="border: none; border-top: 1px solid #ddd; margin: 30px 0;" />
+			<p style="font-size: 12px; color: #888;">
+				Ta wiadomość została wygenerowana automatycznie w odpowiedzi na Twoje zgłoszenie
+				wysłane przez formularz kontaktowy na stronie bezstresowo.com
+			</p>
+		</div>
+	</body>
+</html>
