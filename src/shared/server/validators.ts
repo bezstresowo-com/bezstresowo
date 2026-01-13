@@ -52,5 +52,9 @@ export const validators = {
 	IsIn: withTranslationMessage('IsIn', cv.IsIn),
 	IsNumber: withTranslationMessage('IsNumber', cv.IsNumber),
 	IsUrl: withTranslationMessage('IsUrl', cv.IsUrl),
-	IsOptional: cv.IsOptional
+	IsOptional: cv.IsOptional,
+	IsArray: withTranslationMessage('IsArray', cv.IsArray),
+	ArrayMinSize: withTranslationMessage('ArrayMinSize', cv.ArrayMinSize),
+	ArrayMaxSize: withTranslationMessage('ArrayMaxSize', cv.ArrayMaxSize),
+	ValidateNested: cv.ValidateNested
 };

@@ -4,7 +4,7 @@ export interface ButtonProps {
 	type?: ButtonTypes;
 	tailwind?: string;
 	href?: string;
-	onclick?: () => void;
+	onclick?: () => void | Promise<void>;
 }
 
 export enum ButtonTypes {

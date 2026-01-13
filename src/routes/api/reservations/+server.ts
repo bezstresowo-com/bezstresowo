@@ -3,22 +3,27 @@ import { buildErrorResponse, buildOkResponse } from '$shared/server/functions/bu
 import { validateRequest } from '$shared/server/functions/validate-body';
 import { EmailService } from '$shared/server/services/email/email-service';
 
-import { ContactRequestDto } from './model';
+import { ReservationsRequestDto } from './model';
 
 export async function POST({ request, route }) {
 	try {
-		const validationResult = await validateRequest(await request.json(), ContactRequestDto);
+		const validationResult = await validateRequest(await request.json(), ReservationsRequestDto);
 		if (validationResult.type === 'error') {
 			return validationResult.response;
 		}
 
-		const { email, message, nameAndSurname, tel } = validationResult.dto;
+		const { therapyType, preferredDates, nameAndSurname, tel, email, message } =
+			validationResult.dto;
 
-		await new EmailService().contactRequest({
+		const msg = message ?? '';
+
+		await new EmailService().reservationRequest({
 			email,
-			message,
+			message: msg,
 			nameAndSurname,
-			tel
+			tel,
+			therapyType,
+			preferredDates
 		});
 
 		return buildOkResponse();

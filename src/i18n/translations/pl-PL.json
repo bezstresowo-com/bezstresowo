@@ -89,8 +89,85 @@
 					"autoRedirect": "Zostaniesz automatycznie przekierowany za {{ time }} sekund..."
 				}
 			},
-			"blog": {},
-			"reservations": {}
+			"blog": {
+				"title": "Blog"
+			},
+			"reservations": {
+				"title": "Rezerwacja konsultacji",
+				"titleDescription": "Wypełnij formularz, aby zarezerwować termin konsultacji.",
+				"submit": "Zarezerwuj",
+				"therapyType": {
+					"label": "Typ terapii",
+					"placeholder": "Wybierz typ terapii",
+					"options": {
+						"individual": "Terapia indywidualna",
+						"couples": "Terapia dla pary",
+						"group": "Terapia grupowa",
+						"other": "Inne"
+					},
+					"errors": {
+						"required": "Typ terapii jest wymagany",
+						"invalid": "Wybierz prawidłowy typ terapii"
+					}
+				},
+				"preferredDates": {
+					"label": "Preferowane terminy",
+					"hint": "Możesz dodać od 1 do 5 preferowanych terminów z przedziałem godzinowym.",
+					"date": "Data",
+					"timeFrom": "Od",
+					"timeTo": "Do",
+					"add": "Dodaj kolejny termin",
+					"remove": "Usuń termin",
+					"errors": {
+						"required": "Przynajmniej jeden termin jest wymagany",
+						"min": "Musisz podać przynajmniej jeden preferowany termin",
+						"max": "Możesz podać maksymalnie 5 terminów",
+						"dateRequired": "Data jest wymagana",
+						"timeFromRequired": "Godzina rozpoczęcia jest wymagana",
+						"timeToRequired": "Godzina zakończenia jest wymagana",
+						"timeOrder": "Godzina zakończenia musi być późniejsza niż godzina rozpoczęcia"
+					}
+				},
+				"nameAndSurname": {
+					"label": "Imię i nazwisko",
+					"placeholder": "Wpisz swoje imię i nazwisko",
+					"errors": {
+						"required": "Imię i nazwisko jest wymagane",
+						"min": "Imię i nazwisko jest za krótkie",
+						"max": "Imię i nazwisko jest za długie"
+					}
+				},
+				"tel": {
+					"label": "Numer telefonu",
+					"placeholder": "Wpisz swój numer telefonu",
+					"errors": {
+						"required": "Numer telefonu jest wymagany",
+						"min": "Numer telefonu jest za krótki",
+						"max": "Numer telefonu jest za długi"
+					}
+				},
+				"email": {
+					"label": "Adres e-mail",
+					"placeholder": "Wpisz swój adres e-mail",
+					"errors": {
+						"required": "Adres e-mail jest wymagany",
+						"email": "Adres e-mail jest nieprawidłowy"
+					}
+				},
+				"message": {
+					"label": "Wiadomość",
+					"placeholder": "Opisz swoje potrzeby lub pytania...",
+					"optional": "opcjonalne",
+					"errors": {
+						"max": "Wiadomość może mieć maksymalnie 500 znaków",
+						"requiredForOther": "Wiadomość jest wymagana dla typu 'Inne'"
+					}
+				},
+				"toast": {
+					"success": "Twoja rezerwacja została wysłana!",
+					"error": "Wystąpił błąd serwera. Spróbuj ponownie później."
+				}
+			}
 		},
 		"header": {
 			"items": {
@@ -185,6 +262,7 @@
 		},
 		"blog": {
 			"label": "Artykuły na blogu",
+			"description": "Tworz, aktualizuj i usuwaj artykuly na blogu",
 			"back": "Wróć",
 			"emptyState": {
 				"title": "Brak artykułów na blogu",
@@ -248,7 +326,11 @@
 				"IsDefined": "Musi być zdefiniowane",
 				"IsPhoneNumber": "Musi być prawidłowym numerem telefonu",
 				"IsEmail": "Musi być prawidłowym adresem e-mail",
-				"IsString": "Musi być ciągiem znaków"
+				"IsString": "Musi być ciągiem znaków",
+				"IsArray": "Musi być tablicą",
+				"IsIn": "Nieprawidłowa wartość",
+				"ArrayMinSize": "Tablica musi zawierać co najmniej {{ length }} elementów",
+				"ArrayMaxSize": "Tablica nie może zawierać więcej niż {{ length }} elementów"
 			}
 		},
 		"contact": {

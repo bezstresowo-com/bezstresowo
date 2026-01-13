@@ -4,9 +4,10 @@
 	import { asset } from '$app/paths';
 	import { HEADER_PATHS } from './model';
 	import { resolve } from '$app/paths';
+	import { page } from '$app/stores';
 
 	let menuOpen = $state(false);
-	let selectedPath = $state(HEADER_PATHS[0].href);
+	let selectedPath = $derived($page.url.pathname);
 </script>
 
 <!-- Desktop: header -->
@@ -21,8 +22,8 @@
 		{#each HEADER_PATHS as { href, label } (href)}
 			<a
 				{href}
-				class={`${selectedPath === href ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-md:hidden`}
-				onclick={() => (selectedPath = href)}>{$translate(label)}</a
+				class={`${selectedPath.startsWith(href) ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-md:hidden`}
+				>{$translate(label)}</a
 			>
 		{/each}
 
@@ -52,11 +53,10 @@
 {#if menuOpen}
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
-	<!-- svelte-ignore element_invalid_self_closing_tag -->
 	<div
 		class="fixed inset-0 bg-black/30 backdrop-blur-sm md:hidden"
 		onclick={() => (menuOpen = false)}
-	/>
+	></div>
 	<div class="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-primary shadow-xl md:hidden">
 		<div class="flex items-center justify-between p-4">
 			<a
@@ -87,9 +87,8 @@
 			{#each HEADER_PATHS as { href, label }, i (i)}
 				<a
 					{href}
-					class={`${selectedPath === href ? 'text-secondary' : 'text-white'}  px-2 py-2 text-lg text-secondary hover:underline`}
+					class={`${selectedPath.startsWith(href) ? 'text-secondary' : 'text-white'}  px-2 py-2 text-lg text-secondary hover:underline`}
 					onclick={() => {
-						selectedPath = href;
 						menuOpen = false;
 					}}
 					>{$translate(label)}

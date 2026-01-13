@@ -1,8 +1,8 @@
 import { HttpStatus } from '$shared/global/enums/http-status.js';
 import { PaginationParamsDto } from '$shared/global/types/http.js';
 import { buildErrorResponse, buildResponse } from '$shared/server/functions/build-response.js';
-import { prisma } from '$shared/server/services/prisma/prisma-service.js';
 import { validateRequest } from '$shared/server/functions/validate-body';
+import { prisma } from '$shared/server/services/prisma/prisma-service.js';
 import {
 	type GetBlogArticlesPaginatedResponseDto,
 	PostBlogArticleRequestDto,
@@ -25,7 +25,14 @@ export async function GET({ url, request, route }) {
 			take: size
 		});
 
-		return buildResponse<GetBlogArticlesPaginatedResponseDto>({ data: blogArticles, page, size });
+		const totalCount = await prisma.blogArticle.count();
+
+		return buildResponse<GetBlogArticlesPaginatedResponseDto>({
+			data: blogArticles,
+			page,
+			size,
+			totalCount
+		});
 	} catch (error) {
 		console.error(error);
 

@@ -24,6 +24,7 @@
 		{disabled}
 		{onclick}
 		class={`h-12 cursor-pointer rounded-lg bg-accent font-medium transition hover:bg-accent/70 ${disabled ? 'cursor-not-allowed grayscale' : ''} ${tailwind}`}
+		onclick={() => onclick?.()}
 	>
 		{@render children?.()}
 	</button>

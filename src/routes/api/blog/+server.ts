@@ -24,7 +24,14 @@ export async function GET({ url, request, route }) {
 			take: size
 		});
 
-		return buildResponse<GetBlogArticlesPaginatedResponseDto>({ data: blogArticles, page, size });
+		const totalCount = await prisma.blogArticle.count();
+
+		return buildResponse<GetBlogArticlesPaginatedResponseDto>({
+			data: blogArticles,
+			page,
+			size,
+			totalCount
+		});
 	} catch (error) {
 		console.error(error);
 
