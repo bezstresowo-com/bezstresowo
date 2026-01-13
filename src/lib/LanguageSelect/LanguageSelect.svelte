@@ -39,7 +39,7 @@
 	items={ITEMS}
 >
 	<Select.Trigger
-		class="flex cursor-pointer items-center gap-2 rounded-xl bg-accent px-3 py-1 text-primary transition hover:bg-accent/70"
+		class="flex cursor-pointer items-center gap-2 rounded-xl bg-accent px-3 py-1 text-primary transition hover:bg-accent/80"
 	>
 		<span>
 			<i class="fa fa-globe"></i>

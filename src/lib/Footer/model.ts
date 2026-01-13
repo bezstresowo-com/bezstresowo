@@ -1,3 +1,5 @@
+import { asset } from '$app/paths';
+
 export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
@@ -21,19 +23,22 @@ export const CONTACT_ELEMENTS = [
 // TODO: make right
 export const FAST_LINKS = [
 	{
-		id: 'privacy-policy',
-		label: 'user.footer.fastLinks.privacyPolicy',
-		href: '/'
-	},
-	{
 		id: 'statute',
 		label: 'user.footer.fastLinks.termsOfService',
-		href: '/'
+		href: asset('/documents/Regulamin - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'),
+		download: true
 	},
 	{
-		id: 'faq',
-		label: 'user.footer.fastLinks.faq',
-		href: '/'
+		id: 'gdpr',
+		label: 'user.footer.fastLinks.gdpr',
+		href: asset('/documents/Klauzula RODO - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'),
+		download: true
+	},
+	{
+		id: 'price-list',
+		label: 'user.footer.fastLinks.priceList',
+		href: asset('/documents/Cennik - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'),
+		download: true
 	}
 ];
 
