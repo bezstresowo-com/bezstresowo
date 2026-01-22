@@ -31,8 +31,14 @@
 				},
 				"aboutMe": {
 					"title": "About Me",
-					"myNameIs": "My name is Olesya Haiduk.",
-					"description": "I am a psychotherapist in training at the International Transactional Analysis Association. I provide individual and group psychotherapy for adolescents and adults, as well as couples therapy. I work with individuals dealing with eating disorders, anxiety disorders, challenges with identity formation and emotional expression, depression, codependent relationships, low self-esteem, social difficulties, and traumatic experiences. I am also deeply committed to supporting members of the LGBT+ community, offering them a space grounded in acceptance, understanding, and professional care. My work is rooted in the approach of transactional analysis, which focuses on helping clients understand the behavioral patterns present in themselves and their surroundings, especially within communication, as well as the roles we adopt in relationships. I adhere to the ethical code of psychologists and psychotherapists, building with each client a space based on trust, safety, and acceptance. To maintain the highest standards of my work, I continuously develop my skills by participating in courses, conferences, and professional training. I work under regular supervision. My priority is always to provide clients with a safe and supportive environment where they can feel understood and accepted. I am guided by strong ethical principles, deep respect, and genuine dedication. With passion and professionalism, I support individuals in improving their quality of life and in navigating emotional and social challenges. I warmly invite you to reach out and begin a shared journey toward greater well-being and mental health. I offer support to both adults and adolescents, providing care tailored to individual needs."
+					"myNameIs": "My name is <b>Olesya Haiduk</b>.",
+					"description": [
+						"I am a psychotherapist in training at the International Transactional Analysis Association. I provide individual psychotherapy for women, group psychotherapy for adolescents and adults, as well as psychotherapy for couples.",
+						"I work with individuals who struggle with eating disorders, anxiety disorders, difficulties in defining identity and expressing emotions, depression, anxiety states, codependent relationships, low self-esteem, social difficulties, and traumatic experiences. I also fully support people from the LGBT+ community, providing them with a space based on acceptance, understanding, and professional support.",
+						"I specialize in the transactional analysis approach, which is based on helping clients become familiar with the patterns present in their own behavior and that of their environment, especially in communication, as well as the roles we take on in relationships. In my work, I adhere to the psychotherapist’s code of ethics and build a therapeutic space with clients founded on trust, a sense of safety, and acceptance.",
+						"In order to maintain the highest standards of my work, I continuously develop my skills by participating in numerous courses, conferences, and professional trainings. I work under the constant supervision of qualified supervisors.",
+						"My priority is always to provide clients with a safe and supportive space in which they can feel understood and accepted. In my work, I am guided by high ethical standards, full respect, and commitment. With passion and professionalism, I support individuals in improving their quality of life and in the process of coping with difficulties, both emotional and social. I warmly invite you to get in touch and begin a shared journey toward better well-being and mental health. I offer help by providing support tailored to individual needs."
+					]
 				},
 				"certificates": {
 					"title": "Certificates and Qualifications",
@@ -67,7 +73,28 @@
 					"readAllPosts": "View all posts"
 				}
 			},
-			"shop": {},
+			"shop": {
+				"title": "Shop",
+				"titleDescription": "Grow with my products",
+				"buyNowButton": "Buy now",
+				"showMore": "show more",
+				"showLess": "show less",
+				"whatWillYouGet": "What will you get:",
+				"errors": {
+					"noProducts": "No products available at the moment. Please check back later.",
+					"loadError": "An error occurred while loading products. Please try again later.",
+					"checkoutError": "An error occurred while initiating the checkout process. Please try again later.",
+					"serverError": "A server error occurred. Please try again later."
+				},
+				"checkoutMessages": {
+					"successTitle": "Purchase Successful",
+					"cancelTitle": "Purchase Canceled",
+					"successDescription": "Thank you for your purchase, you will be redirected to the store website shortly.",
+					"cancelDescription": "You have canceled the purchase process. You can continue shopping in the store.",
+					"backToShop": "Back to Shop",
+					"autoRedirect": "You will be redirected automatically in {{ time }} seconds..."
+				}
+			},
 			"blog": {
 				"title": "Blog"
 			},
@@ -162,9 +189,9 @@
 			"followMeHeader": "Follow me",
 			"copyright": "© 2025 Bezstresowo. All rights reserved.",
 			"fastLinks": {
-				"privacyPolicy": "Privacy policy",
+				"priceList": "Price list",
 				"termsOfService": "Terms of service",
-				"faq": "FAQ"
+				"gdpr": "GDPR"
 			}
 		},
 		"contactForm": {

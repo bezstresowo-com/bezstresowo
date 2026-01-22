@@ -31,8 +31,14 @@
 				},
 				"aboutMe": {
 					"title": "O mnie",
-					"myNameIs": "Nazywam się Olesya Haiduk.",
-					"description": "Jestem psychoterapeutką w trakcie szkolenia w Międzynarodowym Towarzystwie Analizy Transakcyjnej. Prowadzę psychoterapię indywidualną, i grupową z młodzieżą i osobami dorosłymi, a także psychoterapię dla par. Pracuję z osobami, które zmagają się z zaburzeniami odżywiania, zaburzeniami lękowymi, problemami w określeniu tożsamości i wyrażaniu emocji, depresją, współzależnymi relacjami, niską samooceną, problemami społecznymi oraz traumatycznymi przeżyciami. Z pełnym zaangażowaniem wspieram także osoby z grupy LGBT+, zapewniając im przestrzeń opartą na akceptacji, zrozumieniu oraz profesjonalnym wsparciu. Specjalizuję się w nurcie analizy transakcyjnej opierającej się na zapoznaniu się klienta ze schematami, jakie występują w jego i otoczenia postępowaniu, zwłaszcza w komunikacji, a także rolami, w jakie wchodzimy w relacjach. 'W swoich działaniach opieram się na kodeksie etycznym psychologa i psychoterapeuty, buduję z pacjentem przestrzeń opartą na zaufaniu, poczuciu bezpieczeństwa i akceptacji. W trosce o jak najwyższe standardy mojej pracy nieustannie rozwijam swoje umiejętności poprzez udział w licznych kursach, konferencjach i szkoleniach zawodowych. Pracuję pod stałą opieką superwizorów. Moim priorytetem jest zawsze zapewnienie pacjentom bezpiecznej, wspierającej przestrzeni, w której mogą poczuć się zrozumiani i akceptowani. W swojej pracy kieruję się wysokimi standardami etycznymi, pełnym szacunkiem oraz zaangażowaniem. Z pasją i profesjonalizmem wspieram osoby w dążeniu do poprawy jakości ich życia oraz w procesie radzenia sobie z trudnościami, zarówno emocjonalnymi, jak i społecznymi. Serdecznie zapraszam do kontaktu i rozpoczęcia wspólnej drogi ku lepszemu samopoczuciu oraz zdrowiu psychicznemu. Oferuję pomoc zarówno dorosłym, jak i młodzieży, zapewniając wsparcie dostosowane do indywidualnych potrzeb."
+					"myNameIs": "Nazywam się <b>Olesya Haiduk</b>.",
+					"description": [
+						"Jestem psychoterapeutką w trakcie szkolenia w Międzynarodowym Towarzystwie Analizy Transakcyjnej. Prowadzę indywidualną psychoterapię dla kobiet, psychoterapię grupową z młodzieżą i osobami dorosłymi, a także psychoterapię dla par.",
+						"Pracuję z osobami, które zmagają się z zaburzeniami odżywiania, zaburzeniami lękowymi, problemami w określeniu tożsamości i wyrażaniu emocji, depresją, stanami lękowymi, współzależnymi relacjami, niską samooceną, problemami społecznymi oraz traumatycznymi przeżyciami. Z pełnym zaangażowaniem wspieram także osoby z grupy LGBT+, zapewniając im przestrzeń opartą na akceptacji, zrozumieniu oraz profesjonalnym wsparciu.",
+						"Specjalizuję się w nurcie analizy transakcyjnej opierającej się na zapoznaniu się klienta ze schematami, jakie występują w jego i otoczenia postępowaniu, zwłaszcza w komunikacji, a także rolami, w jakie wchodzimy w relacjach. W swoich działaniach opieram się na kodeksie etycznym psychoterapeuty, buduję z klientem przestrzeń opartą na zaufaniu, poczuciu bezpieczeństwa i akceptacji.",
+						"W trosce o jak najwyższe standardy mojej pracy nieustannie rozwijam swoje umiejętności poprzez udział w licznych kursach, konferencjach i szkoleniach zawodowych. Pracuję pod stałą opieką superwizorów.",
+						"Moim priorytetem jest zawsze zapewnienie klientom bezpiecznej, wspierającej przestrzeni, w której mogą poczuć się zrozumiani i akceptowani. W swojej pracy kieruję się wysokimi standardami etycznymi, pełnym szacunkiem oraz zaangażowaniem. Z pasją i profesjonalizmem wspieram osoby w dążeniu do poprawy jakości ich życia oraz w procesie radzenia sobie z trudnościami, zarówno emocjonalnymi, jak i społecznymi. Serdecznie zapraszam do kontaktu i rozpoczęcia wspólnej drogi ku lepszemu samopoczuciu oraz zdrowiu psychicznemu. Oferuję pomoc, zapewniając wsparcie dostosowane do indywidualnych potrzeb."
+					]
 				},
 				"certificates": {
 					"title": "Certyfikaty i kwalifikacje",
@@ -67,7 +73,28 @@
 					"readAllPosts": "Zobacz wszystkie wpisy"
 				}
 			},
-			"shop": {},
+			"shop": {
+				"title": "Sklep",
+				"titleDescription": "Rozwijaj się z moimi produktami",
+				"buyNowButton": "Kup teraz",
+				"showMore": "pokaż więcej",
+				"showLess": "pokaż mniej",
+				"whatWillYouGet": "Co otrzymasz:",
+				"errors": {
+					"noProducts": "Brak dostępnych produktów w tym momencie. Sprawdź ponownie później.",
+					"loadError": "Wystąpił błąd podczas ładowania produktów. Spróbuj ponownie później.",
+					"checkoutError": "Wystąpił błąd podczas inicjowania procesu zakupu. Spróbuj ponownie później.",
+					"serverError": "Wystąpił błąd serwera. Spróbuj ponownie później."
+				},
+				"checkoutMessages": {
+					"successTitle": "Zakup zakończony sukcesem",
+					"cancelTitle": "Zakup anulowany",
+					"successDescription": "Dziękujemy za zakup, zostaniesz wkrótce przekierowany do sklepu.",
+					"cancelDescription": "Anulowałeś proces zakupu. Możesz kontynuować zakupy w sklepie.",
+					"backToShop": "Powrót do sklepu",
+					"autoRedirect": "Zostaniesz automatycznie przekierowany za {{ time }} sekund..."
+				}
+			},
 			"blog": {
 				"title": "Blog"
 			},
@@ -162,9 +189,9 @@
 			"followMeHeader": "Śledź mnie",
 			"copyright": "© 2025 Bezstresowo. Wszystkie prawa zastrzeżone.",
 			"fastLinks": {
-				"privacyPolicy": "Polityka prywatności",
+				"priceList": "Cennik",
 				"termsOfService": "Regulamin",
-				"faq": "FAQ"
+				"gdpr": "RODO"
 			}
 		},
 		"contactForm": {

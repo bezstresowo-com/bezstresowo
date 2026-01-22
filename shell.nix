@@ -7,6 +7,7 @@ pkgs.mkShell {
   packages = with pkgs; [
     zsh
     nodejs_24
+    stripe-cli
   ];
 
   # for prisma-engines (6.7.0)
