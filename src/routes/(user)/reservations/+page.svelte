@@ -1,11 +1,6 @@
 <script lang="ts">
-	import type { ReservationsRequestDto } from '$shared/global/types/therapy-types';
-	import { resolve } from '$app/paths';
 	import { translate } from '$i18n';
 	import type { BackendErrorResponse } from '$lib/ContactForm/model';
-	import { HttpMethod } from '$shared/global/enums/http-method';
-	import { HttpStatus } from '$shared/global/enums/http-status';
-	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { createForm } from 'svelte-forms-lib';
 	import {
@@ -13,18 +8,32 @@
 		FORM_INITIAL_VALUE,
 		prefix,
 		SCHEMA,
-		THERAPY_TYPES,
 		createEmptyPreferredDate,
 		type FormValue,
-		type PreferredDate,
-		type TherapyType
+		type PreferredDate
 	} from './model';
 	import { ButtonTypes } from '$lib/Button/model';
 	import Button from '$lib/Button/Button.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
+	import { onMount } from 'svelte';
+	import { getReservationProducts, createReservationCheckout } from './fetch-methods';
+	import type { ReservationProduct } from '$api/stripe/reservation-products/model';
+	import {
+		DEFAULT_LOADABLE_STATE,
+		ERRORED,
+		LOADED,
+		type LoadableState
+	} from '$shared/global/types/store';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
+
+	let therapyTypesData = $state<LoadableState<ReservationProduct[]>>({
+		...DEFAULT_LOADABLE_STATE,
+		isLoading: true
+	});
+
+	let therapyTypes = $derived(therapyTypesData.data ?? []);
 
 	const {
 		form,
@@ -40,33 +49,42 @@
 		validationSchema: SCHEMA,
 		async onSubmit(values) {
 			isLoading = true;
+			generalError = null;
+
 			try {
-				const body = JSON.stringify({
-					therapyType: values.therapyType as TherapyType,
+				const selectedProduct = therapyTypes.find((t) => t.id === values.therapyType);
+				if (!selectedProduct?.defaultPrice) {
+					toast.error($translate(`${prefix}.toast.noPriceAvailable`));
+					return;
+				}
+
+				const baseUrl = window.location.origin;
+
+				const checkoutResult = await createReservationCheckout({
+					priceId: selectedProduct.defaultPrice.id,
+					therapyType: values.therapyType,
 					preferredDates: values.preferredDates,
 					nameAndSurname: values.nameAndSurname,
 					tel: values.tel,
 					email: values.email,
-					message: values.message || undefined
-				} satisfies ReservationsRequestDto);
-
-				const response = await fetch(resolve('/api/reservations'), {
-					method: HttpMethod.POST,
-					headers: getBaseHeaders(),
-					body
+					message: values.message || undefined,
+					successUrl: `${baseUrl}/reservation-success`,
+					cancelUrl: `${baseUrl}/reservation-cancel`
 				});
 
-				const resBody: BackendErrorResponse = await response.json().catch(() => ({}));
-
-				switch (response.status) {
-					case HttpStatus.OK:
-						generalError = null;
-						handleReset();
-						toast.success($translate(`${prefix}.toast.success`));
+				switch (checkoutResult.status) {
+					case 'ok': {
+						if (checkoutResult.data.url) {
+							handleReset();
+							window.location.href = checkoutResult.data.url;
+						} else {
+							toast.error($translate(`${prefix}.toast.checkoutError`));
+						}
 						break;
+					}
 
-					case HttpStatus.BAD_REQUEST: {
-						const serverErrors = resBody?.errors ?? [];
+					case 'validationError': {
+						const serverErrors = (checkoutResult.data as unknown as BackendErrorResponse)?.errors ?? [];
 						if (serverErrors.length) {
 							for (const { field, messages } of serverErrors) {
 								const key = FIELD_MAP[field] ?? (field as keyof FormValue);
@@ -78,8 +96,9 @@
 						break;
 					}
 
-					case HttpStatus.INTERNAL_SERVER_ERROR:
-						toast.error($translate(`${prefix}.toast.error`));
+					case 'error':
+					default:
+						toast.error($translate(`${prefix}.toast.checkoutError`));
 						break;
 				}
 			} catch (error) {
@@ -120,16 +139,43 @@
 	}
 
 	let isSubmitDisabled = $derived(() => {
-		return isLoading || !$isValid;
-	});
-
-	let showMessageRequired = $derived(() => {
-		return $form.therapyType === 'other';
+		return isLoading || !$isValid || therapyTypesData.isLoading;
 	});
 
 	function handleTherapyTypeChange(value: string) {
 		updateValidateField('therapyType', value);
 	}
+
+	async function loadTherapyTypes() {
+		const fetchResult = await getReservationProducts();
+
+		switch (fetchResult.status) {
+			case 'ok':
+				therapyTypesData = {
+					...LOADED,
+					data: fetchResult.data.data
+				};
+				break;
+
+			case 'error':
+				therapyTypesData = {
+					...therapyTypesData,
+					...ERRORED(fetchResult.data.message)
+				};
+				break;
+
+			default:
+				therapyTypesData = {
+					...therapyTypesData,
+					...ERRORED(fetchResult.error)
+				};
+				break;
+		}
+	}
+
+	onMount(async () => {
+		await loadTherapyTypes();
+	});
 </script>
 
 <div class="h-full">
@@ -149,19 +195,40 @@
 				<label for="therapyType" class="mb-1 block text-sm font-medium text-primary">
 					{$translate(`${prefix}.therapyType.label`)}
 				</label>
-				<select
-					id="therapyType"
-					name="therapyType"
-					bind:value={$form.therapyType}
-					onchange={(e) => handleTherapyTypeChange(e.currentTarget.value)}
-					onblur={handleChange}
-					class="h-12 w-full rounded-lg border border-primary/30 bg-white px-4 text-primary transition outline-none focus:border-primary"
-				>
-					<option value="" disabled>{$translate(`${prefix}.therapyType.placeholder`)}</option>
-					{#each THERAPY_TYPES as type (type)}
-						<option value={type}>{$translate(`${prefix}.therapyType.options.${type}`)}</option>
-					{/each}
-				</select>
+				{#if therapyTypesData.isLoading}
+					<div
+						class="flex h-12 items-center justify-center rounded-lg border border-primary/30 bg-white"
+					>
+						<LoadingSpinner size="sm" />
+					</div>
+				{:else if therapyTypesData.error}
+					<div
+						class="flex h-12 items-center rounded-lg border border-danger/30 bg-white px-4 text-danger"
+					>
+						{$translate(`${prefix}.therapyType.errors.loadError`)}
+					</div>
+				{:else}
+					<select
+						id="therapyType"
+						name="therapyType"
+						bind:value={$form.therapyType}
+						onchange={(e) => handleTherapyTypeChange(e.currentTarget.value)}
+						onblur={handleChange}
+						class="h-12 w-full rounded-lg border border-primary/30 bg-white px-4 text-primary transition outline-none focus:border-primary"
+					>
+						<option value="" disabled>{$translate(`${prefix}.therapyType.placeholder`)}</option>
+						{#each therapyTypes as therapyType (therapyType.id)}
+							<option value={therapyType.id}
+								>{therapyType.name}
+								{therapyType.defaultPrice?.unit_amount
+									? therapyType.defaultPrice.unit_amount / 100 +
+										' ' +
+										therapyType.defaultPrice.currency.toUpperCase()
+									: 'N/A'}</option
+							>
+						{/each}
+					</select>
+				{/if}
 				{#if $errors.therapyType}
 					<small class="mt-1 block text-sm text-danger">{$translate($errors.therapyType)}</small>
 				{/if}
@@ -177,8 +244,12 @@
 				</p>
 
 				{#each $form.preferredDates as preferredDate, index (index)}
-					{@const dateErrors = $errors.preferredDates?.[index] as { date?: string; timeFrom?: string; timeTo?: string } | undefined}
-					<div class="mb-3 flex flex-wrap gap-2 rounded-lg border border-primary/20 bg-primary/5 p-3">
+					{@const dateErrors = $errors.preferredDates?.[index] as
+						| { date?: string; timeFrom?: string; timeTo?: string }
+						| undefined}
+					<div
+						class="mb-3 flex flex-wrap gap-2 rounded-lg border border-primary/20 bg-primary/5 p-3"
+					>
 						<div class="min-w-[150px] flex-1">
 							<label for={`date-${index}`} class="mb-1 block text-xs text-primary/70">
 								{$translate(`${prefix}.preferredDates.date`)}
@@ -206,7 +277,9 @@
 								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
 							/>
 							{#if dateErrors?.timeFrom}
-								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.timeFrom)}</small>
+								<small class="mt-1 block text-xs text-danger"
+									>{$translate(dateErrors.timeFrom)}</small
+								>
 							{/if}
 						</div>
 						<div class="min-w-[100px] flex-1">
@@ -221,7 +294,8 @@
 								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
 							/>
 							{#if dateErrors?.timeTo}
-								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.timeTo)}</small>
+								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.timeTo)}</small
+								>
 							{/if}
 						</div>
 						{#if $form.preferredDates.length > 1}
@@ -318,11 +392,7 @@
 			<div>
 				<label for="message" class="mb-1 block text-sm font-medium text-primary">
 					{$translate(`${prefix}.message.label`)}
-					{#if showMessageRequired()}
-						<span class="text-danger">*</span>
-					{:else}
-						<span class="text-xs text-primary/50">({$translate(`${prefix}.message.optional`)})</span>
-					{/if}
+					<span class="text-xs text-primary/50">({$translate(`${prefix}.message.optional`)})</span>
 				</label>
 				<textarea
 					id="message"

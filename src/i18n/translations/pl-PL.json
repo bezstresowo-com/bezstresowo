@@ -171,7 +171,17 @@
 				},
 				"toast": {
 					"success": "Twoja rezerwacja została wysłana!",
-					"error": "Wystąpił błąd serwera. Spróbuj ponownie później."
+					"error": "Wystąpił błąd serwera. Spróbuj ponownie później.",
+					"noPriceAvailable": "Wybrany typ terapii nie ma przypisanej ceny. Skontaktuj się z nami.",
+					"checkoutError": "Wystąpił błąd podczas inicjowania płatności. Spróbuj ponownie później."
+				},
+				"checkoutMessages": {
+					"successTitle": "Rezerwacja opłacona",
+					"successDescription": "Dziękujemy za dokonanie płatności. Twoja rezerwacja została potwierdzona. Skontaktujemy się z Tobą wkrótce w celu ustalenia szczegółów.",
+					"cancelTitle": "Płatność anulowana",
+					"cancelDescription": "Anulowałeś proces płatności. Twoja rezerwacja nie została potwierdzona. Możesz spróbować ponownie.",
+					"backToReservations": "Powrót do rezerwacji",
+					"autoRedirect": "Zostaniesz automatycznie przekierowany za {{ time }} sekund..."
 				}
 			}
 		},

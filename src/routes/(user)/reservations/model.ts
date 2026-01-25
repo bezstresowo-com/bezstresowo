@@ -1,11 +1,6 @@
-import { THERAPY_TYPES } from '$shared/global/types/therapy-types';
 import * as yup from 'yup';
 
-export { THERAPY_TYPES };
-
 export const prefix = 'user.pages.reservations';
-
-export type TherapyType = (typeof THERAPY_TYPES)[number];
 
 export interface PreferredDate {
 	date: string;
@@ -16,7 +11,6 @@ export interface PreferredDate {
 export const SCHEMA = yup.object().shape({
 	therapyType: yup
 		.string()
-		.oneOf(THERAPY_TYPES, `${prefix}.therapyType.errors.invalid`)
 		.required(`${prefix}.therapyType.errors.required`),
 	preferredDates: yup
 		.array()
@@ -58,11 +52,7 @@ export const SCHEMA = yup.object().shape({
 	message: yup
 		.string()
 		.max(500, `${prefix}.message.errors.max`)
-		.when('therapyType', {
-			is: 'other',
-			then: (schema) => schema.required(`${prefix}.message.errors.requiredForOther`),
-			otherwise: (schema) => schema.optional()
-		})
+		.optional()
 });
 
 export const createEmptyPreferredDate = (): PreferredDate => ({
@@ -71,11 +61,18 @@ export const createEmptyPreferredDate = (): PreferredDate => ({
 	timeTo: ''
 });
 
-export type FormValue = yup.InferType<typeof SCHEMA>;
+export interface FormValue {
+	therapyType: string;
+	preferredDates: PreferredDate[];
+	nameAndSurname: string;
+	tel: string;
+	email: string;
+	message: string;
+}
 
 export const FORM_INITIAL_VALUE: FormValue = {
-	therapyType: '' as TherapyType & '',
-	preferredDates: [createEmptyPreferredDate()] as PreferredDate[],
+	therapyType: '',
+	preferredDates: [createEmptyPreferredDate()],
 	nameAndSurname: '',
 	tel: '',
 	email: '',
