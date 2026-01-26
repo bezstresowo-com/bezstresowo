@@ -46,7 +46,7 @@
 		purchaseLoadingIndex = index;
 
 		try {
-			const baseUrl = window.location.origin; // Nie wiem czy powinienem to tak zostawić. SZYMON WYPOWIEDZ SIE XD
+			const baseUrl = window.location.origin;
 
 			const checkoutResult = await createCheckoutSession({
 				priceId: product.defaultPrice.id,
