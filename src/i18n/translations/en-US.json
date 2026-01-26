@@ -148,8 +148,7 @@
 					"placeholder": "Enter your phone number",
 					"errors": {
 						"required": "Phone number is required",
-						"min": "Phone number is too short",
-						"max": "Phone number is too long"
+						"invalid": "Phone number is invalid (country code may be missing, e.g. +1 or +44)"
 					}
 				},
 				"email": {
@@ -242,7 +241,7 @@
 					"label": "Your phone",
 					"placeholder": "Enter your phone number",
 					"errors": {
-						"matches": "Phone number is invalid",
+						"invalid": "Phone number is invalid (country code may be missing, e.g. +1 or +44)",
 						"required": "Phone number is required"
 					}
 				},

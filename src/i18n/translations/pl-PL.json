@@ -148,8 +148,7 @@
 					"placeholder": "Wpisz swój numer telefonu",
 					"errors": {
 						"required": "Numer telefonu jest wymagany",
-						"min": "Numer telefonu jest za krótki",
-						"max": "Numer telefonu jest za długi"
+						"invalid": "Numer telefonu jest nieprawidłowy (prawdopodobnie brakuje numeru kierunkowego, np. +48)"
 					}
 				},
 				"email": {
@@ -242,7 +241,7 @@
 					"label": "Twój telefon",
 					"placeholder": "Wpisz swój numer telefonu",
 					"errors": {
-						"matches": "Numer telefonu jest nieprawidłowy",
+						"invalid": "Numer telefonu jest nieprawidłowy (prawdopodobnie brakuje numeru kierunkowego, np. +48)",
 						"required": "Numer telefonu jest wymagany"
 					}
 				},

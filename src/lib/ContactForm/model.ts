@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 
 const prefix = 'user.contactForm.fields';
 
@@ -14,8 +15,11 @@ export const SCHEMA = yup.object().shape({
 		.required(`${prefix}.email.errors.required`),
 	phone: yup
 		.string()
-		.matches(/^[\d+\-\s]+$/, `${prefix}.phone.errors.matches`)
-		.required(`${prefix}.phone.errors.required`),
+		.required(`${prefix}.phone.errors.required`)
+		.test('is-valid-phone', `${prefix}.phone.errors.invalid`, (value) => {
+			if (!value) return false;
+			return isValidPhoneNumber(value);
+		}),
 	message: yup
 		.string()
 		.required(`${prefix}.message.errors.required`)

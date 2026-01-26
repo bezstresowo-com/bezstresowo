@@ -29,10 +29,6 @@
 	});
 </script>
 
-<svelte:head>
-	<title>{$translate(`${translationPrefix}.${type}Title`)}</title>
-</svelte:head>
-
 <div class="flex min-h-screen items-center justify-center">
 	<div class="mx-auto max-w-md rounded-lg p-8 text-center shadow-lg">
 		<div class="mb-6">

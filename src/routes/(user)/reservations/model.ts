@@ -1,4 +1,5 @@
 import * as yup from 'yup';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 
 export const prefix = 'user.pages.reservations';
 
@@ -41,8 +42,10 @@ export const SCHEMA = yup.object().shape({
 	tel: yup
 		.string()
 		.required(`${prefix}.tel.errors.required`)
-		.min(9, `${prefix}.tel.errors.min`)
-		.max(15, `${prefix}.tel.errors.max`),
+		.test('is-valid-phone', `${prefix}.tel.errors.invalid`, (value) => {
+			if (!value) return false;
+			return isValidPhoneNumber(value);
+		}),
 	email: yup
 		.string()
 		.email(`${prefix}.email.errors.email`)

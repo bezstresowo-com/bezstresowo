@@ -17,7 +17,6 @@
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import { onMount } from 'svelte';
 	import { getReservationProducts, createReservationCheckout } from './fetch-methods';
-	import type { ReservationProduct } from '$api/stripe/reservation-products/model';
 	import {
 		DEFAULT_LOADABLE_STATE,
 		ERRORED,
@@ -25,6 +24,7 @@
 		type LoadableState
 	} from '$shared/global/types/store';
 	import { resolve } from '$app/paths';
+	import type { ReservationProduct } from '$api/stripe/(reservation)/reservation-products/model';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);

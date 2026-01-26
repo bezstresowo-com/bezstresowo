@@ -96,7 +96,14 @@
 			<LoadingSpinner size="lg" tailwind="mt-5" />
 		</div>
 	{:else if blogPosts.data?.data?.length === 0}
-		<p class="my-5 text-lg">{$translate('user.pages.home.blog.noPosts')}</p>
+		<div class="flex flex-col items-center justify-center px-4 py-16 text-center">
+			<div class="mb-4 flex h-24 w-24 items-center justify-center rounded-full bg-secondary/10">
+				<i class="fa-solid fa-newspaper text-5xl text-secondary/60"></i>
+			</div>
+			<p class="text-xl font-medium text-primary/80">
+				{$translate('user.pages.home.blog.noPosts')}
+			</p>
+		</div>
 	{:else}
 		<div class="grid w-full grid-cols-3 gap-4 max-lg:flex max-lg:flex-col">
 			{#each blogPosts.data?.data as post (post.id)}

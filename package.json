@@ -64,6 +64,7 @@
 		"class-validator": "^0.14.2",
 		"googleapis": "^159.0.0",
 		"jsonwebtoken": "^9.0.2",
+		"libphonenumber-js": "^1.12.35",
 		"lodash-es": "^4.17.21",
 		"nodemailer": "^7.0.6",
 		"prisma": "^6.18.0",
