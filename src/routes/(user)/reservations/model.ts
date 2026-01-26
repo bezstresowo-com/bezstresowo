@@ -9,9 +9,7 @@ export interface PreferredDate {
 }
 
 export const SCHEMA = yup.object().shape({
-	therapyType: yup
-		.string()
-		.required(`${prefix}.therapyType.errors.required`),
+	therapyType: yup.string().required(`${prefix}.therapyType.errors.required`),
 	preferredDates: yup
 		.array()
 		.of(
@@ -49,10 +47,7 @@ export const SCHEMA = yup.object().shape({
 		.string()
 		.email(`${prefix}.email.errors.email`)
 		.required(`${prefix}.email.errors.required`),
-	message: yup
-		.string()
-		.max(500, `${prefix}.message.errors.max`)
-		.optional()
+	message: yup.string().max(500, `${prefix}.message.errors.max`).optional()
 });
 
 export const createEmptyPreferredDate = (): PreferredDate => ({

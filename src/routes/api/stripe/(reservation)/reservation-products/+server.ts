@@ -19,7 +19,11 @@ export async function GET() {
 			const rawPrice = product.default_price;
 
 			let defaultPrice: Stripe.Price | null = null;
-			if (rawPrice && typeof rawPrice !== 'string' && !('deleted' in rawPrice && rawPrice.deleted)) {
+			if (
+				rawPrice &&
+				typeof rawPrice !== 'string' &&
+				!('deleted' in rawPrice && rawPrice.deleted)
+			) {
 				defaultPrice = rawPrice as Stripe.Price;
 			}
 

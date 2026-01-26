@@ -90,7 +90,7 @@
 				</h1>
 			</header>
 
-			<div class="prose sm:prose-lg max-w-none text-gray-600">
+			<div class="prose max-w-none text-gray-600 sm:prose-lg">
 				{@html blogPost.data.content}
 			</div>
 		</article>

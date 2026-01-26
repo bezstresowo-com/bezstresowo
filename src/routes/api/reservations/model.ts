@@ -1,4 +1,5 @@
 import { validators } from '$shared/server/validators';
+import { Type } from 'class-transformer';
 
 const {
 	ArrayMaxSize,
@@ -14,7 +15,6 @@ const {
 	MinLength,
 	ValidateNested
 } = validators;
-import { Type } from 'class-transformer';
 
 export class PreferredDateDto {
 	@IsDefined()

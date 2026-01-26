@@ -8,14 +8,11 @@
 		LOADED,
 		type LoadableState
 	} from '$shared/global/types/store';
-	import type { ProductWithDefaultPrice } from '$api/stripe/shop-products/model';
 	import { translate } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { asset, resolve } from '$app/paths';
-
-	// @TODO:
-	// - defaultowe zdjecie produktu w przypadku braku zdjęcia
+	import type { ProductWithDefaultPrice } from '$api/stripe/(shop)/shop-products/model';
 
 	const translationPrefix = 'user.pages.shop';
 	const MAX_DESCRIPTION_LENGTH = 150;

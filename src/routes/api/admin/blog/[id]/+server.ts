@@ -13,8 +13,8 @@ import {
 	buildOkResponse,
 	buildResponse
 } from '$shared/server/functions/build-response.js';
-import { S3Service } from '$shared/server/services/s3/s3-service.js';
 import { prisma } from '$shared/server/services/prisma/prisma-service.js';
+import { S3Service } from '$shared/server/services/s3/s3-service.js';
 
 export async function GET({ params, route, request }) {
 	try {
