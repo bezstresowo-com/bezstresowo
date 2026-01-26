@@ -22,7 +22,7 @@ export async function POST({ request, route }) {
 			message: msg,
 			nameAndSurname,
 			tel,
-			therapyType,
+			therapyName: therapyType,
 			preferredDates
 		});
 

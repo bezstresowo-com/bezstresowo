@@ -3,7 +3,7 @@ import { HttpStatus } from '$shared/global/enums/http-status';
 import { validateRequest } from '$shared/server/functions/validate-body';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { ReservationCheckoutRequestDto } from './model';
+import { ReservationCheckoutRequestDto, type ReservationCheckoutMetadata } from './model';
 
 export async function POST({ request }) {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -20,7 +20,7 @@ export async function POST({ request }) {
 
 		const {
 			priceId,
-			therapyType,
+			therapyName,
 			preferredDates,
 			nameAndSurname,
 			tel,
@@ -52,13 +52,13 @@ export async function POST({ request }) {
 			customer_email: email,
 			metadata: {
 				type: 'reservation',
-				therapyType,
+				therapyName: therapyName,
 				preferredDates: JSON.stringify(preferredDates),
 				nameAndSurname,
 				tel,
 				email,
 				message: message ?? ''
-			}
+			} satisfies ReservationCheckoutMetadata
 		});
 
 		return json({

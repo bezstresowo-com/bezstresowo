@@ -62,7 +62,7 @@ export const createEmptyPreferredDate = (): PreferredDate => ({
 });
 
 export interface FormValue {
-	therapyType: string;
+	therapyProductId: string;
 	preferredDates: PreferredDate[];
 	nameAndSurname: string;
 	tel: string;
@@ -71,7 +71,7 @@ export interface FormValue {
 }
 
 export const FORM_INITIAL_VALUE: FormValue = {
-	therapyType: '',
+	therapyProductId: '',
 	preferredDates: [createEmptyPreferredDate()],
 	nameAndSurname: '',
 	tel: '',
@@ -80,7 +80,7 @@ export const FORM_INITIAL_VALUE: FormValue = {
 };
 
 export const FIELD_MAP: Record<string, keyof FormValue> = {
-	therapyType: 'therapyType',
+	therapyProductId: 'therapyProductId',
 	preferredDates: 'preferredDates',
 	nameAndSurname: 'nameAndSurname',
 	tel: 'tel',

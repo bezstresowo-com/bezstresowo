@@ -51,8 +51,7 @@ export async function updateBlogPost(id: string, data: PutBlogArticleRequestDto)
 			await fetch(resolve('/api/admin/blog/[id]', { id }), {
 				method: HttpMethod.PUT,
 				headers: {
-					...getBaseHeaders(),
-					'Content-Type': 'application/json'
+					...getBaseHeaders()
 				},
 				body: JSON.stringify(data)
 			})
@@ -65,8 +64,7 @@ export async function createBlogPost(data: PostBlogArticleRequestDto) {
 			await fetch(resolve('/api/admin/blog'), {
 				method: HttpMethod.POST,
 				headers: {
-					...getBaseHeaders(),
-					'Content-Type': 'application/json'
+					...getBaseHeaders()
 				},
 				body: JSON.stringify(data)
 			})

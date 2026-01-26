@@ -24,16 +24,17 @@
 		LOADED,
 		type LoadableState
 	} from '$shared/global/types/store';
+	import { resolve } from '$app/paths';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
 
-	let therapyTypesData = $state<LoadableState<ReservationProduct[]>>({
+	let reservationProductsData = $state<LoadableState<ReservationProduct[]>>({
 		...DEFAULT_LOADABLE_STATE,
 		isLoading: true
 	});
 
-	let therapyTypes = $derived(therapyTypesData.data ?? []);
+	let reservationProducts = $derived(reservationProductsData.data ?? []);
 
 	const {
 		form,
@@ -52,7 +53,7 @@
 			generalError = null;
 
 			try {
-				const selectedProduct = therapyTypes.find((t) => t.id === values.therapyType);
+				const selectedProduct = reservationProducts.find((t) => t.id === values.therapyProductId);
 				if (!selectedProduct?.defaultPrice) {
 					toast.error($translate(`${prefix}.toast.noPriceAvailable`));
 					return;
@@ -62,14 +63,14 @@
 
 				const checkoutResult = await createReservationCheckout({
 					priceId: selectedProduct.defaultPrice.id,
-					therapyType: values.therapyType,
+					therapyName: reservationProducts.find(({ id }) => id === values.therapyProductId)!.name,
 					preferredDates: values.preferredDates,
 					nameAndSurname: values.nameAndSurname,
 					tel: values.tel,
 					email: values.email,
 					message: values.message || undefined,
-					successUrl: `${baseUrl}/reservation-success`,
-					cancelUrl: `${baseUrl}/reservation-cancel`
+					successUrl: `${baseUrl}${resolve(`/(user)/(payments)/(reservation)/reservation-success`)}`,
+					cancelUrl: `${baseUrl}${resolve(`/(user)/(payments)/(reservation)/reservation-cancel`)}`
 				});
 
 				switch (checkoutResult.status) {
@@ -84,7 +85,8 @@
 					}
 
 					case 'validationError': {
-						const serverErrors = (checkoutResult.data as unknown as BackendErrorResponse)?.errors ?? [];
+						const serverErrors =
+							(checkoutResult.data as unknown as BackendErrorResponse)?.errors ?? [];
 						if (serverErrors.length) {
 							for (const { field, messages } of serverErrors) {
 								const key = FIELD_MAP[field] ?? (field as keyof FormValue);
@@ -139,11 +141,11 @@
 	}
 
 	let isSubmitDisabled = $derived(() => {
-		return isLoading || !$isValid || therapyTypesData.isLoading;
+		return isLoading || !$isValid || reservationProductsData.isLoading;
 	});
 
 	function handleTherapyTypeChange(value: string) {
-		updateValidateField('therapyType', value);
+		updateValidateField('therapyProductId', value);
 	}
 
 	async function loadTherapyTypes() {
@@ -151,22 +153,22 @@
 
 		switch (fetchResult.status) {
 			case 'ok':
-				therapyTypesData = {
+				reservationProductsData = {
 					...LOADED,
 					data: fetchResult.data.data
 				};
 				break;
 
 			case 'error':
-				therapyTypesData = {
-					...therapyTypesData,
+				reservationProductsData = {
+					...reservationProductsData,
 					...ERRORED(fetchResult.data.message)
 				};
 				break;
 
 			default:
-				therapyTypesData = {
-					...therapyTypesData,
+				reservationProductsData = {
+					...reservationProductsData,
 					...ERRORED(fetchResult.error)
 				};
 				break;
@@ -188,20 +190,20 @@
 		</div>
 	</div>
 
-	<form onsubmit={handleSubmit} class="mt-10 mb-10 p-6 sm:mt-20 sm:pr-80 sm:pl-80">
+	<form onsubmit={handleSubmit} class="mx-auto mt-10 mb-10 max-w-160 p-6 sm:mt-20">
 		<div class="space-y-5">
 			<!-- Typ terapii -->
 			<div>
 				<label for="therapyType" class="mb-1 block text-sm font-medium text-primary">
 					{$translate(`${prefix}.therapyType.label`)}
 				</label>
-				{#if therapyTypesData.isLoading}
+				{#if reservationProductsData.isLoading}
 					<div
 						class="flex h-12 items-center justify-center rounded-lg border border-primary/30 bg-white"
 					>
 						<LoadingSpinner size="sm" />
 					</div>
-				{:else if therapyTypesData.error}
+				{:else if reservationProductsData.error}
 					<div
 						class="flex h-12 items-center rounded-lg border border-danger/30 bg-white px-4 text-danger"
 					>
@@ -211,26 +213,31 @@
 					<select
 						id="therapyType"
 						name="therapyType"
-						bind:value={$form.therapyType}
+						bind:value={$form.therapyProductId}
 						onchange={(e) => handleTherapyTypeChange(e.currentTarget.value)}
 						onblur={handleChange}
 						class="h-12 w-full rounded-lg border border-primary/30 bg-white px-4 text-primary transition outline-none focus:border-primary"
 					>
-						<option value="" disabled>{$translate(`${prefix}.therapyType.placeholder`)}</option>
-						{#each therapyTypes as therapyType (therapyType.id)}
-							<option value={therapyType.id}
-								>{therapyType.name}
-								{therapyType.defaultPrice?.unit_amount
-									? therapyType.defaultPrice.unit_amount / 100 +
+						<option value="" disabled>
+							{$translate(`${prefix}.therapyType.placeholder`)}
+						</option>
+
+						{#each reservationProducts as reservationProduct (reservationProduct.id)}
+							<option value={reservationProduct.id}
+								>{reservationProduct.name}
+								{reservationProduct.defaultPrice?.unit_amount
+									? reservationProduct.defaultPrice.unit_amount / 100 +
 										' ' +
-										therapyType.defaultPrice.currency.toUpperCase()
+										reservationProduct.defaultPrice.currency.toUpperCase()
 									: 'N/A'}</option
 							>
 						{/each}
 					</select>
 				{/if}
-				{#if $errors.therapyType}
-					<small class="mt-1 block text-sm text-danger">{$translate($errors.therapyType)}</small>
+				{#if $errors.therapyProductId}
+					<small class="mt-1 block text-sm text-danger"
+						>{$translate($errors.therapyProductId)}</small
+					>
 				{/if}
 			</div>
 
@@ -432,5 +439,6 @@
 			</Button>
 		</div>
 	</form>
+
 	<Toaster />
 </div>

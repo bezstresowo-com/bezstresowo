@@ -1,8 +1,8 @@
-import type { ReservationProduct } from '$api/stripe/reservation-products/model';
 import type {
 	ReservationCheckoutRequestDto,
 	ReservationCheckoutResponseDto
-} from '$api/stripe/reservation-checkout/model';
+} from '$api/stripe/(reservation)/reservation-checkout/model';
+import type { ReservationProduct } from '$api/stripe/(reservation)/reservation-products/model';
 import { resolve } from '$app/paths';
 import { HttpMethod } from '$shared/global/enums/http-method';
 import { baseFetch } from '$shared/global/functions/base-fetch';
@@ -26,8 +26,7 @@ export async function createReservationCheckout(data: ReservationCheckoutRequest
 			await fetch(`${resolve('/api/stripe/reservation-checkout')}`, {
 				method: HttpMethod.POST,
 				headers: {
-					...getBaseHeaders(),
-					'Content-Type': 'application/json'
+					...getBaseHeaders()
 				},
 				body: JSON.stringify(data)
 			})

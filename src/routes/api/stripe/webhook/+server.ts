@@ -1,7 +1,10 @@
 import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { EmailService } from '$shared/server/services/email/email-service';
+import type { ReservationRequestArgs } from '$shared/server/services/email/model.js';
 import { json, text } from '@sveltejs/kit';
+import { isNil } from 'lodash-es';
 import Stripe from 'stripe';
+import type { StripeSessionMetadata } from './model';
 
 export async function POST({ request }) {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -26,20 +29,28 @@ export async function POST({ request }) {
 
 	if (event.type === 'checkout.session.completed') {
 		const session = event.data.object as Stripe.Checkout.Session;
-		const metadata = session.metadata;
+		const metadata = session.metadata as StripeSessionMetadata;
 
-		if (metadata?.type === 'reservation') {
+		if (!isNil(metadata)) {
 			try {
-				const preferredDates = JSON.parse(metadata.preferredDates || '[]');
+				switch (metadata.type) {
+					case 'reservation': {
+						const parsedMetadata = {
+							...metadata,
+							preferredDates: JSON.parse(metadata.preferredDates || '[]')
+						} as ReservationRequestArgs;
 
-				await new EmailService().reservationRequest({
-					email: metadata.email || '',
-					message: metadata.message || '',
-					nameAndSurname: metadata.nameAndSurname || '',
-					tel: metadata.tel || '',
-					therapyType: metadata.therapyType || '',
-					preferredDates
-				});
+						await new EmailService().reservationRequest({
+							email: parsedMetadata.email || '',
+							message: parsedMetadata.message || '',
+							nameAndSurname: parsedMetadata.nameAndSurname || '',
+							tel: parsedMetadata.tel || '',
+							therapyName: parsedMetadata.therapyName || '',
+							preferredDates: parsedMetadata.preferredDates
+						});
+						break;
+					}
+				}
 			} catch (error) {
 				console.error('Error processing reservation webhook:', error);
 			}
