@@ -11,5 +11,6 @@ export { default as HeroSection } from './HeroSection/HeroSection.svelte';
 export { default as HowCanIHelpSection } from './HowCanIHelpSection/HowCanIHelpSection.svelte';
 export { default as LanguageSelect } from './LanguageSelect/LanguageSelect.svelte';
 export { default as LoadingSpinner } from './LoadingSpinner/LoadingSpinner.svelte';
+export { default as PaymentResultPage } from './PaymentResultPage/PaymentResultPage.svelte';
 export { default as ServicesSection } from './ServicesSection/ServicesSection.svelte';
 export { default as TipTap } from './TipTap/TipTap.svelte';

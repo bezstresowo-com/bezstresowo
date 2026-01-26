@@ -1,20 +1,20 @@
 import { validators } from '$shared/server/validators';
+import { Type } from 'class-transformer';
 
 const {
-	ArrayMaxSize,
-	ArrayMinSize,
-	IsArray,
 	IsDefined,
-	IsEmail,
-	IsNotEmpty,
-	IsOptional,
-	IsPhoneNumber,
 	IsString,
+	IsArray,
+	ArrayMinSize,
+	ArrayMaxSize,
+	ValidateNested,
+	IsOptional,
 	MaxLength,
+	IsEmail,
+	IsPhoneNumber,
 	MinLength,
-	ValidateNested
+	IsNotEmpty
 } = validators;
-import { Type } from 'class-transformer';
 
 export class PreferredDateDto {
 	@IsDefined()
@@ -30,11 +30,15 @@ export class PreferredDateDto {
 	timeTo: string;
 }
 
-export class ReservationsRequestDto {
+export class ReservationCheckoutRequestDto {
+	@IsDefined()
+	@IsString()
+	priceId: string;
+
 	@IsDefined()
 	@IsString()
 	@IsNotEmpty()
-	therapyType: string;
+	therapyName: string;
 
 	@IsDefined()
 	@IsArray()
@@ -63,4 +67,27 @@ export class ReservationsRequestDto {
 	@IsString()
 	@MaxLength(500)
 	message?: string;
+
+	@IsDefined()
+	@IsString()
+	successUrl: string;
+
+	@IsDefined()
+	@IsString()
+	cancelUrl: string;
+}
+
+export interface ReservationCheckoutResponseDto {
+	sessionId: string;
+	url: string | null;
+}
+
+export interface ReservationCheckoutMetadata {
+	type: 'reservation';
+	email: string;
+	nameAndSurname: string;
+	tel: string;
+	therapyName: string;
+	preferredDates: string;
+	message: string;
 }

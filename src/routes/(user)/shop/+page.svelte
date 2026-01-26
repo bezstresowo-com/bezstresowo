@@ -8,10 +8,11 @@
 		LOADED,
 		type LoadableState
 	} from '$shared/global/types/store';
-	import type { ProductWithDefaultPrice } from '$api/stripe/products/model';
+	import type { ProductWithDefaultPrice } from '$api/stripe/shop-products/model';
 	import { translate } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import toast, { Toaster } from 'svelte-5-french-toast';
+	import { asset, resolve } from '$app/paths';
 
 	// @TODO:
 	// - defaultowe zdjecie produktu w przypadku braku zdjęcia
@@ -50,8 +51,8 @@
 			const checkoutResult = await createCheckoutSession({
 				priceId: product.defaultPrice.id,
 				quantity: 1,
-				successUrl: `${baseUrl}/payment-success`,
-				cancelUrl: `${baseUrl}/payment-cancel`
+				successUrl: `${baseUrl}${resolve('/(user)/(payments)/(shop)/shop-success')}`,
+				cancelUrl: `${baseUrl}${resolve('/(user)/(payments)/(shop)/shop-cancel')}`
 			});
 
 			switch (checkoutResult.status) {
@@ -145,9 +146,9 @@
 					<!-- Product details -->
 					<div class="flex-grow border-b-1 border-black/30 pb-6">
 						<img
-							src={product.images[0]}
+							src={product?.images?.[0] ?? asset('/assets/shop-image-placeholder.svg')}
 							alt={product.name}
-							class="mb-4 h-48 w-full rounded-xl object-cover"
+							class={`mb-4 h-48 w-full rounded-xl ${product?.images?.[0] ? 'object-cover' : ''}`}
 						/>
 						<h2 class="mb-2 text-2xl">{product.name}</h2>
 
