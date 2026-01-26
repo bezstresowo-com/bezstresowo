@@ -46,8 +46,6 @@ export class EmailService {
 				.join('<br>')
 		};
 
-		console.log(JSON.stringify({ args, formattedArgs }));
-
 		// Send to owner
 		await this._send(
 			EMAIL_SENDER,
