@@ -31,24 +31,23 @@ export const FAST_LINKS = [
 	}
 ];
 
-// TODO: make right
 export const FOLLOW_ME_LINKS = [
 	{
 		id: 'facebook',
 		label: 'facebook',
 		icon: 'fa-brands fa-facebook-f',
-		href: 'facebook.com'
+		href: 'https://www.facebook.com/profile.php?id=100088923916892'
 	},
 	{
 		id: 'instagram',
 		label: 'instagram',
 		icon: 'fa-brands fa-instagram',
-		href: 'instagram.com'
+		href: 'https://www.instagram.com/_bezstresovo_psychology'
 	},
 	{
-		id: 'linkedin',
-		label: 'linkedin',
+		id: 'telegram',
+		label: 'telegram',
 		icon: 'fa-brands fa-telegram',
-		href: 'linkedin.com'
+		href: 'https://t.me/Olesya_Haiduk'
 	}
 ];

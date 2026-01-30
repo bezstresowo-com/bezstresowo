@@ -9,6 +9,7 @@
 		{#each FOLLOW_ME_LINKS as { icon, label, href } (href)}
 			<a
 				{href}
+				target="_blank"
 				aria-label={label}
 				class="flex size-8 items-center justify-center rounded-full bg-accent transition hover:bg-accent/80"
 			>
