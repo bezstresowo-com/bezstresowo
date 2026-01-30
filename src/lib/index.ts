@@ -6,7 +6,6 @@ export { default as Blog } from './Blog/Blog.svelte';
 export { default as Button } from './Button/Button.svelte';
 export { default as CertificatesSection } from './CertificatesSection/CertificatesSection.svelte';
 export { default as ContactForm } from './ContactForm/ContactForm.svelte';
-export { default as CustomerReviewsSection } from './CustomerReviewsSection/CustomerReviewsSection.svelte';
 export { default as HeroSection } from './HeroSection/HeroSection.svelte';
 export { default as HowCanIHelpSection } from './HowCanIHelpSection/HowCanIHelpSection.svelte';
 export { default as LanguageSelect } from './LanguageSelect/LanguageSelect.svelte';

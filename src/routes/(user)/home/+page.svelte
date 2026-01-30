@@ -3,7 +3,6 @@
 		HeroSection,
 		HowCanIHelpSection,
 		AboutMeSection,
-		CustomerReviewsSection,
 		ServicesSection,
 		ContactForm,
 		Blog,
@@ -15,7 +14,6 @@
 <HowCanIHelpSection />
 <AboutMeSection />
 <CertificatesSection />
-<CustomerReviewsSection />
 <ServicesSection />
 <ContactForm />
 <Blog />

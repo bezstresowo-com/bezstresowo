@@ -41,9 +41,12 @@ export class EmailService {
 
 		const formattedArgs = {
 			...args,
-			preferredDates: args.preferredDates
-				.map((d, i) => `${i + 1}. ${d.date} (${d.timeFrom} - ${d.timeTo})`)
-				.join('<br>')
+			preferredDates:
+				args.preferredDates.length > 0
+					? args.preferredDates
+							.map((d, i) => `${i + 1}. ${d.date} (${d.timeFrom} - ${d.timeTo})`)
+							.join('<br>')
+					: 'Brak'
 		};
 
 		// Send to owner

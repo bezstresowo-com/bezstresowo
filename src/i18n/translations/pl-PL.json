@@ -41,16 +41,7 @@
 					]
 				},
 				"certificates": {
-					"title": "Certyfikaty i kwalifikacje",
-					"transactionalAnalyst": "Certyfikowany Psychoterapeuta Analizy Transakcyjnej",
-					"couplesTherapist": "Terapeuta Par i Małżeństw",
-					"supervisor": "Superwizor praktyk psychoterapeutycznych"
-				},
-				"customerReviews": {
-					"title": "Opinie klientów",
-					"review1": "\"Dzięki terapii udało nam się odbudować nasze małżeństwo. Polecam z całego serca!\"",
-					"review2": "\"Profesjonalne podejście i ogromne wsparcie. Po raz pierwszy czuję się zrozumiany.\"",
-					"review3": "\"Terapia pomogła mi zrozumieć moje emocje i nauczyć się lepiej komunikować\""
+					"title": "Certyfikaty i kwalifikacje"
 				},
 				"offeredServices": {
 					"title": "Dostępne usługi",
@@ -58,11 +49,79 @@
 					"services": {
 						"couplesTherapy": {
 							"title": "Terapia dla par i małżeństw",
-							"description": "Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze."
+							"description": "Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.",
+							"extended": {
+								"section0": {
+									"title": "Czym jest terapia dla par?",
+									"paragraph0": "To przestrzeń, w której partnerzy mogą w bezpieczny sposób przyjrzeć się swojemu związkowi. Niezależnie od tego, czy jesteście małżeństwem, parą z wieloletnim stażem, czy dopiero zaczynacie wspólną drogę - jeśli pojawiają się trudności, terapia może pomóc odzyskać bliskość i zrozumienie. Spotkania pozwalają odkryć przyczyny konfliktów, odbudować zaufanie i znaleźć nowe sposoby komunikacji."
+								},
+								"section1": {
+									"title": "Dla kogo?",
+									"paragraph0": "Terapia par będzie pomocna, jeśli:",
+									"list0": [
+										"często dochodzi między Wami do kłótni, nieporozumień czy emocjonalnego dystansu,",
+										"czujesz się w relacji samotny/a lub nierozumiany/a,",
+										"przechodzicie przez kryzys - związany np. ze zdradą, problemami seksualnymi, trudnościami wychowawczymi, chorobą czy stratą,",
+										"chcecie poprawić jakość związku, zanim problemy się pogłębią,",
+										"stoicie na rozdrożu i zastanawiacie się nad przyszłością Waszej relacji."
+									]
+								},
+								"section2": {
+									"title": "Jak wygląda proces terapii?",
+									"list0": [
+										"Sesje odbywają się wspólnie - oboje partnerzy spotykają się z terapeutą.",
+										"Pierwsze spotkania służą poznaniu historii Waszego związku i ustaleniu tego, nad czym chcecie pracować.",
+										"W trakcie terapii uczycie się otwartej komunikacji, wyrażania emocji i rozwiązywania konfliktów w konstruktywny sposób.",
+										"Terapeuta nie staje po żadnej stronie - tworzy neutralną i bezpieczną przestrzeń, w której oboje możecie się wypowiedzieć i zostać usłyszani."
+									]
+								},
+								"section3": {
+									"title": "Cele terapii:",
+									"list0": [
+										"lepsze zrozumienie siebie nawzajem i poprawa komunikacji,",
+										"odbudowanie bliskości i zaufania,",
+										"nauczenie się rozwiązywania konfliktów w zdrowy sposób,",
+										"wzmocnienie więzi partnerskiej i emocjonalnej,",
+										"podjęcie świadomej decyzji o przyszłości związku."
+									]
+								}
+							}
 						},
 						"transactionalTherapy": {
 							"title": "Psychoterapia w nurcie analizy transakcyjnej",
-							"description": "Indywidualna praca terapeutyczna skupiona na zrozumieniu wzorców zachowań, budowaniu samoświadomości i osiąganiu trwałych zmian w życiu."
+							"description": "Indywidualna praca terapeutyczna skupiona na zrozumieniu wzorców zachowań, budowaniu samoświadomości i osiąganiu trwałych zmian w życiu.",
+							"extended": {
+								"section0": {
+									"title": "Czym jest analiza transakcyjna?",
+									"paragraph0": "Analiza transakcyjna (AT) to kierunek psychoterapii, który pozwala lepiej zrozumieć siebie i swoje relacje z innymi. Zakłada, że w każdym z nas działają trzy różne stany ego: <i>Dziecko, Dorosły i Rodzic</i>. To właśnie one wpływają na nasze emocje, sposób myślenia oraz komunikację z otoczeniem."
+								},
+								"section1": {
+									"title": "Jak wygląda praca podczas terapii?",
+									"paragraph0": "W procesie spotkań:",
+									"list0": [
+										"<b>Poznasz swoje stany ego</b> - nauczysz się rozpoznawać, z jakiego miejsca reagujesz w różnych sytuacjach i jak wpływa to na Twoje zachowanie.",
+										"<b>Przyjrzysz się swoim interakcjom</b> - będziemy analizować Twoją komunikację z innymi, aby dostrzec niekorzystne schematy i zastąpić je zdrowszymi.",
+										"<b>Zrozumiesz wpływ przeszłości</b> - odkryjesz, w jaki sposób doświadczenia z dzieciństwa oddziałują na Twoje obecne życie i relacje.",
+										"<b>Określisz własne cele</b> - wspólnie ustalimy, nad czym chcesz pracować, aby terapia była dla Ciebie jak najbardziej wartościowa."
+									]
+								},
+								"section2": {
+									"title": "Dla kogo jest analiza transakcyjna?",
+									"paragraph0": "Ta forma psychoterapii jest pomocna dla osób, które chcą:",
+									"list0": [
+										"uporządkować relację z jedzeniem i swoim ciałem,",
+										"lepiej radzić sobie z lękiem i wyzwalającymi go schematami,",
+										"budować zdrowsze i bliższe więzi z innymi,",
+										"uwolnić się od negatywnych wzorców myślenia,",
+										"rozwijać swoje umiejętności w kontaktach z ludźmi,",
+										"pogłębiać samoświadomość i rozumienie własnych emocji."
+									]
+								},
+								"section3": {
+									"title": "Dlaczego warto?",
+									"paragraph0": "Analiza transakcyjna to praktyczne narzędzie, które daje szansę na prawdziwą zmianę. Pomaga nie tylko lepiej zrozumieć siebie i swoje reakcje, ale też tworzyć bardziej satysfakcjonujące relacje. Dzięki niej możliwe jest stopniowe wprowadzanie głębokich i trwałych zmian w życiu."
+								}
+							}
 						}
 					}
 				},
@@ -98,6 +157,155 @@
 			"blog": {
 				"title": "Blog"
 			},
+			"gdpr": {
+				"title": "Klauzula informacyjna RODO",
+				"subtitle": "Centrum Psychoterapii Bezstresowo - Olesya Haiduk",
+				"description": "Informacje dotyczące przetwarzania danych osobowych",
+				"sections": {
+					"controller": {
+						"title": "1. Administratorem danych osobowych jest Centrum Psychoterapii Bezstresowo – Olesya Haiduk."
+					},
+					"purpose": {
+						"title": "2. Dane osobowe przetwarzane są w celu:",
+						"items": [
+							"realizacji usług psychoterapeutycznych,",
+							"kontaktu organizacyjnego,",
+							"realizacji obowiązków księgowych i prawnych."
+						]
+					},
+					"legal": {
+						"title": "3. Podstawą przetwarzania danych jest zgoda Klienta, wykonanie umowy oraz obowiązek prawny Administratora."
+					},
+					"recipients": {
+						"title": "4. Dane nie są przekazywane osobom trzecim, z wyjątkiem podmiotów uprawnionych na mocy prawa."
+					},
+					"rights": {
+						"title": "5. Klient ma prawo dostępu do danych, ich poprawiania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz cofnięcia zgody."
+					},
+					"complaint": {
+						"title": "6. Klient ma prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych."
+					}
+				},
+				"download": {
+					"title": "Pobierz pełną klauzulę",
+					"description": "Możesz pobrać pełną klauzulę informacyjną RODO w formacie PDF.",
+					"languageNote": "Dokument PDF dostępny jest w języku polskim.",
+					"button": "Pobierz PDF"
+				}
+			},
+			"termsOfService": {
+				"title": "Regulamin świadczenia usług psychoterapeutycznych",
+				"subtitle": "Centrum Psychoterapii Bezstresowo - Olesya Haiduk",
+				"description": "Regulamin określający zasady świadczenia usług psychoterapeutycznych",
+				"sections": {
+					"general": {
+						"title": "§1 Postanowienia ogólne",
+						"items": [
+							"Niniejszy Regulamin określa zasady świadczenia usług psychoterapeutycznych przez Centrum Psychoterapii Bezstresowo - Olesya Haiduk, zwane dalej \"Terapeutą\".",
+							"Klientem jest osoba korzystająca z usług psychoterapeutycznych, zwana dalej \"Klientem\".",
+							"Skorzystanie z usług oznacza akceptację niniejszego Regulaminu."
+						]
+					},
+					"scope": {
+						"title": "§2 Zakres świadczonych usług",
+						"intro": "Usługi świadczone są przez psychoterapeutkę pracującą w nurcie Analizy Transakcyjnej w trakcie szkolenia, pracującą zgodnie ze standardami etycznymi oraz pod stałą opieką superwizorów. Spotkania odbywają się w formie stacjonarnej lub online.",
+						"servicesTitle": "Usługi świadczone przez Centrum obejmują:",
+						"services": [
+							"psychoterapię zaburzeń odżywiania;",
+							"psychoterapię dla kobiet, przebywających w trudnych relacjach;",
+							"psychoterapię traumy;",
+							"psychoterapię depresji oraz zaburzeń lękowych;",
+							"psychoterapię dla osób DDA;",
+							"psychoterapię par."
+						],
+						"notProvidedTitle": "Centrum NIE PROWADZI:",
+						"notProvided": [
+							"psychoterapii zaburzeń psychotycznych (w tym schizofrenii);",
+							"psychoterapii uzależnień;",
+							"psychoterapii rodzin."
+						]
+					},
+					"nature": {
+						"title": "§3 Charakter usług psychoterapeutycznych",
+						"items": [
+							"Psychoterapia jest procesem wsparcia psychicznego, pracy nad trudnościami emocjonalnymi, relacyjnymi oraz skutkami doświadczeń traumatycznych.",
+							"Usługi świadczone przez Terapeutę nie są usługami medycznymi i nie zastępują leczenia psychiatrycznego ani farmakoterapii.",
+							"Terapeuta nie wystawia recept, zwolnień lekarskich, zaświadczeń ani opinii sądowych.",
+							"Psychoterapia nie daje gwarancji osiągnięcia konkretnych rezultatów - jej efekty są indywidualne."
+						]
+					},
+					"trauma": {
+						"title": "§4 Terapia traumy i bezpieczeństwo Klienta",
+						"items": [
+							"Klient ma świadomość, że proces psychoterapii, szczególnie w obszarze traumatycznego doświadczenia, może wiązać się z przeżywaniem silnych emocji, okresowym pogorszeniem samopoczucia lub pojawieniem się trudnych wspomnień.",
+							"W sytuacjach zagrożenia Klient zobowiązany jest do niezwłocznego kontaktu z numerami alarmowymi (112) lub placówkami medycznymi.",
+							"Terapeuta może rekomendować konsultację psychiatryczną lub inną formę specjalistycznej pomocy."
+						]
+					},
+					"cooperation": {
+						"title": "§5 Zasady współpracy terapeutycznej",
+						"items": [
+							"Psychoterapia opiera się na dobrowolności, poufności, wzajemnym szacunku i jasno określonych granicach.",
+							"Klient zobowiązuje się do aktywnego udziału w procesie terapeutycznym oraz do szczerej komunikacji.",
+							"Relacja terapeutyczna ma charakter wyłącznie profesjonalny: poza sesjami nie są nawiązywane relacje prywatne ani towarzyskie.",
+							"Kontakt z Terapeutą odbywa się wyłącznie w ustalonych formach i godzinach."
+						]
+					},
+					"appointments": {
+						"title": "§6 Umawianie i odwoływanie wizyt",
+						"items": [
+							"Terminy sesji ustalane są indywidualnie.",
+							"Klient zobowiązany jest do odwołania wizyty najpóźniej 24 godziny przed planowanym terminem.",
+							"W przypadku nieodwołania wizyty lub odwołania jej po tym czasie, Terapeuta ma prawo pobrać opłatę w pełnej wysokości.",
+							"Spóźnienie Klienta nie skutkuje przedłużeniem sesji."
+						]
+					},
+					"fees": {
+						"title": "§7 Opłaty",
+						"items": [
+							"Aktualny cennik usług dostępny jest na stronie internetowej lub przekazywany Klientowi przed rozpoczęciem współpracy.",
+							"Opłata za sesję dokonywana jest w ustalonej formie.",
+							"Terapeuta zastrzega sobie prawo do zmiany cen, informując o tym Klienta z wyprzedzeniem."
+						]
+					},
+					"online": {
+						"title": "§8 Sesje online",
+						"items": [
+							"Sesje online odbywają się za pośrednictwem ustalonej platformy komunikacyjnej.",
+							"Klient zobowiązany jest do zapewnienia sobie prywatnych, bezpiecznych warunków do rozmowy oraz stabilnego połączenia internetowego.",
+							"Terapeuta nie ponosi odpowiedzialności za problemy techniczne po stronie Klienta."
+						]
+					},
+					"confidentiality": {
+						"title": "§9 Poufność i tajemnica zawodowa",
+						"items": [
+							"Wszystkie informacje przekazywane przez Klienta objęte są tajemnicą zawodową.",
+							"Tajemnica może zostać naruszona wyłącznie w przypadkach przewidzianych przepisami prawa (np. zagrożenie życia)."
+						]
+					},
+					"liability": {
+						"title": "§10 Odpowiedzialność",
+						"items": [
+							"Terapeuta nie ponosi odpowiedzialności za decyzje podejmowane przez Klienta poza procesem terapeutycznym.",
+							"Psychoterapia nie jest formą doradztwa prawnego, finansowego ani medycznego."
+						]
+					},
+					"final": {
+						"title": "§11 Postanowienia końcowe",
+						"items": [
+							"Regulamin może ulec zmianie.",
+							"Aktualna wersja Regulaminu dostępna jest na stronie internetowej Centrum.",
+							"W sprawach nieuregulowanych Regulaminem zastosowanie mają przepisy prawa polskiego."
+						]
+					}
+				},
+				"download": {
+					"title": "Pobierz pełny regulamin",
+					"description": "Możesz pobrać pełny regulamin świadczenia usług psychoterapeutycznych w formacie PDF.",
+					"languageNote": "Dokument PDF dostępny jest w języku polskim.",
+					"button": "Pobierz PDF"
+				}
+			},
 			"reservations": {
 				"title": "Rezerwacja konsultacji",
 				"titleDescription": "Wypełnij formularz, aby zarezerwować termin konsultacji.",
@@ -118,11 +326,13 @@
 				},
 				"preferredDates": {
 					"label": "Preferowane terminy",
-					"hint": "Możesz dodać od 1 do 5 preferowanych terminów z przedziałem godzinowym.",
+					"hint": "Możesz dodać od 0 do 5 preferowanych terminów z przedziałem godzinowym.",
+					"optional": "opcjonalne",
 					"date": "Data",
 					"timeFrom": "Od",
 					"timeTo": "Do",
-					"add": "Dodaj kolejny termin",
+					"add": "Dodaj termin",
+					"addMore": "Dodaj kolejny termin",
 					"remove": "Usuń termin",
 					"errors": {
 						"required": "Przynajmniej jeden termin jest wymagany",

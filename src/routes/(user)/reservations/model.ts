@@ -1,5 +1,5 @@
-import * as yup from 'yup';
 import { isValidPhoneNumber } from 'libphonenumber-js';
+import * as yup from 'yup';
 
 export const prefix = 'user.pages.reservations';
 
@@ -31,7 +31,7 @@ export const SCHEMA = yup.object().shape({
 					)
 			})
 		)
-		.min(1, `${prefix}.preferredDates.errors.min`)
+		.min(0, `${prefix}.preferredDates.errors.min`)
 		.max(5, `${prefix}.preferredDates.errors.max`)
 		.required(`${prefix}.preferredDates.errors.required`),
 	nameAndSurname: yup
@@ -70,7 +70,7 @@ export interface FormValue {
 
 export const FORM_INITIAL_VALUE: FormValue = {
 	therapyProductId: '',
-	preferredDates: [createEmptyPreferredDate()],
+	preferredDates: [],
 	nameAndSurname: '',
 	tel: '',
 	email: '',

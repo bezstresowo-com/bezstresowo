@@ -25,14 +25,12 @@ export const FAST_LINKS = [
 	{
 		id: 'statute',
 		label: 'user.footer.fastLinks.termsOfService',
-		href: asset('/documents/Regulamin - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'),
-		download: true
+		href: '/terms-of-service'
 	},
 	{
 		id: 'gdpr',
 		label: 'user.footer.fastLinks.gdpr',
-		href: asset('/documents/Klauzula RODO - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'),
-		download: true
+		href: '/gdpr'
 	},
 	{
 		id: 'price-list',
@@ -59,7 +57,7 @@ export const FOLLOW_ME_LINKS = [
 	{
 		id: 'linkedin',
 		label: 'linkedin',
-		icon: 'fa-brands fa-linkedin-in',
+		icon: 'fa-brands fa-telegram',
 		href: 'linkedin.com'
 	}
 ];

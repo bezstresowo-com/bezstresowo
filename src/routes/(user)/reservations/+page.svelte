@@ -123,12 +123,10 @@
 	}
 
 	function removePreferredDate(index: number) {
-		if ($form.preferredDates.length > 1) {
-			form.update((f) => ({
-				...f,
-				preferredDates: f.preferredDates.filter((_, i) => i !== index)
-			}));
-		}
+		form.update((f) => ({
+			...f,
+			preferredDates: f.preferredDates.filter((_, i) => i !== index)
+		}));
 	}
 
 	function updatePreferredDate(index: number, field: keyof PreferredDate, value: string) {
@@ -245,6 +243,9 @@
 			<fieldset>
 				<legend class="mb-1 block text-sm font-medium text-primary">
 					{$translate(`${prefix}.preferredDates.label`)}
+					<span class="text-xs text-primary/50"
+						>({$translate(`${prefix}.preferredDates.optional`)})</span
+					>
 				</legend>
 				<p class="mb-3 text-xs text-primary/60">
 					{$translate(`${prefix}.preferredDates.hint`)}
@@ -305,17 +306,16 @@
 								>
 							{/if}
 						</div>
-						{#if $form.preferredDates.length > 1}
-							<button
-								type="button"
-								onclick={() => removePreferredDate(index)}
-								class="h-10 self-end rounded-lg px-3 text-danger transition hover:bg-red-50"
-								title={$translate(`${prefix}.preferredDates.remove`)}
-								aria-label={$translate(`${prefix}.preferredDates.remove`)}
-							>
-								<i class="fa-solid fa-trash"></i>
-							</button>
-						{/if}
+
+						<button
+							type="button"
+							onclick={() => removePreferredDate(index)}
+							class="h-10 cursor-pointer self-end rounded-lg px-3 text-danger transition hover:bg-red-50"
+							title={$translate(`${prefix}.preferredDates.remove`)}
+							aria-label={$translate(`${prefix}.preferredDates.remove`)}
+						>
+							<i class="fa-solid fa-trash"></i>
+						</button>
 					</div>
 				{/each}
 
@@ -323,10 +323,12 @@
 					<button
 						type="button"
 						onclick={addPreferredDate}
-						class="flex items-center gap-2 text-sm text-primary transition hover:text-primary/80"
+						class="flex cursor-pointer items-center gap-2 text-sm text-primary transition hover:text-primary/80"
 					>
 						<i class="fa-solid fa-plus"></i>
-						{$translate(`${prefix}.preferredDates.add`)}
+						{$form.preferredDates.length === 0
+							? $translate(`${prefix}.preferredDates.add`)
+							: $translate(`${prefix}.preferredDates.addMore`)}
 					</button>
 				{/if}
 

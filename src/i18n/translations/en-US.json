@@ -41,16 +41,7 @@
 					]
 				},
 				"certificates": {
-					"title": "Certificates and Qualifications",
-					"transactionalAnalyst": "Certified Transactional Analysis Psychotherapist",
-					"couplesTherapist": "Couples and Marriage Therapist",
-					"supervisor": "Supervisor of Psychotherapeutic Practice"
-				},
-				"customerReviews": {
-					"title": "Customer Reviews",
-					"review1": "\"Thanks to therapy, we were able to rebuild our marriage. I wholeheartedly recommend it!\"",
-					"review2": "\"Professional approach and tremendous support. For the first time, I feel truly understood.\"",
-					"review3": "\"Therapy helped me understand my emotions and learn to communicate better.\""
+					"title": "Certificates and Qualifications"
 				},
 				"offeredServices": {
 					"title": "Available Services",
@@ -58,11 +49,79 @@
 					"services": {
 						"couplesTherapy": {
 							"title": "Couples and Marriage Therapy",
-							"description": "Support in resolving conflicts, improving communication, and rebuilding connection within the relationship. Sessions are held in a safe and supportive environment."
+							"description": "Support in resolving conflicts, improving communication, and rebuilding connection within the relationship. Sessions are held in a safe and supportive environment.",
+							"extended": {
+								"section0": {
+									"title": "What is couples therapy?",
+									"paragraph0": "It is a space where partners can safely examine their relationship. Whether you are married, in a long-term partnership, or just beginning your journey together — if difficulties arise, therapy can help you regain closeness and understanding. Sessions allow you to discover the causes of conflicts, rebuild trust, and find new ways of communicating."
+								},
+								"section1": {
+									"title": "Who is it for?",
+									"paragraph0": "Couples therapy can be helpful if:",
+									"list0": [
+										"you frequently have arguments, misunderstandings, or emotional distance,",
+										"you feel lonely or misunderstood in the relationship,",
+										"you are going through a crisis — related to infidelity, sexual problems, parenting difficulties, illness, or loss,",
+										"you want to improve the quality of your relationship before problems deepen,",
+										"you are at a crossroads and considering the future of your relationship."
+									]
+								},
+								"section2": {
+									"title": "What does the therapy process look like?",
+									"list0": [
+										"Sessions are held together — both partners meet with the therapist.",
+										"The first meetings are for learning about your relationship history and determining what you want to work on.",
+										"During therapy, you learn open communication, expressing emotions, and resolving conflicts constructively.",
+										"The therapist does not take sides — they create a neutral and safe space where both of you can speak and be heard."
+									]
+								},
+								"section3": {
+									"title": "Goals of therapy:",
+									"list0": [
+										"better understanding of each other and improved communication,",
+										"rebuilding closeness and trust,",
+										"learning to resolve conflicts in a healthy way,",
+										"strengthening the partnership and emotional bond,",
+										"making a conscious decision about the future of the relationship."
+									]
+								}
+							}
 						},
 						"transactionalTherapy": {
 							"title": "Psychotherapy in the Transactional Analysis Approach",
-							"description": "Individual therapeutic work focused on understanding behavioral patterns, developing self-awareness, and achieving lasting positive changes in life."
+							"description": "Individual therapeutic work focused on understanding behavioral patterns, developing self-awareness, and achieving lasting positive changes in life.",
+							"extended": {
+								"section0": {
+									"title": "What is transactional analysis?",
+									"paragraph0": "Transactional analysis (TA) is an approach to psychotherapy that helps you better understand yourself and your relationships with others. It assumes that each of us operates from three different ego states: <i>Child, Adult, and Parent</i>. These influence our emotions, way of thinking, and communication with others."
+								},
+								"section1": {
+									"title": "What does the work in therapy look like?",
+									"paragraph0": "During sessions:",
+									"list0": [
+										"<b>You will get to know your ego states</b> — you will learn to recognize which place you react from in different situations and how this affects your behavior.",
+										"<b>You will examine your interactions</b> — we will analyze your communication with others to identify unhealthy patterns and replace them with healthier ones.",
+										"<b>You will understand the influence of the past</b> — you will discover how childhood experiences affect your current life and relationships.",
+										"<b>You will set your own goals</b> — together we will determine what you want to work on so that therapy is as valuable as possible for you."
+									]
+								},
+								"section2": {
+									"title": "Who is transactional analysis for?",
+									"paragraph0": "This form of psychotherapy is helpful for people who want to:",
+									"list0": [
+										"improve their relationship with food and their body,",
+										"better cope with anxiety and the patterns that trigger it,",
+										"build healthier and closer relationships with others,",
+										"free themselves from negative thinking patterns,",
+										"develop their interpersonal skills,",
+										"deepen self-awareness and understanding of their own emotions."
+									]
+								},
+								"section3": {
+									"title": "Why is it worth it?",
+									"paragraph0": "Transactional analysis is a practical tool that offers a chance for real change. It helps not only to better understand yourself and your reactions but also to create more satisfying relationships. It enables the gradual introduction of deep and lasting changes in life."
+								}
+							}
 						}
 					}
 				},
@@ -98,6 +157,155 @@
 			"blog": {
 				"title": "Blog"
 			},
+			"gdpr": {
+				"title": "GDPR Information Clause",
+				"subtitle": "Bezstresowo Psychotherapy Center - Olesya Haiduk",
+				"description": "Personal data processing information",
+				"sections": {
+					"controller": {
+						"title": "1. The data controller is Bezstresowo Psychotherapy Center – Olesya Haiduk."
+					},
+					"purpose": {
+						"title": "2. Personal data is processed for the purpose of:",
+						"items": [
+							"providing psychotherapy services,",
+							"organizational contact,",
+							"fulfilling accounting and legal obligations."
+						]
+					},
+					"legal": {
+						"title": "3. The basis for data processing is the Client's consent, contract performance, and the Controller's legal obligation."
+					},
+					"recipients": {
+						"title": "4. Data is not transferred to third parties, except to entities authorized by law."
+					},
+					"rights": {
+						"title": "5. The Client has the right to access data, correct it, delete it, restrict processing, transfer it, and withdraw consent."
+					},
+					"complaint": {
+						"title": "6. The Client has the right to lodge a complaint with the President of the Personal Data Protection Office."
+					}
+				},
+				"download": {
+					"title": "Download Full Clause",
+					"description": "You can download the full GDPR information clause in PDF format.",
+					"languageNote": "The PDF document is available in Polish.",
+					"button": "Download PDF"
+				}
+			},
+			"termsOfService": {
+				"title": "Terms of Psychotherapy Services",
+				"subtitle": "Bezstresowo Psychotherapy Center - Olesya Haiduk",
+				"description": "Terms and conditions for the provision of psychotherapy services",
+				"sections": {
+					"general": {
+						"title": "§1 General Provisions",
+						"items": [
+							"These Terms define the rules for providing psychotherapy services by Bezstresowo Psychotherapy Center - Olesya Haiduk, hereinafter referred to as the \"Therapist\".",
+							"The Client is a person using psychotherapy services, hereinafter referred to as the \"Client\".",
+							"Using the services means acceptance of these Terms."
+						]
+					},
+					"scope": {
+						"title": "§2 Scope of Services",
+						"intro": "Services are provided by a psychotherapist trained in Transactional Analysis, working in accordance with ethical standards and under the constant supervision of supervisors. Sessions are held in-person or online.",
+						"servicesTitle": "Services provided by the Center include:",
+						"services": [
+							"psychotherapy for eating disorders;",
+							"psychotherapy for women in difficult relationships;",
+							"trauma psychotherapy;",
+							"psychotherapy for depression and anxiety disorders;",
+							"psychotherapy for Adult Children of Dysfunctional Families;",
+							"couples psychotherapy."
+						],
+						"notProvidedTitle": "The Center does NOT provide:",
+						"notProvided": [
+							"psychotherapy for psychotic disorders (including schizophrenia);",
+							"addiction psychotherapy;",
+							"family psychotherapy."
+						]
+					},
+					"nature": {
+						"title": "§3 Nature of Psychotherapy Services",
+						"items": [
+							"Psychotherapy is a process of psychological support, working on emotional and relational difficulties, and the effects of traumatic experiences.",
+							"Services provided by the Therapist are not medical services and do not replace psychiatric treatment or pharmacotherapy.",
+							"The Therapist does not issue prescriptions, sick leaves, certificates, or court opinions.",
+							"Psychotherapy does not guarantee specific results - its effects are individual."
+						]
+					},
+					"trauma": {
+						"title": "§4 Trauma Therapy and Client Safety",
+						"items": [
+							"The Client is aware that the psychotherapy process, especially in the area of traumatic experience, may involve experiencing strong emotions, temporary deterioration of well-being, or the emergence of difficult memories.",
+							"In emergency situations, the Client is obliged to immediately contact emergency numbers (112) or medical facilities.",
+							"The Therapist may recommend psychiatric consultation or another form of specialized help."
+						]
+					},
+					"cooperation": {
+						"title": "§5 Rules of Therapeutic Cooperation",
+						"items": [
+							"Psychotherapy is based on voluntariness, confidentiality, mutual respect, and clearly defined boundaries.",
+							"The Client commits to active participation in the therapeutic process and honest communication.",
+							"The therapeutic relationship is exclusively professional: no private or social relationships are established outside of sessions.",
+							"Contact with the Therapist takes place only in agreed forms and hours."
+						]
+					},
+					"appointments": {
+						"title": "§6 Scheduling and Cancelling Appointments",
+						"items": [
+							"Session dates are arranged individually.",
+							"The Client is required to cancel an appointment at least 24 hours before the scheduled time.",
+							"In case of not cancelling an appointment or cancelling it after this time, the Therapist has the right to charge the full fee.",
+							"Client's lateness does not extend the session."
+						]
+					},
+					"fees": {
+						"title": "§7 Fees",
+						"items": [
+							"The current price list is available on the website or provided to the Client before starting cooperation.",
+							"The session fee is paid in the agreed form.",
+							"The Therapist reserves the right to change prices, informing the Client in advance."
+						]
+					},
+					"online": {
+						"title": "§8 Online Sessions",
+						"items": [
+							"Online sessions are held via an agreed communication platform.",
+							"The Client is obliged to ensure private, safe conditions for the conversation and a stable internet connection.",
+							"The Therapist is not responsible for technical problems on the Client's side."
+						]
+					},
+					"confidentiality": {
+						"title": "§9 Confidentiality and Professional Secrecy",
+						"items": [
+							"All information provided by the Client is covered by professional secrecy.",
+							"Confidentiality may be breached only in cases provided for by law (e.g., threat to life)."
+						]
+					},
+					"liability": {
+						"title": "§10 Liability",
+						"items": [
+							"The Therapist is not responsible for decisions made by the Client outside the therapeutic process.",
+							"Psychotherapy is not a form of legal, financial, or medical advice."
+						]
+					},
+					"final": {
+						"title": "§11 Final Provisions",
+						"items": [
+							"These Terms may be amended.",
+							"The current version of the Terms is available on the Center's website.",
+							"Matters not regulated by these Terms are governed by Polish law."
+						]
+					}
+				},
+				"download": {
+					"title": "Download Full Terms",
+					"description": "You can download the full terms of psychotherapy services in PDF format.",
+					"languageNote": "The PDF document is available in Polish.",
+					"button": "Download PDF"
+				}
+			},
 			"reservations": {
 				"title": "Consultation Reservation",
 				"titleDescription": "Fill out the form to reserve a consultation appointment.",
@@ -118,11 +326,13 @@
 				},
 				"preferredDates": {
 					"label": "Preferred dates",
-					"hint": "You can add 1 to 5 preferred dates with time ranges.",
+					"hint": "You can add 0 to 5 preferred dates with time ranges.",
+					"optional": "optional",
 					"date": "Date",
 					"timeFrom": "From",
 					"timeTo": "To",
-					"add": "Add another date",
+					"add": "Add a date",
+					"addMore": "Add another date",
 					"remove": "Remove date",
 					"errors": {
 						"required": "At least one date is required",

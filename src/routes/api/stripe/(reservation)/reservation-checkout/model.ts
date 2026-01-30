@@ -42,7 +42,7 @@ export class ReservationCheckoutRequestDto {
 
 	@IsDefined()
 	@IsArray()
-	@ArrayMinSize(1)
+	@ArrayMinSize(0)
 	@ArrayMaxSize(5)
 	@ValidateNested({ each: true })
 	@Type(() => PreferredDateDto)

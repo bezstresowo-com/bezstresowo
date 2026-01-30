@@ -99,15 +99,13 @@
 	<!-- Content -->
 	<div class="mx-auto grid grid-cols-1 gap-10 lg:grid-cols-2">
 		<!-- Left: Contact info -->
-		<!-- @TODO: Do zautomatyzowania chyba -->
-		<!-- @TODO: Spoko by było podzielić na komponenty -->
-		<div class="space-y-6">
-			<h2 class="text-lg font-medium text-slate-700">
+		<div class="flex flex-col justify-center space-y-6">
+			<h2 class="px-5 text-lg font-medium text-slate-700">
 				{$translate('user.contactForm.infoTitle')}
 			</h2>
 
 			<!-- Phone -->
-			<div class="flex items-start gap-4 p-5">
+			<div class="flex items-start gap-4 px-5">
 				<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
 					<i class="fa-solid fa-phone text-xl" aria-hidden="true"></i>
 				</div>
@@ -124,7 +122,7 @@
 			</div>
 
 			<!-- Email -->
-			<div class="flex items-start gap-4 p-5">
+			<div class="flex items-start gap-4 px-5">
 				<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
 					<i class="fa-solid fa-envelope text-xl" aria-hidden="true"></i>
 				</div>
@@ -141,7 +139,7 @@
 			</div>
 
 			<!-- Hours -->
-			<div class="flex items-start gap-4 p-5">
+			<div class="flex items-start gap-4 px-5">
 				<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
 					<i class="fa-solid fa-clock text-xl" aria-hidden="true"></i>
 				</div>
