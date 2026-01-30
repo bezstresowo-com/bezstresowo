@@ -30,7 +30,7 @@ export class EmailService {
 		// Send to user
 		await this._send(
 			args.email,
-			'Dziękuję za wiadomość - bezstresowo.com',
+			'Dziękuję za wiadomość - bezstresowo.org',
 			htmlKeyValueReplacer(userHtml, args)
 		);
 	}
@@ -59,7 +59,7 @@ export class EmailService {
 		// Send to user
 		await this._send(
 			args.email,
-			'Potwierdzenie rezerwacji - bezstresowo.com',
+			'Potwierdzenie rezerwacji - bezstresowo.org',
 			htmlKeyValueReplacer(userHtml, formattedArgs)
 		);
 	}
