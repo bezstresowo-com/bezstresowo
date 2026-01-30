@@ -1,5 +1,3 @@
-import { asset } from '$app/paths';
-
 export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
@@ -20,7 +18,6 @@ export const CONTACT_ELEMENTS = [
 	}
 ];
 
-// TODO: make right
 export const FAST_LINKS = [
 	{
 		id: 'statute',
@@ -31,12 +28,6 @@ export const FAST_LINKS = [
 		id: 'gdpr',
 		label: 'user.footer.fastLinks.gdpr',
 		href: '/gdpr'
-	},
-	{
-		id: 'price-list',
-		label: 'user.footer.fastLinks.priceList',
-		href: asset('/documents/Cennik - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'),
-		download: true
 	}
 ];
 
