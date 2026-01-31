@@ -22,7 +22,7 @@
 	}}
 />
 
-<section class="bg-white pt-20 text-primary max-xl:px-4">
+<section class="bg-white pt-12 text-primary max-xl:px-4">
 	<div class="mx-auto text-center">
 		<h1 class="text-3xl font-semibold sm:text-4xl">
 			{$translate('user.pages.home.certificates.title')}
@@ -36,7 +36,12 @@
 					class="max-w-120 rounded-lg border-2 border-accent bg-primary p-4 transition hover:cursor-pointer hover:border-secondary hover:shadow-md"
 					onclick={() => openCertificate(cert, i)}
 				>
-					<img class="aspect-video object-contain" src={cert} alt={`certificate ${i + 1}`} />
+					<img
+						class="aspect-video object-contain"
+						src={cert}
+						alt={`certificate ${i + 1}`}
+						loading="lazy"
+					/>
 				</button>
 			{/each}
 		</div>
@@ -67,6 +72,7 @@
 				class="h-full w-full object-contain"
 				src={selectedCertificate}
 				alt={selectedIndex !== null ? `certificate ${selectedIndex + 1}` : 'certificate'}
+				loading="lazy"
 			/>
 		</button>
 	</div>

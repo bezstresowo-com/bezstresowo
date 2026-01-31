@@ -5,12 +5,17 @@
 </script>
 
 <div
-	class="flex h-96 flex-col items-center justify-center bg-cover bg-center text-primary"
+	class="relative h-96 bg-cover bg-center"
 	style={`background-image: url(${asset('assets/hero-image.jpg')});`}
 >
-	<div class="text-center text-5xl text-balance">{$translate('user.pages.home.hero.primary')}</div>
-	<div class="mt-3 text-center text-xl">{$translate('user.pages.home.hero.secondary')}</div>
-	<Button tailwind="w-auto mt-3 p-3" href="#contact"
-		>{$translate('user.pages.home.hero.contactMe')}</Button
-	>
+	<div class="absolute right-0 bottom-4 left-0 flex justify-center">
+		<div class="flex flex-col items-center justify-center rounded-lg bg-white/75 p-4 text-primary">
+			<div class="text-center text-xl font-bold">
+				{$translate('user.pages.home.hero.primary')}
+			</div>
+			<Button tailwind="w-auto mt-3 p-3" href="#contact">
+				{$translate('user.pages.home.hero.contactMe')}
+			</Button>
+		</div>
+	</div>
 </div>

@@ -88,7 +88,7 @@
 </script>
 
 <section class="bg-white text-primary max-xl:px-4">
-	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl sm:text-4xl">
+	<h1 class="mx-auto px-4 pt-12 pb-8 text-center text-3xl font-semibold sm:text-4xl">
 		{$translate(title)}
 	</h1>
 	{#if isLoading}

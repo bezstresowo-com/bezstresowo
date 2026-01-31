@@ -21,7 +21,7 @@
 	}}
 />
 
-<section class="bg-white pt-20 text-primary max-xl:px-4">
+<section class="bg-white pt-12 text-primary max-xl:px-4">
 	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold sm:text-4xl">
 			{$translate('user.pages.home.offeredServices.title')}

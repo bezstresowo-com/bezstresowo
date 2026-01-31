@@ -7,10 +7,15 @@
 	);
 </script>
 
-<section class="pt-20 max-xl:px-4">
-	<div class="mx-auto grid grid-cols-1 gap-6 lg:grid-cols-7">
+<section class="pt-12 max-xl:px-4">
+	<div class="mx-auto gap-6 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-7">
 		<div class="col-span-3 flex justify-center">
-			<img src={asset('assets/about-me.jpg')} alt="About Me" class="rounded-lg object-cover" />
+			<img
+				src={asset('assets/about-me.jpg')}
+				alt="About Me"
+				class="rounded-lg object-cover max-lg:aspect-video"
+				loading="lazy"
+			/>
 		</div>
 
 		<div class="col-span-4">

@@ -146,6 +146,7 @@
 							src={product?.images?.[0] ?? asset('/assets/shop-image-placeholder.svg')}
 							alt={product.name}
 							class={`mb-4 h-48 w-full rounded-xl ${product?.images?.[0] ? 'object-cover' : ''}`}
+							loading="lazy"
 						/>
 						<h2 class="mb-2 text-2xl">{product.name}</h2>
 

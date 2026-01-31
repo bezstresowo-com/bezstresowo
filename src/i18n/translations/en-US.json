@@ -17,15 +17,14 @@
 		"pages": {
 			"home": {
 				"hero": {
-					"primary": "Find peace and balance in your life",
-					"secondary": "Professional psychotherapy with empathy and understanding",
+					"primary": "Psychotherapy with empathy and understanding",
 					"contactMe": "Contact me"
 				},
 				"howCanIHelp": {
 					"title": "How can I help you?",
 					"elements": {
 						"communication": "Relationship and communication issues",
-						"relationships": "Marital and relationship crises",
+						"foodDisorder": "Eating disorders",
 						"depression": "Anxiety, depression, and stress"
 					}
 				},

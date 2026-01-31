@@ -50,7 +50,7 @@
 	<Select.Portal>
 		<Select.Content
 			sideOffset={8}
-			class="z-[70] rounded-lg border-2 border-accent bg-primary p-2 text-secondary"
+			class="z-1001 rounded-lg border-2 border-accent bg-primary p-2 text-secondary"
 		>
 			<Select.Viewport class="flex flex-col gap-4">
 				{#each ITEMS as { value, label, disabled }, i (i + value)}
@@ -63,6 +63,7 @@
 									class="aspect-video h-4 object-cover"
 									src={LOCALES_MAP[value].icon.src}
 									alt={$translate(LOCALES_MAP[value].icon.alt)}
+									loading="lazy"
 								/>
 								{$translate(label)}
 							</div>

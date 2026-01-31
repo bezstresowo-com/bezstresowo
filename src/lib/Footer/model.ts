@@ -1,9 +1,9 @@
 export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
-		label: 'beztresowo@gmail.com',
+		label: 'bezstresowo.org@gmail.com',
 		icon: 'fa-regular fa-envelope',
-		href: 'mailto:beztresowo@gmail.com'
+		href: 'mailto:bezstresowo.org@gmail.com'
 	},
 	{
 		id: 'phone',

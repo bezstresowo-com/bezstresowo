@@ -4,8 +4,8 @@ export const HELP_ELEMENTS = [
 		icon: 'fa-solid fa-heart'
 	},
 	{
-		title: 'user.pages.home.howCanIHelp.elements.relationships',
-		icon: 'fa-solid fa-users'
+		title: 'user.pages.home.howCanIHelp.elements.foodDisorder',
+		icon: 'fa-solid fa-apple-whole'
 	},
 	{
 		title: 'user.pages.home.howCanIHelp.elements.depression',

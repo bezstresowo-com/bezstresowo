@@ -17,15 +17,14 @@
 		"pages": {
 			"home": {
 				"hero": {
-					"primary": "Znajdź spokój i równowagę w swoim życiu",
-					"secondary": "Profesjonalna psychoterapia z empatią i zrozumieniem",
+					"primary": "Psychoterapia z empatią i zrozumieniem",
 					"contactMe": "Skontaktuj się ze mną"
 				},
 				"howCanIHelp": {
 					"title": "W czym mogę Ci pomóc?",
 					"elements": {
 						"communication": "Problemy w relacjach i komunikacji",
-						"relationships": "Kryzysy małżeńskie i związkowe",
+						"foodDisorder": "Zaburzenia odżywiania",
 						"depression": "Lęki, depresja i stres"
 					}
 				},

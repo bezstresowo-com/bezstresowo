@@ -85,7 +85,7 @@
 	});
 </script>
 
-<section class="pt-20 max-xl:px-4" id="contact">
+<section class="pt-12 max-xl:px-4" id="contact">
 	<!-- Header -->
 	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
