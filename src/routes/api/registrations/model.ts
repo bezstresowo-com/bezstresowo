@@ -25,7 +25,7 @@ export class PreferredDateDto {
 	timeTo: string;
 }
 
-export class ReservationsRequestDto {
+export class RegistrationsRequestDto {
 	@IsDefined()
 	@IsString()
 	@IsNotEmpty()

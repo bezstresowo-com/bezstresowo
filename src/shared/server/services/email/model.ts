@@ -5,7 +5,7 @@ export type ContactRequestArgs = {
 	message: string;
 };
 
-export type ReservationRequestArgs = {
+export type RegistrationRequestArgs = {
 	email: string;
 	nameAndSurname: string;
 	tel: string;

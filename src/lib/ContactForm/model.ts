@@ -1,5 +1,5 @@
-import * as yup from 'yup';
 import { isValidPhoneNumber } from 'libphonenumber-js';
+import * as yup from 'yup';
 
 const prefix = 'user.contactForm.fields';
 

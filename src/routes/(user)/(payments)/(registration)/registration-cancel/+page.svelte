@@ -5,8 +5,8 @@
 
 <PaymentResultPage
 	type="cancel"
-	translationPrefix="user.pages.reservations.checkoutMessages"
-	redirectPath={resolve('/(user)/reservations')}
-	buttonTextKey="backToReservations"
+	translationPrefix="user.pages.registrations.checkoutMessages"
+	redirectPath={resolve('/(user)/registrations')}
+	buttonTextKey="backToRegistrations"
 	redirectDelay={10}
 />

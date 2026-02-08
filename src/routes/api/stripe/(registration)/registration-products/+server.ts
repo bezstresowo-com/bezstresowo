@@ -1,7 +1,7 @@
 import { STRIPE_SK } from '$env/static/private';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import type { ReservationProduct } from './model';
+import type { RegistrationProduct } from './model';
 
 export async function GET() {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -13,8 +13,8 @@ export async function GET() {
 		expand: ['data.default_price']
 	});
 
-	const reservationProducts: ReservationProduct[] = products.data
-		.filter((product) => product.metadata?.siteLocation === 'reservations')
+	const registrationProducts: RegistrationProduct[] = products.data
+		.filter((product) => product.metadata?.siteLocation === 'registrations')
 		.map((product) => {
 			const rawPrice = product.default_price;
 
@@ -35,5 +35,5 @@ export async function GET() {
 			};
 		});
 
-	return json({ data: reservationProducts });
+	return json({ data: registrationProducts });
 }

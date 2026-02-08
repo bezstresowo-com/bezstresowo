@@ -4,7 +4,7 @@ export interface PreferredDate {
 	timeTo: string;
 }
 
-export interface ReservationsRequestDto {
+export interface RegistrationsRequestDto {
 	therapyType: string;
 	nameAndSurname: string;
 	tel: string;

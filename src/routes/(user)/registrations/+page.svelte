@@ -8,7 +8,7 @@
 	import Button from '$lib/Button/Button.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import { onMount } from 'svelte';
-	import { getReservationProducts, createReservationCheckout } from './fetch-methods';
+	import { getRegistrationProducts, createRegistrationCheckout } from './fetch-methods';
 	import {
 		DEFAULT_LOADABLE_STATE,
 		ERRORED,
@@ -16,17 +16,17 @@
 		type LoadableState
 	} from '$shared/global/types/store';
 	import { resolve } from '$app/paths';
-	import type { ReservationProduct } from '$api/stripe/(reservation)/reservation-products/model';
+	import type { RegistrationProduct } from '$api/stripe/(registration)/registration-products/model';
 
 	let isLoading = $state(false);
 	let generalError = $state<string | null>(null);
 
-	let reservationProductsData = $state<LoadableState<ReservationProduct[]>>({
+	let registrationProductsData = $state<LoadableState<RegistrationProduct[]>>({
 		...DEFAULT_LOADABLE_STATE,
 		isLoading: true
 	});
 
-	let reservationProducts = $derived(reservationProductsData.data ?? []);
+	let registrationProducts = $derived(registrationProductsData.data ?? []);
 
 	const {
 		form,
@@ -45,7 +45,7 @@
 			generalError = null;
 
 			try {
-				const selectedProduct = reservationProducts.find((t) => t.id === values.therapyProductId);
+				const selectedProduct = registrationProducts.find((t) => t.id === values.therapyProductId);
 				if (!selectedProduct?.defaultPrice) {
 					toast.error($translate(`${prefix}.toast.noPriceAvailable`));
 					return;
@@ -53,15 +53,15 @@
 
 				const baseUrl = window.location.origin;
 
-				const checkoutResult = await createReservationCheckout({
+				const checkoutResult = await createRegistrationCheckout({
 					priceId: selectedProduct.defaultPrice.id,
-					therapyName: reservationProducts.find(({ id }) => id === values.therapyProductId)!.name,
+					therapyName: registrationProducts.find(({ id }) => id === values.therapyProductId)!.name,
 					nameAndSurname: values.nameAndSurname,
 					tel: values.tel,
 					email: values.email,
 					message: values.message || undefined,
-					successUrl: `${baseUrl}${resolve(`/(user)/(payments)/(reservation)/reservation-success`)}`,
-					cancelUrl: `${baseUrl}${resolve(`/(user)/(payments)/(reservation)/reservation-cancel`)}`
+					successUrl: `${baseUrl}${resolve(`/(user)/(payments)/(registration)/registration-success`)}`,
+					cancelUrl: `${baseUrl}${resolve(`/(user)/(payments)/(registration)/registration-cancel`)}`
 				});
 
 				switch (checkoutResult.status) {
@@ -105,7 +105,7 @@
 	});
 
 	let isSubmitDisabled = $derived(() => {
-		return isLoading || !$isValid || reservationProductsData.isLoading;
+		return isLoading || !$isValid || registrationProductsData.isLoading;
 	});
 
 	function handleTherapyTypeChange(value: string) {
@@ -113,26 +113,26 @@
 	}
 
 	async function loadTherapyTypes() {
-		const fetchResult = await getReservationProducts();
+		const fetchResult = await getRegistrationProducts();
 
 		switch (fetchResult.status) {
 			case 'ok':
-				reservationProductsData = {
+				registrationProductsData = {
 					...LOADED,
 					data: fetchResult.data.data
 				};
 				break;
 
 			case 'error':
-				reservationProductsData = {
-					...reservationProductsData,
+				registrationProductsData = {
+					...registrationProductsData,
 					...ERRORED(fetchResult.data.message)
 				};
 				break;
 
 			default:
-				reservationProductsData = {
-					...reservationProductsData,
+				registrationProductsData = {
+					...registrationProductsData,
 					...ERRORED(fetchResult.error)
 				};
 				break;
@@ -161,13 +161,13 @@
 				<label for="therapyType" class="mb-1 block text-sm font-medium text-primary">
 					{$translate(`${prefix}.therapyType.label`)}
 				</label>
-				{#if reservationProductsData.isLoading}
+				{#if registrationProductsData.isLoading}
 					<div
 						class="flex h-12 items-center justify-center rounded-lg border border-primary/30 bg-white"
 					>
 						<LoadingSpinner size="sm" />
 					</div>
-				{:else if reservationProductsData.error}
+				{:else if registrationProductsData.error}
 					<div
 						class="flex h-12 items-center rounded-lg border border-danger/30 bg-white px-4 text-danger"
 					>
@@ -186,13 +186,13 @@
 							{$translate(`${prefix}.therapyType.placeholder`)}
 						</option>
 
-						{#each reservationProducts as reservationProduct (reservationProduct.id)}
-							<option value={reservationProduct.id}
-								>{reservationProduct.name}
-								{reservationProduct.defaultPrice?.unit_amount
-									? reservationProduct.defaultPrice.unit_amount / 100 +
+						{#each registrationProducts as registrationProduct (registrationProduct.id)}
+							<option value={registrationProduct.id}
+								>{registrationProduct.name}
+								{registrationProduct.defaultPrice?.unit_amount
+									? registrationProduct.defaultPrice.unit_amount / 100 +
 										' ' +
-										reservationProduct.defaultPrice.currency.toUpperCase()
+										registrationProduct.defaultPrice.currency.toUpperCase()
 									: 'N/A'}</option
 							>
 						{/each}

@@ -1,6 +1,6 @@
 import type Stripe from 'stripe';
 
-export type ReservationProduct = {
+export type RegistrationProduct = {
 	id: string;
 	name: string;
 	description: string | null;

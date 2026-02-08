@@ -1,7 +1,7 @@
 import { EMAIL_APP_PASSWORD, EMAIL_SENDER } from '$env/static/private';
 import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
 import { createTransport } from 'nodemailer';
-import type { ContactRequestArgs, ReservationRequestArgs } from './model';
+import type { ContactRequestArgs, RegistrationRequestArgs } from './model';
 
 export class EmailService {
 	private readonly _transport;
@@ -35,9 +35,9 @@ export class EmailService {
 		);
 	}
 
-	async reservationRequest(args: ReservationRequestArgs) {
-		const ownerHtml = (await import('./email-templates/reservation-request.html?raw')).default;
-		const userHtml = (await import('./email-templates/reservation-request-user.html?raw')).default;
+	async registrationRequest(args: RegistrationRequestArgs) {
+		const ownerHtml = (await import('./email-templates/registration-request.html?raw')).default;
+		const userHtml = (await import('./email-templates/registration-request-user.html?raw')).default;
 
 		// Send to owner
 		await this._send(

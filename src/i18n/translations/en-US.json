@@ -305,10 +305,10 @@
 					"button": "Download PDF"
 				}
 			},
-			"reservations": {
-				"title": "Consultation Reservation",
-				"titleDescription": "Fill out the form to reserve a consultation appointment.",
-				"submit": "Reserve",
+			"registrations": {
+				"title": "Consultation Registration",
+				"titleDescription": "Fill out the form to register a consultation.",
+				"submit": "Register",
 				"therapyType": {
 					"label": "Therapy type",
 					"placeholder": "Select therapy type",
@@ -358,17 +358,17 @@
 					}
 				},
 				"toast": {
-					"success": "Your reservation has been sent!",
+					"success": "Your consultation registration has been sent!",
 					"error": "A server error occurred. Please try again later.",
 					"noPriceAvailable": "The selected therapy type has no assigned price. Please contact us.",
 					"checkoutError": "An error occurred while initiating payment. Please try again later."
 				},
 				"checkoutMessages": {
-					"successTitle": "Reservation Paid",
-					"successDescription": "Thank you for your payment. Your reservation has been confirmed. We will contact you soon to arrange the details.",
+					"successTitle": "Consultation Paid",
+					"successDescription": "Thank you for your payment. Your consultation registration has been confirmed. We will contact you soon to arrange the details.",
 					"cancelTitle": "Payment Cancelled",
-					"cancelDescription": "You cancelled the payment process. Your reservation has not been confirmed. You can try again.",
-					"backToReservations": "Back to Reservations",
+					"cancelDescription": "You cancelled the payment process. Your consultation registration has not been confirmed. You can try again.",
+					"backToRegistrations": "Back to Consultations",
 					"autoRedirect": "You will be automatically redirected in {{ time }} seconds..."
 				}
 			}
@@ -378,7 +378,7 @@
 				"home": "Home",
 				"blog": "Blog",
 				"shop": "Shop",
-				"reservations": "Reservations"
+				"registrations": "Consultations"
 			}
 		},
 		"footer": {

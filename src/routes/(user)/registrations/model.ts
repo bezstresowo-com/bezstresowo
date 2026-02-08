@@ -1,7 +1,7 @@
 import { isValidPhoneNumber } from 'libphonenumber-js';
 import * as yup from 'yup';
 
-export const prefix = 'user.pages.reservations';
+export const prefix = 'user.pages.registrations';
 
 export const SCHEMA = yup.object().shape({
 	therapyType: yup.string().required(`${prefix}.therapyType.errors.required`),

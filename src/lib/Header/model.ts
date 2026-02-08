@@ -14,7 +14,7 @@ export const HEADER_PATHS = [
 		href: resolve('/(user)/shop')
 	},
 	{
-		label: 'user.header.items.reservations',
-		href: resolve('/(user)/reservations')
+		label: 'user.header.items.registrations',
+		href: resolve('/(user)/registrations')
 	}
 ];

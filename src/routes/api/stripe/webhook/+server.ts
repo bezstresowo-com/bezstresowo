@@ -1,6 +1,6 @@
 import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { EmailService } from '$shared/server/services/email/email-service';
-import type { ReservationRequestArgs } from '$shared/server/services/email/model.js';
+import type { RegistrationRequestArgs } from '$shared/server/services/email/model.js';
 import { json, text } from '@sveltejs/kit';
 import { isNil } from 'lodash-es';
 import Stripe from 'stripe';
@@ -34,12 +34,12 @@ export async function POST({ request }) {
 		if (!isNil(metadata)) {
 			try {
 				switch (metadata.type) {
-					case 'reservation': {
+					case 'registration': {
 						const parsedMetadata = {
 							...metadata
-						} as ReservationRequestArgs;
+						} as RegistrationRequestArgs;
 
-						await new EmailService().reservationRequest({
+						await new EmailService().registrationRequest({
 							email: parsedMetadata.email || '',
 							message: parsedMetadata.message || '',
 							nameAndSurname: parsedMetadata.nameAndSurname || '',
@@ -50,7 +50,7 @@ export async function POST({ request }) {
 					}
 				}
 			} catch (error) {
-				console.error('Error processing reservation webhook:', error);
+				console.error('Error processing registration webhook:', error);
 			}
 		}
 	}

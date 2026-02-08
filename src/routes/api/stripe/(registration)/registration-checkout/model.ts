@@ -11,7 +11,7 @@ const {
 	IsNotEmpty
 } = validators;
 
-export class ReservationCheckoutRequestDto {
+export class RegistrationCheckoutRequestDto {
 	@IsDefined()
 	@IsString()
 	priceId: string;
@@ -50,13 +50,13 @@ export class ReservationCheckoutRequestDto {
 	cancelUrl: string;
 }
 
-export interface ReservationCheckoutResponseDto {
+export interface RegistrationCheckoutResponseDto {
 	sessionId: string;
 	url: string | null;
 }
 
-export interface ReservationCheckoutMetadata {
-	type: 'reservation';
+export interface RegistrationCheckoutMetadata {
+	type: 'registration';
 	email: string;
 	nameAndSurname: string;
 	tel: string;

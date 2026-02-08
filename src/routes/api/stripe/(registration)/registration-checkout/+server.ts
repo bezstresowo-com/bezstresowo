@@ -3,7 +3,7 @@ import { HttpStatus } from '$shared/global/enums/http-status';
 import { validateRequest } from '$shared/server/functions/validate-body';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { ReservationCheckoutRequestDto, type ReservationCheckoutMetadata } from './model';
+import { RegistrationCheckoutRequestDto, type RegistrationCheckoutMetadata } from './model';
 
 export async function POST({ request }) {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -12,22 +12,14 @@ export async function POST({ request }) {
 
 	try {
 		const body = await request.json();
-		const validationResult = await validateRequest(body, ReservationCheckoutRequestDto);
+		const validationResult = await validateRequest(body, RegistrationCheckoutRequestDto);
 
 		if (validationResult.type === 'error') {
 			return validationResult.response;
 		}
 
-		const {
-			priceId,
-			therapyName,
-			nameAndSurname,
-			tel,
-			email,
-			message,
-			successUrl,
-			cancelUrl
-		} = validationResult.dto;
+		const { priceId, therapyName, nameAndSurname, tel, email, message, successUrl, cancelUrl } =
+			validationResult.dto;
 
 		const price = await stripe.prices.retrieve(priceId, {
 			expand: ['product']
@@ -50,13 +42,13 @@ export async function POST({ request }) {
 			cancel_url: cancelUrl,
 			customer_email: email,
 			metadata: {
-				type: 'reservation',
+				type: 'registration',
 				therapyName: therapyName,
 				nameAndSurname,
 				tel,
 				email,
 				message: message ?? ''
-			} satisfies ReservationCheckoutMetadata
+			} satisfies RegistrationCheckoutMetadata
 		});
 
 		return json({
@@ -64,7 +56,7 @@ export async function POST({ request }) {
 			url: session.url
 		});
 	} catch (error: any) {
-		console.error('Error creating reservation checkout session:', error);
+		console.error('Error creating registration checkout session:', error);
 		return json(
 			{ error: 'Failed to create checkout session', details: error.message },
 			{ status: HttpStatus.INTERNAL_SERVER_ERROR }
