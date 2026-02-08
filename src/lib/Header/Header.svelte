@@ -14,7 +14,7 @@
 <header class="fixed top-0 left-0 z-1000 w-full bg-primary">
 	<div class="mx-auto flex h-16 max-w-7xl items-center gap-4 p-4">
 		<a class="text-2xl font-bold text-accent" href={resolve('/(user)/home')}>
-			<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" loading="lazy" />
+			<img src={asset('/assets/header-logo.svg')} alt="Bezstresowo Logo" loading="lazy" />
 		</a>
 
 		<span class="flex-auto"></span>
@@ -64,7 +64,7 @@
 				href={resolve('/(user)/home')}
 				onclick={() => (menuOpen = false)}
 			>
-				<img src={asset('assets/header-logo.svg')} alt="Bezstresowo Logo" loading="lazy" />
+				<img src={asset('/assets/header-logo.svg')} alt="Bezstresowo Logo" loading="lazy" />
 			</a>
 
 			<button

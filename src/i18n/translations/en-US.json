@@ -323,26 +323,6 @@
 						"invalid": "Please select a valid therapy type"
 					}
 				},
-				"preferredDates": {
-					"label": "Preferred dates",
-					"hint": "You can add 0 to 5 preferred dates with time ranges.",
-					"optional": "optional",
-					"date": "Date",
-					"timeFrom": "From",
-					"timeTo": "To",
-					"add": "Add a date",
-					"addMore": "Add another date",
-					"remove": "Remove date",
-					"errors": {
-						"required": "At least one date is required",
-						"min": "You must provide at least one preferred date",
-						"max": "You can provide up to 5 dates",
-						"dateRequired": "Date is required",
-						"timeFromRequired": "Start time is required",
-						"timeToRequired": "End time is required",
-						"timeOrder": "End time must be later than start time"
-					}
-				},
 				"nameAndSurname": {
 					"label": "Name and Surname",
 					"placeholder": "Enter your name and surname",

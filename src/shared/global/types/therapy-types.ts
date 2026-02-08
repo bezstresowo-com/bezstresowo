@@ -6,7 +6,6 @@ export interface PreferredDate {
 
 export interface ReservationsRequestDto {
 	therapyType: string;
-	preferredDates: PreferredDate[];
 	nameAndSurname: string;
 	tel: string;
 	email: string;

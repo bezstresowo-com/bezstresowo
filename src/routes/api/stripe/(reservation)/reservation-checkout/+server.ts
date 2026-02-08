@@ -21,7 +21,6 @@ export async function POST({ request }) {
 		const {
 			priceId,
 			therapyName,
-			preferredDates,
 			nameAndSurname,
 			tel,
 			email,
@@ -53,7 +52,6 @@ export async function POST({ request }) {
 			metadata: {
 				type: 'reservation',
 				therapyName: therapyName,
-				preferredDates: JSON.stringify(preferredDates),
 				nameAndSurname,
 				tel,
 				email,

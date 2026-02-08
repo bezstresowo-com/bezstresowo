@@ -323,26 +323,6 @@
 						"invalid": "Wybierz prawidłowy typ terapii"
 					}
 				},
-				"preferredDates": {
-					"label": "Preferowane terminy",
-					"hint": "Możesz dodać od 0 do 5 preferowanych terminów z przedziałem godzinowym.",
-					"optional": "opcjonalne",
-					"date": "Data",
-					"timeFrom": "Od",
-					"timeTo": "Do",
-					"add": "Dodaj termin",
-					"addMore": "Dodaj kolejny termin",
-					"remove": "Usuń termin",
-					"errors": {
-						"required": "Przynajmniej jeden termin jest wymagany",
-						"min": "Musisz podać przynajmniej jeden preferowany termin",
-						"max": "Możesz podać maksymalnie 5 terminów",
-						"dateRequired": "Data jest wymagana",
-						"timeFromRequired": "Godzina rozpoczęcia jest wymagana",
-						"timeToRequired": "Godzina zakończenia jest wymagana",
-						"timeOrder": "Godzina zakończenia musi być późniejsza niż godzina rozpoczęcia"
-					}
-				},
 				"nameAndSurname": {
 					"label": "Imię i nazwisko",
 					"placeholder": "Wpisz swoje imię i nazwisko",

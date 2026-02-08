@@ -39,28 +39,18 @@ export class EmailService {
 		const ownerHtml = (await import('./email-templates/reservation-request.html?raw')).default;
 		const userHtml = (await import('./email-templates/reservation-request-user.html?raw')).default;
 
-		const formattedArgs = {
-			...args,
-			preferredDates:
-				args.preferredDates.length > 0
-					? args.preferredDates
-							.map((d, i) => `${i + 1}. ${d.date} (${d.timeFrom} - ${d.timeTo})`)
-							.join('<br>')
-					: 'Brak'
-		};
-
 		// Send to owner
 		await this._send(
 			EMAIL_SENDER,
 			`Nowa rezerwacja od ${args.nameAndSurname}`,
-			htmlKeyValueReplacer(ownerHtml, formattedArgs)
+			htmlKeyValueReplacer(ownerHtml, args)
 		);
 
 		// Send to user
 		await this._send(
 			args.email,
 			'Potwierdzenie rezerwacji - bezstresowo.org',
-			htmlKeyValueReplacer(userHtml, formattedArgs)
+			htmlKeyValueReplacer(userHtml, args)
 		);
 	}
 

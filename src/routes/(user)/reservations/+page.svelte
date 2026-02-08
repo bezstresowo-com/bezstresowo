@@ -3,15 +3,7 @@
 	import type { BackendErrorResponse } from '$lib/ContactForm/model';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { createForm } from 'svelte-forms-lib';
-	import {
-		FIELD_MAP,
-		FORM_INITIAL_VALUE,
-		prefix,
-		SCHEMA,
-		createEmptyPreferredDate,
-		type FormValue,
-		type PreferredDate
-	} from './model';
+	import { FIELD_MAP, FORM_INITIAL_VALUE, prefix, SCHEMA, type FormValue } from './model';
 	import { ButtonTypes } from '$lib/Button/model';
 	import Button from '$lib/Button/Button.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
@@ -64,7 +56,6 @@
 				const checkoutResult = await createReservationCheckout({
 					priceId: selectedProduct.defaultPrice.id,
 					therapyName: reservationProducts.find(({ id }) => id === values.therapyProductId)!.name,
-					preferredDates: values.preferredDates,
 					nameAndSurname: values.nameAndSurname,
 					tel: values.tel,
 					email: values.email,
@@ -112,31 +103,6 @@
 			}
 		}
 	});
-
-	function addPreferredDate() {
-		if ($form.preferredDates.length < 5) {
-			form.update((f) => ({
-				...f,
-				preferredDates: [...f.preferredDates, createEmptyPreferredDate()]
-			}));
-		}
-	}
-
-	function removePreferredDate(index: number) {
-		form.update((f) => ({
-			...f,
-			preferredDates: f.preferredDates.filter((_, i) => i !== index)
-		}));
-	}
-
-	function updatePreferredDate(index: number, field: keyof PreferredDate, value: string) {
-		form.update((f) => {
-			const newDates = [...f.preferredDates];
-			newDates[index] = { ...newDates[index], [field]: value };
-			return { ...f, preferredDates: newDates };
-		});
-		updateValidateField('preferredDates', $form.preferredDates);
-	}
 
 	let isSubmitDisabled = $derived(() => {
 		return isLoading || !$isValid || reservationProductsData.isLoading;
@@ -238,104 +204,6 @@
 					>
 				{/if}
 			</div>
-
-			<!-- Preferowane daty -->
-			<fieldset>
-				<legend class="mb-1 block text-sm font-medium text-primary">
-					{$translate(`${prefix}.preferredDates.label`)}
-					<span class="text-xs text-primary/50"
-						>({$translate(`${prefix}.preferredDates.optional`)})</span
-					>
-				</legend>
-				<p class="mb-3 text-xs text-primary/60">
-					{$translate(`${prefix}.preferredDates.hint`)}
-				</p>
-
-				{#each $form.preferredDates as preferredDate, index (index)}
-					{@const dateErrors = $errors.preferredDates?.[index] as
-						| { date?: string; timeFrom?: string; timeTo?: string }
-						| undefined}
-					<div
-						class="mb-3 flex flex-wrap gap-2 rounded-lg border border-primary/20 bg-primary/5 p-3"
-					>
-						<div class="min-w-[150px] flex-1">
-							<label for={`date-${index}`} class="mb-1 block text-xs text-primary/70">
-								{$translate(`${prefix}.preferredDates.date`)}
-							</label>
-							<input
-								id={`date-${index}`}
-								type="date"
-								value={preferredDate.date}
-								onchange={(e) => updatePreferredDate(index, 'date', e.currentTarget.value)}
-								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
-							/>
-							{#if dateErrors?.date}
-								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.date)}</small>
-							{/if}
-						</div>
-						<div class="min-w-[100px] flex-1">
-							<label for={`timeFrom-${index}`} class="mb-1 block text-xs text-primary/70">
-								{$translate(`${prefix}.preferredDates.timeFrom`)}
-							</label>
-							<input
-								id={`timeFrom-${index}`}
-								type="time"
-								value={preferredDate.timeFrom}
-								onchange={(e) => updatePreferredDate(index, 'timeFrom', e.currentTarget.value)}
-								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
-							/>
-							{#if dateErrors?.timeFrom}
-								<small class="mt-1 block text-xs text-danger"
-									>{$translate(dateErrors.timeFrom)}</small
-								>
-							{/if}
-						</div>
-						<div class="min-w-[100px] flex-1">
-							<label for={`timeTo-${index}`} class="mb-1 block text-xs text-primary/70">
-								{$translate(`${prefix}.preferredDates.timeTo`)}
-							</label>
-							<input
-								id={`timeTo-${index}`}
-								type="time"
-								value={preferredDate.timeTo}
-								onchange={(e) => updatePreferredDate(index, 'timeTo', e.currentTarget.value)}
-								class="h-10 w-full rounded-lg border border-primary/30 bg-white px-3 text-primary transition outline-none focus:border-primary"
-							/>
-							{#if dateErrors?.timeTo}
-								<small class="mt-1 block text-xs text-danger">{$translate(dateErrors.timeTo)}</small
-								>
-							{/if}
-						</div>
-
-						<button
-							type="button"
-							onclick={() => removePreferredDate(index)}
-							class="h-10 cursor-pointer self-end rounded-lg px-3 text-danger transition hover:bg-red-50"
-							title={$translate(`${prefix}.preferredDates.remove`)}
-							aria-label={$translate(`${prefix}.preferredDates.remove`)}
-						>
-							<i class="fa-solid fa-trash"></i>
-						</button>
-					</div>
-				{/each}
-
-				{#if $form.preferredDates.length < 5}
-					<button
-						type="button"
-						onclick={addPreferredDate}
-						class="flex cursor-pointer items-center gap-2 text-sm text-primary transition hover:text-primary/80"
-					>
-						<i class="fa-solid fa-plus"></i>
-						{$form.preferredDates.length === 0
-							? $translate(`${prefix}.preferredDates.add`)
-							: $translate(`${prefix}.preferredDates.addMore`)}
-					</button>
-				{/if}
-
-				{#if $errors.preferredDates && $touched.preferredDates && typeof $errors.preferredDates === 'string'}
-					<small class="mt-1 block text-sm text-danger">{$translate($errors.preferredDates)}</small>
-				{/if}
-			</fieldset>
 
 			<!-- Imię i nazwisko -->
 			<div>

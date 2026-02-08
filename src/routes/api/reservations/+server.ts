@@ -12,8 +12,7 @@ export async function POST({ request, route }) {
 			return validationResult.response;
 		}
 
-		const { therapyType, preferredDates, nameAndSurname, tel, email, message } =
-			validationResult.dto;
+		const { therapyType, nameAndSurname, tel, email, message } = validationResult.dto;
 
 		const msg = message ?? '';
 
@@ -22,8 +21,7 @@ export async function POST({ request, route }) {
 			message: msg,
 			nameAndSurname,
 			tel,
-			therapyName: therapyType,
-			preferredDates
+			therapyName: therapyType
 		});
 
 		return buildOkResponse();

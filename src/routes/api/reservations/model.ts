@@ -1,10 +1,6 @@
 import { validators } from '$shared/server/validators';
-import { Type } from 'class-transformer';
 
 const {
-	ArrayMaxSize,
-	ArrayMinSize,
-	IsArray,
 	IsDefined,
 	IsEmail,
 	IsNotEmpty,
@@ -12,8 +8,7 @@ const {
 	IsPhoneNumber,
 	IsString,
 	MaxLength,
-	MinLength,
-	ValidateNested
+	MinLength
 } = validators;
 
 export class PreferredDateDto {
@@ -35,14 +30,6 @@ export class ReservationsRequestDto {
 	@IsString()
 	@IsNotEmpty()
 	therapyType: string;
-
-	@IsDefined()
-	@IsArray()
-	@ArrayMinSize(1)
-	@ArrayMaxSize(5)
-	@ValidateNested({ each: true })
-	@Type(() => PreferredDateDto)
-	preferredDates: PreferredDateDto[];
 
 	@IsDefined()
 	@IsString()

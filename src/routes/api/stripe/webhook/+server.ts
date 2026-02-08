@@ -36,8 +36,7 @@ export async function POST({ request }) {
 				switch (metadata.type) {
 					case 'reservation': {
 						const parsedMetadata = {
-							...metadata,
-							preferredDates: JSON.parse(metadata.preferredDates || '[]')
+							...metadata
 						} as ReservationRequestArgs;
 
 						await new EmailService().reservationRequest({
@@ -45,8 +44,7 @@ export async function POST({ request }) {
 							message: parsedMetadata.message || '',
 							nameAndSurname: parsedMetadata.nameAndSurname || '',
 							tel: parsedMetadata.tel || '',
-							therapyName: parsedMetadata.therapyName || '',
-							preferredDates: parsedMetadata.preferredDates
+							therapyName: parsedMetadata.therapyName || ''
 						});
 						break;
 					}

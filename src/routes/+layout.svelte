@@ -1,7 +1,7 @@
 <script lang="ts">
 	import '../app.css';
 
-	import { currentLocale, getUserPreferredLocale, Locale } from '$i18n';
+	import { currentLocale, DEFAULT_LOCALE, getUserPreferredLocale, Locale } from '$i18n';
 	import { onDestroy, onMount } from 'svelte';
 	import {
 		localStorageGetItem,
@@ -17,12 +17,6 @@
 	const UNSUBS: Unsubscriber[] = [];
 
 	onMount(() => {
-		UNSUBS.push(
-			currentLocale.subscribe((locale) => {
-				localStorageSetItem(LocalStorageKey.locale, locale);
-			})
-		);
-
 		let locale = localStorageGetItem(LocalStorageKey.locale);
 		if (!Object.values(Locale).includes(locale as Locale)) {
 			locale = null;
@@ -31,8 +25,19 @@
 		if (!isNil(locale)) {
 			currentLocale.set(locale as Locale);
 		} else {
-			currentLocale.set(getUserPreferredLocale());
+			const preferredLocale = getUserPreferredLocale();
+			if (!isNil(preferredLocale)) {
+				currentLocale.set(preferredLocale);
+			} else {
+				currentLocale.set(DEFAULT_LOCALE);
+			}
 		}
+
+		UNSUBS.push(
+			currentLocale.subscribe((locale) => {
+				localStorageSetItem(LocalStorageKey.locale, locale);
+			})
+		);
 	});
 
 	onDestroy(() => {

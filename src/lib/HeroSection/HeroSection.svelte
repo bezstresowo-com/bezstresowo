@@ -6,7 +6,7 @@
 
 <div
 	class="relative h-96 bg-cover bg-center"
-	style={`background-image: url(${asset('assets/hero-image.jpg')});`}
+	style={`background-image: url(${asset('/assets/hero-image.jpg')});`}
 >
 	<div class="absolute right-0 bottom-4 left-0 flex justify-center">
 		<div class="flex flex-col items-center justify-center rounded-lg bg-white/75 p-4 text-primary">

@@ -49,7 +49,11 @@ export const TRANSLATIONS = {
 	[Locale.ukUA]: ukUA
 };
 
-export function getUserPreferredLocale(): Locale {
+export function getUserPreferredLocale(): Locale | null {
+	if (typeof navigator === 'undefined') {
+		return null;
+	}
+
 	const userPreferredLangs = navigator.languages || [navigator.language];
 	const supportedLocales = Object.values(Locale);
 
@@ -62,5 +66,5 @@ export function getUserPreferredLocale(): Locale {
 		}
 	}
 
-	return Locale.enUS;
+	return null;
 }

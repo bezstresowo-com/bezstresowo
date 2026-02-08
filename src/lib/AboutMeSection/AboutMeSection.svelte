@@ -11,7 +11,7 @@
 	<div class="mx-auto gap-6 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-7">
 		<div class="col-span-3 flex justify-center">
 			<img
-				src={asset('assets/about-me.jpg')}
+				src={asset('/assets/about-me.jpg')}
 				alt="About Me"
 				class="rounded-lg object-cover max-lg:aspect-video"
 				loading="lazy"
