@@ -50,6 +50,16 @@
 	});
 </script>
 
+<svelte:head>
+	{#if blogPost.data}
+		<title>{blogPost.data.title} - Bezstresowo</title>
+		<meta name="description" content={blogPost.data.title} />
+	{:else}
+		<title>{$translate('user.pages.blog.title')} - Bezstresowo</title>
+		<meta name="description" content={$translate('user.pages.blog.description')} />
+	{/if}
+</svelte:head>
+
 <section class="mx-auto max-w-4xl px-4 py-8 sm:py-12">
 	<div class="mb-8">
 		<Button

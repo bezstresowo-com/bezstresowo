@@ -16,7 +16,7 @@
 <div class="min-h-screen">
 	<!-- Header Section -->
 	<div
-		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90"
+		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90 p-2"
 	>
 		<h1 class="mx-auto text-center text-4xl font-bold text-white sm:text-5xl">
 			{$translate(`${prefix}.title`)}

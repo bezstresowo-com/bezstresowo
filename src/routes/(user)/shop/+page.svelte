@@ -15,6 +15,7 @@
 	import type { ProductWithDefaultPrice } from '$api/stripe/(shop)/shop-products/model';
 
 	const translationPrefix = 'user.pages.shop';
+	const prefix = 'user.pages.shop';
 	const MAX_DESCRIPTION_LENGTH = 150;
 
 	let productsData = $state<LoadableState<ProductWithDefaultPrice[]>>({
@@ -121,11 +122,20 @@
 	});
 </script>
 
+<svelte:head>
+	<title>{$translate(`${prefix}.title`)} - Bezstresowo</title>
+	<meta name="description" content={$translate(`${prefix}.titleDescription`)} />
+</svelte:head>
+
+<Toaster />
+
 <div>
 	<div
-		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90"
+		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90 p-2"
 	>
-		<div class="mx-auto text-5xl text-white">{$translate(`${translationPrefix}.title`)}</div>
+		<h1 class="mx-auto text-4xl font-bold text-white sm:text-5xl">
+			{$translate(`${translationPrefix}.title`)}
+		</h1>
 		<div class="mx-auto mt-5 text-secondary">
 			{$translate(`${translationPrefix}.titleDescription`)}
 		</div>

@@ -16,6 +16,8 @@
 	"user": {
 		"pages": {
 			"home": {
+				"title": "Home",
+				"description": "Bezstresowo Psychotherapy Center - professional psychological support and psychotherapy with empathy and understanding",
 				"hero": {
 					"primary": "Psychotherapy with empathy and understanding",
 					"contactMe": "Contact me"
@@ -353,9 +355,10 @@
 						}
 					}
 				},
-				"blog": {
-					"title": "Latest blog posts",
-					"noPosts": "No posts to display",
+			"blog": {
+				"title": "Blog",
+				"description": "Latest articles and blog posts from Bezstresowo Psychotherapy Center",
+				"noPosts": "No posts to display",
 					"learnMore": "Read more",
 					"readAllPosts": "View all posts"
 				}
@@ -420,6 +423,12 @@
 					"languageNote": "The PDF document is available in Polish.",
 					"button": "Download PDF"
 				}
+			},
+			"priceList": {
+				"title": "Price List",
+				"subtitle": "Current pricing for psychotherapy services and products",
+				"description": "Price list for psychotherapy services and products offered by Bezstresowo Psychotherapy Center",
+				"noProducts": "No services available"
 			},
 			"termsOfService": {
 				"title": "Terms of Psychotherapy Services",
@@ -611,7 +620,8 @@
 			"copyright": "© 2025 Bezstresowo. All rights reserved.",
 			"fastLinks": {
 				"termsOfService": "Terms of service",
-				"gdpr": "GDPR"
+				"gdpr": "GDPR",
+				"priceList": "Price list"
 			}
 		},
 		"contactForm": {

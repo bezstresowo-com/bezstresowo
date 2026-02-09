@@ -16,6 +16,8 @@
 	"user": {
 		"pages": {
 			"home": {
+				"title": "Strona główna",
+				"description": "Centrum Psychoterapii Bezstresowo - profesjonalne wsparcie psychologiczne i psychoterapia z empatią i zrozumieniem",
 				"hero": {
 					"primary": "Psychoterapia z empatią i zrozumieniem",
 					"contactMe": "Skontaktuj się ze mną"
@@ -353,9 +355,10 @@
 						}
 					}
 				},
-				"blog": {
-					"title": "Najnowsze wpisy z bloga",
-					"noPosts": "Brak postów do wyświetlenia",
+			"blog": {
+				"title": "Blog",
+				"description": "Najnowsze artykuły i wpisy z bloga Centrum Psychoterapii Bezstresowo",
+				"noPosts": "Brak postów do wyświetlenia",
 					"learnMore": "Czytaj więcej",
 					"readAllPosts": "Zobacz wszystkie wpisy"
 				}
@@ -420,6 +423,12 @@
 					"languageNote": "Dokument PDF dostępny jest w języku polskim.",
 					"button": "Pobierz PDF"
 				}
+			},
+			"priceList": {
+				"title": "Cennik",
+				"subtitle": "Aktualny cennik usług psychoterapeutycznych i produktów",
+				"description": "Cennik usług psychoterapeutycznych i produktów oferowanych przez Centrum Psychoterapii Bezstresowo",
+				"noProducts": "Brak dostępnych usług"
 			},
 			"termsOfService": {
 				"title": "Regulamin świadczenia usług psychoterapeutycznych",
@@ -610,9 +619,9 @@
 			"followMeHeader": "Śledź mnie",
 			"copyright": "© 2025 Bezstresowo. Wszystkie prawa zastrzeżone.",
 			"fastLinks": {
-				"priceList": "Cennik",
 				"termsOfService": "Regulamin",
-				"gdpr": "RODO"
+				"gdpr": "RODO",
+				"priceList": "Cennik"
 			}
 		},
 		"contactForm": {
