@@ -47,7 +47,7 @@
 					"learnMore": "Dowiedz się więcej",
 					"services": {
 						"couplesTherapy": {
-							"title": "Terapia dla par i małżeństw",
+							"title": "Psychoterapia pary",
 							"description": "Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.",
 							"extended": {
 								"section0": {
@@ -86,39 +86,268 @@
 								}
 							}
 						},
-						"transactionalTherapy": {
-							"title": "Psychoterapia w nurcie analizy transakcyjnej",
-							"description": "Indywidualna praca terapeutyczna skupiona na zrozumieniu wzorców zachowań, budowaniu samoświadomości i osiąganiu trwałych zmian w życiu.",
+						"womenTherapy": {
+							"title": "Psychoterapia dla kobiet",
+							"description": "Indywidualna terapia wspierająca kobiety w budowaniu poczucia własnej wartości, stawianiu granic i odzyskiwaniu wewnętrznej równowagi w bezpiecznej atmosferze zrozumienia.",
 							"extended": {
 								"section0": {
-									"title": "Czym jest analiza transakcyjna?",
-									"paragraph0": "Analiza transakcyjna (AT) to kierunek psychoterapii, który pozwala lepiej zrozumieć siebie i swoje relacje z innymi. Zakłada, że w każdym z nas działają trzy różne stany ego: <i>Dziecko, Dorosły i Rodzic</i>. To właśnie one wpływają na nasze emocje, sposób myślenia oraz komunikację z otoczeniem."
+									"paragraph0": "Psychoterapia dla kobiet to indywidualny proces terapeutyczny skierowany do kobiet, które doświadczają trudności emocjonalnych, relacyjnych lub kryzysów życiowych. To forma profesjonalnej pomocy psychologicznej, w której możesz bezpiecznie przyjrzeć się swoim emocjom, schematom zachowań oraz relacjom w atmosferze zrozumienia, poufności i szacunku.",
+									"paragraph1": "eśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą - psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu."
 								},
 								"section1": {
-									"title": "Jak wygląda praca podczas terapii?",
-									"paragraph0": "W procesie spotkań:",
+									"title": "Dla kogo jest psychoterapia dla kobiet?",
+									"paragraph0": "Z psychoterapii dla kobiet korzystają osoby, które m.in.:",
 									"list0": [
-										"<b>Poznasz swoje stany ego</b> - nauczysz się rozpoznawać, z jakiego miejsca reagujesz w różnych sytuacjach i jak wpływa to na Twoje zachowanie.",
-										"<b>Przyjrzysz się swoim interakcjom</b> - będziemy analizować Twoją komunikację z innymi, aby dostrzec niekorzystne schematy i zastąpić je zdrowszymi.",
-										"<b>Zrozumiesz wpływ przeszłości</b> - odkryjesz, w jaki sposób doświadczenia z dzieciństwa oddziałują na Twoje obecne życie i relacje.",
-										"<b>Określisz własne cele</b> - wspólnie ustalimy, nad czym chcesz pracować, aby terapia była dla Ciebie jak najbardziej wartościowa."
-									]
+										"zmagają się z obniżonym poczuciem własnej wartości",
+										"doświadczają trudności w relacjach partnerskich lub rodzinnych",
+										"mają problem z wyznaczaniem granic i stawianiem siebie na pierwszym miejscu",
+										"czują przewlekły stres, lęk, napięcie emocjonalne lub pustkę",
+										"są w kryzysie życiowym, po rozstaniu lub w trakcie ważnych zmian",
+										"doświadczają trudnej relacji z ciałem lub jedzeniem"
+									],
+									"paragraph1": "Psychoterapia dla kobiet jest także dla tych, które „funkcjonują dobrze”, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie."
 								},
 								"section2": {
-									"title": "Dla kogo jest analiza transakcyjna?",
-									"paragraph0": "Ta forma psychoterapii jest pomocna dla osób, które chcą:",
-									"list0": [
-										"uporządkować relację z jedzeniem i swoim ciałem,",
-										"lepiej radzić sobie z lękiem i wyzwalającymi go schematami,",
-										"budować zdrowsze i bliższe więzi z innymi,",
-										"uwolnić się od negatywnych wzorców myślenia,",
-										"rozwijać swoje umiejętności w kontaktach z ludźmi,",
-										"pogłębiać samoświadomość i rozumienie własnych emocji."
-									]
+									"title": "Obszary pracy w psychoterapii dla kobiet</b>",
+									"paragraph0": "<b>Relacje i schematy emocjonalne</b>",
+									"paragraph1": "Praca nad powtarzającymi się wzorcami w relacjach, trudnościami w bliskości, lękiem przed odrzuceniem, relacjami toksycznymi oraz współuzależnieniem.",
+									"paragraph2": "<b>Poczucie własnej wartości i granice</b>",
+									"paragraph3": "Wsparcie w budowaniu zdrowego poczucia własnej wartości, pracy z perfekcjonizmem, nadmiernym dopasowaniem się do innych oraz trudnością w mówieniu „nie”.",
+									"paragraph4": "<b>Emocje, stres i regulacja napięcia</b>",
+									"paragraph5": "Psychoterapia pomaga w rozumieniu i regulowaniu emocji takich jak lęk, złość, wstyd, smutek czy poczucie winy, a także w pracy z chronicznym napięciem i przeciążeniem psychicznym.",
+									"paragraph6": "<b>Ciało, jedzenie i kontrola</b>",
+									"paragraph7": "Praca terapeutyczna w obszarze zaburzeń odżywiania, kompulsywnego jedzenia, restrykcji, kontroli oraz trudnej relacji z własnym ciałem.",
+									"paragraph8": "<b>Rola silnej kobiety</b>",
+									"paragraph9": "Psychoterapia dla kobiet, które czują przymus bycia silnymi, samodzielnymi i odpowiedzialnymi kosztem własnych potrzeb, odpoczynku i emocji.",
+									"paragraph10": "<b>Kryzysy życiowe i momenty przejścia</b>",
+									"paragraph11": "Wsparcie w czasie rozstań, wypalenia zawodowego, zmiany ról życiowych, poczucia utknięcia lub utraty sensu."
 								},
 								"section3": {
-									"title": "Dlaczego warto?",
-									"paragraph0": "Analiza transakcyjna to praktyczne narzędzie, które daje szansę na prawdziwą zmianę. Pomaga nie tylko lepiej zrozumieć siebie i swoje reakcje, ale też tworzyć bardziej satysfakcjonujące relacje. Dzięki niej możliwe jest stopniowe wprowadzanie głębokich i trwałych zmian w życiu."
+									"title": "Jak wygląda psychoterapia dla kobiet?",
+									"paragraph0": "Psychoterapia to proces oparty na regularnych spotkaniach, dostosowanych do Twoich potrzeb i tempa. Nie musisz wiedzieć, co dokładnie jest problemem, wystarczy gotowość, by przyjrzeć się sobie z ciekawością i uważnością.",
+									"paragraph1": "Celem psychoterapii nie jest „naprawianie” Ciebie, lecz zrozumienie mechanizmów, które powstały, by Cię chronić, oraz stopniowe budowanie bardziej wspierającej relacji ze sobą i innymi."
+								}
+							}
+						},
+						"depressionTherapy": {
+							"title": "Psychoterapia depresji i zaburzeń lękowych",
+							"description": "To profesjonalne wsparcie w odzyskiwaniu równowagi emocjonalnej i budowaniu skutecznych narzędzi radzenia sobie z lękiem oraz depresją.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychoterapia depresji i zaburzeń lękowych to forma specjalistycznego wsparcia psychologicznego skierowana do osób, które zmagają się z obniżonym nastrojem, lękiem, napięciem emocjonalnym lub poczuciem bezradności. Terapia pomaga zrozumieć przyczyny trudności, nauczyć się regulować emocje oraz stopniowo odzyskać poczucie wpływu na własne życie.",
+									"paragraph1": "Depresja i zaburzenia lękowe nie są oznaką słabości. Często są reakcją na długotrwały stres, przeciążenie, trudne doświadczenia lub nierozpoznane potrzeby. Psychoterapia pozwala pracować nie tylko z objawami, ale także z ich źródłem."
+								},
+								"section1": {
+									"title": "Dla kogo jest psychoterapia depresji i lęku?",
+									"paragraph0": "Z psychoterapii depresji i zaburzeń lękowych korzystają osoby, które:",
+									"list0": [
+										"doświadczają długotrwałego smutku, pustki lub braku energii",
+										"odczuwają silny lęk, napięcie, niepokój lub napady paniki",
+										"mają trudności z koncentracją, snem lub codziennym funkcjonowaniem",
+										"czują utratę sensu, motywacji lub radości z życia",
+										"zmagają się z nadmiernym zamartwianiem się i kontrolą",
+										"unikają sytuacji z powodu lęku lub wyczerpania psychicznego"
+									],
+									"paragraph1": "Psychoterapia jest również dla osób, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia."
+								},
+								"section2": {
+									"title": "Obszary pracy w psychoterapii depresji i zaburzeń lękowych:",
+									"paragraph0": "<b>Depresja</b>",
+									"paragraph1": "Praca z obniżonym nastrojem, poczuciem bezwartościowości, brakiem energii, nadmiernym poczuciem winy, wewnętrzną krytyką i wycofaniem z relacji.",
+									"paragraph2": "<b>Zaburzenia lękowe</b>",
+									"paragraph3": "Wsparcie w pracy z lękiem uogólnionym, napadami paniki, lękiem społecznym, fobiami oraz przewlekłym napięciem psychicznym.",
+									"paragraph4": "<b>Myśli i schematy emocjonalne</b>",
+									"paragraph5": "Rozpoznawanie i modyfikowanie schematów myślenia, które podtrzymują lęk, bezradność lub poczucie zagrożenia.",
+									"paragraph6": "<b>Regulacja emocji i napięcia</b>",
+									"paragraph7": "Nauka bezpiecznych sposobów radzenia sobie z intensywnymi emocjami, napięciem w ciele oraz przeciążeniem psychicznym.",
+									"paragraph8": "<b>Relacje i granice</b>",
+									"paragraph9": "Zrozumienie, jak relacje, nadodpowiedzialność lub brak granic wpływają na nasilenie objawów depresyjnych i lękowych.",
+									"paragraph10": "<b>Kryzysy życiowe i przeciążenie</b>",
+									"paragraph11": "Praca z wypaleniem, długotrwałym stresem, zmianami życiowymi, stratą lub poczuciem utknięcia."
+								},
+								"section3": {
+									"title": "Jak wygląda psychoterapia depresji i zaburzeń lękowych?",
+									"paragraph0": "Psychoterapia to proces oparty na regularnych spotkaniach, dostosowanych do Twoich aktualnych możliwości i tempa. Nie wymaga „bycia gotową” ani dokładnego nazwania problemu na początku.",
+									"paragraph1": "Celem psychoterapii jest:",
+									"list0": [
+										"zmniejszenie nasilenia objawów",
+										"lepsze rozumienie własnych reakcji i emocji",
+										"odbudowa poczucia bezpieczeństwa i stabilności",
+										"poprawa jakości życia i funkcjonowania na co dzień"
+									],
+									"paragraph2": "W razie potrzeby terapia może być prowadzona we współpracy z lekarzem psychiatrą."
+								},
+								"section4": {
+									"title": "Psychoterapia depresji i lęku - ważne informacje",
+									"list0": [
+										"Nie musisz „radzić sobie sama”, by zasługiwać na pomoc",
+										"Objawy są sygnałem, nie porażką",
+										"Terapia nie przyspiesza na siłę - pracujemy w bezpiecznym tempie",
+										"Każdy proces jest indywidualny"
+									]
+								}
+							}
+						},
+						"lgbtTherapy": {
+							"title": "Psychoterapia dla osób LGBTQ+",
+							"description": "Afirmatywne wsparcie psychologiczne dla osób LGBTQ+, pomagające budować samoakceptację i dobrostan w bezpiecznej, wolnej od ocen atmosferze.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychoterapia dla osób LGBTQ+ to indywidualna forma wsparcia psychologicznego skierowana do osób nieheteronormatywnych i transpłciowych, które chcą pracować nad swoim dobrostanem psychicznym, relacjami, tożsamością lub trudnymi doświadczeniami życiowymi. To bezpieczna przestrzeń wolna od ocen, patologizowania i prób „naprawiania”.",
+									"paragraph1": "Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w radzeniu sobie z emocjami, stresem mniejszościowym, relacjami oraz skutkami doświadczeń dyskryminacji lub odrzucenia."
+								},
+								"section1": {
+									"title": "Dla kogo jest psychoterapia dla osób LGBTQ+?",
+									"paragraph0": "Z psychoterapii dla osób LGBTQ+ korzystają osoby, które:",
+									"list0": [
+										"doświadczają trudności emocjonalnych, lęku lub obniżonego nastroju",
+										"zmagają się z poczuciem wstydu, winy lub brakiem akceptacji siebie",
+										"są w procesie coming outu lub mierzą się z reakcją otoczenia",
+										"doświadczyły odrzucenia, dyskryminacji lub przemocy",
+										"mają trudności w relacjach partnerskich lub rodzinnych",
+										"czują przeciążenie związane z ciągłym „tłumaczeniem się” lub ukrywaniem siebie"
+									],
+									"paragraph1": "Psychoterapia jest także dla tych, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą."
+								},
+								"section2": {
+									"title": "Obszary pracy w psychoterapii dla osób LGBTQ+",
+									"paragraph0": "<b>Akceptacja siebie i tożsamości</b>",
+									"paragraph1": "Praca nad budowaniem stabilnego poczucia własnej wartości, akceptacją swojej orientacji psychoseksualnej lub tożsamości płciowej.",
+									"paragraph2": "<b>Stres mniejszościowy</b>",
+									"paragraph3": "Wsparcie w radzeniu sobie z chronicznym napięciem wynikającym z życia w społeczeństwie, które bywa nieprzychylne lub oceniające.",
+									"paragraph4": "<b>Relacje i bliskość</b>",
+									"paragraph5": "Trudności w związkach, lęk przed odrzuceniem, problemy z zaufaniem, komunikacją i granicami w relacjach.",
+									"paragraph6": "<b>Rodzina i coming out</b>",
+									"paragraph7": "Praca z reakcjami rodziny, lękiem przed ujawnieniem, poczuciem straty, żalu lub brakiem wsparcia ze strony bliskich.",
+									"paragraph8": "<b>Emocje i regulacja napięcia</b>",
+									"paragraph9": "Lęk, złość, smutek, wstyd, poczucie osamotnienia - terapia pomaga bezpiecznie je przeżywać i regulować.",
+									"paragraph10": "<b>Doświadczenia traumy i przemocy</b>",
+									"paragraph11": "Wsparcie w pracy z konsekwencjami przemocy psychicznej, fizycznej lub seksualnej, hejtu i mikroagresji."
+								},
+								"section3": {
+									"title": "Jak wygląda psychoterapia LGBTQ+?",
+									"paragraph0": "Psychoterapia opiera się na szacunku, wiedzy i rozumieniu specyfiki doświadczeń osób LGBTQ+. Spotkania odbywają się w tempie dostosowanym do Ciebie i Twoich potrzeb.",
+									"paragraph1": "Celem terapii jest:",
+									"list0": [
+										"poprawa dobrostanu psychicznego",
+										"wzmocnienie poczucia bezpieczeństwa i sprawczości",
+										"budowanie zdrowszych relacji",
+										"większa zgodność z własnymi wartościami i tożsamością"
+									]
+								},
+								"section4": {
+									"title": "Ważne informacje",
+									"list0": [
+										"Nie musisz mieć „poważnego problemu”, by skorzystać z terapii",
+										"Twoja tożsamość nie jest diagnozą",
+										"Terapia jest przestrzenią poufną i wspierającą",
+										"Masz prawo do wsparcia bez tłumaczenia się z tego, kim jesteś"
+									]
+								}
+							}
+						},
+						"parentTherapy": {
+							"title": "Psychoterapia i konsultacje dla rodziców",
+							"description": "Profesjonalne wsparcie pomagające rodzicom zrozumieć emocje dziecka, radzić sobie z trudnościami wychowawczymi i budować zdrowsze relacje rodzinne w atmosferze bez oceniania.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychoterapia dla rodziców to forma profesjonalnego wsparcia psychoterapeutycznego skierowana do osób, które chcą lepiej zrozumieć swoje dziecko, poprawić relację w rodzinie oraz poradzić sobie z trudnościami wychowawczymi i emocjonalnymi. To przestrzeń, w której możesz przyjrzeć się nie tylko zachowaniu dziecka, ale także własnym emocjom, reakcjom i poczuciu odpowiedzialności.",
+									"paragraph1": "Rodzicielstwo bywa obciążające, pełne wątpliwości, napięcia i poczucia winy. Psychoterapia pomaga uporządkować chaos, odzyskać spokój i znaleźć bardziej wspierające sposoby reagowania bez oceniania i gotowych recept."
+								},
+								"section1": {
+									"title": "Dla kogo jest terapia dla rodziców?",
+									"paragraph0": "Z terapii lub konsultacji dla rodziców korzystają osoby, które:",
+									"list0": [
+										"doświadczają trudności wychowawczych z dzieckiem lub nastolatkiem",
+										"czują bezradność, złość, lęk lub przeciążenie rolą rodzica",
+										"zmagają się z problemami komunikacji w rodzinie",
+										"martwią się zachowaniem, emocjami lub funkcjonowaniem dziecka",
+										"chcą lepiej stawiać granice bez poczucia winy",
+										"przechodzą przez kryzys rodzinny, rozstanie lub zmianę sytuacji życiowej"
+									],
+									"paragraph1": "Terapia dla rodziców nie oznacza, że „coś robisz źle”. To sygnał, że chcesz działać świadomie i odpowiedzialnie."
+								},
+								"section2": {
+									"title": "Obszary pracy w terapii dla rodziców",
+									"paragraph0": "<b>Trudności wychowawcze i zachowanie dziecka</b>",
+									"paragraph1": "Wsparcie w rozumieniu trudnych zachowań dziecka, wybuchów emocji, wycofania, agresji lub problemów adaptacyjnych.",
+									"paragraph2": "<b>Relacja rodzic-dziecko</b>",
+									"paragraph3": "Praca nad poprawą kontaktu emocjonalnego, komunikacji, poczucia bezpieczeństwa i zaufania w relacji.",
+									"paragraph4": "<b>Granice i konsekwencja</b>",
+									"paragraph5": "Pomoc w stawianiu jasnych granic bez nadmiernej surowości lub uległości, budowanie spójności wychowawczej.",
+									"paragraph6": "<b>Emocje rodzica</b>",
+									"paragraph7": "Praca z poczuciem winy, bezsilnością, złością, lękiem o dziecko oraz wypaleniem rodzicielskim.",
+									"paragraph8": "<b>Trudne sytuacje rodzinne</b>",
+									"paragraph9": "Wsparcie w czasie rozwodu, konfliktów rodzinnych, zmian życiowych, choroby lub kryzysów emocjonalnych dziecka.",
+									"paragraph10": "<b>Rodzic a własne doświadczenia z dzieciństwa</b>",
+									"paragraph11": "Zrozumienie, jak Twoje własne doświadczenia wpływają na sposób reagowania i wychowywania dziecka."
+								},
+								"section3": {
+									"title": "Jak wygląda terapia dla rodziców?",
+									"paragraph0": "Terapia dla rodziców może mieć formę:",
+									"list0": [
+										"pojedynczych konsultacji",
+										"krótkoterminowego wsparcia",
+										"dłuższego procesu psychoterapeutycznego"
+									],
+									"paragraph1": "Spotkania koncentrują się na konkretnych trudnościach, z którymi przychodzisz, oraz na budowaniu realnych, możliwych do wdrożenia zmian. W centrum zawsze pozostaje dobro dziecka, ale bez pomijania potrzeb i granic rodzica."
+								},
+								"section4": {
+									"title": "Wsparcie dla rodziców - ważne informacje:",
+									"list0": [
+										"Nie musisz przychodzić razem z dzieckiem",
+										"Nie potrzebujesz „poważnego problemu”, by skorzystać z pomocy",
+										"Zmiana po stronie rodzica często uruchamia zmianę u dziecka",
+										"Terapia nie ocenia sposobu wychowania, a pomaga zrozumieć i odzyskać pozytywny wpływ."
+									]
+								}
+							}
+						},
+						"eatingDisorderTherapy": {
+							"title": "Psychoterapia zaburzeń odżywiania",
+							"description": "Specjalistyczna terapia pomagająca zrozumieć emocjonalne przyczyny zaburzeń odżywiania oraz odbudować bezpieczną relację z jedzeniem i własnym ciałem.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychoterapia zaburzeń odżywiania to specjalistyczna forma psychoterapii skierowana do osób zmagających się z trudną relacją z jedzeniem, ciałem i kontrolą. Jest to proces, który pomaga zrozumieć emocjonalne i psychiczne mechanizmy stojące za objawami oraz stopniowo odzyskać poczucie bezpieczeństwa, wpływu i kontaktu ze sobą.",
+									"paragraph1": "Zaburzenia odżywiania nie są problemem „braku silnej woli”. To często sposób radzenia sobie z napięciem, emocjami, relacjami lub poczuciem braku kontroli. Psychoterapia pozwala dotrzeć do źródła problemu, a nie tylko zatrzymać objawy."
+								},
+								"section1": {
+									"title": "Dla kogo jest terapia zaburzeń odżywiania?",
+									"paragraph0": "Z terapii zaburzeń odżywiania korzystają osoby, które:",
+									"list0": [
+										"zmagają się z anoreksją, bulimią lub zaburzeniem z napadami objadania się",
+										"doświadczają kompulsywnego jedzenia lub restrykcji żywieniowych",
+										"mają obsesyjne myśli dotyczące jedzenia, wagi lub wyglądu",
+										"czują silne poczucie winy, wstyd lub lęk związany z jedzeniem",
+										"nadmiernie kontrolują ciało, treningi lub dietę",
+										"czują utratę kontroli nad jedzeniem lub przeciwnie - sztywną potrzebę kontroli"
+									],
+									"paragraph1": "Terapia jest również dla osób, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu."
+								},
+								"section2": {
+									"title": "Obszary pracy w terapii zaburzeń odżywiania",
+									"paragraph0": "<b>Relacja z jedzeniem</b>",
+									"paragraph1": "Praca nad restrykcjami, kompulsjami, napadami objadania się, poczuciem winy po jedzeniu oraz lękiem przed utratą kontroli.",
+									"paragraph2": "<b>Relacja z ciałem</b>",
+									"paragraph3": "Wsparcie w budowaniu bardziej realistycznego i łagodnego kontaktu z własnym ciałem, pracy z obrazem ciała, wstydem i nadmierną krytyką.",
+									"paragraph4": "<b>Emocje i regulacja napięcia</b>",
+									"paragraph5": "Zaburzenia odżywiania często pełnią funkcję regulowania emocji. Terapia pomaga nauczyć się rozpoznawać, nazywać i bezpiecznie przeżywać emocje.",
+									"paragraph6": "<b>Kontrola, perfekcjonizm i poczucie wartości</b>",
+									"paragraph7": "Praca z nadmierną potrzebą kontroli, wysokimi wymaganiami wobec siebie oraz poczuciem, że „muszę zasłużyć na bycie wystarczającą”.",
+									"paragraph8": "<b>Relacje i granice</b>",
+									"paragraph9": "Zrozumienie, jak relacje i doświadczenia z przeszłości wpływają na sposób, w jaki ciało i jedzenie stają się miejscem napięcia lub ucieczki."
+								},
+								"section3": {
+									"title": "Jak wygląda terapia zaburzeń odżywiania?",
+									"paragraph0": "Terapia zaburzeń odżywiania to proces długofalowy, oparty na bezpieczeństwie, zaufaniu i indywidualnym tempie pracy. Nie polega na kontroli jedzenia ani narzucaniu gotowych schematów.",
+									"paragraph1": "Celem terapii jest:",
+									"list0": [
+										"zmniejszenie lub wygaszenie objawów",
+										"zrozumienie funkcji zaburzeń odżywiania",
+										"odbudowa poczucia wpływu i sprawczości",
+										"stworzenie bezpieczniejszej relacji z jedzeniem i ciałem"
+									],
+									"paragraph2": "W razie potrzeby terapia może odbywać się we współpracy z lekarzem lub dietetykiem."
 								}
 							}
 						}
@@ -312,12 +541,6 @@
 				"therapyType": {
 					"label": "Typ terapii",
 					"placeholder": "Wybierz typ terapii",
-					"options": {
-						"individual": "Terapia indywidualna",
-						"couples": "Terapia dla pary",
-						"group": "Terapia grupowa",
-						"other": "Inne"
-					},
 					"errors": {
 						"required": "Typ terapii jest wymagany",
 						"invalid": "Wybierz prawidłowy typ terapii"

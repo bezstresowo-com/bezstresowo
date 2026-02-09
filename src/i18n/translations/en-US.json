@@ -47,7 +47,7 @@
 					"learnMore": "Learn more",
 					"services": {
 						"couplesTherapy": {
-							"title": "Couples and Marriage Therapy",
+							"title": "Couple Psychotherapy",
 							"description": "Support in resolving conflicts, improving communication, and rebuilding connection within the relationship. Sessions are held in a safe and supportive environment.",
 							"extended": {
 								"section0": {
@@ -86,8 +86,8 @@
 								}
 							}
 						},
-						"transactionalTherapy": {
-							"title": "Psychotherapy in the Transactional Analysis Approach",
+						"womenTherapy": {
+							"title": "Psychotherapy for Women",
 							"description": "Individual therapeutic work focused on understanding behavioral patterns, developing self-awareness, and achieving lasting positive changes in life.",
 							"extended": {
 								"section0": {
@@ -312,12 +312,6 @@
 				"therapyType": {
 					"label": "Therapy type",
 					"placeholder": "Select therapy type",
-					"options": {
-						"individual": "Individual therapy",
-						"couples": "Couples therapy",
-						"group": "Group therapy",
-						"other": "Other"
-					},
 					"errors": {
 						"required": "Therapy type is required",
 						"invalid": "Please select a valid therapy type"

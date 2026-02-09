@@ -7,7 +7,7 @@
 	);
 </script>
 
-<section class="pt-12 max-xl:px-4">
+<section class="pt-12 max-2xl:px-4">
 	<div class="mx-auto gap-6 max-lg:flex max-lg:flex-col lg:grid lg:grid-cols-7">
 		<div class="col-span-3 flex justify-center">
 			<img
