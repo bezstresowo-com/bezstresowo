@@ -1,9 +1,14 @@
 <script lang="ts">
 	import { translate } from '$i18n';
+	import { isNil } from 'lodash-es';
 	import { CERTIFICATES } from './certificates';
+	import { onDestroy } from 'svelte';
 
 	let selectedCertificate: string | null = $state(null);
 	let selectedIndex: number | null = $state(null);
+	let isBodyScrollLocked = false;
+	let previousBodyOverflow = '';
+	let previousBodyPaddingRight = '';
 
 	function openCertificate(certificate: string, index: number) {
 		selectedCertificate = certificate;
@@ -14,6 +19,42 @@
 		selectedCertificate = null;
 		selectedIndex = null;
 	}
+
+	function lockBodyScroll() {
+		if (isBodyScrollLocked || typeof document === 'undefined') return;
+		const body = document.body;
+		previousBodyOverflow = body.style.overflow;
+		previousBodyPaddingRight = body.style.paddingRight;
+		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+		body.style.overflow = 'hidden';
+		if (scrollbarWidth > 0) {
+			body.style.paddingRight = `${scrollbarWidth}px`;
+		}
+		isBodyScrollLocked = true;
+	}
+
+	function unlockBodyScroll() {
+		if (!isBodyScrollLocked || typeof document === 'undefined') return;
+		const body = document.body;
+		body.style.overflow = previousBodyOverflow;
+		body.style.paddingRight = previousBodyPaddingRight;
+		isBodyScrollLocked = false;
+	}
+
+	$effect(() => {
+		if (isNil(selectedIndex)) {
+			unlockBodyScroll();
+			return;
+		}
+		lockBodyScroll();
+		return () => {
+			unlockBodyScroll();
+		};
+	});
+
+	onDestroy(() => {
+		unlockBodyScroll();
+	});
 </script>
 
 <svelte:window
