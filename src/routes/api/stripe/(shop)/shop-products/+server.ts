@@ -1,6 +1,9 @@
 import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
-import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
+
+import { json } from '@sveltejs/kit';
+
+import type { ShopProductMetadata } from './model';
 
 export async function GET() {
 	const webhookSecret = STRIPE_WHSEC;
@@ -18,7 +21,13 @@ export async function GET() {
 	});
 
 	const processedProducts = products.data
-		.filter((product) => product.metadata?.siteLocation === 'shop')
+		.filter((product) => /shop/.test(product.metadata?.siteLocation ?? ''))
+		.sort((productA, productB) => {
+			const orderMetricA = (productA.metadata as ShopProductMetadata)?.orderKey ?? productA.name;
+			const orderMetricB = (productB.metadata as ShopProductMetadata)?.orderKey ?? productB.name;
+
+			return orderMetricA.localeCompare(orderMetricB);
+		})
 		.map((product) => {
 			const rawPrice = product.default_price;
 

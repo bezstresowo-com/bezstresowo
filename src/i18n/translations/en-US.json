@@ -88,37 +88,266 @@
 						},
 						"womenTherapy": {
 							"title": "Psychotherapy for Women",
-							"description": "Individual therapeutic work focused on understanding behavioral patterns, developing self-awareness, and achieving lasting positive changes in life.",
+							"description": "Individual therapy supporting women in building self-worth, setting boundaries, and regaining inner balance in a safe atmosphere of understanding.",
 							"extended": {
 								"section0": {
-									"title": "What is transactional analysis?",
-									"paragraph0": "Transactional analysis (TA) is an approach to psychotherapy that helps you better understand yourself and your relationships with others. It assumes that each of us operates from three different ego states: <i>Child, Adult, and Parent</i>. These influence our emotions, way of thinking, and communication with others."
+									"paragraph0": "Psychotherapy for women is an individual therapeutic process aimed at women who experience emotional, relational, or life crisis difficulties. It is a form of professional psychological help where you can safely examine your emotions, behavioral patterns, and relationships in an atmosphere of understanding, confidentiality, and respect.",
+									"paragraph1": "If you feel exhausted by constant tension, excessive responsibility, difficult relationships, or the struggle with yourself — psychotherapy can help you reconnect with yourself and introduce real changes in your daily life."
 								},
 								"section1": {
-									"title": "What does the work in therapy look like?",
-									"paragraph0": "During sessions:",
+									"title": "Who is psychotherapy for women for?",
+									"paragraph0": "Women who benefit from psychotherapy include those who, among others:",
 									"list0": [
-										"<b>You will get to know your ego states</b> — you will learn to recognize which place you react from in different situations and how this affects your behavior.",
-										"<b>You will examine your interactions</b> — we will analyze your communication with others to identify unhealthy patterns and replace them with healthier ones.",
-										"<b>You will understand the influence of the past</b> — you will discover how childhood experiences affect your current life and relationships.",
-										"<b>You will set your own goals</b> — together we will determine what you want to work on so that therapy is as valuable as possible for you."
-									]
+										"struggle with low self-esteem",
+										"experience difficulties in romantic or family relationships",
+										"have trouble setting boundaries and putting themselves first",
+										"feel chronic stress, anxiety, emotional tension, or emptiness",
+										"are in a life crisis, after a breakup, or during important changes",
+										"experience a difficult relationship with their body or food"
+									],
+									"paragraph1": "Psychotherapy for women is also for those who \"function well\" but internally feel that something is wrong and want to understand themselves better."
 								},
 								"section2": {
-									"title": "Who is transactional analysis for?",
-									"paragraph0": "This form of psychotherapy is helpful for people who want to:",
-									"list0": [
-										"improve their relationship with food and their body,",
-										"better cope with anxiety and the patterns that trigger it,",
-										"build healthier and closer relationships with others,",
-										"free themselves from negative thinking patterns,",
-										"develop their interpersonal skills,",
-										"deepen self-awareness and understanding of their own emotions."
-									]
+									"title": "Areas of work in psychotherapy for women</b>",
+									"paragraph0": "<b>Relationships and emotional patterns</b>",
+									"paragraph1": "Working on recurring patterns in relationships, difficulties with closeness, fear of rejection, toxic relationships, and codependency.",
+									"paragraph2": "<b>Self-worth and boundaries</b>",
+									"paragraph3": "Support in building healthy self-esteem, working with perfectionism, excessive people-pleasing, and difficulty saying \"no\".",
+									"paragraph4": "<b>Emotions, stress, and tension regulation</b>",
+									"paragraph5": "Psychotherapy helps in understanding and regulating emotions such as anxiety, anger, shame, sadness, or guilt, as well as working with chronic tension and mental overload.",
+									"paragraph6": "<b>Body, food, and control</b>",
+									"paragraph7": "Therapeutic work in the area of eating disorders, compulsive eating, restriction, control, and a difficult relationship with one's own body.",
+									"paragraph8": "<b>The role of the strong woman</b>",
+									"paragraph9": "Psychotherapy for women who feel compelled to be strong, independent, and responsible at the expense of their own needs, rest, and emotions.",
+									"paragraph10": "<b>Life crises and transitional moments</b>",
+									"paragraph11": "Support during breakups, professional burnout, changing life roles, feeling stuck, or loss of meaning."
 								},
 								"section3": {
-									"title": "Why is it worth it?",
-									"paragraph0": "Transactional analysis is a practical tool that offers a chance for real change. It helps not only to better understand yourself and your reactions but also to create more satisfying relationships. It enables the gradual introduction of deep and lasting changes in life."
+									"title": "What does psychotherapy for women look like?",
+									"paragraph0": "Psychotherapy is a process based on regular sessions, tailored to your needs and pace. You don't need to know exactly what the problem is — a willingness to look at yourself with curiosity and mindfulness is enough.",
+									"paragraph1": "The goal of psychotherapy is not to \"fix\" you, but to understand the mechanisms that were created to protect you, and to gradually build a more supportive relationship with yourself and others."
+								}
+							}
+						},
+						"depressionTherapy": {
+							"title": "Psychotherapy for Depression and Anxiety Disorders",
+							"description": "Professional support in regaining emotional balance and building effective tools for coping with anxiety and depression.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychotherapy for depression and anxiety disorders is a form of specialized psychological support aimed at people struggling with low mood, anxiety, emotional tension, or a sense of helplessness. Therapy helps understand the causes of difficulties, learn to regulate emotions, and gradually regain a sense of control over one's own life.",
+									"paragraph1": "Depression and anxiety disorders are not signs of weakness. They are often a reaction to prolonged stress, overload, difficult experiences, or unrecognized needs. Psychotherapy allows working not only with symptoms but also with their source."
+								},
+								"section1": {
+									"title": "Who is psychotherapy for depression and anxiety for?",
+									"paragraph0": "People who benefit from psychotherapy for depression and anxiety disorders include those who:",
+									"list0": [
+										"experience prolonged sadness, emptiness, or lack of energy",
+										"feel intense anxiety, tension, restlessness, or panic attacks",
+										"have difficulty concentrating, sleeping, or functioning daily",
+										"feel a loss of meaning, motivation, or joy in life",
+										"struggle with excessive worrying and control",
+										"avoid situations due to anxiety or mental exhaustion"
+									],
+									"paragraph1": "Psychotherapy is also for people who do not have a formal diagnosis but feel that their mental state significantly affects their quality of life."
+								},
+								"section2": {
+									"title": "Areas of work in psychotherapy for depression and anxiety disorders:",
+									"paragraph0": "<b>Depression</b>",
+									"paragraph1": "Working with low mood, feelings of worthlessness, lack of energy, excessive guilt, inner criticism, and withdrawal from relationships.",
+									"paragraph2": "<b>Anxiety disorders</b>",
+									"paragraph3": "Support in working with generalized anxiety, panic attacks, social anxiety, phobias, and chronic mental tension.",
+									"paragraph4": "<b>Thoughts and emotional patterns</b>",
+									"paragraph5": "Recognizing and modifying thought patterns that maintain anxiety, helplessness, or a sense of threat.",
+									"paragraph6": "<b>Emotion and tension regulation</b>",
+									"paragraph7": "Learning safe ways to cope with intense emotions, bodily tension, and mental overload.",
+									"paragraph8": "<b>Relationships and boundaries</b>",
+									"paragraph9": "Understanding how relationships, over-responsibility, or lack of boundaries affect the intensity of depressive and anxiety symptoms.",
+									"paragraph10": "<b>Life crises and overload</b>",
+									"paragraph11": "Working with burnout, prolonged stress, life changes, loss, or feeling stuck."
+								},
+								"section3": {
+									"title": "What does psychotherapy for depression and anxiety disorders look like?",
+									"paragraph0": "Psychotherapy is a process based on regular sessions, adapted to your current abilities and pace. It does not require \"being ready\" or precisely naming the problem at the beginning.",
+									"paragraph1": "The goals of psychotherapy are:",
+									"list0": [
+										"reducing the severity of symptoms",
+										"better understanding of your own reactions and emotions",
+										"rebuilding a sense of safety and stability",
+										"improving quality of life and daily functioning"
+									],
+									"paragraph2": "If needed, therapy can be conducted in collaboration with a psychiatrist."
+								},
+								"section4": {
+									"title": "Psychotherapy for depression and anxiety — important information",
+									"list0": [
+										"You don't have to \"cope on your own\" to deserve help",
+										"Symptoms are a signal, not a failure",
+										"Therapy doesn't rush — we work at a safe pace",
+										"Every process is individual"
+									]
+								}
+							}
+						},
+						"lgbtTherapy": {
+							"title": "Psychotherapy for LGBTQ+ Individuals",
+							"description": "Affirmative psychological support for LGBTQ+ individuals, helping build self-acceptance and well-being in a safe, judgment-free atmosphere.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychotherapy for LGBTQ+ individuals is an individual form of psychological support aimed at non-heteronormative and transgender people who want to work on their mental well-being, relationships, identity, or difficult life experiences. It is a safe space free from judgment, pathologizing, and attempts to \"fix\" anyone.",
+									"paragraph1": "Therapy is not about changing orientation or identity. Its goal is to support coping with emotions, minority stress, relationships, and the effects of discrimination or rejection."
+								},
+								"section1": {
+									"title": "Who is psychotherapy for LGBTQ+ individuals for?",
+									"paragraph0": "People who benefit from psychotherapy for LGBTQ+ individuals include those who:",
+									"list0": [
+										"experience emotional difficulties, anxiety, or low mood",
+										"struggle with feelings of shame, guilt, or lack of self-acceptance",
+										"are in the process of coming out or dealing with their environment's reaction",
+										"have experienced rejection, discrimination, or violence",
+										"have difficulties in romantic or family relationships",
+										"feel overwhelmed by constantly \"explaining themselves\" or hiding who they are"
+									],
+									"paragraph1": "Psychotherapy is also for those who are not going through a crisis but want to understand themselves better and live in greater harmony with themselves."
+								},
+								"section2": {
+									"title": "Areas of work in psychotherapy for LGBTQ+ individuals",
+									"paragraph0": "<b>Self-acceptance and identity</b>",
+									"paragraph1": "Working on building a stable sense of self-worth, accepting one's psychosexual orientation or gender identity.",
+									"paragraph2": "<b>Minority stress</b>",
+									"paragraph3": "Support in coping with chronic tension resulting from living in a society that can be unfriendly or judgmental.",
+									"paragraph4": "<b>Relationships and closeness</b>",
+									"paragraph5": "Difficulties in partnerships, fear of rejection, problems with trust, communication, and boundaries in relationships.",
+									"paragraph6": "<b>Family and coming out</b>",
+									"paragraph7": "Working with family reactions, fear of disclosure, feelings of loss, grief, or lack of support from loved ones.",
+									"paragraph8": "<b>Emotions and tension regulation</b>",
+									"paragraph9": "Anxiety, anger, sadness, shame, feeling of loneliness — therapy helps safely experience and regulate them.",
+									"paragraph10": "<b>Experiences of trauma and violence</b>",
+									"paragraph11": "Support in working with the consequences of psychological, physical, or sexual violence, hate, and microaggressions."
+								},
+								"section3": {
+									"title": "What does LGBTQ+ psychotherapy look like?",
+									"paragraph0": "Psychotherapy is based on respect, knowledge, and understanding of the specifics of LGBTQ+ experiences. Sessions take place at a pace tailored to you and your needs.",
+									"paragraph1": "The goals of therapy are:",
+									"list0": [
+										"improving mental well-being",
+										"strengthening a sense of safety and agency",
+										"building healthier relationships",
+										"greater alignment with one's own values and identity"
+									]
+								},
+								"section4": {
+									"title": "Important information",
+									"list0": [
+										"You don't need to have a \"serious problem\" to benefit from therapy",
+										"Your identity is not a diagnosis",
+										"Therapy is a confidential and supportive space",
+										"You have the right to support without having to explain who you are"
+									]
+								}
+							}
+						},
+						"parentTherapy": {
+							"title": "Psychotherapy and Consultations for Parents",
+							"description": "Professional support helping parents understand their child's emotions, cope with parenting challenges, and build healthier family relationships in a judgment-free atmosphere.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychotherapy for parents is a form of professional psychotherapeutic support aimed at people who want to better understand their child, improve family relationships, and cope with parenting and emotional difficulties. It is a space where you can look not only at the child's behavior but also at your own emotions, reactions, and sense of responsibility.",
+									"paragraph1": "Parenting can be overwhelming, full of doubts, tension, and guilt. Psychotherapy helps organize the chaos, regain peace, and find more supportive ways of reacting — without judgment and ready-made recipes."
+								},
+								"section1": {
+									"title": "Who is therapy for parents for?",
+									"paragraph0": "People who benefit from therapy or consultations for parents include those who:",
+									"list0": [
+										"experience parenting difficulties with a child or teenager",
+										"feel helplessness, anger, anxiety, or overwhelm in the parenting role",
+										"struggle with communication problems in the family",
+										"worry about the child's behavior, emotions, or functioning",
+										"want to set boundaries better without feeling guilty",
+										"are going through a family crisis, separation, or a change in life situation"
+									],
+									"paragraph1": "Therapy for parents does not mean that \"you're doing something wrong.\" It is a sign that you want to act consciously and responsibly."
+								},
+								"section2": {
+									"title": "Areas of work in therapy for parents",
+									"paragraph0": "<b>Parenting difficulties and child behavior</b>",
+									"paragraph1": "Support in understanding difficult child behaviors, emotional outbursts, withdrawal, aggression, or adaptation problems.",
+									"paragraph2": "<b>Parent-child relationship</b>",
+									"paragraph3": "Working on improving emotional contact, communication, sense of safety, and trust in the relationship.",
+									"paragraph4": "<b>Boundaries and consistency</b>",
+									"paragraph5": "Help in setting clear boundaries without excessive strictness or submissiveness, building parenting consistency.",
+									"paragraph6": "<b>Parent's emotions</b>",
+									"paragraph7": "Working with guilt, helplessness, anger, worry about the child, and parental burnout.",
+									"paragraph8": "<b>Difficult family situations</b>",
+									"paragraph9": "Support during divorce, family conflicts, life changes, illness, or the child's emotional crises.",
+									"paragraph10": "<b>The parent and their own childhood experiences</b>",
+									"paragraph11": "Understanding how your own experiences affect the way you react and raise your child."
+								},
+								"section3": {
+									"title": "What does therapy for parents look like?",
+									"paragraph0": "Therapy for parents can take the form of:",
+									"list0": [
+										"single consultations",
+										"short-term support",
+										"a longer psychotherapeutic process"
+									],
+									"paragraph1": "Sessions focus on the specific difficulties you bring and on building real, implementable changes. The child's well-being always remains at the center, but without ignoring the parent's needs and boundaries."
+								},
+								"section4": {
+									"title": "Support for parents — important information:",
+									"list0": [
+										"You don't have to come with your child",
+										"You don't need a \"serious problem\" to seek help",
+										"A change on the parent's side often triggers a change in the child",
+										"Therapy does not judge the way of parenting — it helps understand and regain positive influence."
+									]
+								}
+							}
+						},
+						"eatingDisorderTherapy": {
+							"title": "Psychotherapy for Eating Disorders",
+							"description": "Specialized therapy helping to understand the emotional causes of eating disorders and rebuild a safe relationship with food and one's own body.",
+							"extended": {
+								"section0": {
+									"paragraph0": "Psychotherapy for eating disorders is a specialized form of psychotherapy aimed at people struggling with a difficult relationship with food, body, and control. It is a process that helps understand the emotional and psychological mechanisms behind the symptoms and gradually regain a sense of safety, control, and connection with oneself.",
+									"paragraph1": "Eating disorders are not a problem of \"lacking willpower.\" They are often a way of coping with tension, emotions, relationships, or a sense of lack of control. Psychotherapy allows reaching the source of the problem, not just stopping the symptoms."
+								},
+								"section1": {
+									"title": "Who is eating disorder therapy for?",
+									"paragraph0": "People who benefit from eating disorder therapy include those who:",
+									"list0": [
+										"struggle with anorexia, bulimia, or binge eating disorder",
+										"experience compulsive eating or dietary restrictions",
+										"have obsessive thoughts about food, weight, or appearance",
+										"feel intense guilt, shame, or anxiety related to food",
+										"excessively control their body, workouts, or diet",
+										"feel a loss of control over eating or, conversely, a rigid need for control"
+									],
+									"paragraph1": "Therapy is also for people who do not formally have a diagnosis but feel that food and body take up too much space in their life."
+								},
+								"section2": {
+									"title": "Areas of work in eating disorder therapy",
+									"paragraph0": "<b>Relationship with food</b>",
+									"paragraph1": "Working on restrictions, compulsions, binge eating episodes, guilt after eating, and fear of losing control.",
+									"paragraph2": "<b>Relationship with the body</b>",
+									"paragraph3": "Support in building a more realistic and gentle connection with one's own body, working with body image, shame, and excessive self-criticism.",
+									"paragraph4": "<b>Emotions and tension regulation</b>",
+									"paragraph5": "Eating disorders often serve the function of regulating emotions. Therapy helps learn to recognize, name, and safely experience emotions.",
+									"paragraph6": "<b>Control, perfectionism, and self-worth</b>",
+									"paragraph7": "Working with an excessive need for control, high self-expectations, and the feeling that \"I have to earn being enough.\"",
+									"paragraph8": "<b>Relationships and boundaries</b>",
+									"paragraph9": "Understanding how relationships and past experiences influence the way body and food become a place of tension or escape."
+								},
+								"section3": {
+									"title": "What does eating disorder therapy look like?",
+									"paragraph0": "Eating disorder therapy is a long-term process based on safety, trust, and an individual pace of work. It does not involve controlling food or imposing ready-made schemes.",
+									"paragraph1": "The goals of therapy are:",
+									"list0": [
+										"reducing or extinguishing symptoms",
+										"understanding the function of eating disorders",
+										"rebuilding a sense of control and agency",
+										"creating a safer relationship with food and the body"
+									],
+									"paragraph2": "If needed, therapy can be conducted in collaboration with a doctor or dietitian."
 								}
 							}
 						}

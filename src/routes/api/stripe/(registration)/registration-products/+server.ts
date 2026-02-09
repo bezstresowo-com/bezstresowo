@@ -1,7 +1,9 @@
 import { STRIPE_SK } from '$env/static/private';
-import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import type { RegistrationProduct } from './model';
+
+import { json } from '@sveltejs/kit';
+
+import type { RegistrationProduct, RegistrationProductMetadata } from './model';
 
 export async function GET() {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -14,7 +16,17 @@ export async function GET() {
 	});
 
 	const registrationProducts: RegistrationProduct[] = products.data
-		.filter((product) => product.metadata?.siteLocation === 'registrations')
+		.filter((product) =>
+			/registrations/.test((product.metadata as RegistrationProductMetadata)?.siteLocation ?? '')
+		)
+		.sort((productA, productB) => {
+			const orderMetricA =
+				(productA.metadata as RegistrationProductMetadata)?.orderKey ?? productA.name;
+			const orderMetricB =
+				(productB.metadata as RegistrationProductMetadata)?.orderKey ?? productB.name;
+
+			return orderMetricA.localeCompare(orderMetricB);
+		})
 		.map((product) => {
 			const rawPrice = product.default_price;
 
