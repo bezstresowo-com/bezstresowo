@@ -24,4 +24,4 @@
 <CertificatesSection />
 <ServicesSection />
 <ContactForm />
-<Blog />
+<Blog siteLocation="home" />

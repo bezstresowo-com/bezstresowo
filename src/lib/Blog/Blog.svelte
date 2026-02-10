@@ -21,6 +21,7 @@
 
 	const {
 		title = 'user.pages.home.blog.title',
+		siteLocation = 'standalone',
 		pageSize = 3,
 		isPreview = true
 	}: BlogProps = $props();
@@ -88,13 +89,21 @@
 </script>
 
 <section class="bg-white text-primary">
-	<div
-		class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90 p-2"
-	>
-		<h1 class="mx-auto text-center text-4xl font-bold text-white sm:text-5xl">
-			{$translate(title)}
-		</h1>
-	</div>
+	{#if siteLocation === 'standalone'}
+		<div
+			class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90 p-2"
+		>
+			<h1 class="mx-auto text-center text-4xl font-bold text-white sm:text-5xl">
+				{$translate(title)}
+			</h1>
+		</div>
+	{:else if siteLocation === 'home'}
+		<div class="mt-16 pb-8 text-center">
+			<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
+				{$translate(title)}
+			</h1>
+		</div>
+	{/if}
 
 	{#if isLoading}
 		<div class="mx- flex items-center justify-center px-4 pb-20">
@@ -110,7 +119,7 @@
 			</p>
 		</div>
 	{:else}
-		<div class="grid w-full grid-cols-3 gap-4 max-2xl:px-4 max-lg:flex max-lg:flex-col">
+		<div class="grid w-full grid-cols-3 gap-4 pt-4 max-2xl:px-4 max-lg:flex max-lg:flex-col">
 			{#each blogPosts.data?.data as post (post.id)}
 				<article class=" rounded-lg border border-accent p-4">
 					<div class="text-accent">
