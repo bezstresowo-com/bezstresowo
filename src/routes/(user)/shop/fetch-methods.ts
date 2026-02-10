@@ -1,6 +1,6 @@
 import type {
-	CreateCheckoutSessionRequestDto,
-	CreateCheckoutSessionResponseDto
+	ShopCheckoutRequestDto,
+	ShopCheckoutResponseDto
 } from '$api/stripe/(shop)/shop-checkout/model';
 import { resolve } from '$app/paths';
 import { HttpMethod } from '$shared/global/enums/http-method';
@@ -19,8 +19,8 @@ export async function getProducts() {
 	);
 }
 
-export async function createCheckoutSession(data: CreateCheckoutSessionRequestDto) {
-	return await baseFetch<CreateCheckoutSessionResponseDto>(
+export async function createCheckoutSession(data: ShopCheckoutRequestDto) {
+	return await baseFetch<ShopCheckoutResponseDto>(
 		async () =>
 			await fetch(`${resolve('/api/stripe/shop-checkout')}`, {
 				method: HttpMethod.POST,

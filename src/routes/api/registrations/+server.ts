@@ -16,7 +16,7 @@ export async function POST({ request, route }) {
 
 		const msg = message ?? '';
 
-		await new EmailService().registrationRequest({
+		await new EmailService().consultationRegistrationMessage({
 			email,
 			message: msg,
 			nameAndSurname,

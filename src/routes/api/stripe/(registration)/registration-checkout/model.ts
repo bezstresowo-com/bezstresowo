@@ -55,8 +55,8 @@ export interface RegistrationCheckoutResponseDto {
 	url: string | null;
 }
 
-export interface RegistrationCheckoutMetadata {
-	type: 'registration';
+export interface ConsultationRegistrationCheckoutMetadata {
+	type: 'consultation-registration';
 	email: string;
 	nameAndSurname: string;
 	tel: string;

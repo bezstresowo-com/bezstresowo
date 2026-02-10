@@ -3,7 +3,10 @@ import { HttpStatus } from '$shared/global/enums/http-status';
 import { validateRequest } from '$shared/server/functions/validate-body';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { RegistrationCheckoutRequestDto, type RegistrationCheckoutMetadata } from './model';
+import {
+	RegistrationCheckoutRequestDto,
+	type ConsultationRegistrationCheckoutMetadata
+} from './model';
 
 export async function POST({ request }) {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -30,7 +33,6 @@ export async function POST({ request }) {
 		}
 
 		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ['card'],
 			line_items: [
 				{
 					price: priceId,
@@ -40,15 +42,18 @@ export async function POST({ request }) {
 			mode: 'payment',
 			success_url: successUrl,
 			cancel_url: cancelUrl,
+			phone_number_collection: {
+				enabled: true
+			},
 			customer_email: email,
 			metadata: {
-				type: 'registration',
+				type: 'consultation-registration',
 				therapyName: therapyName,
 				nameAndSurname,
 				tel,
 				email,
 				message: message ?? ''
-			} satisfies RegistrationCheckoutMetadata
+			} satisfies ConsultationRegistrationCheckoutMetadata
 		});
 
 		return json({

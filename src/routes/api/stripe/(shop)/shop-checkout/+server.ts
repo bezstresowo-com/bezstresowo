@@ -3,7 +3,7 @@ import { HttpStatus } from '$shared/global/enums/http-status';
 import { validateRequest } from '$shared/server/functions/validate-body';
 import { json } from '@sveltejs/kit';
 import Stripe from 'stripe';
-import { CreateCheckoutSessionRequestDto } from './model';
+import { ShopCheckoutRequestDto, type ShopCheckoutMetadata } from './model';
 
 export async function POST({ request }) {
 	const stripe = new Stripe(STRIPE_SK, {
@@ -12,7 +12,7 @@ export async function POST({ request }) {
 
 	try {
 		const body = await request.json();
-		const validationResult = await validateRequest(body, CreateCheckoutSessionRequestDto);
+		const validationResult = await validateRequest(body, ShopCheckoutRequestDto);
 
 		if (validationResult.type === 'error') {
 			return validationResult.response;
@@ -29,7 +29,6 @@ export async function POST({ request }) {
 		}
 
 		const session = await stripe.checkout.sessions.create({
-			payment_method_types: ['card'],
 			line_items: [
 				{
 					price: priceId,
@@ -43,10 +42,8 @@ export async function POST({ request }) {
 				enabled: true
 			},
 			metadata: {
-				priceId: priceId,
-				productId: (price.product as Stripe.Product).id,
-				quantity: quantity.toString()
-			}
+				type: 'shop'
+			} satisfies ShopCheckoutMetadata
 		});
 
 		return json({

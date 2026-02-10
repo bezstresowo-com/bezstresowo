@@ -2,7 +2,7 @@ import { validators } from '$shared/server/validators';
 
 const { IsDefined, IsString, IsNumber, IsOptional, Min } = validators;
 
-export class CreateCheckoutSessionRequestDto {
+export class ShopCheckoutRequestDto {
 	@IsDefined()
 	@IsString()
 	priceId: string;
@@ -21,11 +21,15 @@ export class CreateCheckoutSessionRequestDto {
 	cancelUrl: string;
 }
 
-export interface CreateCheckoutSessionResponseDto {
+export interface ShopCheckoutResponseDto {
 	sessionId: string;
 	url: string | null;
 	product: {
 		id: string;
 		name: string;
 	};
+}
+
+export interface ShopCheckoutMetadata {
+	type: 'shop';
 }

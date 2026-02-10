@@ -14,7 +14,7 @@ export async function POST({ request, route }) {
 
 		const { email, message, nameAndSurname, tel } = validationResult.dto;
 
-		await new EmailService().contactRequest({
+		await new EmailService().contactRequestMessage({
 			email,
 			message,
 			nameAndSurname,

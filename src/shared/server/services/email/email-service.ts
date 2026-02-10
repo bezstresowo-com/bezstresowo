@@ -1,7 +1,11 @@
-import { EMAIL_APP_PASSWORD, EMAIL_SENDER } from '$env/static/private';
+import { EMAIL_APP_PASSWORD, EMAIL_SENDER, EMAIL_SUBJECT_PREFIX } from '$env/static/private';
 import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
 import { createTransport } from 'nodemailer';
-import type { ContactRequestArgs, RegistrationRequestArgs } from './model';
+import type {
+	ConsultationRegistrationMessageArgs,
+	ContactRequestMessageArgs,
+	ShopBuyMessageArgs
+} from './model';
 
 export class EmailService {
 	private readonly _transport;
@@ -16,50 +20,82 @@ export class EmailService {
 		});
 	}
 
-	async contactRequest(args: ContactRequestArgs) {
-		const ownerHtml = (await import('./email-templates/contact-request.html?raw')).default;
-		const userHtml = (await import('./email-templates/contact-request-user.html?raw')).default;
+	async contactRequestMessage(args: ContactRequestMessageArgs) {
+		const ownerHtml = (
+			await import('./email-templates/contact-request/contact-request-owner.html?raw')
+		).default;
+		const userHtml = (
+			await import('./email-templates/contact-request/contact-request-user.html?raw')
+		).default;
 
 		// Send to owner
 		await this._send(
 			EMAIL_SENDER,
-			`Nowa wiadomość od ${args.nameAndSurname}`,
-			htmlKeyValueReplacer(ownerHtml, args)
+			`${EMAIL_SUBJECT_PREFIX} Nowa wiadomość od ${args.nameAndSurname}`,
+			ownerHtml,
+			args
+		);
+
+		// Send to user
+		await this._send(args.email, `${EMAIL_SUBJECT_PREFIX} Dziękuję za wiadomość!`, userHtml, args);
+	}
+
+	async consultationRegistrationMessage(args: ConsultationRegistrationMessageArgs) {
+		const ownerHtml = (
+			await import(
+				'./email-templates/consultation-registration/consultation-registration-owner.html?raw'
+			)
+		).default;
+		const userHtml = (
+			await import(
+				'./email-templates/consultation-registration/consultation-registration-user.html?raw'
+			)
+		).default;
+
+		// Send to owner
+		await this._send(
+			EMAIL_SENDER,
+			`${EMAIL_SUBJECT_PREFIX} Nowa rezerwacja konsultacji od ${args.nameAndSurname}`,
+			ownerHtml,
+			args
 		);
 
 		// Send to user
 		await this._send(
 			args.email,
-			'Dziękuję za wiadomość - bezstresowo.org',
-			htmlKeyValueReplacer(userHtml, args)
+			`${EMAIL_SUBJECT_PREFIX} Potwierdzenie rezerwacji konsultacji`,
+			userHtml,
+			args
 		);
 	}
 
-	async registrationRequest(args: RegistrationRequestArgs) {
-		const ownerHtml = (await import('./email-templates/registration-request.html?raw')).default;
-		const userHtml = (await import('./email-templates/registration-request-user.html?raw')).default;
+	async shopBuyMessage(args: ShopBuyMessageArgs) {
+		const ownerHtml = (await import('./email-templates/shop-buy/shop-buy-owner.html?raw')).default;
+		const userHtml = (await import('./email-templates/shop-buy/shop-buy-user.html?raw')).default;
 
 		// Send to owner
 		await this._send(
 			EMAIL_SENDER,
-			`Nowa rezerwacja od ${args.nameAndSurname}`,
-			htmlKeyValueReplacer(ownerHtml, args)
+			`${EMAIL_SUBJECT_PREFIX} Nowy zakup produktu od ${args.nameAndSurname}`,
+			ownerHtml,
+			args
 		);
 
 		// Send to user
 		await this._send(
 			args.email,
-			'Potwierdzenie rezerwacji - bezstresowo.org',
-			htmlKeyValueReplacer(userHtml, args)
+			`${EMAIL_SUBJECT_PREFIX} Potwierdzenie zakupu produktu`,
+			userHtml,
+			args
 		);
 	}
 
-	private async _send(to: string, subject: string, html: string) {
+	private async _send(to: string, subject: string, html: string, args: Record<string, string>) {
 		await this._transport.sendMail({
 			from: EMAIL_SENDER,
 			to,
 			subject,
-			html
+			html: htmlKeyValueReplacer(html, { subject, ...args })
 		});
 	}
 }

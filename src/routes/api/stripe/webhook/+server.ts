@@ -1,6 +1,6 @@
 import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { EmailService } from '$shared/server/services/email/email-service';
-import type { RegistrationRequestArgs } from '$shared/server/services/email/model.js';
+import type { ConsultationRegistrationMessageArgs } from '$shared/server/services/email/model.js';
 import { json, text } from '@sveltejs/kit';
 import { isNil } from 'lodash-es';
 import Stripe from 'stripe';
@@ -34,17 +34,42 @@ export async function POST({ request }) {
 		if (!isNil(metadata)) {
 			try {
 				switch (metadata.type) {
-					case 'registration': {
+					case 'consultation-registration': {
 						const parsedMetadata = {
 							...metadata
-						} as RegistrationRequestArgs;
+						} as ConsultationRegistrationMessageArgs;
 
-						await new EmailService().registrationRequest({
+						await new EmailService().consultationRegistrationMessage({
 							email: parsedMetadata.email || '',
 							message: parsedMetadata.message || '',
 							nameAndSurname: parsedMetadata.nameAndSurname || '',
 							tel: parsedMetadata.tel || '',
 							therapyName: parsedMetadata.therapyName || ''
+						});
+						break;
+					}
+
+					case 'shop': {
+						const customerDetails = session.customer_details;
+						const lineItems = await stripe.checkout.sessions.listLineItems(session.id, {
+							limit: 1,
+							expand: ['data.price.product']
+						});
+						const firstItem = lineItems.data[0];
+						const product = firstItem?.price?.product;
+						const productName =
+							(typeof product === 'object' && !product.deleted && product.name) ||
+							firstItem?.description ||
+							'';
+
+						await new EmailService().shopBuyMessage({
+							email: customerDetails?.email || '',
+							tel: customerDetails?.phone || '',
+							nameAndSurname: customerDetails?.name || '',
+							price:
+								session.amount_total != null ? (session.amount_total / 100).toFixed(2) : '',
+							currency: session.currency || '',
+							productName
 						});
 						break;
 					}
