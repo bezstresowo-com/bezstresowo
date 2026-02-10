@@ -40,5 +40,8 @@
 
 	// TypeScript settings
 	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true
+	"typescript.enablePromptUseWorkspaceTsdk": true,
+	"[prisma]": {
+		"editor.defaultFormatter": "Prisma.prisma"
+	}
 }

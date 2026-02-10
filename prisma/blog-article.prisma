@@ -1,7 +1,7 @@
 model BlogArticle {
-  id        String   @id @default(uuid())
-  title     String
-  content   String
+  id       String   @id @default(auto()) @map("_id") @db.ObjectId
+  title    String
+  content  String
   mediaIds String[]
 
   createdAt DateTime @default(now())
