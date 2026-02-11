@@ -633,7 +633,7 @@
 				"success": "Twoja wiadomość została wysłana!",
 				"error": "Wystąpił błąd serwera. Spróbuj ponownie później."
 			},
-			"contactInformations": {
+			"contactInformation": {
 				"phone": "Mój telefon",
 				"email": "Mój email",
 				"hours": "Godziny otwarcia",
@@ -671,8 +671,8 @@
 					"placeholder": "Wpisz swoją wiadomość",
 					"errors": {
 						"required": "Wiadomość jest wymagana",
-						"min": "Wiadomość jest za krótka",
-						"max": "Wiadomość jest za długa"
+						"min": "Wiadomość jest za krótka - minimum to {{ min }} znaków",
+						"max": "Wiadomość jest za długa - maximum to {{ max }} znaków"
 					}
 				}
 			}

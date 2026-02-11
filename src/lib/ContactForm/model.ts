@@ -23,8 +23,8 @@ export const SCHEMA = yup.object().shape({
 	message: yup
 		.string()
 		.required(`${prefix}.message.errors.required`)
-		.min(10, `${prefix}.message.errors.min`)
-		.max(10_000, `${prefix}.message.errors.max`)
+		.min(10, ({ min }) => `${prefix}.message.errors.min@${JSON.stringify({ min })}`)
+		.max(10_000, ({ max }) => `${prefix}.message.errors.max@${JSON.stringify({ max })}`)
 });
 
 export type FormValue = yup.InferType<typeof SCHEMA>;

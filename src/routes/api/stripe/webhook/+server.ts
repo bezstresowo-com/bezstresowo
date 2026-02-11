@@ -41,7 +41,7 @@ export async function POST({ request }) {
 
 						await new EmailService().consultationRegistrationMessage({
 							email: parsedMetadata.email || '',
-							message: parsedMetadata.message || '',
+							message: parsedMetadata.message || '<i>Brak wiadomości</i>',
 							nameAndSurname: parsedMetadata.nameAndSurname || '',
 							tel: parsedMetadata.tel || '',
 							therapyName: parsedMetadata.therapyName || ''

@@ -16,7 +16,7 @@ export async function POST({ request, route }) {
 
 		await new EmailService().contactRequestMessage({
 			email,
-			message,
+			message: message || '<i>Brak wiadomości</i>',
 			nameAndSurname,
 			tel
 		});

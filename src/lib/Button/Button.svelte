@@ -14,7 +14,7 @@
 {#if href}
 	<a
 		{href}
-		class={`h-12 cursor-pointer rounded-lg bg-accent font-medium transition hover:bg-accent/80 ${disabled ? 'cursor-not-allowed grayscale' : ''} ${tailwind}`}
+		class={`h-12 rounded-lg bg-accent font-medium transition hover:bg-accent/80 ${disabled ? 'cursor-not-allowed grayscale' : 'cursor-pointer'} ${tailwind}`}
 	>
 		{@render children?.()}
 	</a>
@@ -23,7 +23,7 @@
 		{type}
 		{disabled}
 		{onclick}
-		class={`h-12 cursor-pointer rounded-lg bg-accent font-medium transition hover:bg-accent/80 ${disabled ? 'cursor-not-allowed grayscale' : ''} ${tailwind}`}
+		class={`h-12 rounded-lg bg-accent font-medium transition hover:bg-accent/80 ${disabled ? 'cursor-not-allowed grayscale' : 'cursor-pointer'} ${tailwind}`}
 	>
 		{@render children?.()}
 	</button>

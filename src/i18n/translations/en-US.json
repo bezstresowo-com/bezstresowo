@@ -633,7 +633,7 @@
 				"success": "Your message has been sent!",
 				"error": "A server error occurred. Please try again later."
 			},
-			"contactInformations": {
+			"contactInformation": {
 				"phone": "Phone",
 				"email": "Email",
 				"hours": "Opening hours",
@@ -671,8 +671,8 @@
 					"placeholder": "Enter your message",
 					"errors": {
 						"required": "Message is required",
-						"min": "Message is too short",
-						"max": "Message is too long"
+						"min": "Message is too short - minimum is {{ min }} characters",
+						"max": "Message is too long - maximum is {{ max }} characters"
 					}
 				}
 			}
