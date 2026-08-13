@@ -3,9 +3,9 @@ model Product {
 
   slug String @unique
 
-  // Pricing, checkout and the catalog live in Stripe. This links the local,
-  // localizable content to its Stripe product (see api/stripe/(shop)).
-  stripeProductId String? @unique
+  // Integer price in grosze (1/100 PLN). Currency is always PLN; Stripe only
+  // handles checkout (products are defined here, not in Stripe).
+  priceGrosze Int
 
   active Boolean @default(true)
 
