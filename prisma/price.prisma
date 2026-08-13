@@ -1,0 +1,11 @@
+model Price {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  currency     String @default("pln")
+  inMinorUnits Int
+
+  product Product?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

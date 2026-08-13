@@ -3,13 +3,12 @@ model Product {
 
   slug String @unique
 
-  // Integer price in grosze (1/100 PLN). Currency is always PLN; Stripe only
-  // handles checkout (products are defined here, not in Stripe).
-  priceGrosze Int
-
   active Boolean @default(true)
 
   internationalizedProducts InternationalizedProduct[]
+
+  price   Price  @relation(fields: [priceId], references: [id])
+  priceId String @unique @db.ObjectId
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
