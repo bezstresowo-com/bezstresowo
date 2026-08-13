@@ -1,0 +1,16 @@
+model Product {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  slug String @unique
+
+  // Pricing, checkout and the catalog live in Stripe. This links the local,
+  // localizable content to its Stripe product (see api/stripe/(shop)).
+  stripeProductId String? @unique
+
+  active Boolean @default(true)
+
+  internationalizedProducts InternationalizedProduct[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
