@@ -1,6 +1,7 @@
 import {
 	AWS_S3_ACCESS_KEY_ID,
 	AWS_S3_BUCKET_NAME,
+	AWS_S3_ENDPOINT,
 	AWS_S3_REGION,
 	AWS_S3_SECRET_ACCESS_KEY
 } from '$env/static/private';
@@ -15,7 +16,11 @@ export class S3Service {
 			credentials: {
 				accessKeyId: AWS_S3_ACCESS_KEY_ID,
 				secretAccessKey: AWS_S3_SECRET_ACCESS_KEY
-			}
+			},
+			// A custom endpoint (e.g. local MinIO) needs path-style addressing.
+			...(AWS_S3_ENDPOINT
+				? { endpoint: AWS_S3_ENDPOINT, forcePathStyle: true }
+				: {})
 		});
 	}
 
@@ -29,7 +34,9 @@ export class S3Service {
 
 		await this._s3.send(command);
 
-		const url = `https://${AWS_S3_BUCKET_NAME}.s3.${AWS_S3_REGION}.amazonaws.com/${fileName}`;
+		const url = AWS_S3_ENDPOINT
+			? `${AWS_S3_ENDPOINT}/${AWS_S3_BUCKET_NAME}/${fileName}`
+			: `https://${AWS_S3_BUCKET_NAME}.s3.${AWS_S3_REGION}.amazonaws.com/${fileName}`;
 		return { url };
 	}
 
