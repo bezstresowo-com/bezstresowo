@@ -1,12 +1,10 @@
 model InternationalizedBlogArticle {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  lang String
-
-  title    String
-  content  String
-  mediaIds String[]
-
+  lang           String
+  title          String
+  content        String
+  mediaIds       String[]
   metadataJsonLD Json
 
   blogArticle   BlogArticle @relation(fields: [blogArticleId], references: [id], onDelete: Cascade)

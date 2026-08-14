@@ -1,7 +1,7 @@
 model Price {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  currency     String @default("pln")
+  currency     String @default("PLN") // ISO 4217
   inMinorUnits Int
 
   product Product?
