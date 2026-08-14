@@ -66,8 +66,9 @@
      - walidacja: istniejace DTO `class-validator` sa mostkowane do Standard Schema (`$shared/server/functions/dto-schema.ts`), a `handleValidationError` zwraca bledy per pole jako klucze tlumaczen
      - autoryzacja admina przeniesiona z `hooks.server.ts` do `requireAdmin()` (remote functions maja wspolny prefix `/_app/remote/...`, wiec nie da sie ich chronic po sciezce)
    - [x] - stworzyc jakis skrypt migracyjny ktory pozwoli na przelozenie istniejacych blog-articles (wszystkie istniejace artykuly sa napisane w jezyku polskim) (sprzed zmian z dnia 13.08.2026) na nowy typ blog-article z internationalized-blog-article
-     - `npm run migrate:blog-articles` (`scripts/migrate-blog-articles.js`, obsluguje `--dry-run`, jest idempotentny)
+     - `npm run migrate:prod-data` (`scripts/migrate-prod-data.js`, obsluguje `--dry-run`, jest idempotentny)
      - generuje slug, meta title/description i JSON-LD, a na koncu czysci stare pola z dokumentu `BlogArticle`
+     - ten sam skrypt zaklada tez produkty (katalog z zywego Stripe, tlumaczenia pl + uk) - patrz sekcja deploy
    - [x] - sprzatanie mediow w buckecie - cel: zaden obiekt w buckecie nie moze zostac osierocony
      - [x] - NIE robimy tego prisma extensionami (zrezygnowalismy - za dziurawe: nie lapia `$runCommandRaw`/bezposredniego dostepu do Mongo ani zmian w `$transaction`, dzialaja per-model)
      - [x] - potrzebny zestaw utilsow (jesli jeszcze nie istnieje) gwarantujacy brak osieroconych plikow, wspolny dla wszystkich modeli z `mediaIds` (blog, produkty, kolejne):
@@ -130,11 +131,31 @@
    - [ ] - po zmianie odswiezyc podglad w walidatorach (Facebook Sharing Debugger) i w komunikatorze - miniatury bywaja cache'owane
      - do zrobienia recznie po deployu na produkcje
 
+9. Poprawki po audycie z 14.08.2026:
+   - [x] - dynamiczny sitemap.xml + wpis w robots.txt (stary statyczny plik listowal URL-e sprzed prefixow jezykowych)
+     - `GET /sitemap.xml` (`src/routes/sitemap.xml/+server.ts`) liczony w runtime z bazy - artykuly publikowane z panelu admina wpadaja bez redeployu; odpowiedz cache'owana 1h
+     - strony statyczne x pl/uk oraz kazda wersja jezykowa artykulu (slug per jezyk, `lastmod` z `updatedAt`), z alternatywami `xhtml:link` hreflang + x-default - tak samo jak na stronach
+     - strony `noindex` (gdpr, regulamin, strony wyniku platnosci) celowo poza sitemapa
+     - `static/sitemap.xml` usuniety (zaslanial route), `static/robots.txt` dostal linie `Sitemap:`
+   - [x] - maile do klienta wysylane w jezyku, ktorego uzywal na stronie (maile do wlascicielki zostaja po polsku)
+     - formularz kontaktowy: `lang` w `ContactRequestDto` (i w `RegistrationRequestDto`), klient przekazuje jezyk biezacej strony
+     - platnosci: `lang` (prefix `pl`/`uk`) jedzie w metadata sesji Stripe, webhook czyta go przy potwierdzeniu konsultacji i zakupu; stare sesje bez `lang` -> fallback na polski
+     - szablony `*-user.html` sparametryzowane placeholderami `{{ t... }}`, wszystkie teksty i tematy maili klienta w slownikach `api.emails.*` (PL i UK)
+   - [x] - captcha (Cloudflare Turnstile - darmowa, bez limitow, przyjazna RODO) na formularzu kontaktowym, za feature flaga w kodzie
+     - flaga `CONTACT_FORM_CAPTCHA_ENABLED` w `src/shared/global/config/feature-flags.ts` - domyslnie WYLACZONA (widget ani skrypt nie laduja sie wcale)
+     - po wlaczeniu: widget nad przyciskiem wysylki (jezyk widgetu = jezyk strony), token weryfikowany server-side w `sendContactRequest` (fail-closed przy braku sekretu), blad jako `api.contact.errors.captcha`
+     - wymaga `PUBLIC_TURNSTILE_SITE_KEY` + `TURNSTILE_SECRET_KEY` (patrz `.env.example`)
+   - [x] - resztka lokalizacji: sr-only "Loading..." w ContactForm przeniesione do slownikow (`user.a11y.loading`)
+   - [ ] - wlaczenie captchy (do decyzji): zalozyc darmowe konto Cloudflare Turnstile, wpisac klucze w env i przestawic flage na `true`
+
 ---
 
 ## Do zrobienia przy deployu
 
 - ustawic `PUBLIC_SITE_URL` (canonical / hreflang / og:image) oraz `CRON_SECRET` (media sweep) - patrz `.env.example`
-- odpalic `npm run migrate:blog-articles` (najpierw `--dry-run`) na bazie produkcyjnej
-- podpiac harmonogram na `POST /api/cron/media-sweep` z naglowkiem `Authorization: Bearer $CRON_SECRET`
-- zmigrowac produkty ze Stripe do panelu admina (`/admin/shop`) - Stripe nie jest juz zrodlem produktow ani cen
+- odpalic `npm run migrate:prod-data` (najpierw `--dry-run`) na bazie produkcyjnej - migruje stare artykuly
+  i zaklada produkty (6 terapii + konsultacja z cennika, tlumaczenia pl + uk, ceny z zywego Stripe)
+- po migracji zweryfikowac produkty w `/admin/shop` - Stripe nie jest juz zrodlem produktow ani cen
+- harmonogram media-sweep: `vercel.json` juz definiuje cron (GET, codziennie 03:00 UTC) - wystarczy `CRON_SECRET` w env
+- zglosic `https://bezstresowo.org/sitemap.xml` w Google Search Console (przyspieszy przeindeksowanie URL-i `/pl/` i `/uk/`)
+- przy wlaczaniu captchy: klucze Turnstile w env + flaga `CONTACT_FORM_CAPTCHA_ENABLED` na `true`
