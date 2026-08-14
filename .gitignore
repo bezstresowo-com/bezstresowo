@@ -22,3 +22,9 @@ Thumbs.db
 # Vite
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
+
+# Prisma (generated client, recreated by `prisma generate`)
+/src/shared/server/generated/
+
+# Claude Code local notes / scratch
+.claude/
