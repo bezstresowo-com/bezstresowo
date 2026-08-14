@@ -9,12 +9,14 @@ const DEFAULT_GRACE_PERIOD_MS = 24 * 60 * 60 * 1000;
 
 /**
  * Reconciliation sweep over the media bucket - the actual guarantee that no
- * object is ever orphaned. Point a scheduler (Netlify scheduled function, cron,
- * uptime pinger) at it and send `CRON_SECRET` as a bearer token.
+ * object is ever orphaned. Requires `CRON_SECRET` as a bearer token.
+ *
+ * Exposed on GET as well as POST: Vercel cron (`vercel.json`) only ever issues
+ * GET requests, attaching `Authorization: Bearer $CRON_SECRET` on its own.
  *
  * `?dryRun=1` reports what would be deleted without deleting anything.
  */
-export const POST: RequestHandler = async ({ request, url }) => {
+const sweep: RequestHandler = async ({ request, url }) => {
 	const secret = env.CRON_SECRET;
 
 	if (!secret || request.headers.get('authorization') !== `Bearer ${secret}`) {
@@ -32,3 +34,6 @@ export const POST: RequestHandler = async ({ request, url }) => {
 
 	return json(report);
 };
+
+export const GET = sweep;
+export const POST = sweep;
