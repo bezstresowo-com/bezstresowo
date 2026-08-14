@@ -9,7 +9,7 @@
 		ERRORED,
 		type LoadableState
 	} from '$shared/global/types/store';
-	import type { BlogArticle } from '@prisma/client';
+	import type { BlogArticle } from '$shared/server/generated/prisma/client';
 	import Button from '$lib/Button/Button.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import { translate, currentLocale } from '$i18n';

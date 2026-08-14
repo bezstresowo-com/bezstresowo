@@ -1,7 +1,7 @@
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { buildErrorResponse, buildResponse } from '$shared/server/functions/build-response';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
-import type { BlogArticle } from '@prisma/client';
+import type { BlogArticle } from '$shared/server/generated/prisma/client';
 import { isNil } from 'lodash-es';
 
 export async function GET({ params, route, request }) {

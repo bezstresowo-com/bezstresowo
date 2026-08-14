@@ -4,7 +4,7 @@ import { HttpMethod } from '$shared/global/enums/http-method';
 import { baseFetch } from '$shared/global/functions/base-fetch';
 import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 import { PaginationParamsDto } from '$shared/global/types/http';
-import type { BlogArticle } from '@prisma/client';
+import type { BlogArticle } from '$shared/server/generated/prisma/client';
 
 export async function fetchBlogPosts(
 	providedParams: PaginationParamsDto = new PaginationParamsDto()
