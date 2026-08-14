@@ -1,8 +1,10 @@
 <script lang="ts">
-	import { t } from '$i18n';
+	import { env } from '$env/dynamic/public';
+	import { getLocale, LOCALE_HTML_LANG, t } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
 	import { sendContactRequest } from '$remote/contact.remote';
+	import { CONTACT_FORM_CAPTCHA_ENABLED } from '$shared/global/config/feature-flags';
 	import { remoteErrorIssues } from '$shared/global/functions/remote-error';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { createForm } from 'svelte-forms-lib';
@@ -17,7 +19,75 @@
 		type FormValue
 	} from './model';
 
+	const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+
 	let isLoading = $state(false);
+	let captchaToken = $state<string | null>(null);
+	let captchaContainer = $state<HTMLDivElement>();
+	let captchaWidgetId: string | undefined;
+
+	// Renders the Turnstile widget once the container exists; with the feature
+	// flag off neither the script nor the widget ever loads.
+	$effect(() => {
+		if (!CONTACT_FORM_CAPTCHA_ENABLED || !captchaContainer || captchaWidgetId !== undefined) {
+			return;
+		}
+
+		const container = captchaContainer;
+		let cancelled = false;
+
+		loadTurnstile()
+			.then((turnstile) => {
+				if (cancelled || captchaWidgetId !== undefined) {
+					return;
+				}
+
+				captchaWidgetId = turnstile.render(container, {
+					sitekey: env.PUBLIC_TURNSTILE_SITE_KEY ?? '',
+					language: LOCALE_HTML_LANG[getLocale()],
+					callback: (token) => (captchaToken = token),
+					'expired-callback': () => (captchaToken = null),
+					'error-callback': () => (captchaToken = null)
+				});
+			})
+			.catch((cause) => console.error('[captcha] failed to load turnstile', cause));
+
+		return () => {
+			cancelled = true;
+
+			if (captchaWidgetId !== undefined) {
+				window.turnstile?.remove(captchaWidgetId);
+				captchaWidgetId = undefined;
+				captchaToken = null;
+			}
+		};
+	});
+
+	function loadTurnstile(): Promise<Turnstile> {
+		if (window.turnstile) {
+			return Promise.resolve(window.turnstile);
+		}
+
+		return new Promise((resolve, reject) => {
+			const script = document.createElement('script');
+			script.src = TURNSTILE_SRC;
+			script.async = true;
+			script.onload = () =>
+				window.turnstile
+					? resolve(window.turnstile)
+					: reject(new Error('turnstile script loaded without the global'));
+			script.onerror = () => reject(new Error('turnstile script failed to load'));
+			document.head.appendChild(script);
+		});
+	}
+
+	/** Tokens are single use - after every submit the widget must issue a new one. */
+	function resetCaptcha() {
+		if (CONTACT_FORM_CAPTCHA_ENABLED && captchaWidgetId !== undefined) {
+			window.turnstile?.reset(captchaWidgetId);
+			captchaToken = null;
+		}
+	}
 
 	const {
 		form,
@@ -34,7 +104,14 @@
 			isLoading = true;
 
 			try {
-				await sendContactRequest({ email, tel: phone, nameAndSurname, message });
+				await sendContactRequest({
+					email,
+					tel: phone,
+					nameAndSurname,
+					message,
+					lang: getLocale(),
+					captchaToken: captchaToken ?? undefined
+				});
 
 				handleReset();
 				toast.success(t('user.contactForm.toast.success'));
@@ -51,13 +128,17 @@
 					toast.error(t('user.contactForm.toast.error'));
 				}
 			} finally {
+				resetCaptcha();
 				isLoading = false;
 			}
 		}
 	});
 
 	let isSubmitDisabled = $derived(
-		!$formState.isValid || isLoading || Object.values($touched).some((value) => !value)
+		!$formState.isValid ||
+			isLoading ||
+			Object.values($touched).some((value) => !value) ||
+			(CONTACT_FORM_CAPTCHA_ENABLED && !captchaToken)
 	);
 </script>
 
@@ -177,6 +258,10 @@
 					{/if}
 				{/each}
 
+				{#if CONTACT_FORM_CAPTCHA_ENABLED}
+					<div bind:this={captchaContainer} class="flex justify-center"></div>
+				{/if}
+
 				<Button type={ButtonTypes.Submit} disabled={isSubmitDisabled} tailwind="w-full">
 					{#if !isLoading}
 						{t('user.contactForm.submit')}
@@ -198,7 +283,7 @@
 									fill="currentFill"
 								/>
 							</svg>
-							<span class="sr-only">Loading...</span>
+							<span class="sr-only">{t('user.a11y.loading')}</span>
 						</div>
 					{/if}
 				</Button>

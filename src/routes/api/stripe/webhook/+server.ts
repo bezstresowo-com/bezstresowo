@@ -1,4 +1,5 @@
 import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
+import { toLocale } from '$i18n';
 import type { StripeSessionMetadata } from '$remote/dto/stripe-metadata';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { EmailService } from '$shared/server/services/email/email-service';
@@ -41,7 +42,8 @@ export async function POST({ request }) {
 			try {
 				switch (metadata.type) {
 					case 'consultation-registration': {
-						await new EmailService().consultationRegistrationMessage({
+						// The customer's email follows the language they checked out in.
+						await new EmailService().consultationRegistrationMessage(toLocale(metadata.lang), {
 							email: metadata.email || '',
 							message: metadata.message || '<i>Brak wiadomości</i>',
 							nameAndSurname: metadata.nameAndSurname || '',
@@ -54,7 +56,7 @@ export async function POST({ request }) {
 					case 'shop': {
 						const customerDetails = session.customer_details;
 
-						await new EmailService().shopBuyMessage({
+						await new EmailService().shopBuyMessage(toLocale(metadata.lang), {
 							email: customerDetails?.email || '',
 							tel: customerDetails?.phone || '',
 							nameAndSurname: customerDetails?.name || '',

@@ -1,4 +1,5 @@
 import { EMAIL_APP_PASSWORD, EMAIL_SENDER, EMAIL_SUBJECT_PREFIX } from '$env/static/private';
+import { LOCALE_HTML_LANG, translateWith, type Locale } from '$i18n';
 import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
 import { createTransport } from 'nodemailer';
 import type {
@@ -7,6 +8,10 @@ import type {
 	ShopBuyMessageArgs
 } from './model';
 
+/**
+ * Owner notifications are always polish (the owner reads polish); the customer
+ * copy is rendered in `locale` - the language the visitor used on the site.
+ */
 export class EmailService {
 	private readonly _transport;
 
@@ -20,7 +25,7 @@ export class EmailService {
 		});
 	}
 
-	async contactRequestMessage(args: ContactRequestMessageArgs) {
+	async contactRequestMessage(locale: Locale, args: ContactRequestMessageArgs) {
 		const ownerHtml = (
 			await import('./email-templates/contact-request/contact-request-owner.html?raw')
 		).default;
@@ -37,10 +42,20 @@ export class EmailService {
 		);
 
 		// Send to user
-		await this._send(args.email, `${EMAIL_SUBJECT_PREFIX} Dziękuję za wiadomość!`, userHtml, args);
+		await this._send(
+			args.email,
+			`${EMAIL_SUBJECT_PREFIX} ${tr(locale, 'contactRequest.userSubject')}`,
+			userHtml,
+			{
+				...args,
+				...userTemplateVars(locale),
+				tHeader: tr(locale, 'contactRequest.header'),
+				tIntro: tr(locale, 'contactRequest.intro', { nameAndSurname: args.nameAndSurname })
+			}
+		);
 	}
 
-	async consultationRegistrationMessage(args: ConsultationRegistrationMessageArgs) {
+	async consultationRegistrationMessage(locale: Locale, args: ConsultationRegistrationMessageArgs) {
 		const ownerHtml = (
 			await import(
 				'./email-templates/consultation-registration/consultation-registration-owner.html?raw'
@@ -63,13 +78,22 @@ export class EmailService {
 		// Send to user
 		await this._send(
 			args.email,
-			`${EMAIL_SUBJECT_PREFIX} Potwierdzenie rezerwacji konsultacji`,
+			`${EMAIL_SUBJECT_PREFIX} ${tr(locale, 'consultationRegistration.userSubject')}`,
 			userHtml,
-			args
+			{
+				...args,
+				...userTemplateVars(locale),
+				tHeader: tr(locale, 'consultationRegistration.header'),
+				tIntro: tr(locale, 'consultationRegistration.intro', {
+					nameAndSurname: args.nameAndSurname
+				}),
+				tSummary: tr(locale, 'consultationRegistration.summary'),
+				tTherapyLabel: tr(locale, 'consultationRegistration.therapyLabel')
+			}
 		);
 	}
 
-	async shopBuyMessage(args: ShopBuyMessageArgs) {
+	async shopBuyMessage(locale: Locale, args: ShopBuyMessageArgs) {
 		const ownerHtml = (await import('./email-templates/shop-buy/shop-buy-owner.html?raw')).default;
 		const userHtml = (await import('./email-templates/shop-buy/shop-buy-user.html?raw')).default;
 
@@ -84,9 +108,17 @@ export class EmailService {
 		// Send to user
 		await this._send(
 			args.email,
-			`${EMAIL_SUBJECT_PREFIX} Potwierdzenie zakupu produktu`,
+			`${EMAIL_SUBJECT_PREFIX} ${tr(locale, 'shopBuy.userSubject')}`,
 			userHtml,
-			args
+			{
+				...args,
+				...userTemplateVars(locale),
+				tHeader: tr(locale, 'shopBuy.header'),
+				tIntro: tr(locale, 'shopBuy.intro'),
+				tSummary: tr(locale, 'shopBuy.summary'),
+				tProductLabel: tr(locale, 'shopBuy.productLabel'),
+				tPriceLabel: tr(locale, 'shopBuy.priceLabel')
+			}
 		);
 	}
 
@@ -98,4 +130,26 @@ export class EmailService {
 			html: htmlKeyValueReplacer(html, { subject, ...args })
 		});
 	}
+}
+
+/** `api.emails.*` lookup in the customer's language. */
+function tr(locale: Locale, key: string, vars?: Record<string, unknown>): string {
+	return translateWith(locale, `api.emails.${key}`, vars);
+}
+
+/** Placeholders shared by every customer facing template. */
+function userTemplateVars(locale: Locale): Record<string, string> {
+	return {
+		emailLang: LOCALE_HTML_LANG[locale],
+		tYourMessage: tr(locale, 'common.yourMessage'),
+		tYourData: tr(locale, 'common.yourData'),
+		tNameLabel: tr(locale, 'common.nameLabel'),
+		tEmailLabel: tr(locale, 'common.emailLabel'),
+		tPhoneLabel: tr(locale, 'common.phoneLabel'),
+		tSignatureName: tr(locale, 'common.signatureName'),
+		tSignatureRole: tr(locale, 'common.signatureRole'),
+		tContactViaSite: tr(locale, 'common.contactViaSite'),
+		tCompanyLine: tr(locale, 'common.companyLine'),
+		tSystemNotice: tr(locale, 'common.systemNotice')
+	};
 }

@@ -703,7 +703,8 @@ const plPL = {
 			close: 'Zamknij',
 			aboutMeAlt: 'Olesya Haiduk - psychoterapeutka',
 			certificatePreview: 'Podgląd certyfikatu',
-			serviceDetails: 'Szczegóły usługi'
+			serviceDetails: 'Szczegóły usługi',
+			loading: 'Ładowanie...'
 		},
 		header: {
 			items: {
@@ -980,7 +981,45 @@ const plPL = {
 		},
 		contact: {
 			errors: {
-				general: 'Twoje zapytanie kontaktowe nie mogło zostać wysłane. Spróbuj ponownie.'
+				general: 'Twoje zapytanie kontaktowe nie mogło zostać wysłane. Spróbuj ponownie.',
+				captcha: 'Weryfikacja antyspamowa nie powiodła się. Odśwież stronę i spróbuj ponownie.'
+			}
+		},
+		emails: {
+			common: {
+				yourMessage: 'Twoja wiadomość',
+				yourData: 'Twoje dane',
+				nameLabel: 'Imię i nazwisko',
+				emailLabel: 'Adres e-mail',
+				phoneLabel: 'Numer telefonu',
+				signatureName: 'Olesya Haiduk',
+				signatureRole: 'Psychoterapeutka',
+				contactViaSite: 'W razie potrzeby skontaktuj się ze mną przez stronę',
+				companyLine: 'Centrum Psychoterapii Bezstresowo - Olesya Haiduk',
+				systemNotice: 'Bezstresowo • Powiadomienie systemowe'
+			},
+			contactRequest: {
+				userSubject: 'Dziękuję za wiadomość!',
+				header: 'Dziękujemy za wiadomość',
+				intro:
+					'Cześć {{ nameAndSurname }}! Otrzymałam Twoją wiadomość i odpowiem na nią najszybciej jak to możliwe.'
+			},
+			consultationRegistration: {
+				userSubject: 'Potwierdzenie rezerwacji konsultacji',
+				header: 'Potwierdzenie rejestracji',
+				intro:
+					'Cześć {{ nameAndSurname }}! Otrzymałam Twoją prośbę o rezerwację konsultacji i skontaktuję się z tobą niedługo, aby ustalić termin.',
+				summary: 'Podsumowanie',
+				therapyLabel: 'Rodzaj terapii'
+			},
+			shopBuy: {
+				userSubject: 'Potwierdzenie zakupu produktu',
+				header: 'Dziękuję za zakup',
+				intro:
+					'Twoje zamówienie zostało przyjęte. W najbliższym czasie skontaktuję się z tobą aby dostarczyć Ci twój kupiony produkt.',
+				summary: 'Podsumowanie zakupu',
+				productLabel: 'Produkt',
+				priceLabel: 'Kwota'
 			}
 		},
 		admin: {

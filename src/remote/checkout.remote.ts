@@ -32,6 +32,7 @@ export const createRegistrationCheckout = command(
 			customer_email: dto.email,
 			metadata: {
 				type: 'consultation-registration',
+				lang: LOCALE_PREFIXES[dto.lang],
 				therapyName: dto.therapyName,
 				nameAndSurname: dto.nameAndSurname,
 				tel: dto.tel,
@@ -59,6 +60,7 @@ export const createShopCheckout = command(
 			phone_number_collection: { enabled: true },
 			metadata: {
 				type: 'shop',
+				lang: LOCALE_PREFIXES[dto.lang],
 				productId: product.id,
 				productName: translation.name
 			} satisfies ShopCheckoutMetadata

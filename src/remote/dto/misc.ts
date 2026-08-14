@@ -25,6 +25,12 @@ export class LoginDto {
 }
 
 export class ContactRequestDto {
+	/** Language the visitor used on the site - their confirmation email follows it. */
+	@IsDefined()
+	@IsString()
+	@IsIn(LOCALES)
+	lang: Locale;
+
 	@IsDefined()
 	@IsString()
 	@MinLength(1)
@@ -45,9 +51,21 @@ export class ContactRequestDto {
 	@MinLength(10)
 	@MaxLength(10_000)
 	message: string;
+
+	/** Cloudflare Turnstile token - only checked when the captcha flag is on. */
+	@IsOptional()
+	@IsString()
+	@MaxLength(4096)
+	captchaToken?: string;
 }
 
 export class RegistrationRequestDto {
+	/** Language the visitor used on the site - their confirmation email follows it. */
+	@IsDefined()
+	@IsString()
+	@IsIn(LOCALES)
+	lang: Locale;
+
 	@IsDefined()
 	@IsString()
 	@IsNotEmpty()

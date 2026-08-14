@@ -704,7 +704,8 @@ const ukUA: Translation = {
 			close: 'Закрити',
 			aboutMeAlt: 'Олеся Гайдук - психотерапевтка',
 			certificatePreview: 'Перегляд сертифіката',
-			serviceDetails: 'Деталі послуги'
+			serviceDetails: 'Деталі послуги',
+			loading: 'Завантаження...'
 		},
 		header: {
 			items: {
@@ -980,7 +981,45 @@ const ukUA: Translation = {
 		},
 		contact: {
 			errors: {
-				general: 'Ваш запит не вдалося надіслати. Будь ласка, спробуйте ще раз.'
+				general: 'Ваш запит не вдалося надіслати. Будь ласка, спробуйте ще раз.',
+				captcha: 'Антиспам-перевірка не пройшла. Оновіть сторінку і спробуйте ще раз.'
+			}
+		},
+		emails: {
+			common: {
+				yourMessage: 'Ваше повідомлення',
+				yourData: 'Ваші дані',
+				nameLabel: "Ім'я та прізвище",
+				emailLabel: 'Адреса e-mail',
+				phoneLabel: 'Номер телефону',
+				signatureName: 'Олеся Гайдук (Olesya Haiduk)',
+				signatureRole: 'Психотерапевтка',
+				contactViaSite: "У разі потреби зв'яжіться зі мною через сайт",
+				companyLine: 'Центр психотерапії Bezstresowo - Олеся Гайдук (Olesya Haiduk)',
+				systemNotice: 'Bezstresowo • Системне сповіщення'
+			},
+			contactRequest: {
+				userSubject: 'Дякую за повідомлення!',
+				header: 'Дякуємо за повідомлення',
+				intro:
+					'Привіт, {{ nameAndSurname }}! Я отримала Ваше повідомлення і відповім на нього якнайшвидше.'
+			},
+			consultationRegistration: {
+				userSubject: 'Підтвердження запису на консультацію',
+				header: 'Підтвердження запису',
+				intro:
+					"Привіт, {{ nameAndSurname }}! Я отримала Ваш запит на консультацію і незабаром зв'яжуся з Вами, щоб узгодити дату.",
+				summary: 'Підсумок',
+				therapyLabel: 'Вид терапії'
+			},
+			shopBuy: {
+				userSubject: 'Підтвердження покупки',
+				header: 'Дякую за покупку',
+				intro:
+					"Ваше замовлення прийнято. Найближчим часом я зв'яжуся з Вами, щоб доставити придбаний продукт.",
+				summary: 'Підсумок покупки',
+				productLabel: 'Продукт',
+				priceLabel: 'Сума'
 			}
 		},
 		admin: {
