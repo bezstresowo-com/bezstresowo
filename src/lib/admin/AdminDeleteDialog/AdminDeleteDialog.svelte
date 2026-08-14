@@ -3,12 +3,22 @@
 	import { t } from '$i18n';
 
 	interface Props {
-		blogTitle: string;
+		/** Name of the record about to be deleted, shown for confirmation. */
+		itemName: string;
+		/** Translation namespace, so blog and shop can share the dialog. */
+		translationPrefix?: string;
+		actionsPrefix?: string;
 		isDeleting?: boolean;
 		onConfirm: () => void | Promise<void>;
 	}
 
-	let { blogTitle, isDeleting = false, onConfirm }: Props = $props();
+	let {
+		itemName,
+		translationPrefix = 'admin.blog.deleteDialog',
+		actionsPrefix = 'admin.blog.actions',
+		isDeleting = false,
+		onConfirm
+	}: Props = $props();
 
 	let deleteConfirmation = $state('');
 	let open = $state(false);
@@ -38,7 +48,7 @@
 		<span>
 			<i class="fa-solid fa-trash"></i>
 		</span>
-		{t('admin.blog.actions.delete')}
+		{t(`${actionsPrefix}.delete`)}
 	</Dialog.Trigger>
 
 	<Dialog.Portal>
@@ -52,30 +62,30 @@
 					<span>
 						<i class="fa-solid fa-triangle-exclamation mr-2"></i>
 					</span>
-					{t('admin.blog.deleteDialog.title')}
+					{t(`${translationPrefix}.title`)}
 				</Dialog.Title>
 
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description class="mb-4 text-gray-700">
-					{t('admin.blog.deleteDialog.description')}
-					<strong class="mt-2 block text-black">"{blogTitle}"</strong>
+					{t(`${translationPrefix}.description`)}
+					<strong class="mt-2 block text-black">"{itemName}"</strong>
 				</Dialog.Description>
 
 				<div class="mb-4">
 					<label for="delete-confirmation" class="mb-2 block text-sm font-medium text-gray-700">
-						{t('admin.blog.deleteDialog.confirmLabel')}
+						{t(`${translationPrefix}.confirmLabel`)}
 					</label>
 					<input
 						id="delete-confirmation"
 						type="text"
 						bind:value={deleteConfirmation}
-						placeholder={t('admin.blog.deleteDialog.confirmPlaceholder')}
+						placeholder={t(`${translationPrefix}.confirmPlaceholder`)}
 						class={`w-full rounded-md border px-3 py-2 focus:border-gray-500 ${!isValid && deleteConfirmation ? 'border-red-500' : 'border-gray-300'}`}
 					/>
 					{#if deleteConfirmation && !isValid}
 						<small class="mt-1 block text-sm text-red-500">
-							{t('admin.blog.deleteDialog.confirmError')}
+							{t(`${translationPrefix}.confirmError`)}
 						</small>
 					{/if}
 				</div>
@@ -85,7 +95,7 @@
 						class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-bold text-gray-700 hover:bg-gray-50"
 						disabled={isDeleting}
 					>
-						{t('admin.blog.deleteDialog.cancel')}
+						{t(`${translationPrefix}.cancel`)}
 					</Dialog.Close>
 
 					<button
@@ -103,7 +113,7 @@
 								<i class="fa-solid fa-trash"></i>
 							</span>
 						{/if}
-						{t('admin.blog.deleteDialog.confirm')}
+						{t(`${translationPrefix}.confirm`)}
 					</button>
 				</div>
 

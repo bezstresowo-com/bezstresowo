@@ -82,7 +82,9 @@ export function toLocale(prefix: string | undefined | null): Locale {
 export function matchPreferredLocale(preferred: readonly string[]): Locale | null {
 	for (const lang of preferred) {
 		const baseLang = lang.slice(0, 2).toLowerCase();
-		const matched = Object.values(Locale).find((locale) => locale.toLowerCase().startsWith(baseLang));
+		const matched = Object.values(Locale).find((locale) =>
+			locale.toLowerCase().startsWith(baseLang)
+		);
 
 		if (matched) {
 			return matched;

@@ -50,8 +50,8 @@ export const getProducts = query(
 					orderKey: product.orderKey
 				};
 			})
-			.filter((product): product is LocalizedProduct & { orderKey: string | null } =>
-				!isNil(product)
+			.filter(
+				(product): product is LocalizedProduct & { orderKey: string | null } => !isNil(product)
 			)
 			.sort((a, b) => (a.orderKey ?? a.name).localeCompare(b.orderKey ?? b.name, lang))
 			.map(({ orderKey: _orderKey, ...product }) => product);

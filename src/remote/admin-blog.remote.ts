@@ -59,23 +59,26 @@ export const getAdminBlogArticle = query(dtoSchema(BlogArticleIdDto), async ({ i
 	return blogArticle;
 });
 
-export const createBlogArticle = command(dtoSchema(UpsertBlogArticleDto), async ({ translations }) => {
-	requireAdmin();
+export const createBlogArticle = command(
+	dtoSchema(UpsertBlogArticleDto),
+	async ({ translations }) => {
+		requireAdmin();
 
-	assertUniqueLanguages(translations);
-	await assertFreeSlugs(translations);
+		assertUniqueLanguages(translations);
+		await assertFreeSlugs(translations);
 
-	const now = new Date();
+		const now = new Date();
 
-	return await prisma.blogArticle.create({
-		data: {
-			internationalizedArticles: {
-				create: translations.map((translation) => toTranslationRow(translation, now, now))
-			}
-		},
-		include: ARTICLE_INCLUDE
-	});
-});
+		return await prisma.blogArticle.create({
+			data: {
+				internationalizedArticles: {
+					create: translations.map((translation) => toTranslationRow(translation, now, now))
+				}
+			},
+			include: ARTICLE_INCLUDE
+		});
+	}
+);
 
 export const updateBlogArticle = command(
 	dtoSchema(UpdateBlogArticleDto),
@@ -140,7 +143,9 @@ export const deleteBlogArticle = command(dtoSchema(BlogArticleIdDto), async ({ i
 		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
 	}
 
-	const mediaIds = existing.internationalizedArticles.flatMap((translation) => translation.mediaIds);
+	const mediaIds = existing.internationalizedArticles.flatMap(
+		(translation) => translation.mediaIds
+	);
 
 	await prisma.blogArticle.delete({ where: { id } });
 	await cleanupMedia(mediaIds);

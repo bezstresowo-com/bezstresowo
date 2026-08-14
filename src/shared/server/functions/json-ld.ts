@@ -72,9 +72,7 @@ export function buildProductJsonLD(args: {
 			'@type': 'Offer',
 			priceCurrency: args.currency,
 			price: (args.priceInMinorUnits / 100).toFixed(2),
-			availability: args.available
-				? 'https://schema.org/InStock'
-				: 'https://schema.org/OutOfStock'
+			availability: args.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock'
 		}
 	};
 }

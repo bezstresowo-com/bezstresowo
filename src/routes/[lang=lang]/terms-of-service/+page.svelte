@@ -10,11 +10,7 @@
 </script>
 
 <!-- Legal pages carry no search value - keep them out of the index. -->
-<Seo
-	title="meta.termsOfService.title"
-	description="meta.termsOfService.description"
-	noindex
-/>
+<Seo title="meta.termsOfService.title" description="meta.termsOfService.description" noindex />
 
 <div class="min-h-screen">
 	<!-- Header Section -->

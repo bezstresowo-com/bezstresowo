@@ -26,6 +26,11 @@ const config = {
 			// `*.remote.ts` files replace the old `/api` + `fetch-methods` pairs
 			remoteFunctions: true
 		},
+		paths: {
+			// Pages are nested (`/pl/blog/<slug>`), so relative asset URLs would
+			// resolve against the wrong directory.
+			relative: false
+		},
 		alias: {
 			$services: './src/services',
 			$shared: './src/shared',

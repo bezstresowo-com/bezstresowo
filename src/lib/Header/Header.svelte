@@ -13,7 +13,7 @@
 <header class="fixed top-0 left-0 z-1000 w-full bg-primary">
 	<div class="mx-auto flex h-16 max-w-7xl items-center gap-4 p-4">
 		<a class="text-2xl font-bold text-accent" href={path('/home')}>
-			<img src={asset('/assets/header-logo.svg')} alt="Bezstresowo Logo" loading="lazy" />
+			<img src={asset('/assets/header-logo.svg')} alt={t('user.a11y.logoAlt')} loading="lazy" />
 		</a>
 
 		<span class="flex-auto"></span>
@@ -34,7 +34,7 @@
 		<!-- Mobile: hamburger button-->
 		<button
 			class="w-10 cursor-pointer p-2 text-accent md:hidden"
-			aria-label="Open menu"
+			aria-label={t('user.a11y.openMenu')}
 			onclick={() => (menuOpen = !menuOpen)}
 		>
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="aspect-square w-full">
@@ -64,12 +64,12 @@
 				href={path('/home')}
 				onclick={() => (menuOpen = false)}
 			>
-				<img src={asset('/assets/header-logo.svg')} alt="Bezstresowo Logo" loading="lazy" />
+				<img src={asset('/assets/header-logo.svg')} alt={t('user.a11y.logoAlt')} loading="lazy" />
 			</a>
 
 			<button
 				class="w-10 cursor-pointer p-2 text-secondary"
-				aria-label="Close menu"
+				aria-label={t('user.a11y.closeMenu')}
 				onclick={() => (menuOpen = false)}
 			>
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="aspect-square w-full">

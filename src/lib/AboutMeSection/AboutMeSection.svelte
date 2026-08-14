@@ -12,7 +12,7 @@
 		<div class="col-span-3 flex justify-center">
 			<img
 				src={asset('/assets/about-me.jpg')}
-				alt="About Me"
+				alt={t('user.a11y.aboutMeAlt')}
 				class="rounded-lg object-cover max-lg:aspect-video"
 				loading="lazy"
 			/>

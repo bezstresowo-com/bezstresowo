@@ -17,7 +17,8 @@ const plPL = {
 		pages: {
 			home: {
 				title: 'Strona główna',
-				description: 'Centrum Psychoterapii Bezstresowo - profesjonalne wsparcie psychologiczne i psychoterapia z empatią i zrozumieniem',
+				description:
+					'Centrum Psychoterapii Bezstresowo - profesjonalne wsparcie psychologiczne i psychoterapia z empatią i zrozumieniem',
 				hero: {
 					primary: 'Psychoterapia z empatią i zrozumieniem',
 					contactMe: 'Skontaktuj się ze mną'
@@ -50,11 +51,13 @@ const plPL = {
 					services: {
 						couplesTherapy: {
 							title: 'Psychoterapia pary',
-							description: 'Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.',
+							description:
+								'Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.',
 							extended: {
 								section0: {
 									title: 'Czym jest terapia dla par?',
-									paragraph0: 'To przestrzeń, w której partnerzy mogą w bezpieczny sposób przyjrzeć się swojemu związkowi. Niezależnie od tego, czy jesteście małżeństwem, parą z wieloletnim stażem, czy dopiero zaczynacie wspólną drogę - jeśli pojawiają się trudności, terapia może pomóc odzyskać bliskość i zrozumienie. Spotkania pozwalają odkryć przyczyny konfliktów, odbudować zaufanie i znaleźć nowe sposoby komunikacji.'
+									paragraph0:
+										'To przestrzeń, w której partnerzy mogą w bezpieczny sposób przyjrzeć się swojemu związkowi. Niezależnie od tego, czy jesteście małżeństwem, parą z wieloletnim stażem, czy dopiero zaczynacie wspólną drogę - jeśli pojawiają się trudności, terapia może pomóc odzyskać bliskość i zrozumienie. Spotkania pozwalają odkryć przyczyny konfliktów, odbudować zaufanie i znaleźć nowe sposoby komunikacji.'
 								},
 								section1: {
 									title: 'Dla kogo?',
@@ -90,11 +93,14 @@ const plPL = {
 						},
 						womenTherapy: {
 							title: 'Psychoterapia dla kobiet',
-							description: 'Indywidualna terapia wspierająca kobiety w budowaniu poczucia własnej wartości, stawianiu granic i odzyskiwaniu wewnętrznej równowagi w bezpiecznej atmosferze zrozumienia.',
+							description:
+								'Indywidualna terapia wspierająca kobiety w budowaniu poczucia własnej wartości, stawianiu granic i odzyskiwaniu wewnętrznej równowagi w bezpiecznej atmosferze zrozumienia.',
 							extended: {
 								section0: {
-									paragraph0: 'Psychoterapia dla kobiet to indywidualny proces terapeutyczny skierowany do kobiet, które doświadczają trudności emocjonalnych, relacyjnych lub kryzysów życiowych. To forma profesjonalnej pomocy psychologicznej, w której możesz bezpiecznie przyjrzeć się swoim emocjom, schematom zachowań oraz relacjom w atmosferze zrozumienia, poufności i szacunku.',
-									paragraph1: 'eśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą - psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu.'
+									paragraph0:
+										'Psychoterapia dla kobiet to indywidualny proces terapeutyczny skierowany do kobiet, które doświadczają trudności emocjonalnych, relacyjnych lub kryzysów życiowych. To forma profesjonalnej pomocy psychologicznej, w której możesz bezpiecznie przyjrzeć się swoim emocjom, schematom zachowań oraz relacjom w atmosferze zrozumienia, poufności i szacunku.',
+									paragraph1:
+										'eśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą - psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia dla kobiet?',
@@ -107,41 +113,54 @@ const plPL = {
 										'są w kryzysie życiowym, po rozstaniu lub w trakcie ważnych zmian',
 										'doświadczają trudnej relacji z ciałem lub jedzeniem'
 									],
-									paragraph1: 'Psychoterapia dla kobiet jest także dla tych, które „funkcjonują dobrze”, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
+									paragraph1:
+										'Psychoterapia dla kobiet jest także dla tych, które „funkcjonują dobrze”, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii dla kobiet</b>',
 									paragraph0: '<b>Relacje i schematy emocjonalne</b>',
-									paragraph1: 'Praca nad powtarzającymi się wzorcami w relacjach, trudnościami w bliskości, lękiem przed odrzuceniem, relacjami toksycznymi oraz współuzależnieniem.',
+									paragraph1:
+										'Praca nad powtarzającymi się wzorcami w relacjach, trudnościami w bliskości, lękiem przed odrzuceniem, relacjami toksycznymi oraz współuzależnieniem.',
 									paragraph2: '<b>Poczucie własnej wartości i granice</b>',
-									paragraph3: 'Wsparcie w budowaniu zdrowego poczucia własnej wartości, pracy z perfekcjonizmem, nadmiernym dopasowaniem się do innych oraz trudnością w mówieniu „nie”.',
+									paragraph3:
+										'Wsparcie w budowaniu zdrowego poczucia własnej wartości, pracy z perfekcjonizmem, nadmiernym dopasowaniem się do innych oraz trudnością w mówieniu „nie”.',
 									paragraph4: '<b>Emocje, stres i regulacja napięcia</b>',
-									paragraph5: 'Psychoterapia pomaga w rozumieniu i regulowaniu emocji takich jak lęk, złość, wstyd, smutek czy poczucie winy, a także w pracy z chronicznym napięciem i przeciążeniem psychicznym.',
+									paragraph5:
+										'Psychoterapia pomaga w rozumieniu i regulowaniu emocji takich jak lęk, złość, wstyd, smutek czy poczucie winy, a także w pracy z chronicznym napięciem i przeciążeniem psychicznym.',
 									paragraph6: '<b>Ciało, jedzenie i kontrola</b>',
-									paragraph7: 'Praca terapeutyczna w obszarze zaburzeń odżywiania, kompulsywnego jedzenia, restrykcji, kontroli oraz trudnej relacji z własnym ciałem.',
+									paragraph7:
+										'Praca terapeutyczna w obszarze zaburzeń odżywiania, kompulsywnego jedzenia, restrykcji, kontroli oraz trudnej relacji z własnym ciałem.',
 									paragraph8: '<b>Rola silnej kobiety</b>',
-									paragraph9: 'Psychoterapia dla kobiet, które czują przymus bycia silnymi, samodzielnymi i odpowiedzialnymi kosztem własnych potrzeb, odpoczynku i emocji.',
+									paragraph9:
+										'Psychoterapia dla kobiet, które czują przymus bycia silnymi, samodzielnymi i odpowiedzialnymi kosztem własnych potrzeb, odpoczynku i emocji.',
 									paragraph10: '<b>Kryzysy życiowe i momenty przejścia</b>',
-									paragraph11: 'Wsparcie w czasie rozstań, wypalenia zawodowego, zmiany ról życiowych, poczucia utknięcia lub utraty sensu.'
+									paragraph11:
+										'Wsparcie w czasie rozstań, wypalenia zawodowego, zmiany ról życiowych, poczucia utknięcia lub utraty sensu.'
 								},
 								section3: {
 									title: 'Jak wygląda psychoterapia dla kobiet?',
-									paragraph0: 'Psychoterapia to proces oparty na regularnych spotkaniach, dostosowanych do Twoich potrzeb i tempa. Nie musisz wiedzieć, co dokładnie jest problemem, wystarczy gotowość, by przyjrzeć się sobie z ciekawością i uważnością.',
-									paragraph1: 'Celem psychoterapii nie jest „naprawianie” Ciebie, lecz zrozumienie mechanizmów, które powstały, by Cię chronić, oraz stopniowe budowanie bardziej wspierającej relacji ze sobą i innymi.'
+									paragraph0:
+										'Psychoterapia to proces oparty na regularnych spotkaniach, dostosowanych do Twoich potrzeb i tempa. Nie musisz wiedzieć, co dokładnie jest problemem, wystarczy gotowość, by przyjrzeć się sobie z ciekawością i uważnością.',
+									paragraph1:
+										'Celem psychoterapii nie jest „naprawianie” Ciebie, lecz zrozumienie mechanizmów, które powstały, by Cię chronić, oraz stopniowe budowanie bardziej wspierającej relacji ze sobą i innymi.'
 								}
 							}
 						},
 						depressionTherapy: {
 							title: 'Psychoterapia depresji i zaburzeń lękowych',
-							description: 'To profesjonalne wsparcie w odzyskiwaniu równowagi emocjonalnej i budowaniu skutecznych narzędzi radzenia sobie z lękiem oraz depresją.',
+							description:
+								'To profesjonalne wsparcie w odzyskiwaniu równowagi emocjonalnej i budowaniu skutecznych narzędzi radzenia sobie z lękiem oraz depresją.',
 							extended: {
 								section0: {
-									paragraph0: 'Psychoterapia depresji i zaburzeń lękowych to forma specjalistycznego wsparcia psychologicznego skierowana do osób, które zmagają się z obniżonym nastrojem, lękiem, napięciem emocjonalnym lub poczuciem bezradności. Terapia pomaga zrozumieć przyczyny trudności, nauczyć się regulować emocje oraz stopniowo odzyskać poczucie wpływu na własne życie.',
-									paragraph1: 'Depresja i zaburzenia lękowe nie są oznaką słabości. Często są reakcją na długotrwały stres, przeciążenie, trudne doświadczenia lub nierozpoznane potrzeby. Psychoterapia pozwala pracować nie tylko z objawami, ale także z ich źródłem.'
+									paragraph0:
+										'Psychoterapia depresji i zaburzeń lękowych to forma specjalistycznego wsparcia psychologicznego skierowana do osób, które zmagają się z obniżonym nastrojem, lękiem, napięciem emocjonalnym lub poczuciem bezradności. Terapia pomaga zrozumieć przyczyny trudności, nauczyć się regulować emocje oraz stopniowo odzyskać poczucie wpływu na własne życie.',
+									paragraph1:
+										'Depresja i zaburzenia lękowe nie są oznaką słabości. Często są reakcją na długotrwały stres, przeciążenie, trudne doświadczenia lub nierozpoznane potrzeby. Psychoterapia pozwala pracować nie tylko z objawami, ale także z ich źródłem.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia depresji i lęku?',
-									paragraph0: 'Z psychoterapii depresji i zaburzeń lękowych korzystają osoby, które:',
+									paragraph0:
+										'Z psychoterapii depresji i zaburzeń lękowych korzystają osoby, które:',
 									list0: [
 										'doświadczają długotrwałego smutku, pustki lub braku energii',
 										'odczuwają silny lęk, napięcie, niepokój lub napady paniki',
@@ -150,26 +169,34 @@ const plPL = {
 										'zmagają się z nadmiernym zamartwianiem się i kontrolą',
 										'unikają sytuacji z powodu lęku lub wyczerpania psychicznego'
 									],
-									paragraph1: 'Psychoterapia jest również dla osób, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia.'
+									paragraph1:
+										'Psychoterapia jest również dla osób, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii depresji i zaburzeń lękowych:',
 									paragraph0: '<b>Depresja</b>',
-									paragraph1: 'Praca z obniżonym nastrojem, poczuciem bezwartościowości, brakiem energii, nadmiernym poczuciem winy, wewnętrzną krytyką i wycofaniem z relacji.',
+									paragraph1:
+										'Praca z obniżonym nastrojem, poczuciem bezwartościowości, brakiem energii, nadmiernym poczuciem winy, wewnętrzną krytyką i wycofaniem z relacji.',
 									paragraph2: '<b>Zaburzenia lękowe</b>',
-									paragraph3: 'Wsparcie w pracy z lękiem uogólnionym, napadami paniki, lękiem społecznym, fobiami oraz przewlekłym napięciem psychicznym.',
+									paragraph3:
+										'Wsparcie w pracy z lękiem uogólnionym, napadami paniki, lękiem społecznym, fobiami oraz przewlekłym napięciem psychicznym.',
 									paragraph4: '<b>Myśli i schematy emocjonalne</b>',
-									paragraph5: 'Rozpoznawanie i modyfikowanie schematów myślenia, które podtrzymują lęk, bezradność lub poczucie zagrożenia.',
+									paragraph5:
+										'Rozpoznawanie i modyfikowanie schematów myślenia, które podtrzymują lęk, bezradność lub poczucie zagrożenia.',
 									paragraph6: '<b>Regulacja emocji i napięcia</b>',
-									paragraph7: 'Nauka bezpiecznych sposobów radzenia sobie z intensywnymi emocjami, napięciem w ciele oraz przeciążeniem psychicznym.',
+									paragraph7:
+										'Nauka bezpiecznych sposobów radzenia sobie z intensywnymi emocjami, napięciem w ciele oraz przeciążeniem psychicznym.',
 									paragraph8: '<b>Relacje i granice</b>',
-									paragraph9: 'Zrozumienie, jak relacje, nadodpowiedzialność lub brak granic wpływają na nasilenie objawów depresyjnych i lękowych.',
+									paragraph9:
+										'Zrozumienie, jak relacje, nadodpowiedzialność lub brak granic wpływają na nasilenie objawów depresyjnych i lękowych.',
 									paragraph10: '<b>Kryzysy życiowe i przeciążenie</b>',
-									paragraph11: 'Praca z wypaleniem, długotrwałym stresem, zmianami życiowymi, stratą lub poczuciem utknięcia.'
+									paragraph11:
+										'Praca z wypaleniem, długotrwałym stresem, zmianami życiowymi, stratą lub poczuciem utknięcia.'
 								},
 								section3: {
 									title: 'Jak wygląda psychoterapia depresji i zaburzeń lękowych?',
-									paragraph0: 'Psychoterapia to proces oparty na regularnych spotkaniach, dostosowanych do Twoich aktualnych możliwości i tempa. Nie wymaga „bycia gotową” ani dokładnego nazwania problemu na początku.',
+									paragraph0:
+										'Psychoterapia to proces oparty na regularnych spotkaniach, dostosowanych do Twoich aktualnych możliwości i tempa. Nie wymaga „bycia gotową” ani dokładnego nazwania problemu na początku.',
 									paragraph1: 'Celem psychoterapii jest:',
 									list0: [
 										'zmniejszenie nasilenia objawów',
@@ -177,7 +204,8 @@ const plPL = {
 										'odbudowa poczucia bezpieczeństwa i stabilności',
 										'poprawa jakości życia i funkcjonowania na co dzień'
 									],
-									paragraph2: 'W razie potrzeby terapia może być prowadzona we współpracy z lekarzem psychiatrą.'
+									paragraph2:
+										'W razie potrzeby terapia może być prowadzona we współpracy z lekarzem psychiatrą.'
 								},
 								section4: {
 									title: 'Psychoterapia depresji i lęku - ważne informacje',
@@ -192,11 +220,14 @@ const plPL = {
 						},
 						lgbtTherapy: {
 							title: 'Psychoterapia dla osób LGBTQ+',
-							description: 'Afirmatywne wsparcie psychologiczne dla osób LGBTQ+, pomagające budować samoakceptację i dobrostan w bezpiecznej, wolnej od ocen atmosferze.',
+							description:
+								'Afirmatywne wsparcie psychologiczne dla osób LGBTQ+, pomagające budować samoakceptację i dobrostan w bezpiecznej, wolnej od ocen atmosferze.',
 							extended: {
 								section0: {
-									paragraph0: 'Psychoterapia dla osób LGBTQ+ to indywidualna forma wsparcia psychologicznego skierowana do osób nieheteronormatywnych i transpłciowych, które chcą pracować nad swoim dobrostanem psychicznym, relacjami, tożsamością lub trudnymi doświadczeniami życiowymi. To bezpieczna przestrzeń wolna od ocen, patologizowania i prób „naprawiania”.',
-									paragraph1: 'Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w radzeniu sobie z emocjami, stresem mniejszościowym, relacjami oraz skutkami doświadczeń dyskryminacji lub odrzucenia.'
+									paragraph0:
+										'Psychoterapia dla osób LGBTQ+ to indywidualna forma wsparcia psychologicznego skierowana do osób nieheteronormatywnych i transpłciowych, które chcą pracować nad swoim dobrostanem psychicznym, relacjami, tożsamością lub trudnymi doświadczeniami życiowymi. To bezpieczna przestrzeń wolna od ocen, patologizowania i prób „naprawiania”.',
+									paragraph1:
+										'Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w radzeniu sobie z emocjami, stresem mniejszościowym, relacjami oraz skutkami doświadczeń dyskryminacji lub odrzucenia.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia dla osób LGBTQ+?',
@@ -209,26 +240,34 @@ const plPL = {
 										'mają trudności w relacjach partnerskich lub rodzinnych',
 										'czują przeciążenie związane z ciągłym „tłumaczeniem się” lub ukrywaniem siebie'
 									],
-									paragraph1: 'Psychoterapia jest także dla tych, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą.'
+									paragraph1:
+										'Psychoterapia jest także dla tych, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii dla osób LGBTQ+',
 									paragraph0: '<b>Akceptacja siebie i tożsamości</b>',
-									paragraph1: 'Praca nad budowaniem stabilnego poczucia własnej wartości, akceptacją swojej orientacji psychoseksualnej lub tożsamości płciowej.',
+									paragraph1:
+										'Praca nad budowaniem stabilnego poczucia własnej wartości, akceptacją swojej orientacji psychoseksualnej lub tożsamości płciowej.',
 									paragraph2: '<b>Stres mniejszościowy</b>',
-									paragraph3: 'Wsparcie w radzeniu sobie z chronicznym napięciem wynikającym z życia w społeczeństwie, które bywa nieprzychylne lub oceniające.',
+									paragraph3:
+										'Wsparcie w radzeniu sobie z chronicznym napięciem wynikającym z życia w społeczeństwie, które bywa nieprzychylne lub oceniające.',
 									paragraph4: '<b>Relacje i bliskość</b>',
-									paragraph5: 'Trudności w związkach, lęk przed odrzuceniem, problemy z zaufaniem, komunikacją i granicami w relacjach.',
+									paragraph5:
+										'Trudności w związkach, lęk przed odrzuceniem, problemy z zaufaniem, komunikacją i granicami w relacjach.',
 									paragraph6: '<b>Rodzina i coming out</b>',
-									paragraph7: 'Praca z reakcjami rodziny, lękiem przed ujawnieniem, poczuciem straty, żalu lub brakiem wsparcia ze strony bliskich.',
+									paragraph7:
+										'Praca z reakcjami rodziny, lękiem przed ujawnieniem, poczuciem straty, żalu lub brakiem wsparcia ze strony bliskich.',
 									paragraph8: '<b>Emocje i regulacja napięcia</b>',
-									paragraph9: 'Lęk, złość, smutek, wstyd, poczucie osamotnienia - terapia pomaga bezpiecznie je przeżywać i regulować.',
+									paragraph9:
+										'Lęk, złość, smutek, wstyd, poczucie osamotnienia - terapia pomaga bezpiecznie je przeżywać i regulować.',
 									paragraph10: '<b>Doświadczenia traumy i przemocy</b>',
-									paragraph11: 'Wsparcie w pracy z konsekwencjami przemocy psychicznej, fizycznej lub seksualnej, hejtu i mikroagresji.'
+									paragraph11:
+										'Wsparcie w pracy z konsekwencjami przemocy psychicznej, fizycznej lub seksualnej, hejtu i mikroagresji.'
 								},
 								section3: {
 									title: 'Jak wygląda psychoterapia LGBTQ+?',
-									paragraph0: 'Psychoterapia opiera się na szacunku, wiedzy i rozumieniu specyfiki doświadczeń osób LGBTQ+. Spotkania odbywają się w tempie dostosowanym do Ciebie i Twoich potrzeb.',
+									paragraph0:
+										'Psychoterapia opiera się na szacunku, wiedzy i rozumieniu specyfiki doświadczeń osób LGBTQ+. Spotkania odbywają się w tempie dostosowanym do Ciebie i Twoich potrzeb.',
 									paragraph1: 'Celem terapii jest:',
 									list0: [
 										'poprawa dobrostanu psychicznego',
@@ -250,11 +289,14 @@ const plPL = {
 						},
 						parentTherapy: {
 							title: 'Psychoterapia i konsultacje dla rodziców',
-							description: 'Profesjonalne wsparcie pomagające rodzicom zrozumieć emocje dziecka, radzić sobie z trudnościami wychowawczymi i budować zdrowsze relacje rodzinne w atmosferze bez oceniania.',
+							description:
+								'Profesjonalne wsparcie pomagające rodzicom zrozumieć emocje dziecka, radzić sobie z trudnościami wychowawczymi i budować zdrowsze relacje rodzinne w atmosferze bez oceniania.',
 							extended: {
 								section0: {
-									paragraph0: 'Psychoterapia dla rodziców to forma profesjonalnego wsparcia psychoterapeutycznego skierowana do osób, które chcą lepiej zrozumieć swoje dziecko, poprawić relację w rodzinie oraz poradzić sobie z trudnościami wychowawczymi i emocjonalnymi. To przestrzeń, w której możesz przyjrzeć się nie tylko zachowaniu dziecka, ale także własnym emocjom, reakcjom i poczuciu odpowiedzialności.',
-									paragraph1: 'Rodzicielstwo bywa obciążające, pełne wątpliwości, napięcia i poczucia winy. Psychoterapia pomaga uporządkować chaos, odzyskać spokój i znaleźć bardziej wspierające sposoby reagowania bez oceniania i gotowych recept.'
+									paragraph0:
+										'Psychoterapia dla rodziców to forma profesjonalnego wsparcia psychoterapeutycznego skierowana do osób, które chcą lepiej zrozumieć swoje dziecko, poprawić relację w rodzinie oraz poradzić sobie z trudnościami wychowawczymi i emocjonalnymi. To przestrzeń, w której możesz przyjrzeć się nie tylko zachowaniu dziecka, ale także własnym emocjom, reakcjom i poczuciu odpowiedzialności.',
+									paragraph1:
+										'Rodzicielstwo bywa obciążające, pełne wątpliwości, napięcia i poczucia winy. Psychoterapia pomaga uporządkować chaos, odzyskać spokój i znaleźć bardziej wspierające sposoby reagowania bez oceniania i gotowych recept.'
 								},
 								section1: {
 									title: 'Dla kogo jest terapia dla rodziców?',
@@ -267,22 +309,29 @@ const plPL = {
 										'chcą lepiej stawiać granice bez poczucia winy',
 										'przechodzą przez kryzys rodzinny, rozstanie lub zmianę sytuacji życiowej'
 									],
-									paragraph1: 'Terapia dla rodziców nie oznacza, że „coś robisz źle”. To sygnał, że chcesz działać świadomie i odpowiedzialnie.'
+									paragraph1:
+										'Terapia dla rodziców nie oznacza, że „coś robisz źle”. To sygnał, że chcesz działać świadomie i odpowiedzialnie.'
 								},
 								section2: {
 									title: 'Obszary pracy w terapii dla rodziców',
 									paragraph0: '<b>Trudności wychowawcze i zachowanie dziecka</b>',
-									paragraph1: 'Wsparcie w rozumieniu trudnych zachowań dziecka, wybuchów emocji, wycofania, agresji lub problemów adaptacyjnych.',
+									paragraph1:
+										'Wsparcie w rozumieniu trudnych zachowań dziecka, wybuchów emocji, wycofania, agresji lub problemów adaptacyjnych.',
 									paragraph2: '<b>Relacja rodzic-dziecko</b>',
-									paragraph3: 'Praca nad poprawą kontaktu emocjonalnego, komunikacji, poczucia bezpieczeństwa i zaufania w relacji.',
+									paragraph3:
+										'Praca nad poprawą kontaktu emocjonalnego, komunikacji, poczucia bezpieczeństwa i zaufania w relacji.',
 									paragraph4: '<b>Granice i konsekwencja</b>',
-									paragraph5: 'Pomoc w stawianiu jasnych granic bez nadmiernej surowości lub uległości, budowanie spójności wychowawczej.',
+									paragraph5:
+										'Pomoc w stawianiu jasnych granic bez nadmiernej surowości lub uległości, budowanie spójności wychowawczej.',
 									paragraph6: '<b>Emocje rodzica</b>',
-									paragraph7: 'Praca z poczuciem winy, bezsilnością, złością, lękiem o dziecko oraz wypaleniem rodzicielskim.',
+									paragraph7:
+										'Praca z poczuciem winy, bezsilnością, złością, lękiem o dziecko oraz wypaleniem rodzicielskim.',
 									paragraph8: '<b>Trudne sytuacje rodzinne</b>',
-									paragraph9: 'Wsparcie w czasie rozwodu, konfliktów rodzinnych, zmian życiowych, choroby lub kryzysów emocjonalnych dziecka.',
+									paragraph9:
+										'Wsparcie w czasie rozwodu, konfliktów rodzinnych, zmian życiowych, choroby lub kryzysów emocjonalnych dziecka.',
 									paragraph10: '<b>Rodzic a własne doświadczenia z dzieciństwa</b>',
-									paragraph11: 'Zrozumienie, jak Twoje własne doświadczenia wpływają na sposób reagowania i wychowywania dziecka.'
+									paragraph11:
+										'Zrozumienie, jak Twoje własne doświadczenia wpływają na sposób reagowania i wychowywania dziecka.'
 								},
 								section3: {
 									title: 'Jak wygląda terapia dla rodziców?',
@@ -292,7 +341,8 @@ const plPL = {
 										'krótkoterminowego wsparcia',
 										'dłuższego procesu psychoterapeutycznego'
 									],
-									paragraph1: 'Spotkania koncentrują się na konkretnych trudnościach, z którymi przychodzisz, oraz na budowaniu realnych, możliwych do wdrożenia zmian. W centrum zawsze pozostaje dobro dziecka, ale bez pomijania potrzeb i granic rodzica.'
+									paragraph1:
+										'Spotkania koncentrują się na konkretnych trudnościach, z którymi przychodzisz, oraz na budowaniu realnych, możliwych do wdrożenia zmian. W centrum zawsze pozostaje dobro dziecka, ale bez pomijania potrzeb i granic rodzica.'
 								},
 								section4: {
 									title: 'Wsparcie dla rodziców - ważne informacje:',
@@ -307,11 +357,14 @@ const plPL = {
 						},
 						eatingDisorderTherapy: {
 							title: 'Psychoterapia zaburzeń odżywiania',
-							description: 'Specjalistyczna terapia pomagająca zrozumieć emocjonalne przyczyny zaburzeń odżywiania oraz odbudować bezpieczną relację z jedzeniem i własnym ciałem.',
+							description:
+								'Specjalistyczna terapia pomagająca zrozumieć emocjonalne przyczyny zaburzeń odżywiania oraz odbudować bezpieczną relację z jedzeniem i własnym ciałem.',
 							extended: {
 								section0: {
-									paragraph0: 'Psychoterapia zaburzeń odżywiania to specjalistyczna forma psychoterapii skierowana do osób zmagających się z trudną relacją z jedzeniem, ciałem i kontrolą. Jest to proces, który pomaga zrozumieć emocjonalne i psychiczne mechanizmy stojące za objawami oraz stopniowo odzyskać poczucie bezpieczeństwa, wpływu i kontaktu ze sobą.',
-									paragraph1: 'Zaburzenia odżywiania nie są problemem „braku silnej woli”. To często sposób radzenia sobie z napięciem, emocjami, relacjami lub poczuciem braku kontroli. Psychoterapia pozwala dotrzeć do źródła problemu, a nie tylko zatrzymać objawy.'
+									paragraph0:
+										'Psychoterapia zaburzeń odżywiania to specjalistyczna forma psychoterapii skierowana do osób zmagających się z trudną relacją z jedzeniem, ciałem i kontrolą. Jest to proces, który pomaga zrozumieć emocjonalne i psychiczne mechanizmy stojące za objawami oraz stopniowo odzyskać poczucie bezpieczeństwa, wpływu i kontaktu ze sobą.',
+									paragraph1:
+										'Zaburzenia odżywiania nie są problemem „braku silnej woli”. To często sposób radzenia sobie z napięciem, emocjami, relacjami lub poczuciem braku kontroli. Psychoterapia pozwala dotrzeć do źródła problemu, a nie tylko zatrzymać objawy.'
 								},
 								section1: {
 									title: 'Dla kogo jest terapia zaburzeń odżywiania?',
@@ -324,24 +377,31 @@ const plPL = {
 										'nadmiernie kontrolują ciało, treningi lub dietę',
 										'czują utratę kontroli nad jedzeniem lub przeciwnie - sztywną potrzebę kontroli'
 									],
-									paragraph1: 'Terapia jest również dla osób, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu.'
+									paragraph1:
+										'Terapia jest również dla osób, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu.'
 								},
 								section2: {
 									title: 'Obszary pracy w terapii zaburzeń odżywiania',
 									paragraph0: '<b>Relacja z jedzeniem</b>',
-									paragraph1: 'Praca nad restrykcjami, kompulsjami, napadami objadania się, poczuciem winy po jedzeniu oraz lękiem przed utratą kontroli.',
+									paragraph1:
+										'Praca nad restrykcjami, kompulsjami, napadami objadania się, poczuciem winy po jedzeniu oraz lękiem przed utratą kontroli.',
 									paragraph2: '<b>Relacja z ciałem</b>',
-									paragraph3: 'Wsparcie w budowaniu bardziej realistycznego i łagodnego kontaktu z własnym ciałem, pracy z obrazem ciała, wstydem i nadmierną krytyką.',
+									paragraph3:
+										'Wsparcie w budowaniu bardziej realistycznego i łagodnego kontaktu z własnym ciałem, pracy z obrazem ciała, wstydem i nadmierną krytyką.',
 									paragraph4: '<b>Emocje i regulacja napięcia</b>',
-									paragraph5: 'Zaburzenia odżywiania często pełnią funkcję regulowania emocji. Terapia pomaga nauczyć się rozpoznawać, nazywać i bezpiecznie przeżywać emocje.',
+									paragraph5:
+										'Zaburzenia odżywiania często pełnią funkcję regulowania emocji. Terapia pomaga nauczyć się rozpoznawać, nazywać i bezpiecznie przeżywać emocje.',
 									paragraph6: '<b>Kontrola, perfekcjonizm i poczucie wartości</b>',
-									paragraph7: 'Praca z nadmierną potrzebą kontroli, wysokimi wymaganiami wobec siebie oraz poczuciem, że „muszę zasłużyć na bycie wystarczającą”.',
+									paragraph7:
+										'Praca z nadmierną potrzebą kontroli, wysokimi wymaganiami wobec siebie oraz poczuciem, że „muszę zasłużyć na bycie wystarczającą”.',
 									paragraph8: '<b>Relacje i granice</b>',
-									paragraph9: 'Zrozumienie, jak relacje i doświadczenia z przeszłości wpływają na sposób, w jaki ciało i jedzenie stają się miejscem napięcia lub ucieczki.'
+									paragraph9:
+										'Zrozumienie, jak relacje i doświadczenia z przeszłości wpływają na sposób, w jaki ciało i jedzenie stają się miejscem napięcia lub ucieczki.'
 								},
 								section3: {
 									title: 'Jak wygląda terapia zaburzeń odżywiania?',
-									paragraph0: 'Terapia zaburzeń odżywiania to proces długofalowy, oparty na bezpieczeństwie, zaufaniu i indywidualnym tempie pracy. Nie polega na kontroli jedzenia ani narzucaniu gotowych schematów.',
+									paragraph0:
+										'Terapia zaburzeń odżywiania to proces długofalowy, oparty na bezpieczeństwie, zaufaniu i indywidualnym tempie pracy. Nie polega na kontroli jedzenia ani narzucaniu gotowych schematów.',
 									paragraph1: 'Celem terapii jest:',
 									list0: [
 										'zmniejszenie lub wygaszenie objawów',
@@ -349,7 +409,8 @@ const plPL = {
 										'odbudowa poczucia wpływu i sprawczości',
 										'stworzenie bezpieczniejszej relacji z jedzeniem i ciałem'
 									],
-									paragraph2: 'W razie potrzeby terapia może odbywać się we współpracy z lekarzem lub dietetykiem.'
+									paragraph2:
+										'W razie potrzeby terapia może odbywać się we współpracy z lekarzem lub dietetykiem.'
 								}
 							}
 						}
@@ -373,7 +434,8 @@ const plPL = {
 				errors: {
 					noProducts: 'Brak dostępnych produktów w tym momencie. Sprawdź ponownie później.',
 					loadError: 'Wystąpił błąd podczas ładowania produktów. Spróbuj ponownie później.',
-					checkoutError: 'Wystąpił błąd podczas inicjowania procesu zakupu. Spróbuj ponownie później.',
+					checkoutError:
+						'Wystąpił błąd podczas inicjowania procesu zakupu. Spróbuj ponownie później.',
 					serverError: 'Wystąpił błąd serwera. Spróbuj ponownie później.'
 				},
 				checkoutMessages: {
@@ -385,6 +447,13 @@ const plPL = {
 					autoRedirect: 'Zostaniesz automatycznie przekierowany za {{ time }} sekund...'
 				}
 			},
+			error: {
+				title: 'Coś poszło nie tak',
+				description: 'Nie udało się wczytać tej strony. Spróbuj ponownie za chwilę.',
+				notFoundTitle: 'Nie znaleziono strony',
+				notFoundDescription: 'Ta strona nie istnieje lub została przeniesiona.',
+				backHome: 'Wróć na stronę główną'
+			},
 			blog: {
 				title: 'Blog',
 				article: {
@@ -394,7 +463,8 @@ const plPL = {
 					notFoundTitle: 'Nie znaleziono artykułu',
 					notFoundDescription: 'Ten artykuł nie istnieje lub nie jest dostępny w wybranym języku.',
 					contactCta: 'Skontaktuj się ze mną',
-					contactCtaDescription: 'Masz pytania po lekturze? Umów konsultację - porozmawiamy spokojnie i bez oceniania.'
+					contactCtaDescription:
+						'Masz pytania po lekturze? Umów konsultację - porozmawiamy spokojnie i bez oceniania.'
 				},
 				readMore: 'Czytaj dalej'
 			},
@@ -404,7 +474,8 @@ const plPL = {
 				description: 'Informacje dotyczące przetwarzania danych osobowych',
 				sections: {
 					controller: {
-						title: '1. Administratorem danych osobowych jest Centrum Psychoterapii Bezstresowo - Olesya Haiduk.'
+						title:
+							'1. Administratorem danych osobowych jest Centrum Psychoterapii Bezstresowo - Olesya Haiduk.'
 					},
 					purpose: {
 						title: '2. Dane osobowe przetwarzane są w celu:',
@@ -415,16 +486,20 @@ const plPL = {
 						]
 					},
 					legal: {
-						title: '3. Podstawą przetwarzania danych jest zgoda Klienta, wykonanie umowy oraz obowiązek prawny Administratora.'
+						title:
+							'3. Podstawą przetwarzania danych jest zgoda Klienta, wykonanie umowy oraz obowiązek prawny Administratora.'
 					},
 					recipients: {
-						title: '4. Dane nie są przekazywane osobom trzecim, z wyjątkiem podmiotów uprawnionych na mocy prawa.'
+						title:
+							'4. Dane nie są przekazywane osobom trzecim, z wyjątkiem podmiotów uprawnionych na mocy prawa.'
 					},
 					rights: {
-						title: '5. Klient ma prawo dostępu do danych, ich poprawiania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz cofnięcia zgody.'
+						title:
+							'5. Klient ma prawo dostępu do danych, ich poprawiania, usunięcia, ograniczenia przetwarzania, przenoszenia oraz cofnięcia zgody.'
 					},
 					complaint: {
-						title: '6. Klient ma prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.'
+						title:
+							'6. Klient ma prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.'
 					}
 				},
 				download: {
@@ -437,7 +512,8 @@ const plPL = {
 			priceList: {
 				title: 'Cennik',
 				subtitle: 'Aktualny cennik usług psychoterapeutycznych i produktów',
-				description: 'Cennik usług psychoterapeutycznych i produktów oferowanych przez Centrum Psychoterapii Bezstresowo',
+				description:
+					'Cennik usług psychoterapeutycznych i produktów oferowanych przez Centrum Psychoterapii Bezstresowo',
 				noProducts: 'Brak dostępnych usług'
 			},
 			termsOfService: {
@@ -448,14 +524,15 @@ const plPL = {
 					general: {
 						title: '§1 Postanowienia ogólne',
 						items: [
-							'Niniejszy Regulamin określa zasady świadczenia usług psychoterapeutycznych przez Centrum Psychoterapii Bezstresowo - Olesya Haiduk, zwane dalej \"Terapeutą\".',
-							'Klientem jest osoba korzystająca z usług psychoterapeutycznych, zwana dalej \"Klientem\".',
+							'Niniejszy Regulamin określa zasady świadczenia usług psychoterapeutycznych przez Centrum Psychoterapii Bezstresowo - Olesya Haiduk, zwane dalej "Terapeutą".',
+							'Klientem jest osoba korzystająca z usług psychoterapeutycznych, zwana dalej "Klientem".',
 							'Skorzystanie z usług oznacza akceptację niniejszego Regulaminu.'
 						]
 					},
 					scope: {
 						title: '§2 Zakres świadczonych usług',
-						intro: 'Usługi świadczone są przez psychoterapeutkę pracującą w nurcie Analizy Transakcyjnej w trakcie szkolenia, pracującą zgodnie ze standardami etycznymi oraz pod stałą opieką superwizorów. Spotkania odbywają się w formie stacjonarnej lub online.',
+						intro:
+							'Usługi świadczone są przez psychoterapeutkę pracującą w nurcie Analizy Transakcyjnej w trakcie szkolenia, pracującą zgodnie ze standardami etycznymi oraz pod stałą opieką superwizorów. Spotkania odbywają się w formie stacjonarnej lub online.',
 						servicesTitle: 'Usługi świadczone przez Centrum obejmują:',
 						services: [
 							'psychoterapię zaburzeń odżywiania;',
@@ -548,7 +625,8 @@ const plPL = {
 				},
 				download: {
 					title: 'Pobierz pełny regulamin',
-					description: 'Możesz pobrać pełny regulamin świadczenia usług psychoterapeutycznych w formacie PDF.',
+					description:
+						'Możesz pobrać pełny regulamin świadczenia usług psychoterapeutycznych w formacie PDF.',
 					languageNote: 'Dokument PDF dostępny jest w języku polskim.',
 					button: 'Pobierz PDF'
 				}
@@ -579,7 +657,8 @@ const plPL = {
 					placeholder: 'Wpisz swój numer telefonu',
 					errors: {
 						required: 'Numer telefonu jest wymagany',
-						invalid: 'Numer telefonu jest nieprawidłowy (prawdopodobnie brakuje numeru kierunkowego, np. +48)'
+						invalid:
+							'Numer telefonu jest nieprawidłowy (prawdopodobnie brakuje numeru kierunkowego, np. +48)'
 					}
 				},
 				email: {
@@ -596,7 +675,7 @@ const plPL = {
 					optional: 'opcjonalne',
 					errors: {
 						max: 'Wiadomość może mieć maksymalnie 500 znaków',
-						requiredForOther: 'Wiadomość jest wymagana dla typu \'Inne\''
+						requiredForOther: "Wiadomość jest wymagana dla typu 'Inne'"
 					}
 				},
 				toast: {
@@ -607,13 +686,24 @@ const plPL = {
 				},
 				checkoutMessages: {
 					successTitle: 'Konsultacja opłacona',
-					successDescription: 'Dziękujemy za dokonanie płatności. Twoja rejestracja konsultacji została potwierdzona. Skontaktujemy się z Tobą wkrótce w celu ustalenia szczegółów.',
+					successDescription:
+						'Dziękujemy za dokonanie płatności. Twoja rejestracja konsultacji została potwierdzona. Skontaktujemy się z Tobą wkrótce w celu ustalenia szczegółów.',
 					cancelTitle: 'Płatność anulowana',
-					cancelDescription: 'Anulowałeś proces płatności. Twoja rejestracja konsultacji nie została potwierdzona. Możesz spróbować ponownie.',
+					cancelDescription:
+						'Anulowałeś proces płatności. Twoja rejestracja konsultacji nie została potwierdzona. Możesz spróbować ponownie.',
 					backToRegistrations: 'Powrót do Rejestracji',
 					autoRedirect: 'Zostaniesz automatycznie przekierowany za {{ time }} sekund...'
 				}
 			}
+		},
+		a11y: {
+			logoAlt: 'Logo Bezstresowo',
+			openMenu: 'Otwórz menu',
+			closeMenu: 'Zamknij menu',
+			close: 'Zamknij',
+			aboutMeAlt: 'Olesya Haiduk - psychoterapeutka',
+			certificatePreview: 'Podgląd certyfikatu',
+			serviceDetails: 'Szczegóły usługi'
 		},
 		header: {
 			items: {
@@ -672,7 +762,8 @@ const plPL = {
 					label: 'Twój telefon',
 					placeholder: 'Wpisz swój numer telefonu',
 					errors: {
-						invalid: 'Numer telefonu jest nieprawidłowy (prawdopodobnie brakuje numeru kierunkowego, np. +48)',
+						invalid:
+							'Numer telefonu jest nieprawidłowy (prawdopodobnie brakuje numeru kierunkowego, np. +48)',
 						required: 'Numer telefonu jest wymagany'
 					}
 				},
@@ -729,9 +820,9 @@ const plPL = {
 			deleteDialog: {
 				title: 'Usuń artykuł na blogu',
 				description: 'Czy na pewno chcesz usunąć ten artykuł? Ta akcja nie może być cofnięta.',
-				confirmLabel: 'Wpisz \'delete\' aby potwierdzić',
+				confirmLabel: "Wpisz 'delete' aby potwierdzić",
 				confirmPlaceholder: 'delete',
-				confirmError: 'Proszę wpisać \'delete\' aby potwierdzić',
+				confirmError: "Proszę wpisać 'delete' aby potwierdzić",
 				confirm: 'Usuń artykuł',
 				cancel: 'Anuluj'
 			},
@@ -787,9 +878,9 @@ const plPL = {
 			deleteDialog: {
 				title: 'Usuń produkt',
 				description: 'Czy na pewno chcesz usunąć ten produkt? Tej akcji nie można cofnąć.',
-				confirmLabel: 'Wpisz \'delete\' aby potwierdzić',
+				confirmLabel: "Wpisz 'delete' aby potwierdzić",
 				confirmPlaceholder: 'delete',
-				confirmError: 'Proszę wpisać \'delete\' aby potwierdzić',
+				confirmError: "Proszę wpisać 'delete' aby potwierdzić",
 				confirm: 'Usuń produkt',
 				cancel: 'Anuluj'
 			},
@@ -914,23 +1005,28 @@ const plPL = {
 		ogImageAlt: 'Bezstresowo - Olesya Haiduk, psychoterapia w Łodzi i online',
 		home: {
 			title: 'Psychoterapeuta Łódź | Bezstresowo - Olesya Haiduk',
-			description: 'Psychoterapia dla kobiet, par i młodzieży w Łodzi oraz online. Olesya Haiduk, analiza transakcyjna. Wsparcie z empatią i zrozumieniem. Umów wizytę.'
+			description:
+				'Psychoterapia dla kobiet, par i młodzieży w Łodzi oraz online. Olesya Haiduk, analiza transakcyjna. Wsparcie z empatią i zrozumieniem. Umów wizytę.'
 		},
 		registrations: {
 			title: 'Umów konsultację psychoterapeutyczną | Łódź i online',
-			description: 'Zapisz się na konsultację u Olesyi Haiduk. Terapia indywidualna, par i młodzieży, w gabinecie w Łodzi lub online. Sprawdź dostępne terminy.'
+			description:
+				'Zapisz się na konsultację u Olesyi Haiduk. Terapia indywidualna, par i młodzieży, w gabinecie w Łodzi lub online. Sprawdź dostępne terminy.'
 		},
 		blog: {
 			title: 'Blog o zdrowiu psychicznym i relacjach | Bezstresowo',
-			description: 'Artykuły psychoterapeutki o relacjach, emocjach, lęku i poczuciu własnej wartości. Praktyczna wiedza o zdrowiu psychicznym. Łódź i online.'
+			description:
+				'Artykuły psychoterapeutki o relacjach, emocjach, lęku i poczuciu własnej wartości. Praktyczna wiedza o zdrowiu psychicznym. Łódź i online.'
 		},
 		priceList: {
 			title: 'Cennik psychoterapii | Łódź i online | Bezstresowo',
-			description: 'Cennik sesji psychoterapii indywidualnej, dla par i młodzieży. Konsultacje w gabinecie w Łodzi oraz online. Sprawdź ceny i umów wizytę.'
+			description:
+				'Cennik sesji psychoterapii indywidualnej, dla par i młodzieży. Konsultacje w gabinecie w Łodzi oraz online. Sprawdź ceny i umów wizytę.'
 		},
 		shop: {
 			title: 'Sklep | Materiały wspierające dobrostan | Bezstresowo',
-			description: 'Materiały psychoedukacyjne i produkty wspierające zdrowie psychiczne. Bezstresowo, Olesya Haiduk, psychoterapia w Łodzi i online.'
+			description:
+				'Materiały psychoedukacyjne i produkty wspierające zdrowie psychiczne. Bezstresowo, Olesya Haiduk, psychoterapia w Łodzi i online.'
 		},
 		termsOfService: {
 			title: 'Regulamin | Bezstresowo',

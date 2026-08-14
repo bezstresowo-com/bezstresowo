@@ -12,7 +12,9 @@ import type { StandardSchemaV1 } from '@standard-schema/spec';
  * Keeping the DTOs means the validation messages stay translation keys
  * (see `$shared/server/validators`) instead of raw english strings.
  */
-export function dtoSchema<T extends object>(cls: ClassConstructor<T>): StandardSchemaV1<unknown, T> {
+export function dtoSchema<T extends object>(
+	cls: ClassConstructor<T>
+): StandardSchemaV1<unknown, T> {
 	return {
 		'~standard': {
 			version: 1,
@@ -35,10 +37,9 @@ export function dtoSchema<T extends object>(cls: ClassConstructor<T>): StandardS
 }
 
 /** Schema for remote functions that take no argument beyond a plain string id/slug. */
-export function stringSchema(message = 'api.validation.errors.IsString'): StandardSchemaV1<
-	string,
-	string
-> {
+export function stringSchema(
+	message = 'api.validation.errors.IsString'
+): StandardSchemaV1<string, string> {
 	return {
 		'~standard': {
 			version: 1,

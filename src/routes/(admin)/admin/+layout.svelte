@@ -2,22 +2,14 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { t } from '$i18n';
-	import LanguageSelect from '$lib/LanguageSelect/LanguageSelect.svelte';
-	import { HttpMethod } from '$shared/global/enums/http-method';
+	import { logout } from '$remote/admin-auth.remote';
 
 	let { children, data } = $props();
 
 	async function handleLogout() {
 		try {
-			const response = await fetch(resolve('/api/admin/logout'), {
-				method: HttpMethod.DELETE
-			});
-
-			if (response.ok) {
-				goto(resolve('/(admin)/admin/login'));
-			} else {
-				console.error('Logout failed');
-			}
+			await logout();
+			await goto(resolve('/(admin)/admin/login'), { invalidateAll: true });
 		} catch (error) {
 			console.error('Logout error:', error);
 		}
@@ -40,8 +32,6 @@
 							{t('admin.logout')}
 						</button>
 					{/if}
-
-					<LanguageSelect />
 				</div>
 			</div>
 		</div>

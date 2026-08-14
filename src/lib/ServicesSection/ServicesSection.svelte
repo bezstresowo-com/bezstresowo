@@ -94,7 +94,7 @@
 		class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
 		role="dialog"
 		aria-modal="true"
-		aria-label="Learn more popup"
+		aria-label={t('user.a11y.serviceDetails')}
 		onclick={closePopup}
 		onkeydown={(event) => {
 			if (event.key === 'Enter' || event.key === ' ') {
@@ -108,7 +108,7 @@
 		>
 			<button
 				onclick={closePopup}
-				aria-label="close"
+				aria-label={t('user.a11y.close')}
 				class="absolute top-4 right-4 cursor-pointer rounded-full bg-white p-1 hover:shadow-lg"
 			>
 				<i class="fa-solid fa-xmark"></i>
@@ -122,9 +122,7 @@
 			>
 				<span>
 					<i class={`text-2xl text-accent ${selectedOffer.icon}`}></i>
-					<span class="my-6 ml-4 text-2xl font-bold"
-						>{t(`${selectedOffer.prefix}.title`)}</span
-					>
+					<span class="my-6 ml-4 text-2xl font-bold">{t(`${selectedOffer.prefix}.title`)}</span>
 				</span>
 
 				{#each extendedTranslations as { type, value }, i (i)}

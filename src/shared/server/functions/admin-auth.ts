@@ -1,7 +1,5 @@
 import { dev } from '$app/environment';
-import { resolve } from '$app/paths';
 import { COOKIE_MAX_AGE_S, JWT_EXP_INTERVAL_MS, JWT_SECRET } from '$env/static/private';
-import { HttpStatus } from '$shared/global/enums/http-status';
 import type { Cookies } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 import { isNil } from 'lodash-es';
@@ -58,23 +56,14 @@ export function isAdminAuthenticated(cookies: Cookies) {
 	}
 
 	const tokenExpInterval = Number(JWT_EXP_INTERVAL_MS.replaceAll('_', ''));
-	const { iat, exp } = jwt.verify(token, JWT_SECRET, { algorithms: ['HS512'] }) as JwtPayload;
 
-	const now = Date.now();
-	if (iat > now || exp < now || Math.abs(iat - exp) !== tokenExpInterval) return false;
-	return true;
-}
+	try {
+		const { iat, exp } = jwt.verify(token, JWT_SECRET, { algorithms: ['HS512'] }) as JwtPayload;
 
-/**
- * Redirects to login if not authenticated
- */
-export function requireAdminAuth(cookies: Cookies) {
-	if (!isAdminAuthenticated(cookies)) {
-		throw new Response(null, {
-			status: HttpStatus.FOUND,
-			headers: {
-				location: resolve('/(admin)/admin/login')
-			}
-		});
+		const now = Date.now();
+		return !(iat > now || exp < now || Math.abs(iat - exp) !== tokenExpInterval);
+	} catch {
+		// tampered / expired / malformed token - simply not authenticated
+		return false;
 	}
 }

@@ -95,7 +95,7 @@
 		class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4"
 		role="dialog"
 		aria-modal="true"
-		aria-label="Certificate preview"
+		aria-label={t('user.a11y.certificatePreview')}
 		onclick={closeCertificate}
 		onkeydown={(event) => {
 			if (event.key === 'Enter' || event.key === ' ') {

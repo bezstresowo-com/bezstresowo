@@ -1,4 +1,4 @@
-import { LOCALE_HTML_LANG, LOCALE_PREFIXES, Locale, DEFAULT_LOCALE } from '$i18n';
+import { DEFAULT_LOCALE, LOCALE_HTML_LANG, LOCALE_PREFIXES, Locale } from '$i18n';
 import { absoluteUrl } from '$shared/global/functions/site-url';
 
 export type SeoAlternate = {

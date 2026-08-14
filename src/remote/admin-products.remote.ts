@@ -116,7 +116,9 @@ export const deleteProduct = command(dtoSchema(ProductIdDto), async ({ id }) => 
 		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
 	}
 
-	const mediaIds = existing.internationalizedProducts.flatMap((translation) => translation.mediaIds);
+	const mediaIds = existing.internationalizedProducts.flatMap(
+		(translation) => translation.mediaIds
+	);
 
 	await prisma.product.delete({ where: { id } });
 	// The one-to-one price row is not cascaded by the relation, drop it here.

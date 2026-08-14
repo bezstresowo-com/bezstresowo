@@ -7,9 +7,7 @@
 	import Seo from '$lib/Seo/Seo.svelte';
 	import { getBlogArticle } from '$remote/blog.remote';
 
-	const article = $derived(
-		getBlogArticle({ lang: getLocale(), slug: page.params.slug as string })
-	);
+	const article = $derived(getBlogArticle({ lang: getLocale(), slug: page.params.slug as string }));
 </script>
 
 <svelte:boundary>

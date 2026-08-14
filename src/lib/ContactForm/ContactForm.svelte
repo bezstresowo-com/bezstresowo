@@ -141,9 +141,7 @@
 				{#each FORM_FIELDS_ORDER as key, i (i + key)}
 					{#if FORM_FIELDS[key].element === 'input'}
 						<div>
-							<label class="sr-only" for={key}
-								>{t(`user.contactForm.fields.${key}.label`)}</label
-							>
+							<label class="sr-only" for={key}>{t(`user.contactForm.fields.${key}.label`)}</label>
 							<input
 								id={key}
 								name={key}
@@ -161,9 +159,7 @@
 						</div>
 					{:else if FORM_FIELDS[key].element === 'textarea'}
 						<div>
-							<label class="sr-only" for={key}
-								>{t(`user.contactForm.fields.${key}.label`)}</label
-							>
+							<label class="sr-only" for={key}>{t(`user.contactForm.fields.${key}.label`)}</label>
 							<textarea
 								id={key}
 								name={key}

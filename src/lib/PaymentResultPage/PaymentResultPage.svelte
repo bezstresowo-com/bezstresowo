@@ -20,7 +20,7 @@
 			timeLeft -= 1;
 			if (timeLeft <= 0) {
 				clearInterval(interval);
-				// eslint-disable-next-line svelte/no-navigation-without-resolve
+
 				goto(redirectPath);
 			}
 		}, 1000);

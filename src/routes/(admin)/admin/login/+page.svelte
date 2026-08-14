@@ -2,8 +2,8 @@
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
 	import { t } from '$i18n';
-	import { HttpMethod } from '$shared/global/enums/http-method';
-	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
+	import { login } from '$remote/admin-auth.remote';
+	import { remoteErrorMessage } from '$shared/global/functions/remote-error';
 	import { isEmpty, isNil } from 'lodash-es';
 	import { onDestroy } from 'svelte';
 	import { createForm } from 'svelte-forms-lib';
@@ -18,7 +18,7 @@
 	};
 
 	const formValidationSchema = yup.object().shape({
-		password: yup.string().required('Password is required')
+		password: yup.string().required('api.validation.errors.IsNotEmpty')
 	});
 
 	const {
@@ -36,29 +36,18 @@
 			isLoading = true;
 
 			try {
-				const response = await fetch(resolve('/api/admin/login'), {
-					method: HttpMethod.POST,
-					headers: getBaseHeaders(),
-					body: JSON.stringify({ password })
-				});
-
-				const result = await response.json();
-
-				if (response.ok) {
-					goto(resolve('/(admin)/admin'));
-				} else {
-					httpError = result.message;
-				}
-			} catch (err) {
-				httpError = 'An error occurred during login';
-				console.error('Login error:', err);
+				await login({ password });
+				await goto(resolve('/(admin)/admin'), { invalidateAll: true });
+			} catch (error) {
+				httpError = remoteErrorMessage(error);
+				console.error('Login error:', error);
+			} finally {
+				isLoading = false;
 			}
 
-			isLoading = false;
-
 			form.set(formInitialValue);
-			touched.set({} as any);
-			errors.set({} as any);
+			touched.set({} as never);
+			errors.set({} as never);
 		}
 	});
 
@@ -88,9 +77,9 @@
 		<form class="mt-8 space-y-6" onsubmit={handleSubmit}>
 			<div class="-space-y-px rounded-md shadow-sm">
 				<div>
-					<label for="password" class="sr-only"
-						>{t('admin.login.form.fields.password.label')}</label
-					>
+					<label for="password" class="sr-only">
+						{t('admin.login.form.fields.password.label')}
+					</label>
 					<input
 						id="password"
 						name="password"

@@ -15,7 +15,10 @@ export async function POST({ request }) {
 	const signature = request.headers.get('stripe-signature');
 
 	if (!signature || !STRIPE_WHSEC) {
-		return json({ error: 'Missing signature or webhook secret' }, { status: HttpStatus.BAD_REQUEST });
+		return json(
+			{ error: 'Missing signature or webhook secret' },
+			{ status: HttpStatus.BAD_REQUEST }
+		);
 	}
 
 	let event: Stripe.Event;

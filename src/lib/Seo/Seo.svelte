@@ -80,6 +80,7 @@
 	<meta name="twitter:image:alt" content={previewImageAlt} />
 
 	{#if jsonLd}
+		<!-- eslint-disable-next-line no-useless-escape -- `<\/script>` must stay escaped inside the template literal -->
 		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}
 	{/if}
 </svelte:head>

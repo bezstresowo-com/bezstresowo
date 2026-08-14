@@ -17,7 +17,9 @@
 
 	let currentPage = $state(1);
 
-	const articles = $derived(getBlogArticles({ lang: getLocale(), page: currentPage, size: pageSize }));
+	const articles = $derived(
+		getBlogArticles({ lang: getLocale(), page: currentPage, size: pageSize })
+	);
 </script>
 
 <section class="bg-white text-primary">

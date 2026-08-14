@@ -148,9 +148,7 @@
 					</select>
 				{/if}
 				{#if $errors.therapyProductId}
-					<small class="mt-1 block text-sm text-danger"
-						>{t($errors.therapyProductId)}</small
-					>
+					<small class="mt-1 block text-sm text-danger">{t($errors.therapyProductId)}</small>
 				{/if}
 			</div>
 

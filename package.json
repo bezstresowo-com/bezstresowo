@@ -21,7 +21,8 @@
 		"prisma:db:push": "prisma db push",
 		"prisma:studio": "prisma studio",
 		"prisma:validate": "prisma validate",
-		"prisma:format": "prisma format"
+		"prisma:format": "prisma format",
+		"migrate:blog-articles": "node --env-file-if-exists=.env scripts/migrate-blog-articles.js"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",

@@ -6,10 +6,10 @@ import satori from 'satori';
 
 import cyrillic400 from '@fontsource/roboto/files/roboto-cyrillic-400-normal.woff?inline';
 import cyrillic700 from '@fontsource/roboto/files/roboto-cyrillic-700-normal.woff?inline';
-import latinExt400 from '@fontsource/roboto/files/roboto-latin-ext-400-normal.woff?inline';
-import latinExt700 from '@fontsource/roboto/files/roboto-latin-ext-700-normal.woff?inline';
 import latin400 from '@fontsource/roboto/files/roboto-latin-400-normal.woff?inline';
 import latin700 from '@fontsource/roboto/files/roboto-latin-700-normal.woff?inline';
+import latinExt400 from '@fontsource/roboto/files/roboto-latin-ext-400-normal.woff?inline';
+import latinExt700 from '@fontsource/roboto/files/roboto-latin-ext-700-normal.woff?inline';
 
 import type { RequestHandler } from './$types';
 
@@ -79,7 +79,7 @@ async function render(locale: Locale, title: string, subtitle: string) {
 					justifyContent: 'space-between',
 					padding: '64px 72px',
 					backgroundColor: COLORS.primary,
-					fontFamily: 'Roboto'
+					fontFamily: FONT_STACK
 				},
 				children: [
 					{
@@ -171,12 +171,17 @@ function decode(dataUrl: string) {
 /**
  * Roboto subsets covering polish (latin + latin-ext) and ukrainian (cyrillic).
  * Inlined as data URLs so the serverless bundle carries the fonts with it.
+ *
+ * Satori only falls back between fonts with *different* family names, hence the
+ * three families and the explicit stack below.
  */
 const FONTS = [
 	{ name: 'Roboto', data: decode(latin400), weight: 400 as const, style: 'normal' as const },
-	{ name: 'Roboto', data: decode(latinExt400), weight: 400 as const, style: 'normal' as const },
-	{ name: 'Roboto', data: decode(cyrillic400), weight: 400 as const, style: 'normal' as const },
+	{ name: 'RobotoExt', data: decode(latinExt400), weight: 400 as const, style: 'normal' as const },
+	{ name: 'RobotoCyr', data: decode(cyrillic400), weight: 400 as const, style: 'normal' as const },
 	{ name: 'Roboto', data: decode(latin700), weight: 700 as const, style: 'normal' as const },
-	{ name: 'Roboto', data: decode(latinExt700), weight: 700 as const, style: 'normal' as const },
-	{ name: 'Roboto', data: decode(cyrillic700), weight: 700 as const, style: 'normal' as const }
+	{ name: 'RobotoExt', data: decode(latinExt700), weight: 700 as const, style: 'normal' as const },
+	{ name: 'RobotoCyr', data: decode(cyrillic700), weight: 700 as const, style: 'normal' as const }
 ];
+
+const FONT_STACK = 'Roboto, RobotoExt, RobotoCyr';

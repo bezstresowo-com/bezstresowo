@@ -8,9 +8,8 @@
 	import { Video } from './extensions/Video';
 	import FileHandler from '@tiptap/extension-file-handler';
 	import { v4 } from 'uuid';
-	import { resolve } from '$app/paths';
-	import { HttpMethod } from '$shared/global/enums/http-method';
-	import type { CreateMediaResponseDto } from '$api/admin/media/[id]/model';
+	import { deleteMedia, uploadMedia } from '$remote/admin-media.remote';
+	import { toBase64 } from '$shared/global/functions/to-base64';
 
 	let { content = '', onUpdate }: Props = $props();
 
@@ -38,18 +37,12 @@
 				}
 
 				const id = v4();
-				const formData = new FormData();
-				formData.append('file', file);
-				const response = await fetch(
-					resolve('/api/admin/media/[id]', {
-						id
-					}),
-					{
-						method: HttpMethod.POST,
-						body: formData
-					}
-				);
-				const { url } = (await response.json()) as CreateMediaResponseDto;
+				// Remote function payloads are JSON, so the file travels base64 encoded.
+				const { url } = await uploadMedia({
+					id,
+					mimeType: file.type,
+					dataBase64: await toBase64(file)
+				});
 				addedMedia[id] = url;
 				currentEditor
 					.chain()
@@ -107,14 +100,7 @@
 					(props.node.type.name === 'image' || props.node.type.name === 'video')
 				) {
 					const id = props.node.attrs['id'] as string;
-					await fetch(
-						resolve('/api/admin/media/[id]', {
-							id
-						}),
-						{
-							method: HttpMethod.DELETE
-						}
-					);
+					await deleteMedia({ id });
 					delete addedMedia[id];
 				}
 			}
