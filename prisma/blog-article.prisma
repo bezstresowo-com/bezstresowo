@@ -1,8 +1,6 @@
 model BlogArticle {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  slug String @unique
-
   internationalizedArticles InternationalizedBlogArticle[]
 
   createdAt DateTime @default(now())

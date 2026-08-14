@@ -1,20 +1,7 @@
-import { resolve } from '$app/paths';
-
+/** Paths are language agnostic - `path()` prefixes them with the active locale. */
 export const HEADER_PATHS = [
-	{
-		label: 'user.header.items.home',
-		href: resolve('/(user)/home')
-	},
-	{
-		label: 'user.header.items.blog',
-		href: resolve('/(user)/blog')
-	},
-	{
-		label: 'user.header.items.shop',
-		href: resolve('/(user)/shop')
-	},
-	{
-		label: 'user.header.items.registrations',
-		href: resolve('/(user)/registrations')
-	}
+	{ label: 'user.header.items.home', path: '/home' },
+	{ label: 'user.header.items.blog', path: '/blog' },
+	{ label: 'user.header.items.shop', path: '/shop' },
+	{ label: 'user.header.items.registrations', path: '/registrations' }
 ];

@@ -1,5 +1,3 @@
-import { resolve } from "$app/paths";
-
 export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
@@ -24,17 +22,17 @@ export const FAST_LINKS = [
 	{
 		id: 'statute',
 		label: 'user.footer.fastLinks.termsOfService',
-		href: resolve('/terms-of-service')
+		path: '/terms-of-service'
 	},
 	{
 		id: 'gdpr',
 		label: 'user.footer.fastLinks.gdpr',
-		href: resolve('/gdpr')
+		path: '/gdpr'
 	},
 	{
 		id: 'priceList',
 		label: 'user.footer.fastLinks.priceList',
-		href: resolve('/price-list')
+		path: '/price-list'
 	}
 ];
 

@@ -1,14 +1,37 @@
 import { asset } from '$app/paths';
 
-import enUK from './translations/en-US.json';
-import plPL from './translations/pl-PL.json';
-import ukUA from './translations/uk-UA.json';
+import plPL from './translations/pl-PL';
+import ukUA from './translations/uk-UA';
 
 export enum Locale {
-	enUS = 'en-US',
 	plPL = 'pl-PL',
 	ukUA = 'uk-UA'
 }
+
+/** Polish is the default language of the whole site. */
+export const DEFAULT_LOCALE = Locale.plPL;
+
+/** The `[lang]` route segment every user facing page is prefixed with. */
+export const LOCALE_PREFIXES = {
+	[Locale.plPL]: 'pl',
+	[Locale.ukUA]: 'uk'
+} as const satisfies Record<Locale, string>;
+
+export type LocalePrefix = (typeof LOCALE_PREFIXES)[Locale];
+
+export const LOCALE_PREFIX_LIST = Object.values(LOCALE_PREFIXES) as LocalePrefix[];
+
+export const PREFIX_TO_LOCALE = Object.fromEntries(
+	Object.entries(LOCALE_PREFIXES).map(([locale, prefix]) => [prefix, locale as Locale])
+) as Record<LocalePrefix, Locale>;
+
+export const DEFAULT_LOCALE_PREFIX = LOCALE_PREFIXES[DEFAULT_LOCALE];
+
+/** BCP 47 tag used in `<html lang>` and `hreflang`. */
+export const LOCALE_HTML_LANG = {
+	[Locale.plPL]: 'pl',
+	[Locale.ukUA]: 'uk'
+} as const satisfies Record<Locale, string>;
 
 export const LOCALES_MAP: Record<
 	Locale,
@@ -20,13 +43,6 @@ export const LOCALES_MAP: Record<
 		};
 	}
 > = {
-	[Locale.enUS]: {
-		label: 'language.english.label',
-		icon: {
-			src: asset('/flags/us.svg'),
-			alt: 'language.english.alt'
-		}
-	},
 	[Locale.plPL]: {
 		label: 'language.polish.label',
 		icon: {
@@ -43,26 +59,33 @@ export const LOCALES_MAP: Record<
 	}
 };
 
-export const TRANSLATIONS = {
-	[Locale.enUS]: enUK,
+/** The polish dictionary defines the shape every other dictionary has to match. */
+export type Translation = typeof plPL;
+
+export const TRANSLATIONS: Record<Locale, Translation> = {
 	[Locale.plPL]: plPL,
 	[Locale.ukUA]: ukUA
 };
 
-export function getUserPreferredLocale(): Locale | null {
-	if (typeof navigator === 'undefined') {
-		return null;
-	}
+export function isLocalePrefix(value: string | undefined | null): value is LocalePrefix {
+	return !!value && (LOCALE_PREFIX_LIST as string[]).includes(value);
+}
 
-	const userPreferredLangs = navigator.languages || [navigator.language];
-	const supportedLocales = Object.values(Locale);
+export function toLocale(prefix: string | undefined | null): Locale {
+	return isLocalePrefix(prefix) ? PREFIX_TO_LOCALE[prefix] : DEFAULT_LOCALE;
+}
 
-	for (const lang of userPreferredLangs) {
-		const baseLang = lang.slice(0, 2);
-		const matchedLocale = supportedLocales.find((supported) => supported.startsWith(baseLang));
+/**
+ * Best effort match of the visitor's `Accept-Language` / `navigator.languages`
+ * against the supported locales. Only used to pick the initial redirect target.
+ */
+export function matchPreferredLocale(preferred: readonly string[]): Locale | null {
+	for (const lang of preferred) {
+		const baseLang = lang.slice(0, 2).toLowerCase();
+		const matched = Object.values(Locale).find((locale) => locale.toLowerCase().startsWith(baseLang));
 
-		if (matchedLocale) {
-			return matchedLocale;
+		if (matched) {
+			return matched;
 		}
 	}
 

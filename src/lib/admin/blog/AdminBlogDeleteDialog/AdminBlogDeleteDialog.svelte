@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Dialog, Separator } from 'bits-ui';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 
 	interface Props {
 		blogTitle: string;
@@ -38,7 +38,7 @@
 		<span>
 			<i class="fa-solid fa-trash"></i>
 		</span>
-		{$translate('admin.blog.actions.delete')}
+		{t('admin.blog.actions.delete')}
 	</Dialog.Trigger>
 
 	<Dialog.Portal>
@@ -52,30 +52,30 @@
 					<span>
 						<i class="fa-solid fa-triangle-exclamation mr-2"></i>
 					</span>
-					{$translate('admin.blog.deleteDialog.title')}
+					{t('admin.blog.deleteDialog.title')}
 				</Dialog.Title>
 
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description class="mb-4 text-gray-700">
-					{$translate('admin.blog.deleteDialog.description')}
+					{t('admin.blog.deleteDialog.description')}
 					<strong class="mt-2 block text-black">"{blogTitle}"</strong>
 				</Dialog.Description>
 
 				<div class="mb-4">
 					<label for="delete-confirmation" class="mb-2 block text-sm font-medium text-gray-700">
-						{$translate('admin.blog.deleteDialog.confirmLabel')}
+						{t('admin.blog.deleteDialog.confirmLabel')}
 					</label>
 					<input
 						id="delete-confirmation"
 						type="text"
 						bind:value={deleteConfirmation}
-						placeholder={$translate('admin.blog.deleteDialog.confirmPlaceholder')}
+						placeholder={t('admin.blog.deleteDialog.confirmPlaceholder')}
 						class={`w-full rounded-md border px-3 py-2 focus:border-gray-500 ${!isValid && deleteConfirmation ? 'border-red-500' : 'border-gray-300'}`}
 					/>
 					{#if deleteConfirmation && !isValid}
 						<small class="mt-1 block text-sm text-red-500">
-							{$translate('admin.blog.deleteDialog.confirmError')}
+							{t('admin.blog.deleteDialog.confirmError')}
 						</small>
 					{/if}
 				</div>
@@ -85,7 +85,7 @@
 						class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-bold text-gray-700 hover:bg-gray-50"
 						disabled={isDeleting}
 					>
-						{$translate('admin.blog.deleteDialog.cancel')}
+						{t('admin.blog.deleteDialog.cancel')}
 					</Dialog.Close>
 
 					<button
@@ -103,7 +103,7 @@
 								<i class="fa-solid fa-trash"></i>
 							</span>
 						{/if}
-						{$translate('admin.blog.deleteDialog.confirm')}
+						{t('admin.blog.deleteDialog.confirm')}
 					</button>
 				</div>
 

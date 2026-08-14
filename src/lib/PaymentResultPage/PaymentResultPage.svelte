@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 	import { goto } from '$app/navigation';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import type { Props } from './model';
 
@@ -44,18 +44,18 @@
 				></i>
 			</div>
 			<h1 class="mb-2 text-2xl font-bold text-primary">
-				{$translate(`${translationPrefix}.${type}Title`)}
+				{t(`${translationPrefix}.${type}Title`)}
 			</h1>
 			<p class="text-primary">
-				{$translate(`${translationPrefix}.${type}Description`)}
+				{t(`${translationPrefix}.${type}Description`)}
 			</p>
 		</div>
 		<Button href={redirectPath} tailwind="p-2">
-			{$translate(`${translationPrefix}.${buttonTextKey}`)}
+			{t(`${translationPrefix}.${buttonTextKey}`)}
 		</Button>
 
 		<p class="mt-4 text-sm text-primary/70">
-			{$translate(`${translationPrefix}.autoRedirect`, { time: timeLeft })}
+			{t(`${translationPrefix}.autoRedirect`, { time: timeLeft })}
 		</p>
 	</div>
 </div>

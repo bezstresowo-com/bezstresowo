@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { PATHS } from './model';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 </script>
 
 <div class="w-full rounded-xl border border-gray-200 bg-white p-6 shadow-md">
 	<h1 class="mb-5 text-3xl font-bold text-gray-800">
-		{$translate('admin.availableResources')}
+		{t('admin.availableResources')}
 	</h1>
 
 	<ul class="space-y-2">
@@ -21,10 +21,10 @@
 					<div class="flex items-center">
 						<div>
 							<h3>
-								{$translate(label)}
+								{t(label)}
 							</h3>
 
-							<small>{$translate(description)}</small>
+							<small>{t(description)}</small>
 						</div>
 
 						<span class="flex-auto"></span>

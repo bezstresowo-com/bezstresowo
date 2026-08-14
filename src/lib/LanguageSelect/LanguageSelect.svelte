@@ -1,40 +1,36 @@
 <script lang="ts">
-	import { Locale, LOCALES_MAP, currentLocale, translate } from '$i18n';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
+	import { getLocale, LOCALE_PREFIXES, LOCALES_MAP, Locale, t } from '$i18n';
+	import { stripLocalePrefix } from '$lib/Seo/model';
 	import { Select } from 'bits-ui';
-	import { onDestroy } from 'svelte';
-	import type { Unsubscriber } from 'svelte/store';
+
 	import { ITEMS } from './model';
 
-	const UNSUBS: Unsubscriber[] = [];
-
 	let open = $state(false);
-	let selectedValue = $state<Locale>($currentLocale);
-	const selectedLabel = $derived(ITEMS.find((item) => selectedValue === item.value)?.label ?? '');
 
-	$effect(() => {
-		currentLocale.set(selectedValue);
-	});
-
-	UNSUBS.push(currentLocale.subscribe((locale) => (selectedValue = locale)));
-
-	function handleOnOpenChange(value: boolean) {
-		open = value;
-	}
+	/** The language lives in the URL, so switching it is a navigation. */
+	const selectedValue = $derived(getLocale());
+	const selectedLabel = $derived(LOCALES_MAP[selectedValue].label);
 
 	function handleOnValueChange(value: string) {
-		selectedValue = value as Locale;
-	}
+		const locale = value as Locale;
 
-	onDestroy(() => {
-		UNSUBS.forEach((unsub) => unsub());
-	});
+		if (locale === selectedValue) {
+			return;
+		}
+
+		const target = `/${LOCALE_PREFIXES[locale]}${stripLocalePrefix(page.url.pathname)}${page.url.search}`;
+
+		goto(target, { invalidateAll: true });
+	}
 </script>
 
 <Select.Root
 	type="single"
 	value={selectedValue}
 	onValueChange={handleOnValueChange}
-	onOpenChange={handleOnOpenChange}
+	onOpenChange={(value) => (open = value)}
 	{open}
 	items={ITEMS}
 >
@@ -44,7 +40,7 @@
 		<span>
 			<i class="fa fa-globe"></i>
 		</span>
-		{$translate(selectedLabel)}
+		{t(selectedLabel)}
 	</Select.Trigger>
 
 	<Select.Portal>
@@ -62,10 +58,10 @@
 								<img
 									class="aspect-video h-4 object-cover"
 									src={LOCALES_MAP[value].icon.src}
-									alt={$translate(LOCALES_MAP[value].icon.alt)}
+									alt={t(LOCALES_MAP[value].icon.alt)}
 									loading="lazy"
 								/>
-								{$translate(label)}
+								{t(label)}
 							</div>
 						{/snippet}
 					</Select.Item>

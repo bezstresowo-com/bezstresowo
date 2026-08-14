@@ -10,7 +10,7 @@
 	import { onMount } from 'svelte';
 	import { fetchBlogPosts, deleteBlogPost, updateBlogPost, createBlogPost } from './fetch-methods';
 	import { AdminBlogForm, AdminBlogDeleteDialog } from '$lib';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import { Pagination } from 'bits-ui';
 	import { PaginationParamsDto } from '$shared/global/types/http';
 	import { toast } from 'svelte-sonner';
@@ -72,12 +72,12 @@
 		});
 
 		if (createResult.status === 'ok') {
-			toast.success($translate('admin.blog.notifications.createSuccess'));
+			toast.success(t('admin.blog.notifications.createSuccess'));
 			await getBlogPosts();
 			return true;
 		} else {
 			console.error('Failed to create blog post:', createResult);
-			toast.error($translate('admin.blog.notifications.createError'));
+			toast.error(t('admin.blog.notifications.createError'));
 			return false;
 		}
 	}
@@ -98,12 +98,12 @@
 		});
 
 		if (updateResult.status === 'ok') {
-			toast.success($translate('admin.blog.notifications.updateSuccess'));
+			toast.success(t('admin.blog.notifications.updateSuccess'));
 			await getBlogPosts();
 			return true;
 		} else {
 			console.error('Failed to update blog post:', updateResult);
-			toast.error($translate('admin.blog.notifications.updateError'));
+			toast.error(t('admin.blog.notifications.updateError'));
 			return false;
 		}
 	}
@@ -113,11 +113,11 @@
 		const deleteResult = await deleteBlogPost(id);
 
 		if (deleteResult.status === 'ok') {
-			toast.success($translate('admin.blog.notifications.deleteSuccess'));
+			toast.success(t('admin.blog.notifications.deleteSuccess'));
 			await getBlogPosts();
 		} else {
 			console.error('Failed to delete blog post:', deleteResult);
-			toast.error($translate('admin.blog.notifications.deleteError'));
+			toast.error(t('admin.blog.notifications.deleteError'));
 		}
 		deletingPostId = null;
 	}
@@ -140,7 +140,7 @@
 		<span>
 			<i class="fa-solid fa-arrow-left mr-2"></i>
 		</span>
-		{$translate('admin.blog.back')}
+		{t('admin.blog.back')}
 	</a>
 	<div class="flex-auto"></div>
 	<AdminBlogForm mode="create" onSubmit={handleBlogPostCreate} />
@@ -180,10 +180,10 @@
 			<i class="fa-solid fa-inbox mb-4 text-5xl text-gray-400"></i>
 		</span>
 		<h3 class="mb-2 text-xl font-semibold text-gray-700">
-			{$translate('admin.blog.emptyState.title')}
+			{t('admin.blog.emptyState.title')}
 		</h3>
 		<p class="text-gray-500">
-			{$translate('admin.blog.emptyState.description')}
+			{t('admin.blog.emptyState.description')}
 		</p>
 	</div>
 {:else if blogPosts.data}

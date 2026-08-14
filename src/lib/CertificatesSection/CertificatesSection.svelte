@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import { isNil } from 'lodash-es';
 	import { CERTIFICATES } from './certificates';
 	import { onDestroy } from 'svelte';
@@ -66,7 +66,7 @@
 <section class="bg-white pt-12 text-primary max-2xl:px-4">
 	<div class="mx-auto text-center">
 		<h1 class="text-3xl font-semibold sm:text-4xl">
-			{$translate('user.pages.home.certificates.title')}
+			{t('user.pages.home.certificates.title')}
 		</h1>
 	</div>
 	<div class="mx-auto mt-6 w-full">

@@ -7,6 +7,13 @@ const config = {
 	// for more information about preprocessors
 	preprocess: vitePreprocess(),
 
+	compilerOptions: {
+		// `await` directly inside components (used together with remote functions)
+		experimental: {
+			async: true
+		}
+	},
+
 	kit: {
 		// adapter-auto only supports some environments, see https://svelte.dev/docs/kit/adapter-auto for a list.
 		// If your environment is not supported, or you settled on a specific environment, switch out the adapter.
@@ -15,11 +22,15 @@ const config = {
 			edge: false,
 			split: true
 		}),
+		experimental: {
+			// `*.remote.ts` files replace the old `/api` + `fetch-methods` pairs
+			remoteFunctions: true
+		},
 		alias: {
 			$services: './src/services',
 			$shared: './src/shared',
 			$i18n: './src/i18n',
-			$api: './src/routes/api'
+			$remote: './src/remote'
 		}
 	}
 };

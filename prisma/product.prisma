@@ -1,8 +1,17 @@
+/// Every product lives in our database. Stripe is only ever used to create a
+/// checkout session - no products and no prices are stored on Stripe's side.
 model Product {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
   slug   String  @unique
   active Boolean @default(true)
+
+  /// Where the product shows up: `shop` and/or `registrations`.
+  /// Both are always listed on the price list page.
+  siteLocations String[]
+
+  /// Optional manual ordering key, falls back to the localized name.
+  orderKey String?
 
   internationalizedProducts InternationalizedProduct[]
 

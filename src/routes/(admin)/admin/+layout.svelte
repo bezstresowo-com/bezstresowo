@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import LanguageSelect from '$lib/LanguageSelect/LanguageSelect.svelte';
 	import { HttpMethod } from '$shared/global/enums/http-method';
 
@@ -29,7 +29,7 @@
 		<div class="mx-auto max-w-7xl px-4">
 			<div class="flex h-16 items-center justify-between">
 				<div class="flex items-center">
-					<h1 class="text-lg font-bold">{$translate('admin.title')}</h1>
+					<h1 class="text-lg font-bold">{t('admin.title')}</h1>
 				</div>
 				<div class="flex items-center space-x-2">
 					{#if data.isAuthenticated}
@@ -37,7 +37,7 @@
 							onclick={handleLogout}
 							class="inline-flex cursor-pointer items-center rounded-md border border-transparent bg-danger px-4 py-2 text-sm font-medium text-white"
 						>
-							{$translate('admin.logout')}
+							{t('admin.logout')}
 						</button>
 					{/if}
 

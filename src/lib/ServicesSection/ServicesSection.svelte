@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import { isNil } from 'lodash-es';
 	import { onDestroy } from 'svelte';
@@ -64,7 +64,7 @@
 <section class="bg-white pt-12 text-primary max-2xl:px-4">
 	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold sm:text-4xl">
-			{$translate('user.pages.home.offeredServices.title')}
+			{t('user.pages.home.offeredServices.title')}
 		</h1>
 	</div>
 
@@ -73,12 +73,12 @@
 			<div class="flex flex-1 flex-col gap-7 rounded-lg border border-accent p-10 text-left">
 				<span class="flex items-center gap-6">
 					<i class={`text-4xl text-accent ${icon}`}></i>
-					<h3 class="font-bold">{$translate(`${prefix}.title`)}</h3>
+					<h3 class="font-bold">{t(`${prefix}.title`)}</h3>
 				</span>
-				<p>{$translate(`${prefix}.description`)}</p>
+				<p>{t(`${prefix}.description`)}</p>
 				<span class="flex-auto"></span>
 				<Button tailwind="w-full bg-white border border-accent" onclick={() => openPopup(i)}>
-					{$translate('user.pages.home.offeredServices.learnMore')}
+					{t('user.pages.home.offeredServices.learnMore')}
 				</Button>
 			</div>
 		{/each}
@@ -123,18 +123,18 @@
 				<span>
 					<i class={`text-2xl text-accent ${selectedOffer.icon}`}></i>
 					<span class="my-6 ml-4 text-2xl font-bold"
-						>{$translate(`${selectedOffer.prefix}.title`)}</span
+						>{t(`${selectedOffer.prefix}.title`)}</span
 					>
 				</span>
 
 				{#each extendedTranslations as { type, value }, i (i)}
 					{#if type === ExtendedTranslationType.title}
-						<div class="mt-6 mb-2 text-lg font-bold">{@html $translate(value)}</div>
+						<div class="mt-6 mb-2 text-lg font-bold">{@html t(value)}</div>
 					{:else if type === ExtendedTranslationType.paragraph}
-						<div class="my-2">{@html $translate(value)}</div>
+						<div class="my-2">{@html t(value)}</div>
 					{:else if type === ExtendedTranslationType.listItem}
 						<div class="ml-2">
-							• {@html $translate(value)}
+							• {@html t(value)}
 						</div>
 					{/if}
 				{/each}

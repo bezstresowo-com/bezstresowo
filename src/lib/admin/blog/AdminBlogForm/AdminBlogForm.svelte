@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createForm } from 'svelte-forms-lib';
 	import { FORM_FIELDS, FORM_FIELDS_ORDER, INITIAL_FORM_VALUE, SCHEMA } from './model';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import { Dialog, Separator } from 'bits-ui';
 	import TipTap from '$lib/TipTap/TipTap.svelte';
 
@@ -73,7 +73,7 @@
 		<span>
 			<i class={isUpdateMode ? 'fa-solid fa-edit' : 'fa-solid fa-plus'}></i>
 		</span>
-		{$translate(
+		{t(
 			isUpdateMode ? 'admin.blog.dialog.update.trigger' : 'admin.blog.dialog.create.trigger'
 		)}
 	</Dialog.Trigger>
@@ -86,7 +86,7 @@
 				<Dialog.Title
 					class="flex w-full items-center justify-center text-xl font-semibold tracking-tight"
 				>
-					{$translate(
+					{t(
 						isUpdateMode ? 'admin.blog.dialog.update.title' : 'admin.blog.dialog.create.title'
 					)}
 				</Dialog.Title>
@@ -94,7 +94,7 @@
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description>
-					{$translate(
+					{t(
 						isUpdateMode
 							? 'admin.blog.dialog.update.description'
 							: 'admin.blog.dialog.create.description'
@@ -113,13 +113,13 @@
 										bind:value={$form[key]}
 										onchange={handleChange}
 										onblur={handleChange}
-										placeholder={$translate(`admin.blog.dialog.form.fields.${key}.placeholder`)}
+										placeholder={t(`admin.blog.dialog.form.fields.${key}.placeholder`)}
 										class={`w-full rounded-md border pr-10 focus:border-gray-500 ${$errors[key] && $touched[key] ? 'border-danger' : 'border-gray-300'}`}
 									/>
 								</div>
 
 								{#if $errors[key] && $touched[key]}
-									<small class="text-sm text-danger">{$translate($errors[key])}</small>
+									<small class="text-sm text-danger">{t($errors[key])}</small>
 								{/if}
 							</div>
 						{/each}
@@ -136,7 +136,7 @@
 							<Dialog.Close
 								class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-bold text-gray-700 hover:bg-gray-50"
 							>
-								{$translate('admin.blog.dialog.cancel')}
+								{t('admin.blog.dialog.cancel')}
 							</Dialog.Close>
 
 							<button
@@ -154,7 +154,7 @@
 										></i>
 									</span>
 								{/if}
-								{$translate(
+								{t(
 									isUpdateMode
 										? 'admin.blog.dialog.update.submit'
 										: 'admin.blog.dialog.create.submit'

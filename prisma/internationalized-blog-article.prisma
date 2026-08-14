@@ -1,9 +1,22 @@
 model InternationalizedBlogArticle {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
-  lang           String
-  title          String
-  content        String
+  lang String
+
+  /// Per-language URL: `/pl/blog/<slug>` and `/uk/blog/<slug>` are distinct pages.
+  slug String @unique
+
+  title   String
+  content String
+
+  /// SEO, kept per language (title ~60 chars, description ~155 chars).
+  metaTitle       String
+  metaDescription String
+
+  /// Featured image (one of `mediaIds`) plus its localized alt text.
+  featuredImageId  String?
+  featuredImageAlt String?
+
   mediaIds       String[]
   metadataJsonLD Json
 

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { resolve } from '$app/paths';
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import { HttpMethod } from '$shared/global/enums/http-method';
 	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
 	import { isEmpty, isNil } from 'lodash-es';
@@ -80,16 +80,16 @@
 	<div class="w-full max-w-md space-y-8">
 		<div>
 			<h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-				{$translate('admin.login.title')}
+				{t('admin.login.title')}
 			</h2>
-			<p class="mt-2 text-center text-sm text-gray-600">{$translate('admin.login.description')}</p>
+			<p class="mt-2 text-center text-sm text-gray-600">{t('admin.login.description')}</p>
 		</div>
 
 		<form class="mt-8 space-y-6" onsubmit={handleSubmit}>
 			<div class="-space-y-px rounded-md shadow-sm">
 				<div>
 					<label for="password" class="sr-only"
-						>{$translate('admin.login.form.fields.password.label')}</label
+						>{t('admin.login.form.fields.password.label')}</label
 					>
 					<input
 						id="password"
@@ -100,7 +100,7 @@
 						onchange={handleChange}
 						onblur={handleChange}
 						class="relative block w-full appearance-none rounded-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none sm:text-sm"
-						placeholder={$translate('admin.login.form.fields.password.placeholder')}
+						placeholder={t('admin.login.form.fields.password.placeholder')}
 						disabled={isLoading}
 					/>
 				</div>
@@ -114,13 +114,13 @@
 				>
 					{#if isLoading}
 						<div class="flex items-center justify-center gap-4">
-							{$translate('admin.login.form.submitLoading')}
+							{t('admin.login.form.submitLoading')}
 							<div
 								class="aspect-square h-6 animate-spin rounded-full border-2 border-solid border-gray-500 border-t-white"
 							></div>
 						</div>
 					{:else}
-						{$translate('admin.login.form.submit')}
+						{t('admin.login.form.submit')}
 					{/if}
 				</button>
 			</div>
@@ -128,7 +128,7 @@
 			{#if !isNil(httpError)}
 				<div class="rounded-md bg-red-50 p-4">
 					<div class="text-sm text-red-700">
-						{$translate(httpError)}
+						{t(httpError)}
 					</div>
 				</div>
 			{/if}

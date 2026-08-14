@@ -1,25 +1,34 @@
-import { resolve } from '$app/paths';
-import { HttpStatus } from '$shared/global/enums/http-status';
-import { isAdminAuthenticated } from '$shared/server/functions/admin-auth';
-import { buildErrorResponse } from '$shared/server/functions/build-response';
-import { isNil } from 'lodash-es';
+import { LOCALE_HTML_LANG, toLocale } from '$i18n';
 
-import type { Handle } from '@sveltejs/kit';
-export const handle: Handle = async ({ event, resolve: resolveEvent }) => {
-	if (isNil(event.route.id) || event.route.id === resolve('/api/admin/login')) {
-		return resolveEvent(event);
+import type { Handle, HandleValidationError } from '@sveltejs/kit';
+
+export const handle: Handle = async ({ event, resolve }) => {
+	const [, maybePrefix] = event.url.pathname.split('/');
+	const locale = toLocale(maybePrefix);
+
+	event.locals.locale = locale;
+
+	return resolve(event, {
+		// `<html lang>` follows the language prefix of the URL.
+		transformPageChunk: ({ html }) => html.replace('%lang%', LOCALE_HTML_LANG[locale])
+	});
+};
+
+/**
+ * Remote function inputs are validated with the existing class-validator DTOs
+ * (see `$shared/server/functions/dto-schema`), whose messages are translation
+ * keys - they are forwarded to the client so forms can show field level errors.
+ */
+export const handleValidationError: HandleValidationError = ({ issues }) => {
+	const byField = new Map<string, string[]>();
+
+	for (const issue of issues) {
+		const field = (issue.path ?? []).map((segment) => String(segment)).join('.');
+		byField.set(field, [...(byField.get(field) ?? []), issue.message]);
 	}
 
-	if (event.route.id.startsWith(resolve('/api/admin'))) {
-		const isLoggedIn = isAdminAuthenticated(event.cookies);
-		if (!isLoggedIn) {
-			return buildErrorResponse(
-				{ id: resolve('/api/admin/login') },
-				{ ...event.request, method: 'POST' },
-				HttpStatus.UNAUTHORIZED
-			);
-		}
-	}
-
-	return resolveEvent(event);
+	return {
+		message: 'api.errors.BAD_REQUEST',
+		issues: [...byField].map(([field, messages]) => ({ field, messages }))
+	};
 };

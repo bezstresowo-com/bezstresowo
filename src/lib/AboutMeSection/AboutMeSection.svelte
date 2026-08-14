@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import { asset } from '$app/paths';
 
 	const descriptionParts = Array.from({ length: 5 }).map(
@@ -19,11 +19,11 @@
 		</div>
 
 		<div class="col-span-4">
-			<h1 class="mb-5 text-3xl text-primary">{$translate('user.pages.home.aboutMe.title')}</h1>
+			<h1 class="mb-5 text-3xl text-primary">{t('user.pages.home.aboutMe.title')}</h1>
 			<div class="text-sm text-primary/80">
-				<p>{@html $translate('user.pages.home.aboutMe.myNameIs')}</p>
+				<p>{@html t('user.pages.home.aboutMe.myNameIs')}</p>
 				{#each descriptionParts as descriptionPart, i (i)}
-					<p class="my-2">{$translate(descriptionPart)}</p>
+					<p class="my-2">{t(descriptionPart)}</p>
 				{/each}
 			</div>
 		</div>
