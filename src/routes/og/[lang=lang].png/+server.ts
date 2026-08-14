@@ -28,7 +28,7 @@ const COLORS = {
 const CACHE = new Map<string, Uint8Array>();
 const CACHE_LIMIT = 64;
 
-export const GET: RequestHandler = async ({ params, url, setHeaders }) => {
+export const GET: RequestHandler = async ({ params, url }) => {
 	const locale = toLocale(params.lang);
 	const title = (url.searchParams.get('title') ?? '').slice(0, 120).trim();
 	const subtitle = (url.searchParams.get('subtitle') ?? '').slice(0, 180).trim();
@@ -41,14 +41,8 @@ export const GET: RequestHandler = async ({ params, url, setHeaders }) => {
 	const cacheKey = `${locale}|${title}|${subtitle}`;
 	const cached = CACHE.get(cacheKey);
 
-	setHeaders({
-		'content-type': 'image/png',
-		// The title is part of the URL, so a changed title is a changed URL.
-		'cache-control': 'public, max-age=31536000, immutable'
-	});
-
 	if (cached) {
-		return new Response(cached as BodyInit);
+		return pngResponse(cached);
 	}
 
 	try {
@@ -59,12 +53,25 @@ export const GET: RequestHandler = async ({ params, url, setHeaders }) => {
 		}
 		CACHE.set(cacheKey, png);
 
-		return new Response(png as BodyInit);
+		return pngResponse(png);
 	} catch (error) {
 		console.error('[og] failed to render the preview image', error);
+
+		// The caching headers below must never end up on this redirect: a
+		// transient failure would otherwise be cached for a year.
 		redirect(HttpStatus.FOUND, '/site-preview.jpeg');
 	}
 };
+
+function pngResponse(png: Uint8Array) {
+	return new Response(png as BodyInit, {
+		headers: {
+			'content-type': 'image/png',
+			// The title is part of the URL, so a changed title is a changed URL.
+			'cache-control': 'public, max-age=31536000, immutable'
+		}
+	});
+}
 
 async function render(locale: Locale, title: string, subtitle: string) {
 	const svg = await satori(
