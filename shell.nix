@@ -1,29 +1,55 @@
-# run with: nix-shell shell.nix
-
+# run with: nix-shell <filename>.nix
 let
   pkgs = import <nixpkgs> { };
 in
 pkgs.mkShell {
+  # [rust]:
+  # hardeningDisable = [ "all" ];
+  # RUST_SRC_PATH = "${pkgs.rust.packages.stable.rustPlatform.rustLibSrc}";
+
   packages = with pkgs; [
     zsh
+
+    # [python]:
+    # (python3.withPackages (pp: [
+    #   pp.pandas
+    #   pp.requests
+    #   pp.numpy
+    # ]))
+
+    # [node]:
     nodejs_24
-    stripe-cli
+    prisma-engines_6
+    prisma_6
+
+    # [golang]:
+    # go
+
+    # [rust]:
+    # rustc
+    # cargo
+    # rustfmt
+    # clippy
   ];
 
-  # for prisma-engines (6.7.0)
-  env = with pkgs; {
-    PRISMA_FORMAT_BINARY = "${prisma-engines}/bin/prisma-fmt";
-    PRISMA_QUERY_ENGINE_BINARY = "${prisma-engines}/bin/query-engine";
-    PRISMA_QUERY_ENGINE_LIBRARY = "${prisma-engines}/lib/libquery_engine.node";
-    PRISMA_SCHEMA_ENGINE_BINARY = "${prisma-engines}/bin/schema-engine";
-    PRISMA_INTROSPECTION_ENGINE_BINARY = "${prisma-engines}/bin/introspection-engine";
-  };
-
   shellHook = ''
+    # [rust]:
+    # export NIX_ENFORCE_PURITY=0
+
+    # [node:prisma]:
+    # Pin engine paths to prisma-engines_6 so they match prisma_6 in `packages`
+    # (bare `prisma-engines` resolves to v7 in this nixpkgs).
+    export PKG_CONFIG_PATH="${pkgs.openssl.dev}/lib/pkgconfig"
+    export PRISMA_SCHEMA_ENGINE_BINARY="${pkgs.prisma-engines_6}/bin/schema-engine"
+    export PRISMA_QUERY_ENGINE_BINARY="${pkgs.prisma-engines_6}/bin/query-engine"
+    export PRISMA_QUERY_ENGINE_LIBRARY="${pkgs.prisma-engines_6}/lib/libquery_engine.node"
+    export PRISMA_FMT_BINARY="${pkgs.prisma-engines_6}/bin/prisma-fmt"
+
+    # zsh terminal forwarding:
     export SHELL=${pkgs.zsh}/bin/zsh
-    export ZDOTDIR=$(pwd)/.zshrc.d
-    mkdir -p $ZDOTDIR
-    cat > $ZDOTDIR/.zshrc <<'EOF'
+    export ZDOTDIR="$(pwd)/.zshrc.d"
+    mkdir -p "$ZDOTDIR"
+    cat > "$ZDOTDIR/.zshrc" <<'EOF'
       # Source your original config
       [[ -f ~/.zshrc ]] && source ~/.zshrc
 
