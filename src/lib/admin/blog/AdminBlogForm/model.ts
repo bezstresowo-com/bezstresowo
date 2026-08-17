@@ -1,4 +1,4 @@
-import { Locale } from '$i18n';
+import { Locale, LOCALE_PREFIXES, t } from '$i18n';
 import {
 	META_DESCRIPTION_MAX_LENGTH,
 	META_TITLE_MAX_LENGTH,
@@ -25,10 +25,12 @@ export type TranslationDraft = {
 
 export type TranslationDrafts = Record<Locale, TranslationDraft>;
 
-export const LOCALE_TAB_LABELS: Record<Locale, string> = {
-	[Locale.plPL]: 'admin.languageTabs.pl',
-	[Locale.ukUA]: 'admin.languageTabs.uk'
-};
+/** Label of a language tab; unknown langs (stale db rows) fall back to the raw tag. */
+export function localeTabLabel(lang: string): string {
+	return (Object.values(Locale) as string[]).includes(lang)
+		? t.admin.languageTabs[LOCALE_PREFIXES[lang as Locale]]
+		: lang;
+}
 
 export function emptyDraft(): TranslationDraft {
 	return {

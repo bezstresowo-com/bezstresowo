@@ -640,7 +640,8 @@ const plPL = {
 					placeholder: 'Wybierz typ terapii',
 					errors: {
 						required: 'Typ terapii jest wymagany',
-						invalid: 'Wybierz prawidłowy typ terapii'
+						invalid: 'Wybierz prawidłowy typ terapii',
+						loadError: 'Nie udało się załadować listy terapii. Odśwież stronę i spróbuj ponownie.'
 					}
 				},
 				nameAndSurname: {
@@ -914,6 +915,9 @@ const plPL = {
 				active: {
 					label: 'Produkt aktywny'
 				},
+				siteLocations: {
+					hint: 'Brak zaznaczenia = produkt widoczny tylko na cenniku.'
+				},
 				name: {
 					label: 'Nazwa',
 					placeholder: 'Nazwa produktu'
@@ -996,7 +1000,8 @@ const plPL = {
 				signatureRole: 'Psychoterapeutka',
 				contactViaSite: 'W razie potrzeby skontaktuj się ze mną przez stronę',
 				companyLine: 'Centrum Psychoterapii Bezstresowo - Olesya Haiduk',
-				systemNotice: 'Bezstresowo • Powiadomienie systemowe'
+				systemNotice: 'Bezstresowo • Powiadomienie systemowe',
+				noMessage: 'Brak wiadomości'
 			},
 			contactRequest: {
 				userSubject: 'Dziękuję za wiadomość!',
@@ -1036,6 +1041,7 @@ const plPL = {
 			UNAUTHORIZED: 'Brak autoryzacji. Zaloguj się ponownie.',
 			NOT_FOUND: 'Nie znaleziono zasobu.',
 			CONFLICT: 'Taki zasób już istnieje.',
+			TOO_MANY_REQUESTS: 'Zbyt wiele prób. Spróbuj ponownie za kilka minut.',
 			INTERNAL_SERVER_ERROR: 'Wystąpił błąd serwera. Spróbuj ponownie później.'
 		}
 	},
@@ -1084,6 +1090,6 @@ const plPL = {
 			description: 'Płatność została anulowana.'
 		}
 	}
-};
+} as const;
 
 export default plPL;

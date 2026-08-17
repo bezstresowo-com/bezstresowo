@@ -1,24 +1,22 @@
 <script lang="ts">
 	import { Dialog, Separator } from 'bits-ui';
-	import { t } from '$i18n';
+	import type { Translations } from '$i18n';
+
+	/** Both `admin.blog` and `admin.shop` carry this subtree shape. */
+	type DeleteDialogLabels = Translations['admin']['blog']['deleteDialog'];
 
 	interface Props {
 		/** Name of the record about to be deleted, shown for confirmation. */
 		itemName: string;
-		/** Translation namespace, so blog and shop can share the dialog. */
-		translationPrefix?: string;
-		actionsPrefix?: string;
+		/** Dialog texts, e.g. `t.admin.blog.deleteDialog` - blog and shop share the dialog. */
+		labels: DeleteDialogLabels;
+		/** Text of the delete trigger button, e.g. `t.admin.blog.actions.delete`. */
+		triggerLabel: string;
 		isDeleting?: boolean;
 		onConfirm: () => void | Promise<void>;
 	}
 
-	let {
-		itemName,
-		translationPrefix = 'admin.blog.deleteDialog',
-		actionsPrefix = 'admin.blog.actions',
-		isDeleting = false,
-		onConfirm
-	}: Props = $props();
+	let { itemName, labels, triggerLabel, isDeleting = false, onConfirm }: Props = $props();
 
 	let deleteConfirmation = $state('');
 	let open = $state(false);
@@ -48,7 +46,7 @@
 		<span>
 			<i class="fa-solid fa-trash"></i>
 		</span>
-		{t(`${actionsPrefix}.delete`)}
+		{triggerLabel}
 	</Dialog.Trigger>
 
 	<Dialog.Portal>
@@ -62,30 +60,30 @@
 					<span>
 						<i class="fa-solid fa-triangle-exclamation mr-2"></i>
 					</span>
-					{t(`${translationPrefix}.title`)}
+					{labels.title}
 				</Dialog.Title>
 
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description class="mb-4 text-gray-700">
-					{t(`${translationPrefix}.description`)}
+					{labels.description}
 					<strong class="mt-2 block text-black">"{itemName}"</strong>
 				</Dialog.Description>
 
 				<div class="mb-4">
 					<label for="delete-confirmation" class="mb-2 block text-sm font-medium text-gray-700">
-						{t(`${translationPrefix}.confirmLabel`)}
+						{labels.confirmLabel}
 					</label>
 					<input
 						id="delete-confirmation"
 						type="text"
 						bind:value={deleteConfirmation}
-						placeholder={t(`${translationPrefix}.confirmPlaceholder`)}
+						placeholder={labels.confirmPlaceholder}
 						class={`w-full rounded-md border px-3 py-2 focus:border-gray-500 ${!isValid && deleteConfirmation ? 'border-red-500' : 'border-gray-300'}`}
 					/>
 					{#if deleteConfirmation && !isValid}
 						<small class="mt-1 block text-sm text-red-500">
-							{t(`${translationPrefix}.confirmError`)}
+							{labels.confirmError}
 						</small>
 					{/if}
 				</div>
@@ -95,7 +93,7 @@
 						class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-bold text-gray-700 hover:bg-gray-50"
 						disabled={isDeleting}
 					>
-						{t(`${translationPrefix}.cancel`)}
+						{labels.cancel}
 					</Dialog.Close>
 
 					<button
@@ -113,7 +111,7 @@
 								<i class="fa-solid fa-trash"></i>
 							</span>
 						{/if}
-						{t(`${translationPrefix}.confirm`)}
+						{labels.confirm}
 					</button>
 				</div>
 

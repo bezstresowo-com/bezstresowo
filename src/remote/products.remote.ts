@@ -23,7 +23,7 @@ export const getProducts = query(
 		});
 
 		return products
-			.map((product) => {
+			.map((product): (LocalizedProduct & { orderKey: string | null }) | null => {
 				const translation =
 					product.internationalizedProducts.find((candidate) => candidate.lang === lang) ??
 					product.internationalizedProducts.find(
@@ -47,6 +47,7 @@ export const getProducts = query(
 					priceInMinorUnits: product.price.inMinorUnits,
 					currency: product.price.currency,
 					siteLocations: product.siteLocations,
+					metadataJsonLD: translation.metadataJsonLD,
 					orderKey: product.orderKey
 				};
 			})

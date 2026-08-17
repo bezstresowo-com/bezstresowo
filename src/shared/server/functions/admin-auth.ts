@@ -4,9 +4,17 @@ import type { Cookies } from '@sveltejs/kit';
 import jwt from 'jsonwebtoken';
 import { isNil } from 'lodash-es';
 
-interface JwtPayload {
-	iat: number;
-	exp: number;
+/**
+ * Bumped whenever the token format changes - tokens without the current
+ * version are rejected. v2: `exp`/`iat` moved from milliseconds to the RFC
+ * 7519 seconds, so the standard `jwt.verify` expiry check finally applies;
+ * the version gate also invalidates old millisecond tokens, which would
+ * otherwise pass verification with an absurdly distant expiry.
+ */
+const TOKEN_VERSION = 2;
+
+interface AdminTokenPayload {
+	v?: number;
 }
 
 const ADMIN_SESSION_COOKIE = 'admin_session';
@@ -16,12 +24,12 @@ const ADMIN_SESSION_COOKIE = 'admin_session';
  */
 export function setAdminAuthCookie(cookies: Cookies) {
 	const cookieMaxAge = Number(COOKIE_MAX_AGE_S.replaceAll('_', ''));
-	const tokenExpInterval = Number(JWT_EXP_INTERVAL_MS.replaceAll('_', ''));
-	const now = Date.now();
-	const tokenExpiresAt = now + tokenExpInterval;
+	const tokenExpIntervalMs = Number(JWT_EXP_INTERVAL_MS.replaceAll('_', ''));
 
-	const token = jwt.sign({ iat: now, exp: tokenExpiresAt } satisfies JwtPayload, JWT_SECRET, {
-		algorithm: 'HS512'
+	const token = jwt.sign({ v: TOKEN_VERSION }, JWT_SECRET, {
+		algorithm: 'HS512',
+		// `jsonwebtoken` fills in the seconds based `iat` and `exp` itself.
+		expiresIn: Math.floor(tokenExpIntervalMs / 1000)
 	});
 
 	cookies.set(ADMIN_SESSION_COOKIE, token, {
@@ -55,13 +63,11 @@ export function isAdminAuthenticated(cookies: Cookies) {
 		return false;
 	}
 
-	const tokenExpInterval = Number(JWT_EXP_INTERVAL_MS.replaceAll('_', ''));
-
 	try {
-		const { iat, exp } = jwt.verify(token, JWT_SECRET, { algorithms: ['HS512'] }) as JwtPayload;
+		// Signature and expiry are both enforced by `jwt.verify`.
+		const payload = jwt.verify(token, JWT_SECRET, { algorithms: ['HS512'] }) as AdminTokenPayload;
 
-		const now = Date.now();
-		return !(iat > now || exp < now || Math.abs(iat - exp) !== tokenExpInterval);
+		return payload.v === TOKEN_VERSION;
 	} catch {
 		// tampered / expired / malformed token - simply not authenticated
 		return false;

@@ -2,6 +2,7 @@ import { env } from '$env/dynamic/private';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { reconcileBucket } from '$shared/server/functions/media-cleanup';
 import { json } from '@sveltejs/kit';
+import { timingSafeEqual } from 'node:crypto';
 
 import type { RequestHandler } from './$types';
 
@@ -17,9 +18,9 @@ const DEFAULT_GRACE_PERIOD_MS = 24 * 60 * 60 * 1000;
  * `?dryRun=1` reports what would be deleted without deleting anything.
  */
 const sweep: RequestHandler = async ({ request, url }) => {
-	const secret = env.CRON_SECRET;
-
-	if (!secret || request.headers.get('authorization') !== `Bearer ${secret}`) {
+	// `$env/dynamic` on purpose: the check below is fail-closed anyway, and a
+	// `$env/static` import would fail the build wherever the secret is not set.
+	if (!isAuthorized(request.headers.get('authorization'), env.CRON_SECRET)) {
 		return json({ message: 'api.errors.UNAUTHORIZED' }, { status: HttpStatus.UNAUTHORIZED });
 	}
 
@@ -34,6 +35,18 @@ const sweep: RequestHandler = async ({ request, url }) => {
 
 	return json(report);
 };
+
+/** Constant time comparison - the token gates irreversible file deletion. */
+function isAuthorized(header: string | null, secret: string | undefined): boolean {
+	if (!secret) {
+		return false;
+	}
+
+	const expected = Buffer.from(`Bearer ${secret}`);
+	const provided = Buffer.from(header ?? '');
+
+	return expected.length === provided.length && timingSafeEqual(expected, provided);
+}
 
 export const GET = sweep;
 export const POST = sweep;

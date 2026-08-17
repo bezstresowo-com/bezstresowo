@@ -9,11 +9,14 @@
 	import type { BlogProps } from './model';
 
 	const {
-		title = 'user.pages.home.blog.title',
+		title: titleProp,
 		siteLocation = 'standalone',
 		pageSize = 3,
 		isPreview = true
 	}: BlogProps = $props();
+
+	// Reactive fallback - a static default would freeze the first locale.
+	const title = $derived(titleProp ?? t.user.pages.home.blog.title);
 
 	let currentPage = $state(1);
 
@@ -28,13 +31,13 @@
 			class="flex h-50 flex-col items-center justify-center bg-linear-170 from-primary to-primary/90 p-2"
 		>
 			<h1 class="mx-auto text-center text-4xl font-bold text-white sm:text-5xl">
-				{t(title)}
+				{title}
 			</h1>
 		</div>
 	{:else if siteLocation === 'home'}
 		<div class="mt-16 pb-8 text-center">
 			<h2 class="text-3xl font-semibold text-primary sm:text-4xl">
-				{t(title)}
+				{title}
 			</h2>
 		</div>
 	{/if}
@@ -60,7 +63,7 @@
 					<i class="fa-solid fa-newspaper text-5xl text-secondary/60"></i>
 				</div>
 				<p class="text-xl font-medium text-primary/80">
-					{t('user.pages.home.blog.noPosts')}
+					{t.user.pages.home.blog.noPosts}
 				</p>
 			</div>
 		{:else}
@@ -79,7 +82,7 @@
 								tailwind="border-none text-accent bg-white hover:bg-white hover:text-secondary"
 								href={path(`/blog/${post.slug}`)}
 							>
-								{t('user.pages.home.blog.learnMore')}
+								{t.user.pages.home.blog.learnMore}
 							</Button>
 						</div>
 					</article>
@@ -92,7 +95,7 @@
 						tailwind="bg-white border border-accent text-primary px-6 py-3 mt-5"
 						href={path('/blog')}
 					>
-						{t('user.pages.home.blog.readAllPosts')}
+						{t.user.pages.home.blog.readAllPosts}
 					</Button>
 				</div>
 			{:else}

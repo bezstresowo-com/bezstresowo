@@ -83,11 +83,12 @@ export function toMinorUnits(price: string): number | null {
 export type ProductIssues = {
 	slug?: string;
 	price?: string;
-	siteLocations?: string;
 	translations?: string;
 	names?: Partial<Record<Locale, string>>;
 };
 
+/** Mirrors `UpsertProductDto`: empty `siteLocations` (price list only) and an
+ * empty description are both allowed. */
 export function validateProductDraft(draft: ProductDraft): ProductIssues {
 	const issues: ProductIssues = {};
 
@@ -97,10 +98,6 @@ export function validateProductDraft(draft: ProductDraft): ProductIssues {
 
 	if (toMinorUnits(draft.price) === null) {
 		issues.price = 'api.validation.errors.IsNumber';
-	}
-
-	if (draft.siteLocations.length === 0) {
-		issues.siteLocations = 'api.validation.errors.ArrayNotEmpty';
 	}
 
 	const enabled = enabledLocales(draft);
@@ -113,7 +110,7 @@ export function validateProductDraft(draft: ProductDraft): ProductIssues {
 	for (const locale of enabled) {
 		const translation = draft.translations[locale];
 
-		if (translation.name.trim().length === 0 || translation.description.trim().length === 0) {
+		if (translation.name.trim().length === 0) {
 			names[locale] = 'api.validation.errors.IsNotEmpty';
 		}
 	}

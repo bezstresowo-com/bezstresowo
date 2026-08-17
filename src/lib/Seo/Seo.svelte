@@ -3,6 +3,7 @@
 	import { getLocale, t } from '$i18n';
 	import { absoluteUrl } from '$shared/global/functions/site-url';
 
+	import { getPageAlternates } from './alternates-context.svelte';
 	import {
 		alternateUrl,
 		defaultAlternates,
@@ -28,15 +29,25 @@
 	const pathWithoutPrefix = $derived(stripLocalePrefix(page.url.pathname));
 	const languageVersions = $derived(alternates ?? defaultAlternates(pathWithoutPrefix));
 
-	const resolvedTitle = $derived(t(title));
-	const resolvedDescription = $derived(description ? t(description) : '');
+	const resolvedDescription = $derived(description ?? '');
 	const canonical = $derived(absoluteUrl(page.url.pathname));
-	const previewImage = $derived(image ?? ogImageUrl(locale, resolvedTitle, resolvedDescription));
-	const previewImageAlt = $derived(imageAlt ? t(imageAlt) : t('meta.ogImageAlt'));
+	const previewImage = $derived(image ?? ogImageUrl(locale, title, resolvedDescription));
+	const previewImageAlt = $derived(imageAlt ?? t.meta.ogImageAlt);
+
+	// Publish the explicit alternates for the language switcher. An effect (not
+	// SSR) is enough: the switcher only ever navigates client side.
+	const pageAlternates = getPageAlternates();
+
+	$effect(() => {
+		if (pageAlternates) {
+			pageAlternates.path = page.url.pathname;
+			pageAlternates.alternates = alternates;
+		}
+	});
 </script>
 
 <svelte:head>
-	<title>{resolvedTitle}</title>
+	<title>{title}</title>
 
 	{#if resolvedDescription}
 		<meta name="description" content={resolvedDescription} />
@@ -56,23 +67,27 @@
 	<link rel="alternate" hreflang="x-default" href={xDefaultUrl(languageVersions)} />
 
 	<!-- Open Graph -->
-	<meta property="og:site_name" content={t('meta.siteName')} />
+	<meta property="og:site_name" content={t.meta.siteName} />
 	<meta property="og:locale" content={locale.replace('-', '_')} />
 	<meta property="og:type" content={ogType} />
 	<meta property="og:url" content={canonical} />
-	<meta property="og:title" content={resolvedTitle} />
+	<meta property="og:title" content={title} />
 	{#if resolvedDescription}
 		<meta property="og:description" content={resolvedDescription} />
 	{/if}
 	<meta property="og:image" content={previewImage} />
-	<meta property="og:image:width" content="1200" />
-	<meta property="og:image:height" content="630" />
+	{#if !image}
+		<!-- Only the generated `/og/` preview is known to be 1200x630 - claiming
+			it for a custom image of other proportions makes crawlers crop it. -->
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+	{/if}
 	<meta property="og:image:alt" content={previewImageAlt} />
 
 	<!-- Twitter / X -->
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:url" content={canonical} />
-	<meta name="twitter:title" content={resolvedTitle} />
+	<meta name="twitter:title" content={title} />
 	{#if resolvedDescription}
 		<meta name="twitter:description" content={resolvedDescription} />
 	{/if}
@@ -80,7 +95,10 @@
 	<meta name="twitter:image:alt" content={previewImageAlt} />
 
 	{#if jsonLd}
+		<!-- `JSON.stringify` leaves `<` alone, so a `</script>` inside the data
+			could break out of the block - escaping every `<` as < (still valid
+			JSON) makes that impossible. -->
 		<!-- eslint-disable-next-line no-useless-escape -- `<\/script>` must stay escaped inside the template literal -->
-		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd)}<\/script>`}
+		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}<\/script>`}
 	{/if}
 </svelte:head>

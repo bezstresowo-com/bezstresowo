@@ -22,8 +22,42 @@ import { difference, isNil } from 'lodash-es';
 /** Every model that stores bucket object keys in a `mediaIds` array. */
 const MEDIA_OWNERS = [
 	() => prisma.internationalizedBlogArticle.findMany({ select: { mediaIds: true } }),
-	() => prisma.internationalizedProduct.findMany({ select: { mediaIds: true } })
+	() => prisma.internationalizedProduct.findMany({ select: { mediaIds: true } }),
+	legacyBlogArticleRows
 ] as const;
+
+/**
+ * Legacy (pre-i18n) articles keep `mediaIds` directly on the `BlogArticle`
+ * document. Those fields are gone from the prisma schema, so they are only
+ * reachable raw. This stays as long as a database with legacy documents (the
+ * one the old site wrote to) can be swept - without it, a sweep would
+ * irreversibly wipe the images of the old articles. On a fresh, seeded
+ * database the query simply returns nothing.
+ */
+async function legacyBlogArticleRows(): Promise<{ mediaIds: string[] }[]> {
+	const response = (await prisma.$runCommandRaw({
+		find: 'BlogArticle',
+		filter: { mediaIds: { $exists: true } },
+		projection: { mediaIds: true },
+		batchSize: 100_000
+	})) as { cursor?: { id?: unknown; firstBatch?: { mediaIds?: unknown }[] } };
+
+	// A live cursor would mean silently missed references - and a missed
+	// reference here means a deleted file. Refuse instead of guessing.
+	const cursorId = response.cursor?.id ?? 0;
+	const rawCursorId =
+		typeof cursorId === 'object'
+			? ((cursorId as { $numberLong?: string }).$numberLong ?? '')
+			: String(cursorId);
+
+	if (rawCursorId !== '' && rawCursorId !== '0') {
+		throw new Error('[media-cleanup] legacy BlogArticle scan did not fit in a single batch');
+	}
+
+	return (response.cursor?.firstBatch ?? []).map((row) => ({
+		mediaIds: Array.isArray(row.mediaIds) ? row.mediaIds.map(String) : []
+	}));
+}
 
 /** Ids referenced anywhere in the database - the set that must never be deleted. */
 export async function collectReferencedMediaIds(): Promise<Set<string>> {
@@ -76,6 +110,8 @@ export type ReconciliationReport = {
 	orphaned: number;
 	deleted: string[];
 	skippedWithinGracePeriod: number;
+	/** Set when a sanity check refused to delete anything this run. */
+	aborted?: string;
 };
 
 /**
@@ -103,15 +139,33 @@ export async function reconcileBucket({
 		(object) => now - (object.lastModified?.getTime() ?? 0) > gracePeriodMs
 	);
 
-	if (!dryRun && deletable.length > 0) {
-		await s3.deleteFiles(deletable.map((object) => object.key));
-	}
-
-	return {
+	const report: ReconciliationReport = {
 		bucketObjects: objects.length,
 		referenced: referenced.size,
 		orphaned: orphaned.length,
 		deleted: deletable.map((object) => object.key),
 		skippedWithinGracePeriod: orphaned.length - deletable.length
 	};
+
+	// Sanity guards - deletion is irreversible. Zero references next to a
+	// non-empty bucket almost always means a broken or misconfigured database,
+	// not a bucket full of garbage; and a sweep that wants to remove most of
+	// the bucket at once warrants a human look first.
+	const abortReason =
+		referenced.size === 0 && objects.length > 0
+			? 'database returned zero media references'
+			: deletable.length > objects.length / 2
+				? `sweep wanted to delete ${deletable.length} of ${objects.length} objects`
+				: null;
+
+	if (abortReason !== null) {
+		console.error(`[media-cleanup] refusing to delete anything: ${abortReason}`);
+		return { ...report, deleted: [], aborted: abortReason };
+	}
+
+	if (!dryRun && deletable.length > 0) {
+		await s3.deleteFiles(deletable.map((object) => object.key));
+	}
+
+	return report;
 }

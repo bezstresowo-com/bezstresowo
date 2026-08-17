@@ -8,9 +8,9 @@ export type SeoAlternate = {
 };
 
 export type SeoProps = {
-	/** Translation key or ready made string for `<title>`. */
+	/** Already resolved text for `<title>` (`t.meta...` or a db value). */
 	title: string;
-	/** Translation key or ready made string for the meta description. */
+	/** Already resolved text for the meta description. */
 	description?: string;
 	/** Keep the page out of the index (regulations, privacy policy, ...). */
 	noindex?: boolean;
@@ -60,6 +60,38 @@ export function xDefaultUrl(alternates: SeoAlternate[]): string {
 		alternates.find((alternate) => alternate.locale === DEFAULT_LOCALE) ?? alternates[0];
 
 	return fallback ? alternateUrl(fallback) : absoluteUrl('/pl/home');
+}
+
+/**
+ * Wraps the stored per-product `metadataJsonLD` rows into a single `ItemList`,
+ * ready for `<Seo jsonLd={...} />` on `/shop` and `/price-list`. The entities
+ * are materialized on write - the list pages only assemble them.
+ */
+export function productListJsonLd(items: readonly unknown[]): unknown | undefined {
+	if (items.length === 0) {
+		return undefined;
+	}
+
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		itemListElement: items.map((item, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			item: stripJsonLdContext(item)
+		}))
+	};
+}
+
+/** Nested entities must not repeat `@context` - the top level object carries it. */
+function stripJsonLdContext(item: unknown): unknown {
+	if (typeof item !== 'object' || item === null) {
+		return item;
+	}
+
+	const { '@context': _context, ...rest } = item as Record<string, unknown>;
+
+	return rest;
 }
 
 /** URL of the automatically generated social preview image. */

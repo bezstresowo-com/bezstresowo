@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { Locale, t } from '$i18n';
-	import { LOCALE_TAB_LABELS } from '$lib/admin/blog/AdminBlogForm/model';
+	import { Locale, t, translateKey } from '$i18n';
+	import { localeTabLabel } from '$lib/admin/blog/AdminBlogForm/model';
 	import { SITE_LOCATIONS, type UpsertProductDto } from '$remote/dto/product';
 	import { slugify } from '$shared/global/functions/slugify';
 	import { Dialog, Separator } from 'bits-ui';
@@ -97,7 +97,7 @@
 		<span>
 			<i class={isUpdateMode ? 'fa-solid fa-edit' : 'fa-solid fa-plus'}></i>
 		</span>
-		{t(isUpdateMode ? 'admin.shop.actions.edit' : 'admin.shop.actions.create')}
+		{isUpdateMode ? t.admin.shop.actions.edit : t.admin.shop.actions.create}
 	</Dialog.Trigger>
 
 	<Dialog.Portal>
@@ -108,54 +108,52 @@
 				<Dialog.Title
 					class="flex w-full items-center justify-center text-xl font-semibold tracking-tight"
 				>
-					{t(isUpdateMode ? 'admin.shop.dialog.update.title' : 'admin.shop.dialog.create.title')}
+					{isUpdateMode ? t.admin.shop.dialog.update.title : t.admin.shop.dialog.create.title}
 				</Dialog.Title>
 
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description>
-					{t(
-						isUpdateMode
-							? 'admin.shop.dialog.update.description'
-							: 'admin.shop.dialog.create.description'
-					)}
+					{isUpdateMode
+						? t.admin.shop.dialog.update.description
+						: t.admin.shop.dialog.create.description}
 				</Dialog.Description>
 
 				<form onsubmit={handleSubmit}>
 					<div class="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
 						<div>
 							<label class="mb-1 block text-sm font-medium text-gray-700" for="product-slug">
-								{t('admin.shop.fields.slug.label')}
+								{t.admin.shop.fields.slug.label}
 							</label>
 							<input
 								id="product-slug"
 								type="text"
 								bind:value={draft.slug}
 								oninput={() => (draft.slugTouched = true)}
-								placeholder={t('admin.shop.fields.slug.placeholder')}
+								placeholder={t.admin.shop.fields.slug.placeholder}
 								class={`w-full rounded-md border focus:border-gray-500 ${showIssues && issues.slug ? 'border-danger' : 'border-gray-300'}`}
 							/>
-							<small class="block text-xs text-gray-500">{t('admin.shop.fields.slug.hint')}</small>
+							<small class="block text-xs text-gray-500">{t.admin.shop.fields.slug.hint}</small>
 							{#if showIssues && issues.slug}
-								<small class="text-sm text-danger">{t(issues.slug)}</small>
+								<small class="text-sm text-danger">{translateKey(issues.slug)}</small>
 							{/if}
 						</div>
 
 						<div>
 							<label class="mb-1 block text-sm font-medium text-gray-700" for="product-price">
-								{t('admin.shop.fields.price.label')}
+								{t.admin.shop.fields.price.label}
 							</label>
 							<input
 								id="product-price"
 								type="text"
 								inputmode="decimal"
 								bind:value={draft.price}
-								placeholder={t('admin.shop.fields.price.placeholder')}
+								placeholder={t.admin.shop.fields.price.placeholder}
 								class={`w-full rounded-md border focus:border-gray-500 ${showIssues && issues.price ? 'border-danger' : 'border-gray-300'}`}
 							/>
-							<small class="block text-xs text-gray-500">{t('admin.shop.fields.price.hint')}</small>
+							<small class="block text-xs text-gray-500">{t.admin.shop.fields.price.hint}</small>
 							{#if showIssues && issues.price}
-								<small class="text-sm text-danger">{t(issues.price)}</small>
+								<small class="text-sm text-danger">{translateKey(issues.price)}</small>
 							{/if}
 						</div>
 					</div>
@@ -163,7 +161,7 @@
 					<div class="mt-4 flex flex-wrap items-center gap-6">
 						<label class="flex items-center gap-2 text-sm font-medium text-gray-700">
 							<input type="checkbox" bind:checked={draft.active} />
-							{t('admin.shop.fields.active.label')}
+							{t.admin.shop.fields.active.label}
 						</label>
 
 						{#each SITE_LOCATIONS as location (location)}
@@ -173,15 +171,13 @@
 									checked={draft.siteLocations.includes(location)}
 									onchange={(event) => toggleSiteLocation(location, event.currentTarget.checked)}
 								/>
-								{location === 'shop'
-									? t('user.header.items.shop')
-									: t('user.header.items.registrations')}
+								{location === 'shop' ? t.user.header.items.shop : t.user.header.items.registrations}
 							</label>
 						{/each}
 					</div>
-					{#if showIssues && issues.siteLocations}
-						<small class="text-sm text-danger">{t(issues.siteLocations)}</small>
-					{/if}
+					<small class="mt-1 block text-xs text-gray-500">
+						{t.admin.shop.fields.siteLocations.hint}
+					</small>
 
 					<!-- One tab per supported language; a product may exist in just one. -->
 					<div class="mt-6 flex gap-2 border-b border-gray-200">
@@ -195,7 +191,7 @@
 								}`}
 								onclick={() => (activeLocale = locale)}
 							>
-								{t(LOCALE_TAB_LABELS[locale])}
+								{localeTabLabel(locale)}
 								{#if draft.translations[locale].enabled}
 									<i class="fa-solid fa-circle-check ml-1 text-green-600"></i>
 								{/if}
@@ -207,7 +203,7 @@
 						<div class={activeLocale === locale ? 'block' : 'hidden'}>
 							<label class="mt-4 flex items-center gap-2 text-sm font-medium text-gray-700">
 								<input type="checkbox" bind:checked={draft.translations[locale].enabled} />
-								{t('admin.languageTabs.enabled')}
+								{t.admin.languageTabs.enabled}
 							</label>
 
 							{#if draft.translations[locale].enabled}
@@ -216,14 +212,14 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`product-name-${locale}`}
 									>
-										{t('admin.shop.fields.name.label')}
+										{t.admin.shop.fields.name.label}
 									</label>
 									<input
 										id={`product-name-${locale}`}
 										type="text"
 										bind:value={draft.translations[locale].name}
 										oninput={() => onNameInput(locale)}
-										placeholder={t('admin.shop.fields.name.placeholder')}
+										placeholder={t.admin.shop.fields.name.placeholder}
 										class="w-full rounded-md border border-gray-300 focus:border-gray-500"
 									/>
 								</div>
@@ -233,33 +229,34 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`product-description-${locale}`}
 									>
-										{t('admin.shop.fields.description.label')}
+										{t.admin.shop.fields.description.label}
 									</label>
 									<textarea
 										id={`product-description-${locale}`}
 										rows="5"
 										bind:value={draft.translations[locale].description}
-										placeholder={t('admin.shop.fields.description.placeholder')}
+										placeholder={t.admin.shop.fields.description.placeholder}
 										class="w-full rounded-md border border-gray-300 focus:border-gray-500"
 									></textarea>
 								</div>
 
 								{#if showIssues && issues.names?.[locale]}
-									<small class="text-sm text-danger">{t(issues.names[locale]!)}</small>
+									<small class="text-sm text-danger">{translateKey(issues.names[locale]!)}</small>
 								{/if}
 							{/if}
 						</div>
 					{/each}
 
 					{#if showIssues && issues.translations}
-						<small class="mt-4 block text-sm text-danger">{t(issues.translations)}</small>
+						<small class="mt-4 block text-sm text-danger">{translateKey(issues.translations)}</small
+						>
 					{/if}
 
 					<div class="mt-6 flex justify-end gap-3">
 						<Dialog.Close
 							class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-bold text-gray-700 hover:bg-gray-50"
 						>
-							{t('admin.shop.dialog.cancel')}
+							{t.admin.shop.dialog.cancel}
 						</Dialog.Close>
 
 						<button
@@ -270,9 +267,7 @@
 							{#if isSubmitting}
 								<span><i class="fa-solid fa-spinner fa-spin mr-2"></i></span>
 							{/if}
-							{t(
-								isUpdateMode ? 'admin.shop.dialog.update.submit' : 'admin.shop.dialog.create.submit'
-							)}
+							{isUpdateMode ? t.admin.shop.dialog.update.submit : t.admin.shop.dialog.create.submit}
 						</button>
 					</div>
 				</form>

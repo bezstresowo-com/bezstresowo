@@ -18,23 +18,12 @@ export const CONTACT_ELEMENTS = [
 	}
 ];
 
+/** `name` indexes the `t.user.footer.fastLinks` dictionary section. */
 export const FAST_LINKS = [
-	{
-		id: 'statute',
-		label: 'user.footer.fastLinks.termsOfService',
-		path: '/terms-of-service'
-	},
-	{
-		id: 'gdpr',
-		label: 'user.footer.fastLinks.gdpr',
-		path: '/gdpr'
-	},
-	{
-		id: 'priceList',
-		label: 'user.footer.fastLinks.priceList',
-		path: '/price-list'
-	}
-];
+	{ id: 'statute', name: 'termsOfService', path: '/terms-of-service' },
+	{ id: 'gdpr', name: 'gdpr', path: '/gdpr' },
+	{ id: 'priceList', name: 'priceList', path: '/price-list' }
+] as const;
 
 export const FOLLOW_ME_LINKS = [
 	{

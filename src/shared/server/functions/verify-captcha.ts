@@ -13,6 +13,8 @@ export async function verifyCaptchaToken(
 	token: string | undefined,
 	remoteIp?: string
 ): Promise<boolean> {
+	// `$env/dynamic`: the key is only required when the captcha flag is on - a
+	// `$env/static` import would fail the build on environments without it.
 	const secret = env.TURNSTILE_SECRET_KEY;
 
 	if (!secret) {

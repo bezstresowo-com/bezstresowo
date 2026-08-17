@@ -1,5 +1,6 @@
-import { toLocale, translateWith, type Locale } from '$i18n';
+import { toLocale, translationsFor, type Locale } from '$i18n';
 import { HttpStatus } from '$shared/global/enums/http-status';
+import { createRateLimiter } from '$shared/server/functions/rate-limit';
 import { Resvg } from '@resvg/resvg-js';
 import { redirect } from '@sveltejs/kit';
 import satori from 'satori';
@@ -28,7 +29,15 @@ const COLORS = {
 const CACHE = new Map<string, Uint8Array>();
 const CACHE_LIMIT = 64;
 
-export const GET: RequestHandler = async ({ params, url }) => {
+/**
+ * Every distinct title is a full satori + resvg render, and the title is an
+ * arbitrary query parameter - without a cap a single client can bypass both
+ * caches at will and burn CPU for free.
+ */
+const renderLimiter = createRateLimiter({ max: 20, windowMs: 60_000 });
+
+export const GET: RequestHandler = async (event) => {
+	const { params, url } = event;
 	const locale = toLocale(params.lang);
 	const title = (url.searchParams.get('title') ?? '').slice(0, 120).trim();
 	const subtitle = (url.searchParams.get('subtitle') ?? '').slice(0, 180).trim();
@@ -43,6 +52,11 @@ export const GET: RequestHandler = async ({ params, url }) => {
 
 	if (cached) {
 		return pngResponse(cached);
+	}
+
+	// Only uncached (= actually rendering) requests count against the limit.
+	if (!renderLimiter.consume(clientAddress(event))) {
+		return new Response('Too Many Requests', { status: HttpStatus.TOO_MANY_REQUESTS });
 	}
 
 	try {
@@ -62,6 +76,15 @@ export const GET: RequestHandler = async ({ params, url }) => {
 		redirect(HttpStatus.FOUND, '/site-preview.jpeg');
 	}
 };
+
+/** Not every adapter can resolve the caller's address - fall back to a shared bucket. */
+function clientAddress(event: Parameters<RequestHandler>[0]): string {
+	try {
+		return event.getClientAddress();
+	} catch {
+		return 'unknown';
+	}
+}
 
 function pngResponse(png: Uint8Array) {
 	return new Response(png as BodyInit, {
@@ -100,7 +123,7 @@ async function render(locale: Locale, title: string, subtitle: string) {
 								letterSpacing: '0.08em',
 								color: COLORS.accent
 							},
-							children: translateWith(locale, 'meta.siteName')
+							children: translationsFor(locale).meta.siteName
 						}
 					},
 					{

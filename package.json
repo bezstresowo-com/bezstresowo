@@ -5,11 +5,11 @@
 	"type": "module",
 	"scripts": {
 		"dev": "prisma generate && prisma db push && vite dev",
-		"build": "prisma generate && prisma db push && vite build",
+		"build": "prisma generate && vite build",
 		"preview": "vite preview",
 		"prepare": "svelte-kit sync || echo ''",
-		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
-		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"check": "prisma generate && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"check:watch": "prisma generate && svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"format": "prettier --write .",
 		"lint": "prettier --check . && eslint .",
 		"lint:fix": "prettier --check --write . && eslint . --fix",
@@ -22,7 +22,7 @@
 		"prisma:studio": "prisma studio",
 		"prisma:validate": "prisma validate",
 		"prisma:format": "prisma format",
-		"migrate:prod-data": "tsx --env-file-if-exists=.env scripts/migrate-prod-data.js"
+		"prisma:seed": "tsx --env-file-if-exists=.env prisma/seed.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -63,11 +63,9 @@
 		"@tiptap/extension-file-handler": "^3.6.2",
 		"@tiptap/pm": "^3.4.4",
 		"@tiptap/starter-kit": "^3.4.4",
-		"@types/bcrypt": "^6.0.0",
 		"bits-ui": "^2.11.4",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.2",
-		"googleapis": "^159.0.0",
 		"jsonwebtoken": "^9.0.2",
 		"libphonenumber-js": "^1.12.35",
 		"lodash-es": "^4.17.21",

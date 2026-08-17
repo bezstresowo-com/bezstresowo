@@ -3,7 +3,7 @@ import 'reflect-metadata';
 import { validators } from '$shared/server/validators';
 import { Type } from 'class-transformer';
 
-const { IsInt, IsOptional, Min, IsIn } = validators;
+const { IsInt, IsOptional, Max, Min, IsIn } = validators;
 
 export interface HttpStatusResponse {
 	status: 'ok';
@@ -27,6 +27,7 @@ export class PaginationParamsDto {
 	@Type(() => Number)
 	@IsInt()
 	@Min(1)
+	@Max(100)
 	size: number = 25;
 
 	@IsOptional()

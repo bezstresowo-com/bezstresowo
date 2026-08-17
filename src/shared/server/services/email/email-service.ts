@@ -1,5 +1,5 @@
 import { EMAIL_APP_PASSWORD, EMAIL_SENDER, EMAIL_SUBJECT_PREFIX } from '$env/static/private';
-import { LOCALE_HTML_LANG, translateWith, type Locale } from '$i18n';
+import { Locale, LOCALE_HTML_LANG, translationsFor } from '$i18n';
 import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
 import { createTransport } from 'nodemailer';
 import type {
@@ -32,6 +32,7 @@ export class EmailService {
 		const userHtml = (
 			await import('./email-templates/contact-request/contact-request-user.html?raw')
 		).default;
+		const { contactRequest } = translationsFor(locale).api.emails;
 
 		// Send to owner
 		await this._send(
@@ -44,13 +45,13 @@ export class EmailService {
 		// Send to user
 		await this._send(
 			args.email,
-			`${EMAIL_SUBJECT_PREFIX} ${tr(locale, 'contactRequest.userSubject')}`,
+			`${EMAIL_SUBJECT_PREFIX} ${contactRequest.userSubject}`,
 			userHtml,
 			{
 				...args,
 				...userTemplateVars(locale),
-				tHeader: tr(locale, 'contactRequest.header'),
-				tIntro: tr(locale, 'contactRequest.intro', { nameAndSurname: args.nameAndSurname })
+				tHeader: contactRequest.header,
+				tIntro: contactRequest.intro({ nameAndSurname: args.nameAndSurname })
 			}
 		);
 	}
@@ -67,28 +68,29 @@ export class EmailService {
 			)
 		).default;
 
-		// Send to owner
+		const { consultationRegistration, common } = translationsFor(locale).api.emails;
+
+		// Send to owner - the "no message" fallback is localized per recipient.
 		await this._send(
 			EMAIL_SENDER,
 			`${EMAIL_SUBJECT_PREFIX} Nowa rezerwacja konsultacji od ${args.nameAndSurname}`,
 			ownerHtml,
-			args
+			{ ...args, message: args.message || translationsFor(Locale.plPL).api.emails.common.noMessage }
 		);
 
 		// Send to user
 		await this._send(
 			args.email,
-			`${EMAIL_SUBJECT_PREFIX} ${tr(locale, 'consultationRegistration.userSubject')}`,
+			`${EMAIL_SUBJECT_PREFIX} ${consultationRegistration.userSubject}`,
 			userHtml,
 			{
 				...args,
+				message: args.message || common.noMessage,
 				...userTemplateVars(locale),
-				tHeader: tr(locale, 'consultationRegistration.header'),
-				tIntro: tr(locale, 'consultationRegistration.intro', {
-					nameAndSurname: args.nameAndSurname
-				}),
-				tSummary: tr(locale, 'consultationRegistration.summary'),
-				tTherapyLabel: tr(locale, 'consultationRegistration.therapyLabel')
+				tHeader: consultationRegistration.header,
+				tIntro: consultationRegistration.intro({ nameAndSurname: args.nameAndSurname }),
+				tSummary: consultationRegistration.summary,
+				tTherapyLabel: consultationRegistration.therapyLabel
 			}
 		);
 	}
@@ -96,6 +98,8 @@ export class EmailService {
 	async shopBuyMessage(locale: Locale, args: ShopBuyMessageArgs) {
 		const ownerHtml = (await import('./email-templates/shop-buy/shop-buy-owner.html?raw')).default;
 		const userHtml = (await import('./email-templates/shop-buy/shop-buy-user.html?raw')).default;
+
+		const { shopBuy } = translationsFor(locale).api.emails;
 
 		// Send to owner
 		await this._send(
@@ -106,20 +110,15 @@ export class EmailService {
 		);
 
 		// Send to user
-		await this._send(
-			args.email,
-			`${EMAIL_SUBJECT_PREFIX} ${tr(locale, 'shopBuy.userSubject')}`,
-			userHtml,
-			{
-				...args,
-				...userTemplateVars(locale),
-				tHeader: tr(locale, 'shopBuy.header'),
-				tIntro: tr(locale, 'shopBuy.intro'),
-				tSummary: tr(locale, 'shopBuy.summary'),
-				tProductLabel: tr(locale, 'shopBuy.productLabel'),
-				tPriceLabel: tr(locale, 'shopBuy.priceLabel')
-			}
-		);
+		await this._send(args.email, `${EMAIL_SUBJECT_PREFIX} ${shopBuy.userSubject}`, userHtml, {
+			...args,
+			...userTemplateVars(locale),
+			tHeader: shopBuy.header,
+			tIntro: shopBuy.intro,
+			tSummary: shopBuy.summary,
+			tProductLabel: shopBuy.productLabel,
+			tPriceLabel: shopBuy.priceLabel
+		});
 	}
 
 	private async _send(to: string, subject: string, html: string, args: Record<string, string>) {
@@ -132,24 +131,21 @@ export class EmailService {
 	}
 }
 
-/** `api.emails.*` lookup in the customer's language. */
-function tr(locale: Locale, key: string, vars?: Record<string, unknown>): string {
-	return translateWith(locale, `api.emails.${key}`, vars);
-}
-
 /** Placeholders shared by every customer facing template. */
 function userTemplateVars(locale: Locale): Record<string, string> {
+	const { common } = translationsFor(locale).api.emails;
+
 	return {
 		emailLang: LOCALE_HTML_LANG[locale],
-		tYourMessage: tr(locale, 'common.yourMessage'),
-		tYourData: tr(locale, 'common.yourData'),
-		tNameLabel: tr(locale, 'common.nameLabel'),
-		tEmailLabel: tr(locale, 'common.emailLabel'),
-		tPhoneLabel: tr(locale, 'common.phoneLabel'),
-		tSignatureName: tr(locale, 'common.signatureName'),
-		tSignatureRole: tr(locale, 'common.signatureRole'),
-		tContactViaSite: tr(locale, 'common.contactViaSite'),
-		tCompanyLine: tr(locale, 'common.companyLine'),
-		tSystemNotice: tr(locale, 'common.systemNotice')
+		tYourMessage: common.yourMessage,
+		tYourData: common.yourData,
+		tNameLabel: common.nameLabel,
+		tEmailLabel: common.emailLabel,
+		tPhoneLabel: common.phoneLabel,
+		tSignatureName: common.signatureName,
+		tSignatureRole: common.signatureRole,
+		tContactViaSite: common.contactViaSite,
+		tCompanyLine: common.companyLine,
+		tSystemNotice: common.systemNotice
 	};
 }

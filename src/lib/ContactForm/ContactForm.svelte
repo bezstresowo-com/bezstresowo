@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
-	import { getLocale, LOCALE_HTML_LANG, t } from '$i18n';
+	import { getLocale, LOCALE_HTML_LANG, t, translateKey } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
 	import { sendContactRequest } from '$remote/contact.remote';
 	import { CONTACT_FORM_CAPTCHA_ENABLED } from '$shared/global/config/feature-flags';
-	import { remoteErrorIssues } from '$shared/global/functions/remote-error';
+	import { remoteErrorIssues, remoteErrorMessage } from '$shared/global/functions/remote-error';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { createForm } from 'svelte-forms-lib';
 
@@ -42,6 +42,8 @@
 					return;
 				}
 
+				// `$env/dynamic`: the key only exists when the captcha is enabled - a
+				// `$env/static` import would fail the build on environments without it.
 				captchaWidgetId = turnstile.render(container, {
 					sitekey: env.PUBLIC_TURNSTILE_SITE_KEY ?? '',
 					language: LOCALE_HTML_LANG[getLocale()],
@@ -114,7 +116,7 @@
 				});
 
 				handleReset();
-				toast.success(t('user.contactForm.toast.success'));
+				toast.success(t.user.contactForm.toast.success);
 			} catch (error) {
 				const issues = remoteErrorIssues(error);
 
@@ -125,7 +127,9 @@
 						touched.update((current) => ({ ...current, [key]: true }));
 					}
 				} else {
-					toast.error(t('user.contactForm.toast.error'));
+					// Surface the server's reason (failed captcha, mail outage) - the
+					// message is always a translation key, with a generic fallback.
+					toast.error(translateKey(remoteErrorMessage(error)));
 				}
 			} finally {
 				resetCaptcha();
@@ -146,10 +150,10 @@
 	<!-- Header -->
 	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
-			{t('user.contactForm.title')}
+			{t.user.contactForm.title}
 		</h1>
 		<p class="mx-auto mt-3 max-w-3xl text-slate-600">
-			{t('user.contactForm.subtitle')}
+			{t.user.contactForm.subtitle}
 		</p>
 	</div>
 
@@ -158,7 +162,7 @@
 		<!-- Left: Contact info -->
 		<div class="flex flex-col justify-center space-y-6">
 			<h2 class="px-5 text-lg font-medium text-slate-700">
-				{t('user.contactForm.infoTitle')}
+				{t.user.contactForm.infoTitle}
 			</h2>
 
 			<!-- Phone -->
@@ -168,7 +172,7 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{t('user.contactForm.contactInformation.phone')}
+						{t.user.contactForm.contactInformation.phone}
 					</div>
 					<div class="mt-1 text-slate-600">
 						<a class="underline-offset-4 hover:underline" href={`tel:${CONTACT_INFO.phone}`}
@@ -185,7 +189,7 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{t('user.contactForm.contactInformation.email')}
+						{t.user.contactForm.contactInformation.email}
 					</div>
 					<div class="mt-1 break-all text-slate-600">
 						<a class="underline-offset-4 hover:underline" href={`mailto:${CONTACT_INFO.email}`}
@@ -202,14 +206,14 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{t('user.contactForm.contactInformation.hours')}
+						{t.user.contactForm.contactInformation.hours}
 					</div>
 					<div class="mt-1 text-slate-600">
-						{t('user.contactForm.contactInformation.hoursWeek')}
+						{t.user.contactForm.contactInformation.hoursWeek}
 						{CONTACT_INFO.hoursWeek}
 					</div>
 					<div class="text-slate-600">
-						{t('user.contactForm.contactInformation.hoursSat')}
+						{t.user.contactForm.contactInformation.hoursSat}
 						{CONTACT_INFO.hoursSat}
 					</div>
 				</div>
@@ -222,7 +226,7 @@
 				{#each FORM_FIELDS_ORDER as key, i (i + key)}
 					{#if FORM_FIELDS[key].element === 'input'}
 						<div>
-							<label class="sr-only" for={key}>{t(`user.contactForm.fields.${key}.label`)}</label>
+							<label class="sr-only" for={key}>{t.user.contactForm.fields[key].label}</label>
 							<input
 								id={key}
 								name={key}
@@ -230,17 +234,17 @@
 								bind:value={$form[key]}
 								onchange={handleChange}
 								onblur={handleChange}
-								placeholder={t(`user.contactForm.fields.${key}.label`)}
+								placeholder={t.user.contactForm.fields[key].label}
 								class="h-12 w-full rounded-lg border border-slate-300 bg-white px-4 text-slate-800 placeholder-slate-400 transition outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"
 							/>
 
 							{#if $errors[key] && $touched[key]}
-								<small class="mt-1 block text-sm text-danger">{t($errors[key])}</small>
+								<small class="mt-1 block text-sm text-danger">{translateKey($errors[key])}</small>
 							{/if}
 						</div>
 					{:else if FORM_FIELDS[key].element === 'textarea'}
 						<div>
-							<label class="sr-only" for={key}>{t(`user.contactForm.fields.${key}.label`)}</label>
+							<label class="sr-only" for={key}>{t.user.contactForm.fields[key].label}</label>
 							<textarea
 								id={key}
 								name={key}
@@ -248,11 +252,11 @@
 								bind:value={$form[key]}
 								onchange={handleChange}
 								onblur={handleChange}
-								placeholder={t(`user.contactForm.fields.${key}.label`)}
+								placeholder={t.user.contactForm.fields[key].label}
 								class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-800 placeholder-slate-400 transition outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"
 							></textarea>
 							{#if $errors[key] && $touched[key]}
-								<small class="mt-1 block text-sm text-danger">{t($errors[key])}</small>
+								<small class="mt-1 block text-sm text-danger">{translateKey($errors[key])}</small>
 							{/if}
 						</div>
 					{/if}
@@ -264,7 +268,7 @@
 
 				<Button type={ButtonTypes.Submit} disabled={isSubmitDisabled} tailwind="w-full">
 					{#if !isLoading}
-						{t('user.contactForm.submit')}
+						{t.user.contactForm.submit}
 					{:else}
 						<div role="status" class="flex items-center justify-center">
 							<svg
@@ -283,7 +287,7 @@
 									fill="currentFill"
 								/>
 							</svg>
-							<span class="sr-only">{t('user.a11y.loading')}</span>
+							<span class="sr-only">{t.user.a11y.loading}</span>
 						</div>
 					{/if}
 				</Button>

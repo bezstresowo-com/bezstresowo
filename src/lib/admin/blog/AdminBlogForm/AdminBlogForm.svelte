@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Locale, t } from '$i18n';
+	import { Locale, t, translateKey } from '$i18n';
 	import TipTap from '$lib/TipTap/TipTap.svelte';
 	import type { InternationalizedBlogArticleDto } from '$remote/dto/blog';
 	import { slugify } from '$shared/global/functions/slugify';
@@ -8,7 +8,7 @@
 	import {
 		draftsFrom,
 		emptyDrafts,
-		LOCALE_TAB_LABELS,
+		localeTabLabel,
 		META_DESCRIPTION_MAX_LENGTH,
 		META_TITLE_MAX_LENGTH,
 		toPayload,
@@ -103,7 +103,7 @@
 		<span>
 			<i class={isUpdateMode ? 'fa-solid fa-edit' : 'fa-solid fa-plus'}></i>
 		</span>
-		{t(isUpdateMode ? 'admin.blog.dialog.update.trigger' : 'admin.blog.dialog.create.trigger')}
+		{isUpdateMode ? t.admin.blog.dialog.update.trigger : t.admin.blog.dialog.create.trigger}
 	</Dialog.Trigger>
 
 	<Dialog.Portal>
@@ -114,17 +114,15 @@
 				<Dialog.Title
 					class="flex w-full items-center justify-center text-xl font-semibold tracking-tight"
 				>
-					{t(isUpdateMode ? 'admin.blog.dialog.update.title' : 'admin.blog.dialog.create.title')}
+					{isUpdateMode ? t.admin.blog.dialog.update.title : t.admin.blog.dialog.create.title}
 				</Dialog.Title>
 
 				<Separator.Root class="-mx-5 mt-5 mb-6 block h-px bg-black" />
 
 				<Dialog.Description>
-					{t(
-						isUpdateMode
-							? 'admin.blog.dialog.update.description'
-							: 'admin.blog.dialog.create.description'
-					)}
+					{isUpdateMode
+						? t.admin.blog.dialog.update.description
+						: t.admin.blog.dialog.create.description}
 				</Dialog.Description>
 
 				<form onsubmit={handleSubmit}>
@@ -140,7 +138,7 @@
 								}`}
 								onclick={() => (activeLocale = locale)}
 							>
-								{t(LOCALE_TAB_LABELS[locale])}
+								{localeTabLabel(locale)}
 								{#if drafts[locale].enabled}
 									<i class="fa-solid fa-circle-check ml-1 text-green-600"></i>
 								{/if}
@@ -152,7 +150,7 @@
 						<div class={activeLocale === locale ? 'block' : 'hidden'}>
 							<label class="mt-4 flex items-center gap-2 text-sm font-medium text-gray-700">
 								<input type="checkbox" bind:checked={drafts[locale].enabled} />
-								{t('admin.languageTabs.enabled')}
+								{t.admin.languageTabs.enabled}
 							</label>
 
 							{#if drafts[locale].enabled}
@@ -161,18 +159,20 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`title-${locale}`}
 									>
-										{t('admin.blog.dialog.form.fields.title.label')}
+										{t.admin.blog.dialog.form.fields.title.label}
 									</label>
 									<input
 										id={`title-${locale}`}
 										type="text"
 										bind:value={drafts[locale].title}
 										oninput={() => onTitleInput(locale)}
-										placeholder={t('admin.blog.dialog.form.fields.title.placeholder')}
+										placeholder={t.admin.blog.dialog.form.fields.title.placeholder}
 										class={`w-full rounded-md border focus:border-gray-500 ${issueFor(locale, 'title') ? 'border-danger' : 'border-gray-300'}`}
 									/>
 									{#if issueFor(locale, 'title')}
-										<small class="text-sm text-danger">{t(issueFor(locale, 'title')!)}</small>
+										<small class="text-sm text-danger"
+											>{translateKey(issueFor(locale, 'title')!)}</small
+										>
 									{/if}
 								</div>
 
@@ -181,20 +181,21 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`slug-${locale}`}
 									>
-										{t('admin.seoFields.slug.label')}
+										{t.admin.seoFields.slug.label}
 									</label>
 									<input
 										id={`slug-${locale}`}
 										type="text"
 										bind:value={drafts[locale].slug}
 										oninput={() => (drafts[locale].slugTouched = true)}
-										placeholder={t('admin.seoFields.slug.placeholder')}
+										placeholder={t.admin.seoFields.slug.placeholder}
 										class={`w-full rounded-md border focus:border-gray-500 ${issueFor(locale, 'slug') ? 'border-danger' : 'border-gray-300'}`}
 									/>
-									<small class="block text-xs text-gray-500">{t('admin.seoFields.slug.hint')}</small
-									>
+									<small class="block text-xs text-gray-500">{t.admin.seoFields.slug.hint}</small>
 									{#if issueFor(locale, 'slug')}
-										<small class="text-sm text-danger">{t(issueFor(locale, 'slug')!)}</small>
+										<small class="text-sm text-danger"
+											>{translateKey(issueFor(locale, 'slug')!)}</small
+										>
 									{/if}
 								</div>
 
@@ -203,22 +204,24 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`metaTitle-${locale}`}
 									>
-										{t('admin.seoFields.metaTitle.label')}
+										{t.admin.seoFields.metaTitle.label}
 									</label>
 									<input
 										id={`metaTitle-${locale}`}
 										type="text"
 										bind:value={drafts[locale].metaTitle}
-										placeholder={t('admin.seoFields.metaTitle.placeholder')}
+										placeholder={t.admin.seoFields.metaTitle.placeholder}
 										class={`w-full rounded-md border focus:border-gray-500 ${issueFor(locale, 'metaTitle') ? 'border-danger' : 'border-gray-300'}`}
 									/>
 									<small class="block text-xs text-gray-500">
-										{t('admin.seoFields.charactersLeft', {
+										{t.admin.seoFields.charactersLeft({
 											count: META_TITLE_MAX_LENGTH - drafts[locale].metaTitle.length
 										})}
 									</small>
 									{#if issueFor(locale, 'metaTitle')}
-										<small class="text-sm text-danger">{t(issueFor(locale, 'metaTitle')!)}</small>
+										<small class="text-sm text-danger"
+											>{translateKey(issueFor(locale, 'metaTitle')!)}</small
+										>
 									{/if}
 								</div>
 
@@ -227,23 +230,23 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`metaDescription-${locale}`}
 									>
-										{t('admin.seoFields.metaDescription.label')}
+										{t.admin.seoFields.metaDescription.label}
 									</label>
 									<textarea
 										id={`metaDescription-${locale}`}
 										rows="3"
 										bind:value={drafts[locale].metaDescription}
-										placeholder={t('admin.seoFields.metaDescription.placeholder')}
+										placeholder={t.admin.seoFields.metaDescription.placeholder}
 										class={`w-full rounded-md border focus:border-gray-500 ${issueFor(locale, 'metaDescription') ? 'border-danger' : 'border-gray-300'}`}
 									></textarea>
 									<small class="block text-xs text-gray-500">
-										{t('admin.seoFields.charactersLeft', {
+										{t.admin.seoFields.charactersLeft({
 											count: META_DESCRIPTION_MAX_LENGTH - drafts[locale].metaDescription.length
 										})}
 									</small>
 									{#if issueFor(locale, 'metaDescription')}
 										<small class="text-sm text-danger">
-											{t(issueFor(locale, 'metaDescription')!)}
+											{translateKey(issueFor(locale, 'metaDescription')!)}
 										</small>
 									{/if}
 								</div>
@@ -253,33 +256,40 @@
 										class="mb-1 block text-sm font-medium text-gray-700"
 										for={`featuredImageAlt-${locale}`}
 									>
-										{t('admin.seoFields.featuredImageAlt.label')}
+										{t.admin.seoFields.featuredImageAlt.label}
 									</label>
 									<input
 										id={`featuredImageAlt-${locale}`}
 										type="text"
 										bind:value={drafts[locale].featuredImageAlt}
-										placeholder={t('admin.seoFields.featuredImageAlt.placeholder')}
+										placeholder={t.admin.seoFields.featuredImageAlt.placeholder}
 										class="w-full rounded-md border border-gray-300 focus:border-gray-500"
 									/>
 								</div>
 
 								<TipTap
 									content={drafts[locale].content}
-									onUpdate={(html, addedMedia) => {
+									onUpdate={(html, mediaIds) => {
 										drafts[locale].content = html;
-										drafts[locale].media = { ...drafts[locale].media, ...addedMedia };
+										// The editor reports what the document actually contains, so
+										// removed media drop out of the payload and get cleaned up
+										// server side after the save.
+										drafts[locale].media = Object.fromEntries(
+											mediaIds.map((id) => [id, drafts[locale].media[id] ?? id])
+										);
 
-										// The first image of the article doubles as the featured one.
-										const [firstMediaId] = Object.keys(drafts[locale].media);
-										if (!drafts[locale].featuredImageId && firstMediaId) {
-											drafts[locale].featuredImageId = firstMediaId;
+										// The first image of the article doubles as the featured one;
+										// it follows the document when its image is removed.
+										if (!mediaIds.includes(drafts[locale].featuredImageId)) {
+											drafts[locale].featuredImageId = mediaIds[0] ?? '';
 										}
 									}}
 								/>
 
 								{#if issueFor(locale, 'content')}
-									<small class="text-sm text-danger">{t(issueFor(locale, 'content')!)}</small>
+									<small class="text-sm text-danger"
+										>{translateKey(issueFor(locale, 'content')!)}</small
+									>
 								{/if}
 							{/if}
 						</div>
@@ -287,7 +297,7 @@
 
 					{#if showIssues && enabledLocales.length === 0}
 						<small class="mt-4 block text-sm text-danger">
-							{t('admin.languageTabs.atLeastOne')}
+							{t.admin.languageTabs.atLeastOne}
 						</small>
 					{/if}
 
@@ -295,7 +305,7 @@
 						<Dialog.Close
 							class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 font-bold text-gray-700 hover:bg-gray-50"
 						>
-							{t('admin.blog.dialog.cancel')}
+							{t.admin.blog.dialog.cancel}
 						</Dialog.Close>
 
 						<button
@@ -310,9 +320,7 @@
 									<i class={`${isUpdateMode ? 'fa-solid fa-save' : 'fa-solid fa-check'} mr-2`}></i>
 								</span>
 							{/if}
-							{t(
-								isUpdateMode ? 'admin.blog.dialog.update.submit' : 'admin.blog.dialog.create.submit'
-							)}
+							{isUpdateMode ? t.admin.blog.dialog.update.submit : t.admin.blog.dialog.create.submit}
 						</button>
 					</div>
 				</form>

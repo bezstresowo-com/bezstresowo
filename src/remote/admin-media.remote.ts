@@ -5,7 +5,15 @@ import { requireAdmin } from '$shared/server/functions/require-admin';
 import { S3Service } from '$shared/server/services/s3/s3-service';
 import { error } from '@sveltejs/kit';
 
-import { MediaIdDto, UploadMediaDto } from './dto/misc';
+import { UploadMediaDto } from './dto/misc';
+
+/**
+ * Uploads only - deletion is deliberately not exposed here. Files disappear
+ * through `cleanupMedia` once a save drops their last reference, and through
+ * the `reconcileBucket` cron for anything never attached. Both check the
+ * database first, so a published article can never lose an image it still
+ * uses (which an eager, unconditional delete endpoint could cause).
+ */
 
 /** 8 MB of raw bytes - remote function payloads are JSON, so files are base64. */
 const MAX_UPLOAD_BYTES = 8 * 1024 * 1024;
@@ -40,9 +48,3 @@ export const uploadMedia = command(
 		return { id, url };
 	}
 );
-
-export const deleteMedia = command(dtoSchema(MediaIdDto), async ({ id }) => {
-	requireAdmin();
-
-	await new S3Service().deleteFile(id);
-});

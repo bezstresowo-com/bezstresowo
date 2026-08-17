@@ -33,34 +33,25 @@ export const LOCALE_HTML_LANG = {
 	[Locale.ukUA]: 'uk'
 } as const satisfies Record<Locale, string>;
 
-export const LOCALES_MAP: Record<
-	Locale,
-	{
-		label: string;
-		icon: {
-			src: string;
-			alt: string;
-		};
-	}
-> = {
+/** `name` indexes the `language` dictionary section: `t.language[name].label`. */
+export const LOCALES_MAP = {
 	[Locale.plPL]: {
-		label: 'language.polish.label',
-		icon: {
-			src: asset('/flags/pl.svg'),
-			alt: 'language.polish.alt'
-		}
+		name: 'polish',
+		iconSrc: asset('/flags/pl.svg')
 	},
 	[Locale.ukUA]: {
-		label: 'language.ukrainian.label',
-		icon: {
-			src: asset('/flags/ua.svg'),
-			alt: 'language.ukrainian.alt'
-		}
+		name: 'ukrainian',
+		iconSrc: asset('/flags/ua.svg')
 	}
-};
+} as const satisfies Record<Locale, { name: keyof typeof plPL.language; iconSrc: string }>;
 
-/** The polish dictionary defines the shape every other dictionary has to match. */
-export type Translation = typeof plPL;
+/**
+ * The polish dictionary defines the shape every other dictionary has to match
+ * - with the literal values widened, so translations only share the keys, not
+ * the texts.
+ */
+type WidenLeaves<T> = { [K in keyof T]: T[K] extends string ? string : WidenLeaves<T[K]> };
+export type Translation = WidenLeaves<typeof plPL>;
 
 export const TRANSLATIONS: Record<Locale, Translation> = {
 	[Locale.plPL]: plPL,

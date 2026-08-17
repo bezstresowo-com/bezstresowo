@@ -12,6 +12,6 @@
 		<FollowMeSection />
 	</div>
 	<div class="py-4 text-center font-thin text-white">
-		{t('user.footer.copyright')}
+		{t.user.footer.copyright}
 	</div>
 </footer>

@@ -1,3 +1,7 @@
+// `@Type` reads design-time metadata while the class is being defined - the
+// polyfill must be loaded before the decorators evaluate.
+import 'reflect-metadata';
+
 import { Locale } from '$i18n';
 import { validators } from '$shared/server/validators';
 import { Type } from 'class-transformer';
@@ -59,42 +63,10 @@ export class ContactRequestDto {
 	captchaToken?: string;
 }
 
-export class RegistrationRequestDto {
-	/** Language the visitor used on the site - their confirmation email follows it. */
-	@IsDefined()
-	@IsString()
-	@IsIn(LOCALES)
-	lang: Locale;
-
-	@IsDefined()
-	@IsString()
-	@IsNotEmpty()
-	therapyType: string;
-
-	@IsDefined()
-	@IsString()
-	@MinLength(1)
-	@MaxLength(250)
-	nameAndSurname: string;
-
-	@IsDefined()
-	@IsString()
-	@IsPhoneNumber(undefined)
-	tel: string;
-
-	@IsDefined()
-	@IsEmail(undefined)
-	email: string;
-
-	@IsOptional()
-	@IsString()
-	@MaxLength(500)
-	message?: string;
-}
-
 /**
  * Checkout is created from a product that lives in our database - the client
- * only ever sends our own product id, never a Stripe price id.
+ * only ever sends our own product id, never a Stripe price id. The therapy
+ * name shown in emails comes from that product row, not from this payload.
  */
 export class RegistrationCheckoutDto {
 	@IsDefined()
@@ -105,11 +77,6 @@ export class RegistrationCheckoutDto {
 	@IsString()
 	@IsIn(LOCALES)
 	lang: Locale;
-
-	@IsDefined()
-	@IsString()
-	@IsNotEmpty()
-	therapyName: string;
 
 	@IsDefined()
 	@IsString()
@@ -165,13 +132,6 @@ export class UploadMediaDto {
 	@IsString()
 	@IsNotEmpty()
 	dataBase64: string;
-}
-
-export class MediaIdDto {
-	@IsDefined()
-	@IsString()
-	@IsNotEmpty()
-	id: string;
 }
 
 export type CheckoutSession = {

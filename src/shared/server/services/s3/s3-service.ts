@@ -1,7 +1,7 @@
+import { env } from '$env/dynamic/private';
 import {
 	AWS_S3_ACCESS_KEY_ID,
 	AWS_S3_BUCKET_NAME,
-	AWS_S3_ENDPOINT,
 	AWS_S3_REGION,
 	AWS_S3_SECRET_ACCESS_KEY
 } from '$env/static/private';
@@ -12,6 +12,14 @@ import {
 	PutObjectCommand,
 	S3Client
 } from '@aws-sdk/client-s3';
+
+/**
+ * Optional override for S3 compatible storage (local MinIO). Read via
+ * `$env/dynamic` on purpose: a `$env/static` import of a variable that is
+ * absent from the environment fails the whole build, and this one is expected
+ * to be absent on plain AWS S3 deployments.
+ */
+const AWS_S3_ENDPOINT = env.AWS_S3_ENDPOINT;
 
 export type BucketObject = {
 	key: string;

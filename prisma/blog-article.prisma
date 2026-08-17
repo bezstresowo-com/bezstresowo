@@ -1,8 +1,0 @@
-model BlogArticle {
-  id String @id @default(auto()) @map("_id") @db.ObjectId
-
-  internationalizedArticles InternationalizedBlogArticle[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}

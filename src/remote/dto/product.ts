@@ -1,3 +1,8 @@
+// `@Type` reads design-time metadata while the class is being defined - the
+// polyfill must be loaded first, also in the browser (admin forms import
+// constants from this module).
+import 'reflect-metadata';
+
 import { Locale } from '$i18n';
 import { SLUG_REGEX } from '$shared/global/functions/slugify';
 import { validators } from '$shared/server/validators';
@@ -39,9 +44,9 @@ export class InternationalizedProductDto {
 	@MaxLength(250)
 	name: string;
 
+	/** Optional in practice - seeded products start with an empty description. */
 	@IsDefined()
 	@IsString()
-	@MinLength(1)
 	@MaxLength(5_000)
 	description: string;
 
@@ -63,9 +68,9 @@ export class UpsertProductDto {
 	@IsBoolean()
 	active?: boolean = true;
 
+	/** May be empty: such a product shows up on the price list only. */
 	@IsDefined()
 	@IsArray()
-	@ArrayNotEmpty()
 	@IsIn(SITE_LOCATIONS, { each: true })
 	siteLocations: SiteLocation[];
 
@@ -123,4 +128,6 @@ export type LocalizedProduct = {
 	priceInMinorUnits: number;
 	currency: string;
 	siteLocations: string[];
+	/** Product structured data, materialized on write - see `buildProductJsonLD`. */
+	metadataJsonLD: unknown;
 };

@@ -1,3 +1,8 @@
+// `@Type` reads design-time metadata while the class is being defined - the
+// polyfill must be loaded first, also in the browser (admin forms import
+// constants from this module).
+import 'reflect-metadata';
+
 import { Locale } from '$i18n';
 import { SLUG_REGEX } from '$shared/global/functions/slugify';
 import { validators } from '$shared/server/validators';
@@ -12,6 +17,7 @@ const {
 	IsOptional,
 	IsString,
 	Matches,
+	Max,
 	MaxLength,
 	Min,
 	MinLength,
@@ -108,10 +114,12 @@ export class BlogArticleListParamsDto {
 	@Min(1)
 	page: number = 1;
 
+	/** Capped - the endpoint is public and `size` goes straight into `take`. */
 	@IsOptional()
 	@Type(() => Number)
 	@IsInt()
 	@Min(1)
+	@Max(100)
 	size: number = 25;
 }
 
@@ -121,9 +129,12 @@ export class BlogArticleBySlugDto {
 	@IsIn(LOCALES)
 	lang: Locale;
 
+	/** Same constraints as the write path - defense in depth on a public query. */
 	@IsDefined()
 	@IsString()
 	@MinLength(1)
+	@MaxLength(120)
+	@Matches(SLUG_REGEX)
 	slug: string;
 }
 

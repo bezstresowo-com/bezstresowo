@@ -1,3 +1,11 @@
+- [ ] - slug dla artykolow powinien byc tylko jeden (dla wszystkich wersji jezykowych - najlepiej po angielsku)
+- [ ] - slog dla produktow powiniene byc po angielsku (nie po polsku)
+- [ ] - jezeli wylaczymy dana wersje artykulu bloga to nie powinnismy jej usuwac, tylko oznaczac jako `disabled` w bazie
+- [ ] - edycja produktow i artykulow nie moze odbywac sie w popupie - musi miec miejsce w osobnej podstronie zwiazanej z danym entry (blog-article)
+
+
+## Old
+
 1. Zmiany jezykowe:
    - [x] - wylaczyc jezyk angielski
      - [x] - usunac angielski z przelacznika jezyka (LanguageSelect)

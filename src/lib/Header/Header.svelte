@@ -13,17 +13,17 @@
 <header class="fixed top-0 left-0 z-1000 w-full bg-primary">
 	<div class="mx-auto flex h-16 max-w-7xl items-center gap-4 p-4">
 		<a class="text-2xl font-bold text-accent" href={path('/home')}>
-			<img src={asset('/assets/header-logo.svg')} alt={t('user.a11y.logoAlt')} loading="lazy" />
+			<img src={asset('/assets/header-logo.svg')} alt={t.user.a11y.logoAlt} loading="lazy" />
 		</a>
 
 		<span class="flex-auto"></span>
 
-		{#each HEADER_PATHS as { path: target, label } (target)}
+		{#each HEADER_PATHS as { path: target, name } (target)}
 			{@const href = path(target)}
 			<a
 				{href}
 				class={`${selectedPath.startsWith(href) ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-md:hidden`}
-				>{t(label)}</a
+				>{t.user.header.items[name]}</a
 			>
 		{/each}
 
@@ -34,7 +34,7 @@
 		<!-- Mobile: hamburger button-->
 		<button
 			class="w-10 cursor-pointer p-2 text-accent md:hidden"
-			aria-label={t('user.a11y.openMenu')}
+			aria-label={t.user.a11y.openMenu}
 			onclick={() => (menuOpen = !menuOpen)}
 		>
 			<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="aspect-square w-full">
@@ -64,12 +64,12 @@
 				href={path('/home')}
 				onclick={() => (menuOpen = false)}
 			>
-				<img src={asset('/assets/header-logo.svg')} alt={t('user.a11y.logoAlt')} loading="lazy" />
+				<img src={asset('/assets/header-logo.svg')} alt={t.user.a11y.logoAlt} loading="lazy" />
 			</a>
 
 			<button
 				class="w-10 cursor-pointer p-2 text-secondary"
-				aria-label={t('user.a11y.closeMenu')}
+				aria-label={t.user.a11y.closeMenu}
 				onclick={() => (menuOpen = false)}
 			>
 				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" class="aspect-square w-full">
@@ -84,7 +84,7 @@
 		</div>
 
 		<nav class="flex flex-col gap-3 px-4 pb-6">
-			{#each HEADER_PATHS as { path: target, label }, i (i)}
+			{#each HEADER_PATHS as { path: target, name }, i (i)}
 				{@const href = path(target)}
 				<a
 					{href}
@@ -92,7 +92,7 @@
 					onclick={() => {
 						menuOpen = false;
 					}}
-					>{t(label)}
+					>{t.user.header.items[name]}
 				</a>
 			{/each}
 

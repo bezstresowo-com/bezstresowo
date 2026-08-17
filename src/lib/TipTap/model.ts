@@ -1,4 +1,5 @@
 export interface Props {
 	content?: string;
-	onUpdate?: (html: string, addedMedia: Record<string, string>) => void;
+	/** `mediaIds` lists every image / video currently present in the document. */
+	onUpdate?: (html: string, mediaIds: string[]) => void;
 }

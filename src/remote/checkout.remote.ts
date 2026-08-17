@@ -1,6 +1,6 @@
 import { command, getRequestEvent } from '$app/server';
 import { STRIPE_SK } from '$env/static/private';
-import { LOCALE_PREFIXES, type Locale } from '$i18n';
+import { Locale, LOCALE_PREFIXES } from '$i18n';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { toStripeCurrency } from '$shared/global/functions/to-stripe-currenty';
 import { dtoSchema } from '$shared/server/functions/dto-schema';
@@ -33,7 +33,9 @@ export const createRegistrationCheckout = command(
 			metadata: {
 				type: 'consultation-registration',
 				lang: LOCALE_PREFIXES[dto.lang],
-				therapyName: dto.therapyName,
+				// From the server-side product row, never from the client - the value
+				// ends up in the notification emails.
+				therapyName: translation.name,
 				nameAndSurname: dto.nameAndSurname,
 				tel: dto.tel,
 				email: dto.email,
@@ -118,6 +120,17 @@ function pageUrl(path: string, lang: Locale) {
 	return new URL(`/${LOCALE_PREFIXES[lang]}${path}`, getRequestEvent().url.origin).toString();
 }
 
+/**
+ * Checkout languages Stripe actually supports. Ukrainian is not one of them -
+ * `'uk'` would make every session creation fail with a 400 - so `/uk/...`
+ * falls back to `auto` (the browser language) rather than to russian.
+ * `satisfies` keeps this map honest when a locale is added.
+ */
+const STRIPE_LOCALES = {
+	[Locale.plPL]: 'pl',
+	[Locale.ukUA]: 'auto'
+} as const satisfies Record<Locale, Stripe.Checkout.SessionCreateParams.Locale>;
+
 function stripeLocale(lang: Locale): Stripe.Checkout.SessionCreateParams.Locale {
-	return LOCALE_PREFIXES[lang] as Stripe.Checkout.SessionCreateParams.Locale;
+	return STRIPE_LOCALES[lang];
 }

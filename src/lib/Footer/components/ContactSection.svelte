@@ -5,7 +5,7 @@
 </script>
 
 <div>
-	<div class="mb-3 text-secondary">{t('user.footer.contactHeader')}</div>
+	<div class="mb-3 text-secondary">{t.user.footer.contactHeader}</div>
 	{#each CONTACT_ELEMENTS as { id, label, icon, href } (id)}
 		<div class="mb-3 flex items-center space-x-4">
 			<span><i class="text-accent {icon}"></i></span>

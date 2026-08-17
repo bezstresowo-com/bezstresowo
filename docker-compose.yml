@@ -8,8 +8,9 @@ services:
     environment:
       MONGO_INITDB_DATABASE: bezstresowo
       TZ: Europe/Warsaw
+    # Bound to localhost only - the dev database runs without auth.
     ports:
-      - '27017:27017'
+      - '127.0.0.1:27017:27017'
     volumes:
       - mongodb_data:/data/db
     healthcheck:
@@ -49,8 +50,8 @@ services:
       MINIO_ROOT_PASSWORD: supersecret
       TZ: Europe/Warsaw
     ports:
-      - '9000:9000'
-      - '9001:9001'
+      - '127.0.0.1:9000:9000'
+      - '127.0.0.1:9001:9001'
     volumes:
       - minio_data:/data
     healthcheck:

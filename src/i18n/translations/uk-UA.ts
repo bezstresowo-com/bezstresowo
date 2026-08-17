@@ -641,7 +641,8 @@ const ukUA: Translation = {
 					placeholder: 'Оберіть тип терапії',
 					errors: {
 						required: "Тип терапії є обов'язковим",
-						invalid: 'Будь ласка, оберіть правильний тип терапії'
+						invalid: 'Будь ласка, оберіть правильний тип терапії',
+						loadError: 'Не вдалося завантажити список терапій. Оновіть сторінку і спробуйте ще раз.'
 					}
 				},
 				nameAndSurname: {
@@ -914,6 +915,9 @@ const ukUA: Translation = {
 				active: {
 					label: 'Товар активний'
 				},
+				siteLocations: {
+					hint: 'Якщо нічого не вибрано, товар видно лише у прайс-листі.'
+				},
 				name: {
 					label: 'Назва',
 					placeholder: 'Назва товару'
@@ -996,7 +1000,8 @@ const ukUA: Translation = {
 				signatureRole: 'Психотерапевтка',
 				contactViaSite: "У разі потреби зв'яжіться зі мною через сайт",
 				companyLine: 'Центр психотерапії Bezstresowo - Олеся Гайдук (Olesya Haiduk)',
-				systemNotice: 'Bezstresowo • Системне сповіщення'
+				systemNotice: 'Bezstresowo • Системне сповіщення',
+				noMessage: 'Немає повідомлення'
 			},
 			contactRequest: {
 				userSubject: 'Дякую за повідомлення!',
@@ -1036,6 +1041,7 @@ const ukUA: Translation = {
 			UNAUTHORIZED: 'Немає авторизації. Увійдіть ще раз.',
 			NOT_FOUND: 'Ресурс не знайдено.',
 			CONFLICT: 'Такий ресурс уже існує.',
+			TOO_MANY_REQUESTS: 'Забагато спроб. Спробуйте ще раз за кілька хвилин.',
 			INTERNAL_SERVER_ERROR: 'Сталася помилка сервера. Спробуйте ще раз пізніше.'
 		}
 	},
