@@ -1,16 +1,9 @@
 <script lang="ts">
 	import { path, t } from '$i18n';
 	import AdminDeleteDialog from '$lib/admin/AdminDeleteDialog/AdminDeleteDialog.svelte';
-	import AdminBlogForm from '$lib/admin/blog/AdminBlogForm/AdminBlogForm.svelte';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import { localeTabLabel } from '$lib/admin/blog/AdminBlogForm/model';
-	import {
-		createBlogArticle,
-		deleteBlogArticle,
-		getAdminBlogArticles,
-		updateBlogArticle
-	} from '$remote/admin-blog.remote';
-	import type { InternationalizedBlogArticleDto } from '$remote/dto/blog';
+	import { deleteBlogArticle, getAdminBlogArticles } from '$remote/admin-blog.remote';
 	import { Pagination } from 'bits-ui';
 	import { toast } from 'svelte-sonner';
 
@@ -26,31 +19,6 @@
 		sortOrder: 'desc' as const
 	});
 	const articles = $derived(getAdminBlogArticles(listParams));
-
-	async function handleCreate(translations: InternationalizedBlogArticleDto[]) {
-		try {
-			// Single flight: the mutation response carries the refreshed list.
-			await createBlogArticle({ translations }).updates(getAdminBlogArticles(listParams));
-			toast.success(t.admin.blog.notifications.createSuccess);
-			return true;
-		} catch (error) {
-			console.error('Failed to create blog article:', error);
-			toast.error(t.admin.blog.notifications.createError);
-			return false;
-		}
-	}
-
-	async function handleUpdate(id: string, translations: InternationalizedBlogArticleDto[]) {
-		try {
-			await updateBlogArticle({ id, translations }).updates(getAdminBlogArticles(listParams));
-			toast.success(t.admin.blog.notifications.updateSuccess);
-			return true;
-		} catch (error) {
-			console.error('Failed to update blog article:', error);
-			toast.error(t.admin.blog.notifications.updateError);
-			return false;
-		}
-	}
 
 	async function handleDelete(id: string) {
 		deletingArticleId = id;
@@ -85,7 +53,16 @@
 		{t.admin.blog.back}
 	</a>
 	<div class="flex-auto"></div>
-	<AdminBlogForm mode="create" onSubmit={handleCreate} />
+	<!-- Creating and editing happen on dedicated subpages, never in a popup. -->
+	<a
+		href={path('/admin/blog/new')}
+		class="rounded-md bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+	>
+		<span>
+			<i class="fa-solid fa-plus"></i>
+		</span>
+		{t.admin.blog.actions.create}
+	</a>
 </div>
 
 <svelte:boundary>
@@ -138,8 +115,17 @@
 				>
 					<div class="mb-3 flex items-center gap-2">
 						{#each article.internationalizedArticles as translation (translation.id)}
-							<span class="rounded bg-gray-100 px-2 py-1 text-xs font-medium text-gray-600">
+							<span
+								class={`rounded px-2 py-1 text-xs font-medium ${
+									translation.disabled
+										? 'bg-gray-100 text-gray-400 line-through'
+										: 'bg-gray-100 text-gray-600'
+								}`}
+							>
 								{localeTabLabel(translation.lang)}
+								{#if translation.disabled}
+									({t.admin.languageTabs.disabled})
+								{/if}
 							</span>
 						{/each}
 					</div>
@@ -148,11 +134,14 @@
 
 					<ul class="mb-4 space-y-1 text-sm text-gray-600">
 						{#each article.internationalizedArticles as translation (translation.id)}
-							<li>
+							<li class={translation.disabled ? 'text-gray-400' : ''}>
 								<code class="rounded bg-gray-50 px-1"
-									>/{translation.lang.slice(0, 2)}/blog/{translation.slug}</code
+									>/{translation.lang.slice(0, 2)}/blog/{article.slug}</code
 								>
 								- {translation.metaTitle}
+								{#if translation.disabled}
+									({t.admin.languageTabs.disabled})
+								{/if}
 							</li>
 						{/each}
 					</ul>
@@ -174,11 +163,15 @@
 						</div>
 
 						<div class="flex gap-2">
-							<AdminBlogForm
-								mode="update"
-								initialTranslations={article.internationalizedArticles}
-								onSubmit={(translations) => handleUpdate(article.id, translations)}
-							/>
+							<a
+								href={path(`/admin/blog/${article.id}`)}
+								class="rounded-md bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+							>
+								<span>
+									<i class="fa-solid fa-edit"></i>
+								</span>
+								{t.admin.blog.actions.edit}
+							</a>
 
 							<AdminDeleteDialog
 								itemName={primary?.title ?? ''}

@@ -1,8 +1,17 @@
-- [ ] - slug dla artykolow powinien byc tylko jeden (dla wszystkich wersji jezykowych - najlepiej po angielsku)
-- [ ] - slog dla produktow powiniene byc po angielsku (nie po polsku)
-- [ ] - jezeli wylaczymy dana wersje artykulu bloga to nie powinnismy jej usuwac, tylko oznaczac jako `disabled` w bazie
-- [ ] - edycja produktow i artykulow nie moze odbywac sie w popupie - musi miec miejsce w osobnej podstronie zwiazanej z danym entry (blog-article)
-
+- [x] - slug dla artykolow powinien byc tylko jeden (dla wszystkich wersji jezykowych - najlepiej po angielsku)
+  - slug przeniesiony z `InternationalizedBlogArticle` na `BlogArticle` (`@unique`); wersje jezykowe roznia sie tylko prefixem (`/pl/blog/<slug>` i `/uk/blog/<slug>`)
+  - w panelu jedno wspolne pole sluga (hint: po angielsku), bez podpowiadania z tytulu; sitemap/hreflang/JSON-LD licza URL-e ze wspolnego sluga
+  - pole jest opcjonalne w schemie (`String? @unique`) tylko dlatego, ze produkcyjna kolekcja trzyma tez legacy dokumenty bez sluga (chronia pliki starych artykulow przed sweepem); zapytania panelu filtruja `slug: { isSet: true }`, wiec legacy dokumenty nie wyswietlaja sie i nie da sie ich skasowac z panelu
+  - UWAGA: lokalne bazy sprzed tej zmiany trzeba przesiac na nowo (`npm run prisma:migrate:reset` + `npm run prisma:seed`) - stare dokumenty maja slug per wersja
+- [x] - slog dla produktow powiniene byc po angielsku (nie po polsku)
+  - seed zaklada produkty z angielskimi slugami (`psychotherapy-consultation`, `couples-psychotherapy`, ...)
+  - formularz nie podpowiada juz sluga z polskiej nazwy; hint i placeholder mowia "po angielsku"
+- [x] - jezeli wylaczymy dana wersje artykulu bloga to nie powinnismy jej usuwac, tylko oznaczac jako `disabled` w bazie
+  - `InternationalizedBlogArticle.disabled` (default `false`); update oznacza wersje wyjete z payloadu jako `disabled` zamiast je kasowac - tresc, media i pola SEO zostaja
+  - publiczne query, sitemap i hreflang pomijaja wersje `disabled`; panel pokazuje je jako "wyłączona", ponowne wlaczenie przywraca tresc; media wylaczonej wersji nie sa sprzatane (nadal sa referowane)
+- [x] - edycja produktow i artykulow nie moze odbywac sie w popupie - musi miec miejsce w osobnej podstronie zwiazanej z danym entry (blog-article)
+  - nowe podstrony: `/admin/blog/new`, `/admin/blog/[id]`, `/admin/shop/new`, `/admin/shop/[id]`; listy tylko linkuja do nich
+  - `AdminBlogForm` / `AdminProductForm` to teraz zwykle formularze na stronie (bez `Dialog`); popup zostal wylacznie do potwierdzania usuniecia
 
 ## Old
 
@@ -161,8 +170,8 @@
 ## Do zrobienia przy deployu
 
 - ustawic `PUBLIC_SITE_URL` (canonical / hreflang / og:image) oraz `CRON_SECRET` (media sweep) - patrz `.env.example`
-- odpalic `npm run migrate:prod-data` (najpierw `--dry-run`) na bazie produkcyjnej - migruje stare artykuly
-  i zaklada produkty (6 terapii + konsultacja z cennika, tlumaczenia pl + uk, ceny z zywego Stripe)
+- odpalic `npm run prisma:seed` (najpierw z `-- --dry-run`) na bazie produkcyjnej - zaklada artykuly ze snapshotu
+  i produkty (6 terapii + konsultacja z cennika, tlumaczenia pl + uk, ceny z zywego Stripe, angielskie slugi)
 - po migracji zweryfikowac produkty w `/admin/shop` - Stripe nie jest juz zrodlem produktow ani cen
 - harmonogram media-sweep: `vercel.json` juz definiuje cron (GET, codziennie 03:00 UTC) - wystarczy `CRON_SECRET` w env
 - zglosic `https://bezstresowo.org/sitemap.xml` w Google Search Console (przyspieszy przeindeksowanie URL-i `/pl/` i `/uk/`)

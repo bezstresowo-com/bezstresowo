@@ -11,6 +11,16 @@ datasource db {
 model BlogArticle {
   id String @id @default(auto()) @map("_id") @db.ObjectId
 
+  /// One slug shared by every language version (ideally english):
+  /// `/pl/blog/<slug>` and `/uk/blog/<slug>` differ only in the prefix.
+  ///
+  /// Optional only because the production collection still holds legacy
+  /// (pre-i18n) documents without it - they keep the old articles' bucket
+  /// files referenced (see `media-cleanup.ts`) and must stay readable.
+  /// Every document the app writes has a slug; the admin queries filter on
+  /// `slug: { isSet: true }` and uniqueness is asserted in `assertFreeSlug`.
+  slug String? @unique
+
   internationalizedArticles InternationalizedBlogArticle[]
 
   createdAt DateTime @default(now())
@@ -22,8 +32,9 @@ model InternationalizedBlogArticle {
 
   lang String
 
-  /// Per-language URL: `/pl/blog/<slug>` and `/uk/blog/<slug>` are distinct pages.
-  slug String @unique
+  /// A language version toggled off in the panel is kept (content, media,
+  /// SEO fields) and hidden everywhere - never deleted.
+  disabled Boolean @default(false)
 
   title   String
   content String

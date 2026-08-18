@@ -32,6 +32,21 @@ export const getAdminProducts = query(async () => {
 	});
 });
 
+export const getAdminProduct = query(dtoSchema(ProductIdDto), async ({ id }) => {
+	requireAdmin();
+
+	const product = await prisma.product.findFirst({
+		where: { id },
+		include: PRODUCT_INCLUDE
+	});
+
+	if (isNil(product)) {
+		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
+	}
+
+	return product;
+});
+
 export const createProduct = command(dtoSchema(UpsertProductDto), async (dto) => {
 	requireAdmin();
 

@@ -4,7 +4,7 @@
 import 'reflect-metadata';
 
 import { Locale } from '$i18n';
-import { SLUG_REGEX } from '$shared/global/functions/slugify';
+import { SLUG_REGEX } from '$shared/global/functions/slug';
 import { validators } from '$shared/server/validators';
 import { Type } from 'class-transformer';
 

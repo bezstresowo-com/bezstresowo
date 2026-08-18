@@ -26,13 +26,23 @@ export const GET: RequestHandler = async () => {
 	}
 
 	const articles = await prisma.internationalizedBlogArticle.findMany({
-		select: { slug: true, lang: true, updatedAt: true, blogArticleId: true }
+		where: { disabled: false },
+		select: {
+			lang: true,
+			updatedAt: true,
+			blogArticleId: true,
+			blogArticle: { select: { slug: true } }
+		}
 	});
 
 	const byArticle = new Map<string, typeof articles>();
 
 	for (const article of articles) {
-		if (!(Object.values(Locale) as string[]).includes(article.lang)) {
+		// A missing parent slug can only mean a legacy (pre-i18n) document.
+		if (
+			!(Object.values(Locale) as string[]).includes(article.lang) ||
+			article.blogArticle.slug === null
+		) {
 			continue;
 		}
 
@@ -43,9 +53,10 @@ export const GET: RequestHandler = async () => {
 	}
 
 	for (const versions of byArticle.values()) {
+		// The slug is shared - the language versions differ only in the prefix.
 		const alternates = versions.map((version) => ({
 			locale: version.lang as Locale,
-			path: `/blog/${version.slug}`
+			path: `/blog/${version.blogArticle.slug}`
 		}));
 
 		for (const [index, alternate] of alternates.entries()) {

@@ -4,16 +4,15 @@ import {
 	META_TITLE_MAX_LENGTH,
 	type InternationalizedBlogArticleDto
 } from '$remote/dto/blog';
-import { SLUG_REGEX } from '$shared/global/functions/slugify';
+import { SLUG_REGEX } from '$shared/global/functions/slug';
 
 export { META_DESCRIPTION_MAX_LENGTH, META_TITLE_MAX_LENGTH };
 
-/** One editable language version of an article. */
+/** One editable language version of an article; the slug lives on the article. */
 export type TranslationDraft = {
 	enabled: boolean;
-	slug: string;
-	/** Set once the slug was edited by hand, so it stops following the title. */
-	slugTouched: boolean;
+	/** Set when the version exists in the database (also when disabled there). */
+	existing: boolean;
 	title: string;
 	content: string;
 	metaTitle: string;
@@ -35,8 +34,7 @@ export function localeTabLabel(lang: string): string {
 export function emptyDraft(): TranslationDraft {
 	return {
 		enabled: false,
-		slug: '',
-		slugTouched: false,
+		existing: false,
 		title: '',
 		content: '',
 		metaTitle: '',
@@ -56,7 +54,7 @@ export function emptyDrafts(): TranslationDrafts {
 
 export type ExistingTranslation = {
 	lang: string;
-	slug: string;
+	disabled: boolean;
 	title: string;
 	content: string;
 	metaTitle: string;
@@ -76,10 +74,11 @@ export function draftsFrom(translations: ExistingTranslation[]): TranslationDraf
 			continue;
 		}
 
+		// A disabled version loads with its content intact, just unchecked -
+		// re-enabling it brings everything back.
 		drafts[locale] = {
-			enabled: true,
-			slug: translation.slug,
-			slugTouched: true,
+			enabled: !translation.disabled,
+			existing: true,
 			title: translation.title,
 			content: translation.content,
 			metaTitle: translation.metaTitle,
@@ -95,6 +94,10 @@ export function draftsFrom(translations: ExistingTranslation[]): TranslationDraf
 
 export type DraftIssues = Partial<Record<keyof TranslationDraft, string>>;
 
+export function validateSlug(slug: string): string | undefined {
+	return SLUG_REGEX.test(slug) ? undefined : 'api.validation.errors.Matches';
+}
+
 /** Mirrors `InternationalizedBlogArticleDto`, so the server never sees garbage. */
 export function validateDraft(draft: TranslationDraft): DraftIssues {
 	const issues: DraftIssues = {};
@@ -105,10 +108,6 @@ export function validateDraft(draft: TranslationDraft): DraftIssues {
 
 	if (draft.content.trim().length === 0) {
 		issues.content = 'api.validation.errors.IsNotEmpty';
-	}
-
-	if (!SLUG_REGEX.test(draft.slug)) {
-		issues.slug = 'api.validation.errors.Matches';
 	}
 
 	if (draft.metaTitle.trim().length === 0) {
@@ -132,7 +131,6 @@ export function toPayload(
 ): InternationalizedBlogArticleDto {
 	return {
 		lang: locale,
-		slug: draft.slug,
 		title: draft.title.trim(),
 		content: draft.content,
 		metaTitle: draft.metaTitle.trim(),

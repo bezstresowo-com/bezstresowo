@@ -4,7 +4,7 @@
 import 'reflect-metadata';
 
 import { Locale } from '$i18n';
-import { SLUG_REGEX } from '$shared/global/functions/slugify';
+import { SLUG_REGEX } from '$shared/global/functions/slug';
 import { validators } from '$shared/server/validators';
 import { Type } from 'class-transformer';
 
@@ -34,13 +34,6 @@ export class InternationalizedBlogArticleDto {
 	@IsString()
 	@IsIn(LOCALES)
 	lang: Locale;
-
-	@IsDefined()
-	@IsString()
-	@MinLength(1)
-	@MaxLength(120)
-	@Matches(SLUG_REGEX)
-	slug: string;
 
 	@IsDefined()
 	@IsString()
@@ -82,6 +75,14 @@ export class InternationalizedBlogArticleDto {
 
 /** An article needs at least one language version, but never both. */
 export class UpsertBlogArticleDto {
+	/** One slug for every language version of the article, ideally english. */
+	@IsDefined()
+	@IsString()
+	@MinLength(1)
+	@MaxLength(120)
+	@Matches(SLUG_REGEX)
+	slug: string;
+
 	@IsDefined()
 	@IsArray()
 	@ArrayNotEmpty()
@@ -154,6 +155,9 @@ export type BlogArticleDetails = BlogArticleListItem & {
 	content: string;
 	metaTitle: string;
 	metadataJsonLD: unknown;
-	/** Slugs of the other language versions, used to build `hreflang` links. */
-	alternates: { lang: Locale; slug: string }[];
+	/**
+	 * Languages the article is available in (the slug is shared), used to
+	 * build `hreflang` links.
+	 */
+	alternates: Locale[];
 };

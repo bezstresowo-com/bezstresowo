@@ -15,8 +15,8 @@
  *     translations. The app now owns products and prices in the database;
  *     Stripe only ever opens checkout sessions.
  *
- *   npm run db:seed             # writes to DATABASE_URL from .env
- *   npm run db:seed -- --dry-run
+ *   npm run prisma:seed             # writes to DATABASE_URL from .env
+ *   npm run prisma:seed -- --dry-run
  *
  * Runs through `tsx` - the generated prisma client is typescript with
  * extensionless imports, which plain `node` cannot resolve. Safe to re-run:
@@ -27,7 +27,6 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 
-import { slugify } from '../src/shared/global/functions/slugify';
 import { PrismaClient } from '../src/shared/server/generated/prisma/client.js';
 
 const DRY_RUN = process.argv.includes('--dry-run');
@@ -46,6 +45,8 @@ type SeedArticleTranslation = {
 };
 
 type SeedArticle = {
+	/** One english slug shared by every language version. */
+	slug: string;
 	createdAt: string;
 	updatedAt: string;
 	/** Keyed by locale (`pl-PL` / `uk-UA`). */
@@ -72,7 +73,7 @@ type SeedProduct = {
  */
 const PRODUCTS: SeedProduct[] = [
 	{
-		slug: 'konsultacja-psychoterapeutyczna',
+		slug: 'psychotherapy-consultation',
 		orderKey: '0',
 		priceInMinorUnits: 25000,
 		// Price list only - the page lists every active product regardless of location.
@@ -83,7 +84,7 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	},
 	{
-		slug: 'psychoterapia-dla-kobiet',
+		slug: 'psychotherapy-for-women',
 		orderKey: 'a',
 		priceInMinorUnits: 25000,
 		siteLocations: ['registrations', 'shop'],
@@ -93,7 +94,7 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	},
 	{
-		slug: 'psychoterapia-zaburzen-odzywiania',
+		slug: 'eating-disorders-psychotherapy',
 		orderKey: 'b',
 		priceInMinorUnits: 25000,
 		siteLocations: ['registrations', 'shop'],
@@ -103,7 +104,7 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	},
 	{
-		slug: 'psychoterapia-pary',
+		slug: 'couples-psychotherapy',
 		orderKey: 'c',
 		priceInMinorUnits: 35000,
 		siteLocations: ['registrations', 'shop'],
@@ -113,7 +114,7 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	},
 	{
-		slug: 'psychoterapia-dla-osob-lgbtq',
+		slug: 'lgbtq-psychotherapy',
 		orderKey: 'd',
 		priceInMinorUnits: 25000,
 		siteLocations: ['registrations', 'shop'],
@@ -123,7 +124,7 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	},
 	{
-		slug: 'psychoterapia-dla-rodzicow',
+		slug: 'psychotherapy-for-parents',
 		orderKey: 'e',
 		priceInMinorUnits: 25000,
 		siteLocations: ['registrations', 'shop'],
@@ -133,7 +134,7 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	},
 	{
-		slug: 'psychoterapia-depresji-i-zaburzen-lekowych',
+		slug: 'depression-and-anxiety-psychotherapy',
 		orderKey: 'f',
 		priceInMinorUnits: 25000,
 		siteLocations: ['registrations', 'shop'],
@@ -225,17 +226,17 @@ async function seedBlogArticles() {
 	for (const article of ARTICLES) {
 		const createdAt = new Date(article.createdAt);
 		const updatedAt = new Date(article.updatedAt);
+		const slug = article.slug;
 
 		const rows = Object.entries(article.translations).map(([lang, translation]) => {
 			const title = translation.title.trim();
-			const slug = slugify(title);
 			const plainText = stripHtml(translation.content);
 			const metaTitle = truncate(title, META_TITLE_MAX_LENGTH);
 			const metaDescription = truncate(plainText || title, META_DESCRIPTION_MAX_LENGTH);
 
 			return {
 				lang,
-				slug,
+				disabled: false,
 				title,
 				content: translation.content,
 				metaTitle,
@@ -259,16 +260,16 @@ async function seedBlogArticles() {
 
 		// An earlier (e.g. polish-only) run may have created this article
 		// already - attach the missing language versions instead of skipping.
-		const existing = await prisma.internationalizedBlogArticle.findFirst({
-			where: { slug: { in: rows.map((row) => row.slug) } },
-			select: { blogArticleId: true }
+		const existing = await prisma.blogArticle.findFirst({
+			where: { slug },
+			select: { id: true }
 		});
 
 		if (existing) {
 			const presentLanguages = new Set(
 				(
 					await prisma.internationalizedBlogArticle.findMany({
-						where: { blogArticleId: existing.blogArticleId },
+						where: { blogArticleId: existing.id },
 						select: { lang: true }
 					})
 				).map((row) => row.lang)
@@ -276,16 +277,16 @@ async function seedBlogArticles() {
 
 			for (const row of rows) {
 				if (presentLanguages.has(row.lang)) {
-					console.log(`- ${row.slug}: already exists, skipped`);
+					console.log(`- ${slug} (${row.lang}): already exists, skipped`);
 					skipped++;
 					continue;
 				}
 
-				console.log(`- "${row.title}" -> /${HTML_LANG[row.lang]}/blog/${row.slug}`);
+				console.log(`- "${row.title}" -> /${HTML_LANG[row.lang]}/blog/${slug}`);
 
 				if (!DRY_RUN) {
 					await prisma.internationalizedBlogArticle.create({
-						data: { ...row, blogArticleId: existing.blogArticleId }
+						data: { ...row, blogArticleId: existing.id }
 					});
 				}
 
@@ -296,12 +297,13 @@ async function seedBlogArticles() {
 		}
 
 		for (const row of rows) {
-			console.log(`- "${row.title}" -> /${HTML_LANG[row.lang]}/blog/${row.slug}`);
+			console.log(`- "${row.title}" -> /${HTML_LANG[row.lang]}/blog/${slug}`);
 		}
 
 		if (!DRY_RUN) {
 			await prisma.blogArticle.create({
 				data: {
+					slug,
 					createdAt,
 					updatedAt,
 					internationalizedArticles: { create: rows }

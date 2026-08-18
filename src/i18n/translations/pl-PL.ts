@@ -808,6 +808,7 @@ const plPL = {
 				description: 'Zacznij od utworzenia pierwszego artykułu używając przycisku powyżej.'
 			},
 			actions: {
+				create: 'Utwórz nowy',
 				delete: 'Usuń',
 				edit: 'Edytuj'
 			},
@@ -828,30 +829,22 @@ const plPL = {
 				confirm: 'Usuń artykuł',
 				cancel: 'Anuluj'
 			},
-			dialog: {
+			editor: {
 				create: {
-					trigger: 'Utwórz nowy',
 					title: 'Utwórz nowy artykuł na blogu',
 					description: 'Utwórz nowy artykuł, który będzie wyświetlany na Twoim blogu',
 					submit: 'Utwórz'
 				},
 				update: {
-					trigger: 'Edytuj',
 					title: 'Zaktualizuj artykuł na blogu',
 					description: 'Zaktualizuj artykuł na blogu',
 					submit: 'Zaktualizuj'
 				},
 				cancel: 'Anuluj',
-				form: {
-					fields: {
-						title: {
-							label: 'Tytuł bloga',
-							placeholder: 'Tytuł twojego artykułu',
-							errors: {
-								required: 'Tytuł jest wymagany',
-								max: 'Maksymalna długość tytułu to {{ max }}'
-							}
-						}
+				fields: {
+					title: {
+						label: 'Tytuł bloga',
+						placeholder: 'Tytuł twojego artykułu'
 					}
 				}
 			}
@@ -886,7 +879,7 @@ const plPL = {
 				confirm: 'Usuń produkt',
 				cancel: 'Anuluj'
 			},
-			dialog: {
+			editor: {
 				create: {
 					title: 'Nowy produkt',
 					description: 'Wypełnij dane produktu dla wybranych języków.',
@@ -904,8 +897,8 @@ const plPL = {
 			fields: {
 				slug: {
 					label: 'Slug (URL)',
-					placeholder: 'np. cwiczenia-na-lek',
-					hint: 'Małe litery, myślniki, bez polskich znaków i spacji.'
+					placeholder: 'np. anxiety-relief-exercises',
+					hint: 'Małe litery, myślniki, bez znaków diakrytycznych i spacji, po angielsku.'
 				},
 				price: {
 					label: 'Cena (PLN)',
@@ -930,14 +923,17 @@ const plPL = {
 		},
 		languageTabs: {
 			enabled: 'Wersja językowa włączona',
+			disabled: 'wyłączona',
+			disabledHint:
+				'Wyłączona wersja znika ze strony, ale jej treść pozostaje zapisana i wróci po ponownym włączeniu.',
 			pl: 'Polski',
 			uk: 'Ukraiński',
 			atLeastOne: 'Wymagana jest przynajmniej jedna wersja językowa.'
 		},
 		seoFields: {
 			slug: {
-				label: 'Slug (URL)',
-				placeholder: 'np. jak-radzic-sobie-z-lekiem',
+				label: 'Slug (URL) - wspólny dla wszystkich wersji językowych',
+				placeholder: 'np. how-to-deal-with-anxiety',
 				hint: 'Małe litery, myślniki, bez znaków diakrytycznych i spacji, po angielsku.'
 			},
 			metaTitle: {

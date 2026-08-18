@@ -24,7 +24,13 @@ const ARTICLE_INCLUDE = {
 	}
 };
 
-/** Every article with all of its language versions. */
+/**
+ * Only documents this app wrote carry a slug; the filter hides the legacy
+ * (pre-i18n) documents that share the production collection.
+ */
+const MANAGED_ARTICLES = { slug: { isSet: true } };
+
+/** Every article with all of its language versions (disabled ones included). */
 export const getAdminBlogArticles = query(
 	dtoSchema(PaginationParamsDto),
 	async ({ page, size, sortBy, sortOrder }) => {
@@ -32,12 +38,13 @@ export const getAdminBlogArticles = query(
 
 		const [blogArticles, totalCount] = await Promise.all([
 			prisma.blogArticle.findMany({
+				where: MANAGED_ARTICLES,
 				include: ARTICLE_INCLUDE,
 				orderBy: { [sortBy]: sortOrder },
 				skip: (page - 1) * size,
 				take: size
 			}),
-			prisma.blogArticle.count()
+			prisma.blogArticle.count({ where: MANAGED_ARTICLES })
 		]);
 
 		return { data: blogArticles, page, size, totalCount };
@@ -48,7 +55,7 @@ export const getAdminBlogArticle = query(dtoSchema(BlogArticleIdDto), async ({ i
 	requireAdmin();
 
 	const blogArticle = await prisma.blogArticle.findFirst({
-		where: { id },
+		where: { id, ...MANAGED_ARTICLES },
 		include: ARTICLE_INCLUDE
 	});
 
@@ -61,18 +68,19 @@ export const getAdminBlogArticle = query(dtoSchema(BlogArticleIdDto), async ({ i
 
 export const createBlogArticle = command(
 	dtoSchema(UpsertBlogArticleDto),
-	async ({ translations }) => {
+	async ({ slug, translations }) => {
 		requireAdmin();
 
 		assertUniqueLanguages(translations);
-		await assertFreeSlugs(translations);
+		await assertFreeSlug(slug);
 
 		const now = new Date();
 
 		return await prisma.blogArticle.create({
 			data: {
+				slug,
 				internationalizedArticles: {
-					create: translations.map((translation) => toTranslationRow(translation, now, now))
+					create: translations.map((translation) => toTranslationRow(translation, slug, now, now))
 				}
 			},
 			include: ARTICLE_INCLUDE
@@ -82,13 +90,13 @@ export const createBlogArticle = command(
 
 export const updateBlogArticle = command(
 	dtoSchema(UpdateBlogArticleDto),
-	async ({ id, translations }) => {
+	async ({ id, slug, translations }) => {
 		requireAdmin();
 
 		assertUniqueLanguages(translations);
 
 		const existing = await prisma.blogArticle.findFirst({
-			where: { id },
+			where: { id, ...MANAGED_ARTICLES },
 			include: ARTICLE_INCLUDE
 		});
 
@@ -96,26 +104,39 @@ export const updateBlogArticle = command(
 			error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
 		}
 
-		await assertFreeSlugs(translations, id);
+		await assertFreeSlug(slug, id);
 
 		const previousMediaIds = existing.internationalizedArticles.flatMap(
 			(translation) => translation.mediaIds
 		);
+		const submittedLanguages = translations.map((translation) => translation.lang);
 
-		// Language versions are fully replaced: dropping a translation from the
-		// payload removes it (and, below, its media) from the article. Prisma
-		// runs the nested `deleteMany` before the nested `create`.
+		// Submitted language versions are fully replaced; versions missing from
+		// the payload are only marked `disabled` - their content, media and SEO
+		// fields stay in the database and come back when re-enabled. Prisma runs
+		// the nested `deleteMany` before the nested `create`, and the `updateMany`
+		// filter never matches a created row (disjoint `lang` sets).
 		const updated = await prisma.blogArticle.update({
 			where: { id },
 			data: {
+				slug,
 				internationalizedArticles: {
-					deleteMany: {},
+					deleteMany: { lang: { in: submittedLanguages } },
+					updateMany: {
+						where: { lang: { notIn: submittedLanguages } },
+						data: { disabled: true }
+					},
 					create: translations.map((translation) => {
 						const previous = existing.internationalizedArticles.find(
 							(candidate) => candidate.lang === translation.lang
 						);
 
-						return toTranslationRow(translation, previous?.createdAt ?? new Date(), new Date());
+						return toTranslationRow(
+							translation,
+							slug,
+							previous?.createdAt ?? new Date(),
+							new Date()
+						);
 					})
 				}
 			},
@@ -124,18 +145,20 @@ export const updateBlogArticle = command(
 
 		// Runs after the write committed, so a bucket failure can never leave a
 		// live row pointing at a deleted object. `cleanupMedia` re-checks the db,
-		// so ids that are still referenced (shared media) are kept.
+		// so ids still referenced (shared media, disabled versions) are kept.
 		await cleanupMedia(previousMediaIds);
 
 		return updated;
 	}
 );
 
+// Deliberately scoped to managed articles: deleting a legacy document would
+// drop the only reference to the old articles' bucket files (see the sweep).
 export const deleteBlogArticle = command(dtoSchema(BlogArticleIdDto), async ({ id }) => {
 	requireAdmin();
 
 	const existing = await prisma.blogArticle.findFirst({
-		where: { id },
+		where: { id, ...MANAGED_ARTICLES },
 		include: ARTICLE_INCLUDE
 	});
 
@@ -159,22 +182,10 @@ function assertUniqueLanguages(translations: InternationalizedBlogArticleDto[]) 
 	}
 }
 
-async function assertFreeSlugs(
-	translations: InternationalizedBlogArticleDto[],
-	ignoreArticleId?: string
-) {
-	const slugs = translations.map((translation) => translation.slug);
-
-	if (new Set(slugs).size !== slugs.length) {
-		error(HttpStatus.CONFLICT, { message: 'api.errors.CONFLICT' });
-	}
-
-	const clashing = await prisma.internationalizedBlogArticle.findFirst({
-		where: {
-			slug: { in: slugs },
-			...(isNil(ignoreArticleId) ? {} : { blogArticleId: { not: ignoreArticleId } })
-		},
-		select: { slug: true }
+async function assertFreeSlug(slug: string, ignoreArticleId?: string) {
+	const clashing = await prisma.blogArticle.findFirst({
+		where: { slug, ...(isNil(ignoreArticleId) ? {} : { id: { not: ignoreArticleId } }) },
+		select: { id: true }
 	});
 
 	if (!isNil(clashing)) {
@@ -184,6 +195,7 @@ async function assertFreeSlugs(
 
 function toTranslationRow(
 	translation: InternationalizedBlogArticleDto,
+	slug: string,
 	createdAt: Date,
 	updatedAt: Date
 ) {
@@ -191,7 +203,7 @@ function toTranslationRow(
 
 	return {
 		lang: translation.lang,
-		slug: translation.slug,
+		disabled: false,
 		title: translation.title,
 		content: translation.content,
 		metaTitle: translation.metaTitle,
@@ -202,7 +214,7 @@ function toTranslationRow(
 		// JSON-LD is materialized on write only, never while rendering.
 		metadataJsonLD: buildArticleJsonLD({
 			locale: translation.lang as Locale,
-			slug: translation.slug,
+			slug,
 			title: translation.metaTitle,
 			description: translation.metaDescription,
 			imageUrl: isNil(featuredImageId) ? null : new S3Service().buildUrl(featuredImageId),

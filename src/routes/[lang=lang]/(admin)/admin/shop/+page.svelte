@@ -3,44 +3,13 @@
 	import AdminDeleteDialog from '$lib/admin/AdminDeleteDialog/AdminDeleteDialog.svelte';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import { localeTabLabel } from '$lib/admin/blog/AdminBlogForm/model';
-	import AdminProductForm from '$lib/admin/shop/AdminProductForm/AdminProductForm.svelte';
-	import {
-		createProduct,
-		deleteProduct,
-		getAdminProducts,
-		updateProduct
-	} from '$remote/admin-products.remote';
-	import type { UpsertProductDto } from '$remote/dto/product';
+	import { deleteProduct, getAdminProducts } from '$remote/admin-products.remote';
 	import { formatMoney } from '$shared/global/functions/format-money';
 	import { toast } from 'svelte-sonner';
 
 	let deletingProductId = $state<string | null>(null);
 
 	const products = $derived(getAdminProducts());
-
-	async function handleCreate(dto: UpsertProductDto) {
-		try {
-			await createProduct(dto).updates(getAdminProducts());
-			toast.success(t.admin.shop.notifications.createSuccess);
-			return true;
-		} catch (error) {
-			console.error('Failed to create product:', error);
-			toast.error(t.admin.shop.notifications.createError);
-			return false;
-		}
-	}
-
-	async function handleUpdate(id: string, dto: UpsertProductDto) {
-		try {
-			await updateProduct({ ...dto, id }).updates(getAdminProducts());
-			toast.success(t.admin.shop.notifications.updateSuccess);
-			return true;
-		} catch (error) {
-			console.error('Failed to update product:', error);
-			toast.error(t.admin.shop.notifications.updateError);
-			return false;
-		}
-	}
 
 	async function handleDelete(id: string) {
 		deletingProductId = id;
@@ -71,7 +40,16 @@
 		{t.admin.shop.back}
 	</a>
 	<div class="flex-auto"></div>
-	<AdminProductForm mode="create" onSubmit={handleCreate} />
+	<!-- Creating and editing happen on dedicated subpages, never in a popup. -->
+	<a
+		href={path('/admin/shop/new')}
+		class="rounded-md bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+	>
+		<span>
+			<i class="fa-solid fa-plus"></i>
+		</span>
+		{t.admin.shop.actions.create}
+	</a>
 </div>
 
 <svelte:boundary>
@@ -136,11 +114,15 @@
 						</div>
 
 						<div class="flex gap-2">
-							<AdminProductForm
-								mode="update"
-								{product}
-								onSubmit={(dto) => handleUpdate(product.id, dto)}
-							/>
+							<a
+								href={path(`/admin/shop/${product.id}`)}
+								class="rounded-md bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+							>
+								<span>
+									<i class="fa-solid fa-edit"></i>
+								</span>
+								{t.admin.shop.actions.edit}
+							</a>
 
 							<AdminDeleteDialog
 								itemName={primary?.name ?? product.slug}

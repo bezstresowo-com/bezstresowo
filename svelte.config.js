@@ -31,7 +31,6 @@ const config = {
 			relative: false
 		},
 		alias: {
-			$services: './src/services',
 			$shared: './src/shared',
 			$i18n: './src/i18n',
 			$remote: './src/remote'

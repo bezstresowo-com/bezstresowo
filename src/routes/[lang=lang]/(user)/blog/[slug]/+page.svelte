@@ -43,9 +43,9 @@
 		image={post.featuredImageUrl ?? undefined}
 		imageAlt={post.featuredImageAlt ?? undefined}
 		jsonLd={post.metadataJsonLD}
-		alternates={post.alternates.map((alternate) => ({
-			locale: alternate.lang,
-			path: `/blog/${alternate.slug}`
+		alternates={post.alternates.map((locale) => ({
+			locale,
+			path: `/blog/${post.slug}`
 		}))}
 	/>
 

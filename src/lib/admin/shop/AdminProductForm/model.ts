@@ -1,6 +1,6 @@
 import { Locale } from '$i18n';
 import type { InternationalizedProductDto, SiteLocation } from '$remote/dto/product';
-import { SLUG_REGEX } from '$shared/global/functions/slugify';
+import { SLUG_REGEX } from '$shared/global/functions/slug';
 
 export type ProductTranslationDraft = {
 	enabled: boolean;
@@ -9,8 +9,8 @@ export type ProductTranslationDraft = {
 };
 
 export type ProductDraft = {
+	/** English, entered by hand - see `t.admin.shop.fields.slug.hint`. */
 	slug: string;
-	slugTouched: boolean;
 	/** Entered in złoty, stored in grosze. */
 	price: string;
 	active: boolean;
@@ -32,7 +32,6 @@ export type ExistingProduct = {
 export function emptyProductDraft(): ProductDraft {
 	return {
 		slug: '',
-		slugTouched: false,
 		price: '',
 		active: true,
 		orderKey: '',
@@ -48,7 +47,6 @@ export function productDraftFrom(product: ExistingProduct): ProductDraft {
 	const draft = emptyProductDraft();
 
 	draft.slug = product.slug;
-	draft.slugTouched = true;
 	draft.price = (product.price.inMinorUnits / 100).toFixed(2);
 	draft.active = product.active;
 	draft.orderKey = product.orderKey ?? '';

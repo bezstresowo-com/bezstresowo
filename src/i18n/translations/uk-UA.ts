@@ -808,6 +808,7 @@ const ukUA: Translation = {
 				description: 'Почніть зі створення вашої першої статті, використовуючи кнопку вище.'
 			},
 			actions: {
+				create: 'Створити новий',
 				delete: 'Видалити',
 				edit: 'Редагувати'
 			},
@@ -828,30 +829,22 @@ const ukUA: Translation = {
 				confirm: 'Видалити статтю',
 				cancel: 'Скасувати'
 			},
-			dialog: {
+			editor: {
 				create: {
-					trigger: 'Створити новий',
 					title: 'Створити нову статтю блогу',
 					description: 'Створіть нову статтю, яка буде показана у вашому блозі',
 					submit: 'Створити'
 				},
 				update: {
-					trigger: 'Редагувати',
 					title: 'Оновити статтю блогу',
 					description: 'Оновити статтю блогу',
 					submit: 'Оновити'
 				},
 				cancel: 'Скасувати',
-				form: {
-					fields: {
-						title: {
-							label: 'Заголовок блогу',
-							placeholder: 'Заголовок вашої статті',
-							errors: {
-								required: "Заголовок обов'язковий",
-								max: 'Максимальна довжина заголовка {{ max }}'
-							}
-						}
+				fields: {
+					title: {
+						label: 'Заголовок блогу',
+						placeholder: 'Заголовок вашої статті'
 					}
 				}
 			}
@@ -886,7 +879,7 @@ const ukUA: Translation = {
 				confirm: 'Видалити товар',
 				cancel: 'Скасувати'
 			},
-			dialog: {
+			editor: {
 				create: {
 					title: 'Новий товар',
 					description: 'Заповніть дані товару для вибраних мов.',
@@ -904,8 +897,8 @@ const ukUA: Translation = {
 			fields: {
 				slug: {
 					label: 'Slug (URL)',
-					placeholder: 'напр. vpravy-vid-tryvogy',
-					hint: 'Малі літери, дефіси, без діакритики та пробілів.'
+					placeholder: 'напр. anxiety-relief-exercises',
+					hint: 'Малі літери, дефіси, без діакритики та пробілів, англійською.'
 				},
 				price: {
 					label: 'Ціна (PLN)',
@@ -930,14 +923,17 @@ const ukUA: Translation = {
 		},
 		languageTabs: {
 			enabled: 'Мовну версію увімкнено',
+			disabled: 'вимкнена',
+			disabledHint:
+				'Вимкнена версія зникає зі сторінки, але її вміст залишається збереженим і повернеться після повторного увімкнення.',
 			pl: 'Польська',
 			uk: 'Українська',
 			atLeastOne: 'Потрібна щонайменше одна мовна версія.'
 		},
 		seoFields: {
 			slug: {
-				label: 'Slug (URL)',
-				placeholder: 'напр. yak-podolaty-tryvogu',
+				label: 'Slug (URL) - спільний для всіх мовних версій',
+				placeholder: 'напр. how-to-deal-with-anxiety',
 				hint: 'Малі літери, дефіси, без діакритики та пробілів, англійською.'
 			},
 			metaTitle: {

@@ -14,15 +14,16 @@ import {
 	type BlogArticleListItem
 } from './dto/blog';
 
-/** Articles available in the requested language, newest first. */
+/** Articles available (and not disabled) in the requested language, newest first. */
 export const getBlogArticles = query(
 	dtoSchema(BlogArticleListParamsDto),
 	async ({ lang, page, size }) => {
-		const where = { lang };
+		const where = { lang, disabled: false };
 
 		const [translations, totalCount] = await Promise.all([
 			prisma.internationalizedBlogArticle.findMany({
 				where,
+				include: { blogArticle: { select: { slug: true } } },
 				orderBy: { createdAt: 'desc' },
 				skip: (page - 1) * size,
 				take: size
@@ -34,7 +35,9 @@ export const getBlogArticles = query(
 			data: translations.map(
 				(translation): BlogArticleListItem => ({
 					id: translation.blogArticleId,
-					slug: translation.slug,
+					// Translations only ever attach to articles this app wrote, and
+					// those always carry a slug - `?? ''` is for the type only.
+					slug: translation.blogArticle.slug ?? '',
 					title: translation.title,
 					metaDescription: translation.metaDescription,
 					featuredImageId: translation.featuredImageId,
@@ -51,17 +54,18 @@ export const getBlogArticles = query(
 	}
 );
 
-/** A single article plus the slugs of its other language versions (hreflang). */
+/** A single article plus the languages of its other versions (hreflang). */
 export const getBlogArticle = query(
 	dtoSchema(BlogArticleBySlugDto),
 	async ({ lang, slug }): Promise<BlogArticleDetails> => {
 		const translation = await prisma.internationalizedBlogArticle.findFirst({
-			where: { slug, lang },
+			where: { lang, disabled: false, blogArticle: { slug } },
 			include: {
 				blogArticle: {
 					include: {
 						internationalizedArticles: {
-							select: { lang: true, slug: true }
+							where: { disabled: false },
+							select: { lang: true }
 						}
 					}
 				}
@@ -74,7 +78,8 @@ export const getBlogArticle = query(
 
 		return {
 			id: translation.blogArticleId,
-			slug: translation.slug,
+			// The where clause matched the parent's slug against this exact value.
+			slug,
 			title: translation.title,
 			content: translation.content,
 			metaTitle: translation.metaTitle,
@@ -85,10 +90,9 @@ export const getBlogArticle = query(
 			metadataJsonLD: translation.metadataJsonLD,
 			createdAt: translation.createdAt,
 			updatedAt: translation.updatedAt,
-			alternates: translation.blogArticle.internationalizedArticles.map((alternate) => ({
-				lang: alternate.lang as Locale,
-				slug: alternate.slug
-			}))
+			alternates: translation.blogArticle.internationalizedArticles.map(
+				(alternate) => alternate.lang as Locale
+			)
 		};
 	}
 );

@@ -1,5 +1,6 @@
 [
 	{
+		"slug": "how-to-recognize-a-toxic-relationship",
 		"createdAt": "2026-07-11T15:51:35.144Z",
 		"updatedAt": "2026-07-11T15:52:05.731Z",
 		"translations": {
@@ -14,6 +15,7 @@
 		}
 	},
 	{
+		"slug": "why-it-is-so-hard-to-leave-a-toxic-relationship",
 		"createdAt": "2026-07-31T11:21:31.729Z",
 		"updatedAt": "2026-07-31T11:21:31.729Z",
 		"translations": {
@@ -28,6 +30,7 @@
 		}
 	},
 	{
+		"slug": "gaslighting-in-a-relationship",
 		"createdAt": "2026-08-16T12:09:28.170Z",
 		"updatedAt": "2026-08-16T12:09:28.170Z",
 		"translations": {

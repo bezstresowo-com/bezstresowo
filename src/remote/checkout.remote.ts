@@ -2,7 +2,7 @@ import { command, getRequestEvent } from '$app/server';
 import { STRIPE_SK } from '$env/static/private';
 import { Locale, LOCALE_PREFIXES } from '$i18n';
 import { HttpStatus } from '$shared/global/enums/http-status';
-import { toStripeCurrency } from '$shared/global/functions/to-stripe-currenty';
+import { toStripeCurrency } from '$shared/global/functions/to-stripe-currency';
 import { dtoSchema } from '$shared/server/functions/dto-schema';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { error } from '@sveltejs/kit';
