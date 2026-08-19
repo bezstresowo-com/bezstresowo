@@ -1,20 +1,10 @@
-import { resolve } from '$app/paths';
-
+/**
+ * Paths are language agnostic - `path()` prefixes them with the active locale.
+ * `name` indexes the `t.user.header.items` dictionary section.
+ */
 export const HEADER_PATHS = [
-	{
-		label: 'user.header.items.home',
-		href: resolve('/(user)/home')
-	},
-	{
-		label: 'user.header.items.blog',
-		href: resolve('/(user)/blog')
-	},
-	{
-		label: 'user.header.items.shop',
-		href: resolve('/(user)/shop')
-	},
-	{
-		label: 'user.header.items.registrations',
-		href: resolve('/(user)/registrations')
-	}
-];
+	{ name: 'home', path: '/home' },
+	{ name: 'blog', path: '/blog' },
+	{ name: 'shop', path: '/shop' },
+	{ name: 'registrations', path: '/registrations' }
+] as const;

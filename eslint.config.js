@@ -36,7 +36,10 @@ export default ts.config(
 					caughtErrorsIgnorePattern: '^_'
 				}
 			],
-			'svelte/no-at-html-tags': 'off'
+			'svelte/no-at-html-tags': 'off',
+			// Every user facing URL is language prefixed and built by `path()` /
+			// `localizedPath()` from `$i18n`, which `resolve()` cannot express.
+			'svelte/no-navigation-without-resolve': 'off'
 		}
 	},
 	{

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { translate } from '$i18n';
+	import { t } from '$i18n';
 	import ContactSection from './components/ContactSection.svelte';
 	import FastLinksSection from './components/FastLinksSection.svelte';
 	import FollowMeSection from './components/FollowMeSection.svelte';
@@ -12,6 +12,6 @@
 		<FollowMeSection />
 	</div>
 	<div class="py-4 text-center font-thin text-white">
-		{$translate('user.footer.copyright')}
+		{t.user.footer.copyright}
 	</div>
 </footer>

@@ -1,7 +1,12 @@
+import { DATABASE_URL } from '$env/static/private';
 import { PrismaClient } from '$shared/server/generated/prisma/client';
 
 const createPrismaClient = () =>
 	new PrismaClient({
+		// The `prisma-client` generator resolves `env("DATABASE_URL")` from
+		// `process.env` only, and `vite dev` exposes `.env` exclusively through
+		// the `$env/*` modules - so the url must be handed over explicitly.
+		datasourceUrl: DATABASE_URL,
 		log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error']
 	});
 

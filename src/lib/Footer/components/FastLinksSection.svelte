@@ -1,13 +1,14 @@
 <script lang="ts">
-	import { translate } from '$i18n';
+	import { path, t } from '$i18n';
 	import { FAST_LINKS } from '../model';
 </script>
 
 <div class="flex flex-col">
-	<div class="mb-3 text-secondary">{$translate('user.footer.fastLinksHeader')}</div>
-	{#each FAST_LINKS as { id, label, href } (id)}
+	<div class="mb-3 text-secondary">{t.user.footer.fastLinksHeader}</div>
+	{#each FAST_LINKS as { id, name, path: target } (id)}
+		{@const href = path(target)}
 		<a {href} class="mb-3 font-thin text-white">
-			{$translate(label)}
+			{t.user.footer.fastLinks[name]}
 		</a>
 	{/each}
 </div>

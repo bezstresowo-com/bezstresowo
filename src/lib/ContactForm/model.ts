@@ -59,6 +59,3 @@ export const FIELD_MAP: Record<string, keyof FormValue> = {
 	email: 'email',
 	message: 'message'
 };
-
-export type BackendError = { field: string; messages: string[] };
-export type BackendErrorResponse = { errors?: BackendError[]; message?: string };

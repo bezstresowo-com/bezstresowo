@@ -1,14 +1,6 @@
+/** `name` indexes the `t.user.pages.home.howCanIHelp.elements` dictionary section. */
 export const HELP_ELEMENTS = [
-	{
-		title: 'user.pages.home.howCanIHelp.elements.communication',
-		icon: 'fa-solid fa-heart'
-	},
-	{
-		title: 'user.pages.home.howCanIHelp.elements.foodDisorder',
-		icon: 'fa-solid fa-apple-whole'
-	},
-	{
-		title: 'user.pages.home.howCanIHelp.elements.depression',
-		icon: 'fa-solid fa-comment'
-	}
-];
+	{ name: 'communication', icon: 'fa-solid fa-heart' },
+	{ name: 'foodDisorder', icon: 'fa-solid fa-apple-whole' },
+	{ name: 'depression', icon: 'fa-solid fa-comment' }
+] as const;
