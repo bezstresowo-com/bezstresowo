@@ -22,7 +22,8 @@
 		"prisma:studio": "prisma studio",
 		"prisma:validate": "prisma validate",
 		"prisma:format": "prisma format",
-		"prisma:seed": "tsx --env-file-if-exists=.env prisma/seed.ts"
+		"prisma:seed": "tsx --env-file-if-exists=.env prisma/seed.ts",
+		"manage:vercel:envs": "tsx scripts/manage-vercel-envs.ts"
 	},
 	"devDependencies": {
 		"@eslint/compat": "^1.2.5",
@@ -53,6 +54,7 @@
 		"tsx": "^4.23.12",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.20.0",
+		"vercel": "^59.1.4",
 		"vite": "^7.0.4"
 	},
 	"dependencies": {
