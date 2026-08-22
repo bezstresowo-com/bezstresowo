@@ -1,0 +1,19 @@
+/// One image in the home page "Certificates and qualifications" gallery.
+model Certificate {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  /// A bucket object key. Registered as a media owner in `media-cleanup.ts`.
+  imageId String
+
+  /// Gallery position, ascending. Rewritten as 0..n-1 on every reorder.
+  order Int
+
+  /// Localized alt texts keyed by locale (`{ "pl-PL": "...", "uk-UA": "..." }`).
+  /// A single string per language, so a full internationalized relation (like
+  /// articles and products have) would be overkill. Missing entries fall back
+  /// to the default locale, then to a generic translation.
+  altTexts Json
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

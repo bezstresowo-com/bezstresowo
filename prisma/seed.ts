@@ -14,18 +14,30 @@
  *     `GET /api/stripe/price-list` on 17.08.2026) with polish and ukrainian
  *     translations. The app now owns products and prices in the database;
  *     Stripe only ever opens checkout sessions.
+ *  3. The "About me" section - the legacy hardcoded texts (previously part of
+ *     the translation dictionaries) as TipTap HTML, plus the portrait from
+ *     `static/assets/about-me.jpg` uploaded to the bucket.
+ *  4. Certificates - every image in `static/assets/certs`, uploaded to the
+ *     bucket. The two newest (`cert-17`, `cert-18`) lead the gallery, the
+ *     legacy ones follow in their original order.
+ *
+ * Sections 3 and 4 talk to the media bucket, so a non-dry run needs the
+ * `AWS_S3_*` variables next to `DATABASE_URL`.
  *
  *   npm run prisma:seed             # writes to DATABASE_URL from .env
  *   npm run prisma:seed -- --dry-run
  *
  * Runs through `tsx` - the generated prisma client is typescript with
  * extensionless imports, which plain `node` cannot resolve. Safe to re-run:
- * existing slugs are skipped, and language versions missing from an already
- * seeded article are attached to it.
+ * existing slugs are skipped, language versions missing from an already
+ * seeded article are attached to it, an existing bio row is left untouched
+ * and already uploaded certificates are skipped (matched by bucket key).
  */
 
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
+
+import { PutObjectCommand, S3Client } from '@aws-sdk/client-s3';
 
 import { PrismaClient } from '../src/shared/server/generated/prisma/client.js';
 
@@ -144,6 +156,89 @@ const PRODUCTS: SeedProduct[] = [
 		}
 	}
 ];
+
+/**
+ * The "About me" texts the site used to hardcode in its translation
+ * dictionaries, converted to the TipTap HTML the panel edits (`/admin/bio`).
+ */
+const BIO_CONTENTS: Record<string, string> = {
+	'pl-PL': [
+		'Nazywam się <strong>Olesya Haiduk</strong>.',
+		'Jestem psychoterapeutką po ukończonym 4-letnim szkoleniu psychoterapeutycznym w Międzynarodowym Towarzystwie Analizy Transakcyjnej. Prowadzę indywidualną psychoterapię dla kobiet, psychoterapię grupową z młodzieżą i osobami dorosłymi, a także psychoterapię dla par.',
+		'Pracuję z osobami, które zmagają się z zaburzeniami odżywiania, zaburzeniami lękowymi, problemami w określeniu tożsamości i wyrażaniu emocji, depresją, stanami lękowymi, współzależnymi relacjami, niską samooceną, problemami społecznymi oraz traumatycznymi przeżyciami. Z pełnym zaangażowaniem wspieram także osoby z grupy LGBT+, zapewniając im przestrzeń opartą na akceptacji, zrozumieniu oraz profesjonalnym wsparciu.',
+		'Specjalizuję się w nurcie analizy transakcyjnej opierającej się na zapoznaniu się klienta ze schematami, jakie występują w jego i otoczenia postępowaniu, zwłaszcza w komunikacji, a także rolami, w jakie wchodzimy w relacjach. W swoich działaniach opieram się na kodeksie etycznym psychoterapeuty, buduję z klientem przestrzeń opartą na zaufaniu, poczuciu bezpieczeństwa i akceptacji.',
+		'W trosce o jak najwyższe standardy mojej pracy nieustannie rozwijam swoje umiejętności poprzez udział w licznych kursach, konferencjach i szkoleniach zawodowych. Pracuję pod stałą opieką superwizorów.',
+		'Moim priorytetem jest zawsze zapewnienie klientom bezpiecznej, wspierającej przestrzeni, w której mogą poczuć się zrozumiani i akceptowani. W swojej pracy kieruję się wysokimi standardami etycznymi, pełnym szacunkiem oraz zaangażowaniem. Z pasją i profesjonalizmem wspieram osoby w dążeniu do poprawy jakości ich życia oraz w procesie radzenia sobie z trudnościami, zarówno emocjonalnymi, jak i społecznymi. Serdecznie zapraszam do kontaktu i rozpoczęcia wspólnej drogi ku lepszemu samopoczuciu oraz zdrowiu psychicznemu. Oferuję pomoc, zapewniając wsparcie dostosowane do indywidualnych potrzeb.'
+	]
+		.map((paragraph) => `<p>${paragraph}</p>`)
+		.join(''),
+	'uk-UA': [
+		'Мене звати <strong>Олеся Гайдук</strong>.',
+		'Я психотерапевтка, із завершеним 4-річним циклом навчання в Міжнародному Товаристві Транзакційного Аналізу. Проводжу індивідуальну психотерапію для жінок, а також терапію для пар.',
+		'Я працюю з людьми, які зіткнулися з такими труднощами, як: розлади харчової поведінки, тривожні розлади, депресія, низька самооцінка та труднощі у стосунках, проблеми з вираженням емоцій та визначенням власної ідентичності, співзалежні стосунки, травматичні переживання та соціальні труднощі. З теплом підтримую також представників спільноти LGBT+, створюючи простір прийняття, розуміння та професійної підтримки.',
+		'Моя спеціалізація — транзакційний аналіз. Це модальність, яка допомагає зрозуміти повторювані схеми у спілкуванні, ролі, які ми беремо у стосунках, а також механізми, що заважають нам будувати гармонійне життя. У своїй роботі я опираюсь на етичний кодекс психолога і психотерапевта, дбаю про створення простору довіри, безпеки й прийняття.',
+		'Постійно вдосконалюю свої знання й навички, беручи участь у курсах, тренінгах та конференціях. Працюю під регулярною супервізією, щоб гарантувати моїм клієнтам найвищі стандарти допомоги.',
+		'Моя мета - підтримувати людей у процесі змін, допомагаючи їм знаходити внутрішні ресурси, покращувати якість життя та відчувати себе цілісно й глибоко прийнятими. Кожен заслуговує на простір, де його чують і розуміють. Щиро запрошую до контакту. Пропоную допомогу індивідуально, у парі чи групі - залежно від ваших потреб, а також тренінги з навичок комунікації для працівників фірм.'
+	]
+		.map((paragraph) => `<p>${paragraph}</p>`)
+		.join('')
+};
+
+/** The portrait shown next to the bio, shared by every language version. */
+const BIO_IMAGE = { file: 'about-me.jpg', bucketKey: 'seed-about-me.jpg' };
+
+/**
+ * Gallery order: the two newest certificates (not yet on the legacy site) go
+ * on top, the legacy ones follow in their original order.
+ */
+const CERTIFICATE_FILES = [
+	'cert-17.jpg',
+	'cert-18.jpg',
+	...Array.from({ length: 17 }, (_, i) => `cert-${i}.jpg`)
+];
+
+const STATIC_ASSETS_DIR = path.join(import.meta.dirname, '..', 'static', 'assets');
+
+/**
+ * Mirrors `S3Service` (`src/shared/server/services/s3/s3-service.ts`), which
+ * cannot be imported here - it reads its config through SvelteKit's
+ * `$env/static/private`, a module that only exists inside the app build.
+ */
+function createS3Client(): S3Client {
+	const missing = [
+		'AWS_S3_ACCESS_KEY_ID',
+		'AWS_S3_SECRET_ACCESS_KEY',
+		'AWS_S3_REGION',
+		'AWS_S3_BUCKET_NAME'
+	].filter((name) => !process.env[name]);
+
+	if (missing.length > 0) {
+		throw new Error(`Missing environment variables for bucket uploads: ${missing.join(', ')}`);
+	}
+
+	const endpoint = process.env.AWS_S3_ENDPOINT;
+
+	return new S3Client({
+		region: process.env.AWS_S3_REGION,
+		credentials: {
+			accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID!,
+			secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY!
+		},
+		// A custom endpoint (e.g. local MinIO) needs path-style addressing.
+		...(endpoint ? { endpoint, forcePathStyle: true } : {})
+	});
+}
+
+async function uploadStaticAsset(s3: S3Client, relativePath: string, bucketKey: string) {
+	await s3.send(
+		new PutObjectCommand({
+			Bucket: process.env.AWS_S3_BUCKET_NAME,
+			Key: bucketKey,
+			Body: readFileSync(path.join(STATIC_ASSETS_DIR, relativePath)),
+			ContentType: 'image/jpeg'
+		})
+	);
+}
 
 function stripHtml(html: string): string {
 	return (html ?? '')
@@ -382,10 +477,99 @@ async function seedProducts() {
 	console.log(`${DRY_RUN ? '[dry run] ' : ''}Created ${created} product(s), skipped ${skipped}.`);
 }
 
+async function seedBio() {
+	console.log('== About me (bio) ==');
+
+	// The panel may have edited the singleton already - never overwrite it.
+	const existing = await prisma.bio.findFirst({ select: { id: true } });
+
+	if (existing) {
+		console.log('- bio: already exists, skipped');
+		return;
+	}
+
+	const languages = Object.keys(BIO_CONTENTS);
+	console.log(`- bio (${languages.join(', ')}) with portrait "${BIO_IMAGE.file}"`);
+
+	if (DRY_RUN) {
+		console.log('[dry run] Created 1 bio.');
+		return;
+	}
+
+	await uploadStaticAsset(createS3Client(), BIO_IMAGE.file, BIO_IMAGE.bucketKey);
+
+	await prisma.bio.create({
+		data: {
+			imageId: BIO_IMAGE.bucketKey,
+			internationalizedBios: {
+				create: Object.entries(BIO_CONTENTS).map(([lang, content]) => ({
+					lang,
+					content,
+					mediaIds: []
+				}))
+			}
+		}
+	});
+
+	console.log('Created 1 bio.');
+}
+
+async function seedCertificates() {
+	console.log('== Certificates ==');
+
+	let created = 0;
+	let skipped = 0;
+	let s3: S3Client | null = null;
+
+	for (const [index, file] of CERTIFICATE_FILES.entries()) {
+		const bucketKey = `seed-${file}`;
+
+		// Matched by bucket key, so a re-run never duplicates a certificate. If
+		// the panel reordered the gallery meanwhile, a late create with the seed
+		// position may interleave - the panel heals that with one reorder.
+		const existing = await prisma.certificate.findFirst({
+			where: { imageId: bucketKey },
+			select: { id: true }
+		});
+
+		if (existing) {
+			console.log(`- ${file}: already exists, skipped`);
+			skipped++;
+			continue;
+		}
+
+		console.log(`- ${file} -> position ${index + 1}`);
+
+		if (DRY_RUN) {
+			created++;
+			continue;
+		}
+
+		s3 ??= createS3Client();
+		await uploadStaticAsset(s3, path.join('certs', file), bucketKey);
+
+		// Alt texts start empty - the section falls back to a numbered label
+		// until they are filled in on `/admin/certificates`.
+		await prisma.certificate.create({
+			data: { imageId: bucketKey, order: index, altTexts: {} }
+		});
+
+		created++;
+	}
+
+	console.log(
+		`${DRY_RUN ? '[dry run] ' : ''}Created ${created} certificate(s), skipped ${skipped}.`
+	);
+}
+
 async function main() {
 	await seedBlogArticles();
 	console.log('');
 	await seedProducts();
+	console.log('');
+	await seedBio();
+	console.log('');
+	await seedCertificates();
 }
 
 main()

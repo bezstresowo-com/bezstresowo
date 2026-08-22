@@ -1,0 +1,14 @@
+/// The "About me" section of the home page. A singleton - the panel only ever
+/// edits the one row (`findFirst`), it is never listed or deleted.
+model Bio {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  /// One portrait shared by every language version (a bucket object key).
+  /// Registered as a media owner in `media-cleanup.ts`.
+  imageId String?
+
+  internationalizedBios InternationalizedBio[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

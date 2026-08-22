@@ -23,7 +23,10 @@ import { difference, isNil } from 'lodash-es';
 const MEDIA_OWNERS = [
 	() => prisma.internationalizedBlogArticle.findMany({ select: { mediaIds: true } }),
 	() => prisma.internationalizedProduct.findMany({ select: { mediaIds: true } }),
+	() => prisma.internationalizedBio.findMany({ select: { mediaIds: true } }),
 	productImageRows,
+	bioImageRows,
+	certificateImageRows,
 	legacyBlogArticleRows
 ] as const;
 
@@ -33,6 +36,20 @@ async function productImageRows(): Promise<{ mediaIds: string[] }[]> {
 	const products = await prisma.product.findMany({ select: { imageId: true } });
 
 	return products.map(({ imageId }) => ({ mediaIds: isNil(imageId) ? [] : [imageId] }));
+}
+
+/** The bio's one shared portrait, same shape as `productImageRows`. */
+async function bioImageRows(): Promise<{ mediaIds: string[] }[]> {
+	const bios = await prisma.bio.findMany({ select: { imageId: true } });
+
+	return bios.map(({ imageId }) => ({ mediaIds: isNil(imageId) ? [] : [imageId] }));
+}
+
+/** Every certificate is exactly one bucket image. */
+async function certificateImageRows(): Promise<{ mediaIds: string[] }[]> {
+	const certificates = await prisma.certificate.findMany({ select: { imageId: true } });
+
+	return certificates.map(({ imageId }) => ({ mediaIds: [imageId] }));
 }
 
 /**

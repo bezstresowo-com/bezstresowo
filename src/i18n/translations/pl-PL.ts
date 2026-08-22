@@ -32,15 +32,7 @@ const plPL = {
 					}
 				},
 				aboutMe: {
-					title: 'O mnie',
-					myNameIs: 'Nazywam się <b>Olesya Haiduk</b>.',
-					description: [
-						'Jestem psychoterapeutką po ukończonym 4-letnim szkoleniu psychoterapeutycznym w Międzynarodowym Towarzystwie Analizy Transakcyjnej. Prowadzę indywidualną psychoterapię dla kobiet, psychoterapię grupową z młodzieżą i osobami dorosłymi, a także psychoterapię dla par.',
-						'Pracuję z osobami, które zmagają się z zaburzeniami odżywiania, zaburzeniami lękowymi, problemami w określeniu tożsamości i wyrażaniu emocji, depresją, stanami lękowymi, współzależnymi relacjami, niską samooceną, problemami społecznymi oraz traumatycznymi przeżyciami. Z pełnym zaangażowaniem wspieram także osoby z grupy LGBT+, zapewniając im przestrzeń opartą na akceptacji, zrozumieniu oraz profesjonalnym wsparciu.',
-						'Specjalizuję się w nurcie analizy transakcyjnej opierającej się na zapoznaniu się klienta ze schematami, jakie występują w jego i otoczenia postępowaniu, zwłaszcza w komunikacji, a także rolami, w jakie wchodzimy w relacjach. W swoich działaniach opieram się na kodeksie etycznym psychoterapeuty, buduję z klientem przestrzeń opartą na zaufaniu, poczuciu bezpieczeństwa i akceptacji.',
-						'W trosce o jak najwyższe standardy mojej pracy nieustannie rozwijam swoje umiejętności poprzez udział w licznych kursach, konferencjach i szkoleniach zawodowych. Pracuję pod stałą opieką superwizorów.',
-						'Moim priorytetem jest zawsze zapewnienie klientom bezpiecznej, wspierającej przestrzeni, w której mogą poczuć się zrozumiani i akceptowani. W swojej pracy kieruję się wysokimi standardami etycznymi, pełnym szacunkiem oraz zaangażowaniem. Z pasją i profesjonalizmem wspieram osoby w dążeniu do poprawy jakości ich życia oraz w procesie radzenia sobie z trudnościami, zarówno emocjonalnymi, jak i społecznymi. Serdecznie zapraszam do kontaktu i rozpoczęcia wspólnej drogi ku lepszemu samopoczuciu oraz zdrowiu psychicznemu. Oferuję pomoc, zapewniając wsparcie dostosowane do indywidualnych potrzeb.'
-					]
+					title: 'O mnie'
 				},
 				certificates: {
 					title: 'Certyfikaty i kwalifikacje'
@@ -704,6 +696,7 @@ const plPL = {
 			close: 'Zamknij',
 			aboutMeAlt: 'Olesya Haiduk - psychoterapeutka',
 			certificatePreview: 'Podgląd certyfikatu',
+			certificateAlt: 'Certyfikat {{ number }}',
 			serviceDetails: 'Szczegóły usługi',
 			loading: 'Ładowanie...'
 		},
@@ -927,6 +920,91 @@ const plPL = {
 				description: {
 					label: 'Opis',
 					placeholder: 'Opis produktu'
+				}
+			}
+		},
+		bio: {
+			label: 'Sekcja "O mnie"',
+			description: 'Edytuj treść i zdjęcie sekcji "O mnie" na stronie głównej',
+			back: 'Wróć',
+			editor: {
+				title: 'Edytuj sekcję "O mnie"',
+				description: 'Treść sekcji dla wybranych języków oraz jedno wspólne zdjęcie.',
+				submit: 'Zapisz',
+				submitLoading: 'Zapisywanie...',
+				cancel: 'Anuluj'
+			},
+			notifications: {
+				updateSuccess: 'Sekcja "O mnie" została zapisana!',
+				updateError: 'Nie udało się zapisać sekcji. Spróbuj ponownie.'
+			},
+			fields: {
+				image: {
+					label: 'Zdjęcie',
+					hint: 'Jedno zdjęcie wspólne dla wszystkich wersji językowych.',
+					upload: 'Dodaj zdjęcie',
+					replace: 'Zmień zdjęcie',
+					remove: 'Usuń zdjęcie',
+					invalidFile: 'Nieobsługiwany plik - wybierz obrazek o rozmiarze do 8 MB.',
+					uploadError: 'Nie udało się przesłać zdjęcia. Spróbuj ponownie.'
+				},
+				content: {
+					label: 'Treść'
+				}
+			}
+		},
+		certificates: {
+			label: 'Certyfikaty',
+			description: 'Dodawaj, usuwaj i zmieniaj kolejność certyfikatów na stronie głównej',
+			back: 'Wróć',
+			emptyState: {
+				title: 'Brak certyfikatów',
+				description: 'Zacznij od dodania pierwszego certyfikatu używając formularza powyżej.'
+			},
+			reorderHint: 'Przeciągnij certyfikaty, aby zmienić ich kolejność, albo użyj strzałek.',
+			position: 'Pozycja {{ position }}',
+			add: {
+				title: 'Dodaj certyfikat',
+				submit: 'Dodaj',
+				submitLoading: 'Dodawanie...'
+			},
+			actions: {
+				delete: 'Usuń',
+				saveAlts: 'Zapisz opisy',
+				moveUp: 'Przesuń wyżej',
+				moveDown: 'Przesuń niżej'
+			},
+			notifications: {
+				createSuccess: 'Certyfikat został dodany!',
+				createError: 'Nie udało się dodać certyfikatu. Spróbuj ponownie.',
+				updateSuccess: 'Opisy certyfikatu zostały zapisane!',
+				updateError: 'Nie udało się zapisać opisów. Spróbuj ponownie.',
+				deleteSuccess: 'Certyfikat został usunięty!',
+				deleteError: 'Nie udało się usunąć certyfikatu. Spróbuj ponownie.',
+				reorderSuccess: 'Kolejność certyfikatów została zapisana!',
+				reorderError: 'Nie udało się zapisać kolejności. Spróbuj ponownie.'
+			},
+			deleteDialog: {
+				title: 'Usuń certyfikat',
+				description: 'Czy na pewno chcesz usunąć ten certyfikat? Tej akcji nie można cofnąć.',
+				confirmLabel: "Wpisz 'delete' aby potwierdzić",
+				confirmPlaceholder: 'delete',
+				confirmError: "Proszę wpisać 'delete' aby potwierdzić",
+				confirm: 'Usuń certyfikat',
+				cancel: 'Anuluj'
+			},
+			fields: {
+				image: {
+					label: 'Obraz certyfikatu',
+					upload: 'Wybierz obraz',
+					replace: 'Zmień obraz',
+					invalidFile: 'Nieobsługiwany plik - wybierz obrazek o rozmiarze do 8 MB.',
+					uploadError: 'Nie udało się przesłać obrazu. Spróbuj ponownie.'
+				},
+				alt: {
+					label: 'Tekst alternatywny ({{ language }})',
+					placeholder: 'Opis certyfikatu',
+					hint: 'Opis dla czytników ekranu, osobny dla każdego języka. Może pozostać pusty.'
 				}
 			}
 		},

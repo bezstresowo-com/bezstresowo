@@ -58,6 +58,10 @@ export default defineConfig({
 		noExternal: ['class-validator', 'class-transformer']
 	},
 	optimizeDeps: {
-		exclude: ['class-validator', 'class-transformer']
+		// Pre-bundled (dev only) on purpose: as *excluded* packages their raw ESM
+		// sources reach the browser, and class-validator's deep CJS imports
+		// (`validator/lib/*`) then fail with "does not provide an export named
+		// 'default'". Pre-bundling folds those CJS files in with proper interop.
+		include: ['class-validator', 'class-transformer']
 	}
 });
