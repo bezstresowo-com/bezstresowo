@@ -712,7 +712,7 @@ const plPL = {
 			contactHeader: 'Kontakt',
 			fastLinksHeader: 'Szybkie linki',
 			followMeHeader: 'Śledź mnie',
-			copyright: '© 2025 Bezstresowo. Wszystkie prawa zastrzeżone.',
+			copyright: '© {{ year }} Bezstresowo. Wszystkie prawa zastrzeżone.',
 			fastLinks: {
 				termsOfService: 'Regulamin',
 				gdpr: 'RODO',

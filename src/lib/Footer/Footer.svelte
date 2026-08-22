@@ -12,6 +12,6 @@
 		<FollowMeSection />
 	</div>
 	<div class="py-4 text-center font-thin text-white">
-		{t.user.footer.copyright}
+		{t.user.footer.copyright({ year: new Date(Date.now()).getFullYear() })}
 	</div>
 </footer>

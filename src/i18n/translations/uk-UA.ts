@@ -713,7 +713,7 @@ const ukUA: Translation = {
 			contactHeader: 'Контакт',
 			fastLinksHeader: 'Швидкі посилання',
 			followMeHeader: 'Слідкуйте за мною',
-			copyright: '© 2025 Bezstresowo. Усі права захищені.',
+			copyright: '© {{ year }} Bezstresowo. Усі права захищені.',
 			fastLinks: {
 				termsOfService: 'Правила та умови',
 				gdpr: 'GDPR',
