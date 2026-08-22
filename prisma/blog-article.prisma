@@ -1,9 +1,0 @@
-model BlogArticle {
-  id       String   @id @default(auto()) @map("_id") @db.ObjectId
-  title    String
-  content  String
-  mediaIds String[]
-
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-}

@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="pl">
+<html lang="{{ emailLang }}">
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -31,13 +31,8 @@
 					>
 						<tr>
 							<td style="padding: 24px; font-family: Arial, sans-serif; color: #111827">
-								<h1 style="margin: 0 0 6px; font-size: 20px; font-weight: 700">
-									Potwierdzenie rejestracji
-								</h1>
-								<p style="margin: 0 0 20px; font-size: 14px; color: #6b7280">
-									Cześć {{ nameAndSurname }}! Otrzymałam Twoją prośbę o rezerwację konsultacji i
-									skontaktuję się z tobą niedługo, aby ustalić termin.
-								</p>
+								<h1 style="margin: 0 0 6px; font-size: 20px; font-weight: 700">{{ tHeader }}</h1>
+								<p style="margin: 0 0 20px; font-size: 14px; color: #6b7280">{{ tIntro }}</p>
 
 								<table
 									role="presentation"
@@ -63,10 +58,10 @@
 													color: #6b7280;
 												"
 											>
-												Podsumowanie
+												{{ tSummary }}
 											</p>
 											<p style="margin: 0 0 10px; font-size: 14px; color: #6b7280">
-												Rodzaj terapii
+												{{ tTherapyLabel }}
 											</p>
 											<p style="margin: 0; font-size: 15px; font-weight: 600; color: #111827">
 												{{ therapyName }}
@@ -99,7 +94,7 @@
 													color: #6b7280;
 												"
 											>
-												Twoja wiadomość
+												{{ tYourMessage }}
 											</p>
 											<p
 												style="
@@ -142,17 +137,19 @@
 													color: #6b7280;
 												"
 											>
-												Twoje dane
+												{{ tYourData }}
 											</p>
 											<p style="margin: 0 0 10px; font-size: 14px; color: #6b7280">
-												Imię i Nazwisko
+												{{ tNameLabel }}
 											</p>
 											<p
 												style="margin: 0 0 14px; font-size: 15px; font-weight: 600; color: #111827"
 											>
 												{{ nameAndSurname }}
 											</p>
-											<p style="margin: 0 0 10px; font-size: 14px; color: #6b7280">Adres e-mail</p>
+											<p style="margin: 0 0 10px; font-size: 14px; color: #6b7280">
+												{{ tEmailLabel }}
+											</p>
 											<p
 												style="margin: 0 0 14px; font-size: 15px; font-weight: 600; color: #111827"
 											>
@@ -161,7 +158,7 @@
 												>
 											</p>
 											<p style="margin: 0 0 10px; font-size: 14px; color: #6b7280">
-												Numer telefonu
+												{{ tPhoneLabel }}
 											</p>
 											<p style="margin: 0; font-size: 15px; font-weight: 600; color: #111827">
 												<a href="tel:{{ tel }}" style="color: #2563eb; text-decoration: none"
@@ -173,25 +170,25 @@
 								</table>
 
 								<p style="margin: 0 0 20px; font-size: 14px; color: #6b7280">
-									Olesya Haiduk<br />
-									Psychoterapeutka
+									{{ tSignatureName }}<br />
+									{{ tSignatureRole }}
 								</p>
 
 								<p style="margin: 0 0 20px; font-size: 14px; color: #6b7280">
-									W razie potrzeby skontaktuj się ze mną przez stronę
+									{{ tContactViaSite }}
 									<a href="https://bezstresowo.org" style="color: #2563eb; text-decoration: none"
 										>bezstresowo.org</a
 									>.
 								</p>
 
 								<p style="margin: 0 0 20px; font-size: 14px; color: #6b7280">
-									Centrum Psychoterapii Bezstresowo - Olesya Haiduk<br />
+									{{ tCompanyLine }}<br />
 									NIP: 7282877722<br />
 									REGON: 526600299
 								</p>
 
 								<p style="margin: 20px 0 0; font-size: 12px; color: #9ca3af; text-align: center">
-									Bezstresowo • Powiadomienie systemowe
+									{{ tSystemNotice }}
 								</p>
 							</td>
 						</tr>

@@ -1,9 +1,5 @@
 # bezstresowo.org
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/6bb2ac70-4969-4416-9a92-c02ebf965186/deploy-status)](https://app.netlify.com/projects/bezstresowo/deploys)
-
-[Admin Auth](./ADMIN_AUTH.md)
-
 ## Design
 
 [Figma](https://www.figma.com/design/t7RGz42pDq1tOJse49RzGg/Bezstresowo-AI?node-id=0-1&p=f&t=SlPPhZyLKD2VFDeP-0)

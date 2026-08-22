@@ -8,16 +8,31 @@
 	import { Video } from './extensions/Video';
 	import FileHandler from '@tiptap/extension-file-handler';
 	import { v4 } from 'uuid';
-	import { resolve } from '$app/paths';
-	import { HttpMethod } from '$shared/global/enums/http-method';
-	import type { CreateMediaResponseDto } from '$api/admin/media/[id]/model';
+	import { uploadMedia } from '$remote/admin-media.remote';
+	import { toBase64 } from '$shared/global/functions/to-base64';
 
 	let { content = '', onUpdate }: Props = $props();
 
 	let element: HTMLDivElement | null = null;
 	let editor: Editor | null = null;
 	let editorState: { editor: Editor | null } = $state({ editor: null });
-	let addedMedia = $state<Record<string, string>>({});
+
+	/** Ids of every media node currently present in the document. */
+	function collectMediaIds(currentEditor: Editor): string[] {
+		const ids: string[] = [];
+
+		currentEditor.state.doc.descendants((node) => {
+			if ((node.type.name === 'image' || node.type.name === 'video') && node.attrs['id']) {
+				const id = String(node.attrs['id']);
+
+				if (!ids.includes(id)) {
+					ids.push(id);
+				}
+			}
+		});
+
+		return ids;
+	}
 
 	async function onFileHandlerEvent(currentEditor: Editor, files: File[], pos: number) {
 		await Promise.all(
@@ -38,19 +53,12 @@
 				}
 
 				const id = v4();
-				const formData = new FormData();
-				formData.append('file', file);
-				const response = await fetch(
-					resolve('/api/admin/media/[id]', {
-						id
-					}),
-					{
-						method: HttpMethod.POST,
-						body: formData
-					}
-				);
-				const { url } = (await response.json()) as CreateMediaResponseDto;
-				addedMedia[id] = url;
+				// Remote function payloads are JSON, so the file travels base64 encoded.
+				const { url } = await uploadMedia({
+					id,
+					mimeType: file.type,
+					dataBase64: await toBase64(file)
+				});
 				currentEditor
 					.chain()
 					.insertContentAt(pos, {
@@ -92,31 +100,19 @@
 			onTransaction: ({ editor }) => {
 				editorState = { editor };
 			},
+			// Deleting a node only shrinks the reported `mediaIds` - the file
+			// itself is removed server side after a save (`cleanupMedia`) or by the
+			// bucket sweep, never straight from the editor. An eager delete here
+			// broke undo and, when the edit was abandoned without saving, left the
+			// stored article pointing at an object that no longer existed.
 			onUpdate: ({ editor }) => {
 				const html = editor.getHTML();
 				content = html;
-				onUpdate?.(html, addedMedia);
+				onUpdate?.(html, collectMediaIds(editor));
 				editorState = { editor };
 			},
 			onSelectionUpdate: ({ editor }) => {
 				editorState = { editor };
-			},
-			async onDelete(props) {
-				if (
-					props.type === 'node' &&
-					(props.node.type.name === 'image' || props.node.type.name === 'video')
-				) {
-					const id = props.node.attrs['id'] as string;
-					await fetch(
-						resolve('/api/admin/media/[id]', {
-							id
-						}),
-						{
-							method: HttpMethod.DELETE
-						}
-					);
-					delete addedMedia[id];
-				}
 			}
 		});
 	});

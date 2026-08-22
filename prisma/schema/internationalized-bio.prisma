@@ -1,0 +1,19 @@
+model InternationalizedBio {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  lang String
+
+  /// TipTap HTML of the section body.
+  content String
+
+  /// Bucket object keys of media embedded in `content`.
+  mediaIds String[]
+
+  bio   Bio    @relation(fields: [bioId], references: [id], onDelete: Cascade)
+  bioId String @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([bioId, lang])
+}

@@ -43,5 +43,7 @@
 	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"[prisma]": {
 		"editor.defaultFormatter": "Prisma.prisma"
-	}
+	},
+	"nixEnvSelector.nixFile": "${workspaceFolder}/shell.nix",
+	"nixEnvSelector.useFlakes": false
 }

@@ -1,28 +1,28 @@
-import { PrismaClient } from '@prisma/client';
+import { DATABASE_URL } from '$env/static/private';
+import { PrismaClient } from '$shared/server/generated/prisma/client';
 
-class PrismaService extends PrismaClient {
-	private static instance: PrismaService | null = null;
+const createPrismaClient = () =>
+	new PrismaClient({
+		// The `prisma-client` generator resolves `env("DATABASE_URL")` from
+		// `process.env` only, and `vite dev` exposes `.env` exclusively through
+		// the `$env/*` modules - so the url must be handed over explicitly.
+		datasourceUrl: DATABASE_URL,
+		log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error']
+	});
 
-	private constructor() {
-		super({
-			log: process.env.NODE_ENV === 'development' ? ['query', 'error', 'warn'] : ['error']
-		});
-	}
+export type AppPrismaClient = ReturnType<typeof createPrismaClient>;
 
-	public static getInstance(): PrismaService {
-		if (!PrismaService.instance) {
-			PrismaService.instance = new PrismaService();
+// Reuse a single client across dev/HMR reloads to avoid leaking connections.
+const globalForPrisma = globalThis as unknown as { prisma?: AppPrismaClient };
 
-			if (typeof process !== 'undefined') {
-				process.on('beforeExit', async () => {
-					await PrismaService.instance?.$disconnect();
-				});
-			}
-		}
+export const prisma: AppPrismaClient = globalForPrisma.prisma ?? createPrismaClient();
 
-		return PrismaService.instance;
-	}
+if (process.env.NODE_ENV !== 'production') {
+	globalForPrisma.prisma = prisma;
 }
 
-export const prisma = PrismaService.getInstance();
-export { PrismaService };
+if (typeof process !== 'undefined') {
+	process.on('beforeExit', async () => {
+		await prisma.$disconnect();
+	});
+}

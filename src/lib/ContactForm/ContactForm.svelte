@@ -1,27 +1,95 @@
 <script lang="ts">
-	import { resolve } from '$app/paths';
+	import { env } from '$env/dynamic/public';
+	import { getLocale, LOCALE_HTML_LANG, t, translateKey } from '$i18n';
+	import Button from '$lib/Button/Button.svelte';
+	import { ButtonTypes } from '$lib/Button/model';
+	import { sendContactRequest } from '$remote/contact.remote';
+	import { CONTACT_FORM_CAPTCHA_ENABLED } from '$shared/global/config/feature-flags';
+	import { remoteErrorIssues, remoteErrorMessage } from '$shared/global/functions/remote-error';
+	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { createForm } from 'svelte-forms-lib';
+
+	import { CONTACT_INFO } from './contactInfo';
 	import {
 		FIELD_MAP,
 		FORM_FIELDS,
 		FORM_FIELDS_ORDER,
 		FORM_INITIAL_VALUE,
 		SCHEMA,
-		type BackendErrorResponse,
 		type FormValue
 	} from './model';
-	import { getBaseHeaders } from '$shared/global/functions/get-base-headers';
-	import { HttpStatus } from '$shared/global/enums/http-status';
-	import { translate } from '$i18n';
-	import type { ContactRequestDto } from '$api/contact/model';
-	import { HttpMethod } from '$shared/global/enums/http-method';
-	import { CONTACT_INFO } from './contactInfo';
-	import toast, { Toaster } from 'svelte-5-french-toast';
-	import Button from '$lib/Button/Button.svelte';
-	import { ButtonTypes } from '$lib/Button/model';
+
+	const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
 	let isLoading = $state(false);
-	let generalError = $state<string | null>(null);
+	let captchaToken = $state<string | null>(null);
+	let captchaContainer = $state<HTMLDivElement>();
+	let captchaWidgetId: string | undefined;
+
+	// Renders the Turnstile widget once the container exists; with the feature
+	// flag off neither the script nor the widget ever loads.
+	$effect(() => {
+		if (!CONTACT_FORM_CAPTCHA_ENABLED || !captchaContainer || captchaWidgetId !== undefined) {
+			return;
+		}
+
+		const container = captchaContainer;
+		let cancelled = false;
+
+		loadTurnstile()
+			.then((turnstile) => {
+				if (cancelled || captchaWidgetId !== undefined) {
+					return;
+				}
+
+				// `$env/dynamic`: the key only exists when the captcha is enabled - a
+				// `$env/static` import would fail the build on environments without it.
+				captchaWidgetId = turnstile.render(container, {
+					sitekey: env.PUBLIC_TURNSTILE_SITE_KEY ?? '',
+					language: LOCALE_HTML_LANG[getLocale()],
+					callback: (token) => (captchaToken = token),
+					'expired-callback': () => (captchaToken = null),
+					'error-callback': () => (captchaToken = null)
+				});
+			})
+			.catch((cause) => console.error('[captcha] failed to load turnstile', cause));
+
+		return () => {
+			cancelled = true;
+
+			if (captchaWidgetId !== undefined) {
+				window.turnstile?.remove(captchaWidgetId);
+				captchaWidgetId = undefined;
+				captchaToken = null;
+			}
+		};
+	});
+
+	function loadTurnstile(): Promise<Turnstile> {
+		if (window.turnstile) {
+			return Promise.resolve(window.turnstile);
+		}
+
+		return new Promise((resolve, reject) => {
+			const script = document.createElement('script');
+			script.src = TURNSTILE_SRC;
+			script.async = true;
+			script.onload = () =>
+				window.turnstile
+					? resolve(window.turnstile)
+					: reject(new Error('turnstile script loaded without the global'));
+			script.onerror = () => reject(new Error('turnstile script failed to load'));
+			document.head.appendChild(script);
+		});
+	}
+
+	/** Tokens are single use - after every submit the widget must issue a new one. */
+	function resetCaptcha() {
+		if (CONTACT_FORM_CAPTCHA_ENABLED && captchaWidgetId !== undefined) {
+			window.turnstile?.reset(captchaWidgetId);
+			captchaToken = null;
+		}
+	}
 
 	const {
 		form,
@@ -36,57 +104,45 @@
 		validationSchema: SCHEMA,
 		async onSubmit({ email, message, nameAndSurname, phone }) {
 			isLoading = true;
+
 			try {
-				const body = JSON.stringify({
+				await sendContactRequest({
 					email,
 					tel: phone,
 					nameAndSurname,
-					message
-				} satisfies ContactRequestDto);
-
-				const response = await fetch(resolve('/api/contact'), {
-					method: HttpMethod.POST,
-					headers: getBaseHeaders(),
-					body
+					message,
+					lang: getLocale(),
+					captchaToken: captchaToken ?? undefined
 				});
 
-				const resBody: BackendErrorResponse = await response.json().catch(() => ({}));
-
-				switch (response.status) {
-					case HttpStatus.OK:
-						generalError = null;
-						handleReset();
-						toast.success($translate('user.contactForm.toast.success'));
-						break;
-
-					case HttpStatus.BAD_REQUEST: {
-						const serverErrors = resBody?.errors ?? [];
-						if (serverErrors.length) {
-							for (const { field, messages } of serverErrors) {
-								const key = FIELD_MAP[field] ?? (field as keyof FormValue);
-								const msg = messages?.[0];
-								errors.update((e) => ({ ...e, [key]: msg }));
-								touched.update((t) => ({ ...t, [key]: true }));
-							}
-						}
-						break;
-					}
-
-					case HttpStatus.INTERNAL_SERVER_ERROR:
-						toast.error($translate('user.contactForm.toast.error'));
-						break;
-				}
+				handleReset();
+				toast.success(t.user.contactForm.toast.success);
 			} catch (error) {
-				console.log(`General fetch error: ${(error as Error).message}`);
-				toast.error($translate('user.contactForm.toast.error'));
+				const issues = remoteErrorIssues(error);
+
+				if (Object.keys(issues).length > 0) {
+					for (const [field, messages] of Object.entries(issues)) {
+						const key = FIELD_MAP[field] ?? (field as keyof FormValue);
+						errors.update((current) => ({ ...current, [key]: messages[0] }));
+						touched.update((current) => ({ ...current, [key]: true }));
+					}
+				} else {
+					// Surface the server's reason (failed captcha, mail outage) - the
+					// message is always a translation key, with a generic fallback.
+					toast.error(translateKey(remoteErrorMessage(error)));
+				}
 			} finally {
+				resetCaptcha();
 				isLoading = false;
 			}
 		}
 	});
 
 	let isSubmitDisabled = $derived(
-		!$formState.isValid || isLoading || Object.values($touched).some((touched) => !touched)
+		!$formState.isValid ||
+			isLoading ||
+			Object.values($touched).some((value) => !value) ||
+			(CONTACT_FORM_CAPTCHA_ENABLED && !captchaToken)
 	);
 </script>
 
@@ -94,10 +150,10 @@
 	<!-- Header -->
 	<div class="pb-8 text-center">
 		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
-			{$translate('user.contactForm.title')}
+			{t.user.contactForm.title}
 		</h1>
 		<p class="mx-auto mt-3 max-w-3xl text-slate-600">
-			{$translate('user.contactForm.subtitle')}
+			{t.user.contactForm.subtitle}
 		</p>
 	</div>
 
@@ -106,7 +162,7 @@
 		<!-- Left: Contact info -->
 		<div class="flex flex-col justify-center space-y-6">
 			<h2 class="px-5 text-lg font-medium text-slate-700">
-				{$translate('user.contactForm.infoTitle')}
+				{t.user.contactForm.infoTitle}
 			</h2>
 
 			<!-- Phone -->
@@ -116,7 +172,7 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.contactInformation.phone')}
+						{t.user.contactForm.contactInformation.phone}
 					</div>
 					<div class="mt-1 text-slate-600">
 						<a class="underline-offset-4 hover:underline" href={`tel:${CONTACT_INFO.phone}`}
@@ -133,7 +189,7 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.contactInformation.email')}
+						{t.user.contactForm.contactInformation.email}
 					</div>
 					<div class="mt-1 break-all text-slate-600">
 						<a class="underline-offset-4 hover:underline" href={`mailto:${CONTACT_INFO.email}`}
@@ -150,14 +206,14 @@
 				</div>
 				<div>
 					<div class="text-sm font-semibold text-slate-700">
-						{$translate('user.contactForm.contactInformation.hours')}
+						{t.user.contactForm.contactInformation.hours}
 					</div>
 					<div class="mt-1 text-slate-600">
-						{$translate('user.contactForm.contactInformation.hoursWeek')}
+						{t.user.contactForm.contactInformation.hoursWeek}
 						{CONTACT_INFO.hoursWeek}
 					</div>
 					<div class="text-slate-600">
-						{$translate('user.contactForm.contactInformation.hoursSat')}
+						{t.user.contactForm.contactInformation.hoursSat}
 						{CONTACT_INFO.hoursSat}
 					</div>
 				</div>
@@ -170,9 +226,7 @@
 				{#each FORM_FIELDS_ORDER as key, i (i + key)}
 					{#if FORM_FIELDS[key].element === 'input'}
 						<div>
-							<label class="sr-only" for={key}
-								>{$translate(`user.contactForm.fields.${key}.label`)}</label
-							>
+							<label class="sr-only" for={key}>{t.user.contactForm.fields[key].label}</label>
 							<input
 								id={key}
 								name={key}
@@ -180,19 +234,17 @@
 								bind:value={$form[key]}
 								onchange={handleChange}
 								onblur={handleChange}
-								placeholder={$translate(`user.contactForm.fields.${key}.label`)}
+								placeholder={t.user.contactForm.fields[key].label}
 								class="h-12 w-full rounded-lg border border-slate-300 bg-white px-4 text-slate-800 placeholder-slate-400 transition outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"
 							/>
 
 							{#if $errors[key] && $touched[key]}
-								<small class="mt-1 block text-sm text-danger">{$translate($errors[key])}</small>
+								<small class="mt-1 block text-sm text-danger">{translateKey($errors[key])}</small>
 							{/if}
 						</div>
 					{:else if FORM_FIELDS[key].element === 'textarea'}
 						<div>
-							<label class="sr-only" for={key}
-								>{$translate(`user.contactForm.fields.${key}.label`)}</label
-							>
+							<label class="sr-only" for={key}>{t.user.contactForm.fields[key].label}</label>
 							<textarea
 								id={key}
 								name={key}
@@ -200,23 +252,23 @@
 								bind:value={$form[key]}
 								onchange={handleChange}
 								onblur={handleChange}
-								placeholder={$translate(`user.contactForm.fields.${key}.label`)}
+								placeholder={t.user.contactForm.fields[key].label}
 								class="w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-800 placeholder-slate-400 transition outline-none focus:border-primary focus:ring-2 focus:ring-blue-100"
 							></textarea>
 							{#if $errors[key] && $touched[key]}
-								<small class="mt-1 block text-sm text-danger">{$translate($errors[key])}</small>
+								<small class="mt-1 block text-sm text-danger">{translateKey($errors[key])}</small>
 							{/if}
 						</div>
 					{/if}
 				{/each}
 
-				{#if generalError}
-					<small class="block text-sm text-danger">{$translate(generalError)}</small>
+				{#if CONTACT_FORM_CAPTCHA_ENABLED}
+					<div bind:this={captchaContainer} class="flex justify-center"></div>
 				{/if}
 
 				<Button type={ButtonTypes.Submit} disabled={isSubmitDisabled} tailwind="w-full">
 					{#if !isLoading}
-						{$translate('user.contactForm.submit')}
+						{t.user.contactForm.submit}
 					{:else}
 						<div role="status" class="flex items-center justify-center">
 							<svg
@@ -235,7 +287,7 @@
 									fill="currentFill"
 								/>
 							</svg>
-							<span class="sr-only">Loading...</span>
+							<span class="sr-only">{t.user.a11y.loading}</span>
 						</div>
 					{/if}
 				</Button>

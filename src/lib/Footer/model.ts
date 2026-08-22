@@ -1,5 +1,3 @@
-import { resolve } from "$app/paths";
-
 export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
@@ -20,23 +18,12 @@ export const CONTACT_ELEMENTS = [
 	}
 ];
 
+/** `name` indexes the `t.user.footer.fastLinks` dictionary section. */
 export const FAST_LINKS = [
-	{
-		id: 'statute',
-		label: 'user.footer.fastLinks.termsOfService',
-		href: resolve('/terms-of-service')
-	},
-	{
-		id: 'gdpr',
-		label: 'user.footer.fastLinks.gdpr',
-		href: resolve('/gdpr')
-	},
-	{
-		id: 'priceList',
-		label: 'user.footer.fastLinks.priceList',
-		href: resolve('/price-list')
-	}
-];
+	{ id: 'statute', name: 'termsOfService', path: '/terms-of-service' },
+	{ id: 'gdpr', name: 'gdpr', path: '/gdpr' },
+	{ id: 'priceList', name: 'priceList', path: '/price-list' }
+] as const;
 
 export const FOLLOW_ME_LINKS = [
 	{

@@ -1,0 +1,10 @@
+/// Stripe delivers webhook events at least once. Handled event ids are recorded
+/// here so a redelivery (after a transient failure and a 500) never sends the
+/// notification emails twice.
+model ProcessedStripeEvent {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  eventId String @unique
+
+  createdAt DateTime @default(now())
+}

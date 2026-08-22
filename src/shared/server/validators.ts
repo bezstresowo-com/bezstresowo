@@ -7,7 +7,9 @@ export const VALIDATION_MSG_PREFIX = 'api.validation.errors' as const;
 function withTranslationMessage(name: string, fn: Function) {
 	return (...args: any[]) => {
 		const lastArg = args[args.length - 1];
-		const isOptions = typeof lastArg === 'object' && !Array.isArray(lastArg);
+		// `Matches` takes a RegExp first - an object, but not an options object.
+		const isOptions =
+			typeof lastArg === 'object' && !Array.isArray(lastArg) && !(lastArg instanceof RegExp);
 
 		let msgSuffix = '';
 		switch (name) {
@@ -35,10 +37,7 @@ function withTranslationMessage(name: string, fn: Function) {
 	};
 }
 
-/*
-	TODO:
-	Remember to overwrite the validators which need to have custom validation messages
-*/
+/** Every decorator the DTOs use is wrapped, so no raw english message leaks out. */
 export const validators = {
 	...cv,
 	MinLength: withTranslationMessage('MinLength', cv.MinLength),
@@ -54,5 +53,11 @@ export const validators = {
 	IsUrl: withTranslationMessage('IsUrl', cv.IsUrl),
 	IsArray: withTranslationMessage('IsArray', cv.IsArray),
 	ArrayMinSize: withTranslationMessage('ArrayMinSize', cv.ArrayMinSize),
-	ArrayMaxSize: withTranslationMessage('ArrayMaxSize', cv.ArrayMaxSize)
+	ArrayMaxSize: withTranslationMessage('ArrayMaxSize', cv.ArrayMaxSize),
+	ArrayNotEmpty: withTranslationMessage('ArrayNotEmpty', cv.ArrayNotEmpty),
+	Matches: withTranslationMessage('Matches', cv.Matches),
+	IsInt: withTranslationMessage('IsInt', cv.IsInt),
+	IsBoolean: withTranslationMessage('IsBoolean', cv.IsBoolean),
+	IsNotEmpty: withTranslationMessage('IsNotEmpty', cv.IsNotEmpty),
+	ValidateNested: withTranslationMessage('ValidateNested', cv.ValidateNested)
 };
