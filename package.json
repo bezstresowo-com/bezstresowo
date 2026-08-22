@@ -63,6 +63,7 @@
 		"@tiptap/extension-file-handler": "^3.6.2",
 		"@tiptap/pm": "^3.4.4",
 		"@tiptap/starter-kit": "^3.4.4",
+		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",
 		"bits-ui": "^2.11.4",
 		"class-transformer": "^0.5.1",
