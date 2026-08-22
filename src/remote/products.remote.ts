@@ -35,15 +35,13 @@ export const getProducts = query(
 					return null;
 				}
 
-				const s3 = new S3Service();
-
 				return {
 					id: product.id,
 					slug: product.slug,
 					name: translation.name,
 					description: translation.description,
-					mediaIds: translation.mediaIds,
-					imageUrls: translation.mediaIds.map((mediaId) => s3.buildUrl(mediaId)),
+					// One image shared by every language version of the product.
+					imageUrl: isNil(product.imageId) ? null : new S3Service().buildUrl(product.imageId),
 					priceInMinorUnits: product.price.inMinorUnits,
 					currency: product.price.currency,
 					siteLocations: product.siteLocations,

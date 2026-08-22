@@ -23,13 +23,24 @@ const PRODUCT_INCLUDE = {
 	internationalizedProducts: { orderBy: { lang: 'asc' as const } }
 };
 
+/** The bucket config is server side only, so admin reads carry the public URL
+ * of the shared image for the panel to preview. */
+function withImageUrl<T extends { imageId: string | null }>(product: T) {
+	return {
+		...product,
+		imageUrl: isNil(product.imageId) ? null : new S3Service().buildUrl(product.imageId)
+	};
+}
+
 export const getAdminProducts = query(async () => {
 	requireAdmin();
 
-	return await prisma.product.findMany({
+	const products = await prisma.product.findMany({
 		include: PRODUCT_INCLUDE,
 		orderBy: { createdAt: 'desc' }
 	});
+
+	return products.map(withImageUrl);
 });
 
 export const getAdminProduct = query(dtoSchema(ProductIdDto), async ({ id }) => {
@@ -44,7 +55,7 @@ export const getAdminProduct = query(dtoSchema(ProductIdDto), async ({ id }) => 
 		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
 	}
 
-	return product;
+	return withImageUrl(product);
 });
 
 export const createProduct = command(dtoSchema(UpsertProductDto), async (dto) => {
@@ -53,12 +64,13 @@ export const createProduct = command(dtoSchema(UpsertProductDto), async (dto) =>
 	assertUniqueLanguages(dto.translations);
 	await assertFreeSlug(dto.slug);
 
-	return await prisma.product.create({
+	const created = await prisma.product.create({
 		data: {
 			slug: dto.slug,
 			active: dto.active ?? true,
 			siteLocations: dto.siteLocations,
 			orderKey: dto.orderKey ?? null,
+			imageId: dto.imageId ?? null,
 			price: {
 				create: {
 					currency: PRODUCT_CURRENCY,
@@ -71,6 +83,8 @@ export const createProduct = command(dtoSchema(UpsertProductDto), async (dto) =>
 		},
 		include: PRODUCT_INCLUDE
 	});
+
+	return withImageUrl(created);
 });
 
 export const updateProduct = command(dtoSchema(UpdateProductDto), async (dto) => {
@@ -89,9 +103,12 @@ export const updateProduct = command(dtoSchema(UpdateProductDto), async (dto) =>
 
 	await assertFreeSlug(dto.slug, dto.id);
 
-	const previousMediaIds = existing.internationalizedProducts.flatMap(
-		(translation) => translation.mediaIds
-	);
+	// The shared image is a cleanup candidate like any translation media - when
+	// the save keeps it, `cleanupMedia` sees it referenced and leaves it alone.
+	const previousMediaIds = [
+		...existing.internationalizedProducts.flatMap((translation) => translation.mediaIds),
+		...(isNil(existing.imageId) ? [] : [existing.imageId])
+	];
 
 	const updated = await prisma.product.update({
 		where: { id: dto.id },
@@ -100,6 +117,7 @@ export const updateProduct = command(dtoSchema(UpdateProductDto), async (dto) =>
 			active: dto.active ?? true,
 			siteLocations: dto.siteLocations,
 			orderKey: dto.orderKey ?? null,
+			imageId: dto.imageId ?? null,
 			price: {
 				update: {
 					currency: PRODUCT_CURRENCY,
@@ -116,7 +134,7 @@ export const updateProduct = command(dtoSchema(UpdateProductDto), async (dto) =>
 
 	await cleanupMedia(previousMediaIds);
 
-	return updated;
+	return withImageUrl(updated);
 });
 
 export const deleteProduct = command(dtoSchema(ProductIdDto), async ({ id }) => {
@@ -131,9 +149,10 @@ export const deleteProduct = command(dtoSchema(ProductIdDto), async ({ id }) => 
 		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
 	}
 
-	const mediaIds = existing.internationalizedProducts.flatMap(
-		(translation) => translation.mediaIds
-	);
+	const mediaIds = [
+		...existing.internationalizedProducts.flatMap((translation) => translation.mediaIds),
+		...(isNil(existing.imageId) ? [] : [existing.imageId])
+	];
 
 	await prisma.product.delete({ where: { id } });
 	// The one-to-one price row is not cascaded by the relation, drop it here.
@@ -162,16 +181,13 @@ async function assertFreeSlug(slug: string, ignoreProductId?: string) {
 
 function toTranslationRow(
 	translation: InternationalizedProductDto,
-	product: { slug: string; active?: boolean; priceInMinorUnits: number }
+	product: { slug: string; active?: boolean; priceInMinorUnits: number; imageId?: string }
 ) {
-	const mediaIds = translation.mediaIds ?? [];
-	const [featuredImageId] = mediaIds;
-
 	return {
 		lang: translation.lang,
 		name: translation.name,
 		description: translation.description,
-		mediaIds,
+		mediaIds: translation.mediaIds ?? [],
 		// JSON-LD is materialized on write only, never while rendering.
 		metadataJsonLD: buildProductJsonLD({
 			locale: translation.lang as Locale,
@@ -180,7 +196,8 @@ function toTranslationRow(
 			description: translation.description,
 			priceInMinorUnits: product.priceInMinorUnits,
 			currency: PRODUCT_CURRENCY,
-			imageUrl: isNil(featuredImageId) ? null : new S3Service().buildUrl(featuredImageId),
+			// The one image shared by every language version of the product.
+			imageUrl: isNil(product.imageId) ? null : new S3Service().buildUrl(product.imageId),
 			available: product.active ?? true
 		})
 	};

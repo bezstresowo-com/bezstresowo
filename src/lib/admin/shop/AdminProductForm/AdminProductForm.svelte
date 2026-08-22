@@ -1,8 +1,12 @@
 <script lang="ts">
 	import { Locale, path, t, translateKey } from '$i18n';
 	import { localeTabLabel } from '$lib/admin/blog/AdminBlogForm/model';
+	import { uploadMedia } from '$remote/admin-media.remote';
 	import { SITE_LOCATIONS, type UpsertProductDto } from '$remote/dto/product';
+	import { toBase64 } from '$shared/global/functions/to-base64';
 	import { Separator } from 'bits-ui';
+	import { toast } from 'svelte-sonner';
+	import { v4 } from 'uuid';
 
 	import {
 		emptyProductDraft,
@@ -26,12 +30,61 @@
 	const isUpdateMode = $derived(mode === 'update');
 
 	let isSubmitting = $state(false);
+	let isUploadingImage = $state(false);
 	let showIssues = $state(false);
 	let activeLocale = $state<Locale>(Locale.plPL);
 	let draft = $state<ProductDraft>(product ? productDraftFrom(product) : emptyProductDraft());
 
 	const issues = $derived(validateProductDraft(draft));
 	const hasIssues = $derived(Object.keys(issues).length > 0);
+
+	/** Images only here - the wider `admin-media.remote.ts` list also allows video. */
+	const IMAGE_MIME_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/gif', 'image/svg+xml'];
+	/** Mirrors `MAX_UPLOAD_BYTES` in `admin-media.remote.ts`. */
+	const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+
+	async function handleImageSelected(event: Event) {
+		const input = event.currentTarget as HTMLInputElement;
+		const file = input.files?.[0];
+		// Selecting the same file again should re-trigger `change`.
+		input.value = '';
+
+		if (!file) {
+			return;
+		}
+
+		if (!IMAGE_MIME_TYPES.includes(file.type) || file.size > MAX_IMAGE_BYTES) {
+			toast.error(t.admin.shop.fields.image.invalidFile);
+			return;
+		}
+
+		isUploadingImage = true;
+
+		try {
+			const id = v4();
+			// Remote function payloads are JSON, so the file travels base64 encoded.
+			const { url } = await uploadMedia({
+				id,
+				mimeType: file.type,
+				dataBase64: await toBase64(file)
+			});
+
+			// A replaced or abandoned upload is not deleted here - the save's
+			// `cleanupMedia` or the bucket sweep takes care of it.
+			draft.imageId = id;
+			draft.imageUrl = url;
+		} catch (error) {
+			console.error('Failed to upload product image:', error);
+			toast.error(t.admin.shop.fields.image.uploadError);
+		} finally {
+			isUploadingImage = false;
+		}
+	}
+
+	function removeImage() {
+		draft.imageId = '';
+		draft.imageUrl = '';
+	}
 
 	function toggleSiteLocation(location: (typeof SITE_LOCATIONS)[number], checked: boolean) {
 		draft.siteLocations = checked
@@ -57,6 +110,7 @@
 				active: draft.active,
 				siteLocations: draft.siteLocations,
 				orderKey: draft.orderKey.trim() || undefined,
+				imageId: draft.imageId || undefined,
 				priceInMinorUnits,
 				translations: toTranslationPayload(draft)
 			});
@@ -135,6 +189,56 @@
 		<small class="mt-1 block text-xs text-gray-500">
 			{t.admin.shop.fields.siteLocations.hint}
 		</small>
+
+		<!-- One image shared by every language version, so it sits outside the tabs. -->
+		<div class="mt-6">
+			<span class="mb-1 block text-sm font-medium text-gray-700">
+				{t.admin.shop.fields.image.label}
+			</span>
+
+			{#if draft.imageUrl}
+				<img
+					src={draft.imageUrl}
+					alt={t.admin.shop.fields.image.label}
+					class="mb-3 h-40 w-64 rounded-md border border-gray-200 object-cover"
+				/>
+			{/if}
+
+			<div class="flex flex-wrap items-center gap-3">
+				<label
+					class={`cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 ${isUploadingImage ? 'pointer-events-none opacity-70' : ''}`}
+				>
+					<span>
+						<i
+							class={`${isUploadingImage ? 'fa-solid fa-spinner fa-spin' : 'fa-solid fa-image'} mr-2`}
+						></i>
+					</span>
+					{draft.imageId ? t.admin.shop.fields.image.replace : t.admin.shop.fields.image.upload}
+					<input
+						type="file"
+						accept={IMAGE_MIME_TYPES.join(',')}
+						class="hidden"
+						disabled={isUploadingImage}
+						onchange={handleImageSelected}
+					/>
+				</label>
+
+				{#if draft.imageId}
+					<button
+						type="button"
+						class="cursor-pointer rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-danger hover:bg-gray-50"
+						onclick={removeImage}
+					>
+						<span>
+							<i class="fa-solid fa-trash mr-2"></i>
+						</span>
+						{t.admin.shop.fields.image.remove}
+					</button>
+				{/if}
+			</div>
+
+			<small class="mt-1 block text-xs text-gray-500">{t.admin.shop.fields.image.hint}</small>
+		</div>
 
 		<!-- One tab per supported language; a product may exist in just one. -->
 		<div class="mt-6 flex gap-2 border-b border-gray-200">
@@ -218,7 +322,7 @@
 			<button
 				type="submit"
 				class="cursor-pointer rounded-md bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-70"
-				disabled={isSubmitting}
+				disabled={isSubmitting || isUploadingImage}
 			>
 				{#if isSubmitting}
 					<span><i class="fa-solid fa-spinner fa-spin mr-2"></i></span>

@@ -23,8 +23,17 @@ import { difference, isNil } from 'lodash-es';
 const MEDIA_OWNERS = [
 	() => prisma.internationalizedBlogArticle.findMany({ select: { mediaIds: true } }),
 	() => prisma.internationalizedProduct.findMany({ select: { mediaIds: true } }),
+	productImageRows,
 	legacyBlogArticleRows
 ] as const;
+
+/** A product's one shared image lives on the `Product` row itself (`imageId`),
+ * not in a translation's `mediaIds` - surface it in the same shape. */
+async function productImageRows(): Promise<{ mediaIds: string[] }[]> {
+	const products = await prisma.product.findMany({ select: { imageId: true } });
+
+	return products.map(({ imageId }) => ({ mediaIds: isNil(imageId) ? [] : [imageId] }));
+}
 
 /**
  * Legacy (pre-i18n) articles keep `mediaIds` directly on the `BlogArticle`

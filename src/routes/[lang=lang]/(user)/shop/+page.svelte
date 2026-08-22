@@ -98,9 +98,9 @@
 						<!-- Product details -->
 						<div class="flex-grow border-b-1 border-black/30 pb-6">
 							<img
-								src={product.imageUrls[0] ?? asset('/assets/shop-image-placeholder.svg')}
+								src={product.imageUrl ?? asset('/assets/shop-image-placeholder.svg')}
 								alt={product.name}
-								class={`mb-4 h-48 w-full rounded-xl ${product.imageUrls[0] ? 'object-cover' : ''}`}
+								class={`mb-4 h-48 w-full rounded-xl ${product.imageUrl ? 'object-cover' : ''}`}
 								loading="lazy"
 							/>
 							<h2 class="mb-2 text-2xl">{product.name}</h2>

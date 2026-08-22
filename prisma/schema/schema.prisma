@@ -1,0 +1,16 @@
+// Multi-file schema: the Prisma CLI merges every `.prisma` file in this
+// folder. This one holds the config blocks; each model lives in its own file.
+
+generator client {
+  provider      = "prisma-client"
+  output        = "../../src/shared/server/generated/prisma"
+  // "native" for local dev; "rhel-openssl-3.0.x" is Vercel's serverless
+  // runtime. Without the explicit Linux target the deployed function has no
+  // matching query engine (see vite.config.ts for how it gets bundled).
+  binaryTargets = ["native", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}

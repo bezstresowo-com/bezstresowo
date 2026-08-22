@@ -16,6 +16,9 @@ export type ProductDraft = {
 	active: boolean;
 	orderKey: string;
 	siteLocations: SiteLocation[];
+	/** One image shared by every language version; empty strings mean none. */
+	imageId: string;
+	imageUrl: string;
 	translations: Record<Locale, ProductTranslationDraft>;
 };
 
@@ -25,6 +28,8 @@ export type ExistingProduct = {
 	active: boolean;
 	orderKey: string | null;
 	siteLocations: string[];
+	imageId: string | null;
+	imageUrl: string | null;
 	price: { inMinorUnits: number };
 	internationalizedProducts: { lang: string; name: string; description: string }[];
 };
@@ -36,6 +41,8 @@ export function emptyProductDraft(): ProductDraft {
 		active: true,
 		orderKey: '',
 		siteLocations: ['shop'],
+		imageId: '',
+		imageUrl: '',
 		translations: Object.values(Locale).reduce(
 			(acc, locale) => ({ ...acc, [locale]: { enabled: false, name: '', description: '' } }),
 			{} as Record<Locale, ProductTranslationDraft>
@@ -51,6 +58,8 @@ export function productDraftFrom(product: ExistingProduct): ProductDraft {
 	draft.active = product.active;
 	draft.orderKey = product.orderKey ?? '';
 	draft.siteLocations = product.siteLocations as SiteLocation[];
+	draft.imageId = product.imageId ?? '';
+	draft.imageUrl = product.imageUrl ?? '';
 
 	for (const translation of product.internationalizedProducts) {
 		const locale = translation.lang as Locale;

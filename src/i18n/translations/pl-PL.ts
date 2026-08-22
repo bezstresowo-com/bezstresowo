@@ -35,7 +35,7 @@ const plPL = {
 					title: 'O mnie',
 					myNameIs: 'Nazywam się <b>Olesya Haiduk</b>.',
 					description: [
-						'Jestem psychoterapeutką w trakcie szkolenia w Międzynarodowym Towarzystwie Analizy Transakcyjnej. Prowadzę indywidualną psychoterapię dla kobiet, psychoterapię grupową z młodzieżą i osobami dorosłymi, a także psychoterapię dla par.',
+						'Jestem psychoterapeutką po ukończonym 4-letnim szkoleniu psychoterapeutycznym w Międzynarodowym Towarzystwie Analizy Transakcyjnej. Prowadzę indywidualną psychoterapię dla kobiet, psychoterapię grupową z młodzieżą i osobami dorosłymi, a także psychoterapię dla par.',
 						'Pracuję z osobami, które zmagają się z zaburzeniami odżywiania, zaburzeniami lękowymi, problemami w określeniu tożsamości i wyrażaniu emocji, depresją, stanami lękowymi, współzależnymi relacjami, niską samooceną, problemami społecznymi oraz traumatycznymi przeżyciami. Z pełnym zaangażowaniem wspieram także osoby z grupy LGBT+, zapewniając im przestrzeń opartą na akceptacji, zrozumieniu oraz profesjonalnym wsparciu.',
 						'Specjalizuję się w nurcie analizy transakcyjnej opierającej się na zapoznaniu się klienta ze schematami, jakie występują w jego i otoczenia postępowaniu, zwłaszcza w komunikacji, a także rolami, w jakie wchodzimy w relacjach. W swoich działaniach opieram się na kodeksie etycznym psychoterapeuty, buduję z klientem przestrzeń opartą na zaufaniu, poczuciu bezpieczeństwa i akceptacji.',
 						'W trosce o jak najwyższe standardy mojej pracy nieustannie rozwijam swoje umiejętności poprzez udział w licznych kursach, konferencjach i szkoleniach zawodowych. Pracuję pod stałą opieką superwizorów.',
@@ -910,6 +910,15 @@ const plPL = {
 				},
 				siteLocations: {
 					hint: 'Brak zaznaczenia = produkt widoczny tylko na cenniku.'
+				},
+				image: {
+					label: 'Zdjęcie produktu',
+					hint: 'Jedno zdjęcie wspólne dla wszystkich wersji językowych.',
+					upload: 'Dodaj zdjęcie',
+					replace: 'Zmień zdjęcie',
+					remove: 'Usuń zdjęcie',
+					invalidFile: 'Nieobsługiwany plik - wybierz obrazek o rozmiarze do 8 MB.',
+					uploadError: 'Nie udało się przesłać zdjęcia. Spróbuj ponownie.'
 				},
 				name: {
 					label: 'Nazwa',

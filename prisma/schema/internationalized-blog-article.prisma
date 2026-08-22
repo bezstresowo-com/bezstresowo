@@ -1,0 +1,31 @@
+model InternationalizedBlogArticle {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  lang String
+
+  /// A language version toggled off in the panel is kept (content, media,
+  /// SEO fields) and hidden everywhere - never deleted.
+  disabled Boolean @default(false)
+
+  title   String
+  content String
+
+  /// SEO, kept per language (title ~60 chars, description ~155 chars).
+  metaTitle       String
+  metaDescription String
+
+  /// Featured image (one of `mediaIds`) plus its localized alt text.
+  featuredImageId  String?
+  featuredImageAlt String?
+
+  mediaIds       String[]
+  metadataJsonLD Json
+
+  blogArticle   BlogArticle @relation(fields: [blogArticleId], references: [id], onDelete: Cascade)
+  blogArticleId String      @db.ObjectId
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([blogArticleId, lang])
+}

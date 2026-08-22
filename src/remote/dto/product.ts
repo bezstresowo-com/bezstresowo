@@ -79,6 +79,13 @@ export class UpsertProductDto {
 	@MaxLength(120)
 	orderKey?: string;
 
+	/** One image shared by every language version - a bucket object key. */
+	@IsOptional()
+	@IsString()
+	@MinLength(1)
+	@MaxLength(250)
+	imageId?: string;
+
 	/** Always PLN, always an integer amount of grosze. */
 	@IsDefined()
 	@Type(() => Number)
@@ -123,8 +130,8 @@ export type LocalizedProduct = {
 	slug: string;
 	name: string;
 	description: string;
-	mediaIds: string[];
-	imageUrls: string[];
+	/** The one image shared by every language version, if any. */
+	imageUrl: string | null;
 	priceInMinorUnits: number;
 	currency: string;
 	siteLocations: string[];

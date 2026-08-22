@@ -105,8 +105,21 @@
 						{/if}
 					</div>
 
-					<h2 class="mb-1 text-2xl font-bold text-gray-900">{primary?.name ?? product.slug}</h2>
-					<code class="text-sm text-gray-500">/{product.slug}</code>
+					<div class="flex items-start gap-4">
+						{#if product.imageUrl}
+							<img
+								src={product.imageUrl}
+								alt={primary?.name ?? product.slug}
+								class="h-16 w-24 rounded-md border border-gray-200 object-cover"
+								loading="lazy"
+							/>
+						{/if}
+
+						<div>
+							<h2 class="mb-1 text-2xl font-bold text-gray-900">{primary?.name ?? product.slug}</h2>
+							<code class="text-sm text-gray-500">/{product.slug}</code>
+						</div>
+					</div>
 
 					<div class="mt-4 flex items-center justify-between border-t border-gray-100 pt-4">
 						<div class="text-lg font-semibold text-gray-800">

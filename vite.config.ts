@@ -21,7 +21,7 @@ const prismaClientDir = fileURLToPath(
  * `writeBundle` runs after the server files are written but before the Vercel
  * adapter's `closeBundle` packages the function, so the binary ships with it.
  * The Linux engine only exists when `prisma generate` ran with the
- * `rhel-openssl-3.0.x` binary target (see prisma/schema.prisma).
+ * `rhel-openssl-3.0.x` binary target (see prisma/schema/schema.prisma).
  */
 function copyPrismaQueryEngine(): Plugin {
 	return {

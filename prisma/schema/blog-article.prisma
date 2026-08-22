@@ -1,0 +1,18 @@
+model BlogArticle {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+
+  /// One slug shared by every language version (ideally english):
+  /// `/pl/blog/<slug>` and `/uk/blog/<slug>` differ only in the prefix.
+  ///
+  /// Optional only because the production collection still holds legacy
+  /// (pre-i18n) documents without it - they keep the old articles' bucket
+  /// files referenced (see `media-cleanup.ts`) and must stay readable.
+  /// Every document the app writes has a slug; the admin queries filter on
+  /// `slug: { isSet: true }` and uniqueness is asserted in `assertFreeSlug`.
+  slug String? @unique
+
+  internationalizedArticles InternationalizedBlogArticle[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

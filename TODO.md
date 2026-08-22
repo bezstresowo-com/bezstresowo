@@ -1,3 +1,11 @@
+- [x] - dodac mozliwosc dodania zdjecia do produktu (jedno zdjecie na wszystkie wersje jezykowe)
+  - `Product.imageId` (`String?`) - zdjecie siedzi na produkcie, nie per tlumaczenie, wiec kazda wersja jezykowa pokazuje to samo
+  - w formularzu panelu sekcja "Zdjecie produktu" nad zakladkami jezykow (dodaj / zmien / usun + podglad); upload przez istniejace `uploadMedia` (tylko obrazki, limit 8 MB), lista produktow w panelu pokazuje miniature
+  - sklep renderuje zdjecie produktu (fallback na dotychczasowy placeholder); JSON-LD produktu bierze `image` z tego zdjecia; publiczne `getProducts` zwraca `imageUrl` zamiast martwych `mediaIds`/`imageUrls` z tlumaczen
+  - sprzatanie: `Product.imageId` zarejestrowany jako media owner w `media-cleanup.ts`; podmiana/usuniecie zdjecia i usuniecie produktu ida przez `cleanupMedia`, uploady porzucone bez zapisu lapie sweep (grace period 24h)
+
+## Old
+
 - [x] - slug dla artykolow powinien byc tylko jeden (dla wszystkich wersji jezykowych - najlepiej po angielsku)
   - slug przeniesiony z `InternationalizedBlogArticle` na `BlogArticle` (`@unique`); wersje jezykowe roznia sie tylko prefixem (`/pl/blog/<slug>` i `/uk/blog/<slug>`)
   - w panelu jedno wspolne pole sluga (hint: po angielsku), bez podpowiadania z tytulu; sitemap/hreflang/JSON-LD licza URL-e ze wspolnego sluga
