@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { env } from '$env/dynamic/public';
-	import { getLocale, LOCALE_HTML_LANG, t, translateKey } from '$i18n';
+	import { getLocale, LOCALE_HTML_LANG, path, t, translateKey } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
 	import { sendContactRequest } from '$remote/contact.remote';
@@ -149,9 +149,9 @@
 <section class="scroll-mt-12 pt-12 max-2xl:px-4" id="contact">
 	<!-- Header -->
 	<div class="pb-8 text-center">
-		<h1 class="text-3xl font-semibold text-primary sm:text-4xl">
+		<h2 class="text-3xl font-semibold text-primary sm:text-4xl">
 			{t.user.contactForm.title}
-		</h1>
+		</h2>
 		<p class="mx-auto mt-3 max-w-3xl text-slate-600">
 			{t.user.contactForm.subtitle}
 		</p>
@@ -265,6 +265,13 @@
 				{#if CONTACT_FORM_CAPTCHA_ENABLED}
 					<div bind:this={captchaContainer} class="flex justify-center"></div>
 				{/if}
+
+				<p class="text-sm leading-relaxed text-slate-600">
+					{t.user.contactForm.privacyNotice.text}
+					<a class="font-medium underline underline-offset-2" href={path('/gdpr')}>
+						{t.user.contactForm.privacyNotice.link}</a
+					>.
+				</p>
 
 				<Button type={ButtonTypes.Submit} disabled={isSubmitDisabled} tailwind="w-full">
 					{#if !isLoading}

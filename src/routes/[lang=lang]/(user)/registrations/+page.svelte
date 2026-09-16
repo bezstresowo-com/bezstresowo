@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale, t, translateKey } from '$i18n';
+	import { getLocale, path, t, translateKey } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
@@ -247,6 +247,13 @@
 			{#if generalError}
 				<small class="block text-sm text-danger">{translateKey(generalError)}</small>
 			{/if}
+
+			<p class="text-sm leading-relaxed text-primary/70">
+				{t.user.pages.registrations.privacyNotice.text}
+				<a class="font-medium underline underline-offset-2" href={path('/gdpr')}>
+					{t.user.pages.registrations.privacyNotice.link}</a
+				>.
+			</p>
 
 			<Button
 				type={ButtonTypes.Submit}

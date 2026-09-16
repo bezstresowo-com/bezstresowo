@@ -42,7 +42,7 @@ const plPL = {
 					learnMore: 'Dowiedz się więcej',
 					services: {
 						couplesTherapy: {
-							title: 'Psychoterapia pary',
+							title: 'Psychoterapia par',
 							description:
 								'Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.',
 							extended: {
@@ -627,6 +627,10 @@ const plPL = {
 				title: 'Rejestracja konsultacji',
 				titleDescription: 'Wypełnij formularz, aby zarejestrować konsultację.',
 				submit: 'Zarejestruj',
+				privacyNotice: {
+					text: 'Dane z formularza wykorzystam wyłącznie do obsługi Twojego zapisu. Szczegóły znajdziesz w',
+					link: 'polityce prywatności'
+				},
 				therapyType: {
 					label: 'Typ terapii',
 					placeholder: 'Wybierz typ terapii',
@@ -724,6 +728,10 @@ const plPL = {
 			subtitle: 'Skontaktuj się, aby umówić konsultację lub zadać pytania.',
 			infoTitle: 'Informacje kontaktowe',
 			submit: 'Wyślij',
+			privacyNotice: {
+				text: 'Dane z formularza wykorzystam wyłącznie, aby odpowiedzieć na Twoją wiadomość. Szczegóły znajdziesz w',
+				link: 'polityce prywatności'
+			},
 			toast: {
 				success: 'Twoja wiadomość została wysłana!',
 				error: 'Wystąpił błąd serwera. Spróbuj ponownie później.'

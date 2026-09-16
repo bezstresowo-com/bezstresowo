@@ -1,3 +1,5 @@
+import { Locale } from '$i18n';
+
 export const CONTACT_ELEMENTS = [
 	{
 		id: 'email',
@@ -30,18 +32,28 @@ export const FOLLOW_ME_LINKS = [
 		id: 'facebook',
 		label: 'facebook',
 		icon: 'fa-brands fa-facebook-f',
-		href: 'https://www.facebook.com/profile.php?id=100088923916892'
+		href: 'https://www.facebook.com/profile.php?id=100088923916892',
+		locales: [Locale.plPL, Locale.ukUA]
 	},
 	{
-		id: 'instagram',
-		label: 'instagram',
+		id: 'instagram-pl',
+		label: 'Instagram Bezstresowo po polsku',
 		icon: 'fa-brands fa-instagram',
-		href: 'https://www.instagram.com/_bezstresovo_psychology'
+		href: 'https://www.instagram.com/_bezstresowo_/',
+		locales: [Locale.plPL]
 	},
 	{
-		id: 'telegram',
-		label: 'telegram',
+		id: 'instagram-uk',
+		label: 'Instagram Bezstresowo українською',
+		icon: 'fa-brands fa-instagram',
+		href: 'https://www.instagram.com/_bezstresovo_psychology/',
+		locales: [Locale.ukUA]
+	},
+	{
+		id: 'telegram-uk',
+		label: 'Telegram Bezstresowo українською',
 		icon: 'fa-brands fa-telegram',
-		href: 'https://t.me/Olesya_Haiduk'
+		href: 'https://t.me/zhinochi_spravy_psychologia',
+		locales: [Locale.ukUA]
 	}
-];
+] as const;

@@ -63,9 +63,9 @@
 
 <section class="bg-white pt-12 text-primary max-2xl:px-4">
 	<div class="pb-8 text-center">
-		<h1 class="text-3xl font-semibold sm:text-4xl">
+		<h2 class="text-3xl font-semibold sm:text-4xl">
 			{t.user.pages.home.offeredServices.title}
-		</h1>
+		</h2>
 	</div>
 
 	<div class="grid grid-cols-2 gap-5 max-md:flex max-md:flex-col">
