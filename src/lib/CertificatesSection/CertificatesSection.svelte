@@ -87,9 +87,9 @@
 		<!-- An empty gallery (unseeded database) hides the section. -->
 		{#if certificateList.length > 0}
 			<div class="mx-auto text-center">
-				<h1 class="text-3xl font-semibold sm:text-4xl">
+				<h2 class="text-3xl font-semibold sm:text-4xl">
 					{t.user.pages.home.certificates.title}
-				</h1>
+				</h2>
 			</div>
 			<div class="mx-auto mt-6 w-full">
 				<div class="grid w-full [grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))] gap-4">

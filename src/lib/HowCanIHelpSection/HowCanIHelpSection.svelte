@@ -5,9 +5,9 @@
 
 <section class="bg-white pt-12 text-primary max-2xl:px-4">
 	<div class="mx-auto pb-8 text-center">
-		<h1 class="text-3xl font-semibold sm:text-4xl">
+		<h2 class="text-3xl font-semibold sm:text-4xl">
 			{t.user.pages.home.howCanIHelp.title}
-		</h1>
+		</h2>
 	</div>
 	<div class="mx-auto flex gap-3 max-md:flex-col">
 		{#each HELP_ELEMENTS as { icon, name }, i (i)}

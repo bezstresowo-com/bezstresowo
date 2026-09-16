@@ -36,7 +36,7 @@
 				{/if}
 
 				<div class="col-span-4">
-					<h1 class="mb-5 text-3xl text-primary">{t.user.pages.home.aboutMe.title}</h1>
+					<h2 class="mb-5 text-3xl text-primary">{t.user.pages.home.aboutMe.title}</h2>
 					<!-- TipTap HTML written in the panel - see `/admin/bio`. -->
 					<div
 						class="text-sm text-primary/80 [&_h1]:my-3 [&_h1]:text-2xl [&_h2]:my-2 [&_h2]:text-xl [&_h3]:my-2 [&_h3]:text-lg [&_li]:my-0 [&_ol]:my-2 [&_ol]:list-decimal [&_ol]:pl-5 [&_p]:my-2 [&_ul]:my-2 [&_ul]:list-disc [&_ul]:pl-5"
