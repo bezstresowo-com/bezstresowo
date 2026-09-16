@@ -85,13 +85,23 @@ export function productListJsonLd(items: readonly unknown[]): unknown | undefine
 
 /** Nested entities must not repeat `@context` - the top level object carries it. */
 function stripJsonLdContext(item: unknown): unknown {
+	if (typeof item === 'string') {
+		return item.replaceAll('https://bezstresowo.org', 'https://www.bezstresowo.org');
+	}
+
+	if (Array.isArray(item)) {
+		return item.map(stripJsonLdContext);
+	}
+
 	if (typeof item !== 'object' || item === null) {
 		return item;
 	}
 
 	const { '@context': _context, ...rest } = item as Record<string, unknown>;
 
-	return rest;
+	return Object.fromEntries(
+		Object.entries(rest).map(([key, value]) => [key, stripJsonLdContext(value)])
+	);
 }
 
 /** URL of the automatically generated social preview image. */

@@ -107,6 +107,7 @@ function mediaUrl(mediaId: string | null): string | null {
  * simply become no-ops.
  */
 const LEGACY_ARTICLE_REPLACEMENTS = [
+	['https://bezstresowo.org', 'https://www.bezstresowo.org'],
 	['15 sygnałów, które nie warto ignorować', '15 sygnałów, których nie warto ignorować'],
 	['Gaslighting - to forma', 'Gaslighting to forma'],
 	[

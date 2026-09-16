@@ -4,4 +4,4 @@ Disallow: /admin
 Disallow: /pl/admin
 Disallow: /uk/admin
 
-Sitemap: https://bezstresowo.org/sitemap.xml
+Sitemap: https://www.bezstresowo.org/sitemap.xml
