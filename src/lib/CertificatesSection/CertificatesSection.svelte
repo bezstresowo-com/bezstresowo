@@ -104,6 +104,7 @@
 								src={certificate.imageUrl}
 								alt={certificateAlt(certificate, i)}
 								loading="lazy"
+								decoding="async"
 							/>
 						</button>
 					{/each}

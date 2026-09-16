@@ -22,9 +22,21 @@ export const getCertificates = query(
 
 			return {
 				id: certificate.id,
-				imageUrl: s3.buildUrl(certificate.imageId),
+				imageUrl: certificateImageUrl(certificate.imageId, s3),
 				alt: alts[lang] ?? alts[DEFAULT_LOCALE] ?? ''
 			};
 		});
 	}
 );
+
+/**
+ * The original certificate imports already live in `static/assets/certs`.
+ * Serving their optimized copies avoids downloading the much larger seed
+ * originals from the media bucket. Certificates added in the panel continue
+ * to use their S3 URL.
+ */
+function certificateImageUrl(imageId: string, s3: S3Service): string {
+	const seededFile = /^seed-(cert-\d+\.jpg)$/.exec(imageId)?.[1];
+
+	return seededFile ? `/assets/certs/${seededFile}` : s3.buildUrl(imageId);
+}
