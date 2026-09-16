@@ -53,7 +53,7 @@ export const FOLLOW_ME_LINKS = [
 		id: 'telegram-uk',
 		label: 'Telegram Bezstresowo українською',
 		icon: 'fa-brands fa-telegram',
-		href: 'https://t.me/about_you_therapy',
+		href: 'https://t.me/zhinochi_spravy_psychologia',
 		locales: [Locale.ukUA]
 	}
 ] as const;

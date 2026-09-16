@@ -10,12 +10,29 @@ import {
 	type LocalizedCertificate
 } from './dto/certificate';
 
+const FALLBACK_CERTIFICATE_FILES = [
+	'cert-17.jpg',
+	'cert-18.jpg',
+	...Array.from({ length: 17 }, (_, index) => `cert-${index}.jpg`)
+];
+
 /** The home page gallery, in the order set in the panel. */
 export const getCertificates = query(
 	dtoSchema(CertificateListParamsDto),
 	async ({ lang }): Promise<LocalizedCertificate[]> => {
 		const certificates = await prisma.certificate.findMany({ orderBy: { order: 'asc' } });
 		const s3 = new S3Service();
+
+		if (certificates.length === 0) {
+			return FALLBACK_CERTIFICATE_FILES.map((file, index) => ({
+				id: `fallback-${file}`,
+				imageUrl: `/assets/certs/${file}`,
+				alt:
+					lang === 'uk-UA'
+						? `Диплом або сертифікат про освіту ${index + 1}`
+						: `Dyplom lub certyfikat potwierdzający kwalifikacje ${index + 1}`
+			}));
+		}
 
 		return certificates.map((certificate) => {
 			const alts = toAltRecord(certificate.altTexts);
