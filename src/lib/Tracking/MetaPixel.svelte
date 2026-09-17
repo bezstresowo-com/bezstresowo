@@ -4,7 +4,7 @@
 	import { getLocale, Locale, path } from '$i18n';
 	import { onMount } from 'svelte';
 
-	const PIXEL_ID = '1092359173180905';
+	const PIXEL_ID = '2269646353881533';
 	const CONSENT_STORAGE_KEY = 'bezstresowo:marketing-consent:v1';
 	const COOKIE_SETTINGS_EVENT = 'bezstresowo:cookie-settings';
 
