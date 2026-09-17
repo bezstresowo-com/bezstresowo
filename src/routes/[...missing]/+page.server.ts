@@ -10,6 +10,7 @@ const LEGACY_PAGES = [
 	'blog',
 	'price-list',
 	'shop',
+	'materials',
 	'registrations',
 	'gdpr',
 	'terms-of-service',

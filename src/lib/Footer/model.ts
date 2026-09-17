@@ -30,6 +30,7 @@ export function contactElements(settings: PublicSiteSettings, locale: Locale) {
 
 /** `name` indexes the `t.user.footer.fastLinks` dictionary section. */
 export const FAST_LINKS = [
+	{ id: 'materials', name: 'materials', path: '/materials' },
 	{ id: 'statute', name: 'termsOfService', path: '/terms-of-service' },
 	{ id: 'gdpr', name: 'gdpr', path: '/gdpr' },
 	{ id: 'priceList', name: 'priceList', path: '/price-list' }

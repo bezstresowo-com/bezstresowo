@@ -8,7 +8,7 @@ import type { RequestHandler } from './$types';
  * Indexable static pages; everything rendered with `noindex` (gdpr, regulamin,
  * payment results) intentionally stays out of the sitemap.
  */
-const STATIC_PAGES = ['/home', '/registrations', '/blog', '/price-list', '/shop'];
+const STATIC_PAGES = ['/home', '/materials', '/registrations', '/blog', '/price-list', '/shop'];
 
 /**
  * The sitemap is computed at request time so articles published from the admin
