@@ -2,6 +2,7 @@
 	import Footer from '$lib/Footer/Footer.svelte';
 	import Header from '$lib/Header/Header.svelte';
 	import { providePageAlternates } from '$lib/Seo/alternates-context.svelte';
+	import MetaPixel from '$lib/Tracking/MetaPixel.svelte';
 
 	let { children } = $props();
 
@@ -10,6 +11,7 @@
 	providePageAlternates();
 </script>
 
+<MetaPixel />
 <Header />
 
 <main class="content bg-white">
