@@ -1,12 +1,16 @@
 <script lang="ts">
-	import { t } from '$i18n';
+	import { getLocale, t } from '$i18n';
+	import type { PublicSiteSettings } from '$shared/global/config/site-settings';
 	import { isNil } from 'lodash-es';
-	import { CONTACT_ELEMENTS } from '../model';
+	import { contactElements } from '../model';
+
+	let { settings }: { settings: PublicSiteSettings } = $props();
+	const elements = $derived(contactElements(settings, getLocale()));
 </script>
 
 <div>
 	<div class="mb-3 text-secondary">{t.user.footer.contactHeader}</div>
-	{#each CONTACT_ELEMENTS as { id, label, icon, href } (id)}
+	{#each elements as { id, label, icon, href } (id)}
 		<div class="mb-3 flex items-center space-x-4">
 			<span><i class="text-accent {icon}"></i></span>
 			{#if isNil(href)}

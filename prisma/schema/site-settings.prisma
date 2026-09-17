@@ -1,0 +1,21 @@
+/// Contact details and social links displayed throughout the public site.
+/// A singleton identified by the stable `key`, so the panel only edits one row.
+model SiteSettings {
+  id  String @id @default(auto()) @map("_id") @db.ObjectId
+  key String @unique @default("main")
+
+  phone         String
+  email         String
+  locationPl    String
+  locationUk    String
+  hoursWeek     String
+  hoursSaturday String
+
+  facebookUrl    String
+  instagramPlUrl String
+  instagramUkUrl String
+  telegramUkUrl  String
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
