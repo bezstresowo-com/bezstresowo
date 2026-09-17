@@ -624,6 +624,9 @@ const plPL = {
 				}
 			},
 			materials: {
+				pageTitle: 'Bezpłatne materiały',
+				pageDescription:
+					'Przewodniki i praktyczne materiały, które pomagają lepiej rozumieć siebie, swoje relacje i powtarzające się schematy.',
 				guide: {
 					compactEyebrow: 'Bezpłatny praktyczny przewodnik',
 					eyebrow: '14 stron pytań, ćwiczeń i praktycznych wskazówek',
