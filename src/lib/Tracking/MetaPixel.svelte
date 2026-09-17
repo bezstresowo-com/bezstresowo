@@ -64,6 +64,7 @@
 		} as Fbq;
 
 		fbq.queue = [];
+		fbq.push = fbq;
 		fbq.loaded = true;
 		fbq.version = '2.0';
 		pixelWindow.fbq = fbq;
