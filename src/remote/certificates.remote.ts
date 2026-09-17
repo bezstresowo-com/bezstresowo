@@ -27,6 +27,7 @@ export const getCertificates = query(
 			return FALLBACK_CERTIFICATE_FILES.map((file, index) => ({
 				id: `fallback-${file}`,
 				imageUrl: `/assets/certs/${file}`,
+				thumbnailUrl: `/assets/certs/thumbs/${file.replace(/\.jpg$/, '.webp')}`,
 				alt:
 					lang === 'uk-UA'
 						? `Диплом або сертифікат про освіту ${index + 1}`
@@ -36,10 +37,14 @@ export const getCertificates = query(
 
 		return certificates.map((certificate) => {
 			const alts = toAltRecord(certificate.altTexts);
+			const seededFile = seededCertificateFile(certificate.imageId);
 
 			return {
 				id: certificate.id,
-				imageUrl: certificateImageUrl(certificate.imageId, s3),
+				imageUrl: seededFile ? `/assets/certs/${seededFile}` : s3.buildUrl(certificate.imageId),
+				thumbnailUrl: seededFile
+					? `/assets/certs/thumbs/${seededFile.replace(/\.jpg$/, '.webp')}`
+					: undefined,
 				alt: alts[lang] ?? alts[DEFAULT_LOCALE] ?? ''
 			};
 		});
@@ -52,8 +57,6 @@ export const getCertificates = query(
  * originals from the media bucket. Certificates added in the panel continue
  * to use their S3 URL.
  */
-function certificateImageUrl(imageId: string, s3: S3Service): string {
-	const seededFile = /^seed-(cert-\d+\.jpg)$/.exec(imageId)?.[1];
-
-	return seededFile ? `/assets/certs/${seededFile}` : s3.buildUrl(imageId);
+function seededCertificateFile(imageId: string): string | undefined {
+	return /^seed-(cert-\d+\.jpg)$/.exec(imageId)?.[1];
 }
