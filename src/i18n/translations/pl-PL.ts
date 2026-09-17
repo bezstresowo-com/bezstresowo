@@ -625,10 +625,11 @@ const plPL = {
 			},
 			materials: {
 				guide: {
-					eyebrow: 'Bezpłatny przewodnik • 14 stron',
-					title: '17 pytań, które pomagają zobaczyć relację wyraźniej',
+					compactEyebrow: 'Bezpłatny praktyczny przewodnik',
+					eyebrow: '14 stron pytań, ćwiczeń i praktycznych wskazówek',
+					title: '17 pytań, które pokażą, co naprawdę dzieje się w Twojej relacji',
 					description:
-						'Oddziel fakty od nadziei, lęku i przyzwyczajenia — bez diagnozowania partnera i bez podejmowania decyzji za Ciebie.',
+						'Oddziel fakty od nadziei, lęku i przyzwyczajenia i spójrz na swoją relację bez złudzeń.',
 					benefits: [
 						'Pytania i praktyczne ćwiczenia',
 						'Cena zostania i cena odejścia',

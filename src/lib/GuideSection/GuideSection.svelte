@@ -36,7 +36,9 @@
 						? 'inline-flex rounded-full border border-secondary/50 bg-white/10 px-3 py-1.5 text-xs font-semibold text-secondary'
 						: 'inline-flex rounded-full border border-secondary/50 bg-white/10 px-4 py-2 text-sm font-semibold text-secondary'}
 				>
-					{t.user.pages.materials.guide.eyebrow}
+					{compact
+						? t.user.pages.materials.guide.compactEyebrow
+						: t.user.pages.materials.guide.eyebrow}
 				</span>
 
 				<svelte:element
