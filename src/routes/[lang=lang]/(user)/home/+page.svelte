@@ -20,6 +20,6 @@
 <AboutMeSection />
 <CertificatesSection />
 <ServicesSection />
-<GuideSection />
+<GuideSection compact />
 <ContactForm />
 <Blog siteLocation="home" />
