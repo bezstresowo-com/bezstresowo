@@ -93,12 +93,14 @@
 	{/if}
 	<meta name="twitter:image" content={previewImage} />
 	<meta name="twitter:image:alt" content={previewImageAlt} />
-
-	{#if jsonLd}
-		<!-- `JSON.stringify` leaves `<` alone, so a `</script>` inside the data
-			could break out of the block - escaping every `<` as < (still valid
-			JSON) makes that impossible. -->
-		<!-- eslint-disable-next-line no-useless-escape -- `<\/script>` must stay escaped inside the template literal -->
-		{@html `<script type="application/ld+json">${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}<\/script>`}
-	{/if}
 </svelte:head>
+
+{#if jsonLd}
+	<!--
+		JSON-LD is valid in the document body. Keeping it outside `svelte:head`
+		avoids a Svelte hydration mismatch when this component resolves inside an
+		async boundary (blog article, shop and price list).
+	-->
+	<!-- eslint-disable-next-line no-useless-escape -- `<\/script>` must stay escaped inside the template literal -->
+	{@html `<script type="application/ld+json" data-seo-json-ld>${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}<\/script>`}
+{/if}
