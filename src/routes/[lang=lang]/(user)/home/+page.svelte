@@ -7,7 +7,8 @@
 		ServicesSection,
 		ContactForm,
 		Blog,
-		CertificatesSection
+		CertificatesSection,
+		GuideSection
 	} from '$lib';
 	import Seo from '$lib/Seo/Seo.svelte';
 </script>
@@ -19,5 +20,6 @@
 <AboutMeSection />
 <CertificatesSection />
 <ServicesSection />
+<GuideSection compact />
 <ContactForm />
 <Blog siteLocation="home" />

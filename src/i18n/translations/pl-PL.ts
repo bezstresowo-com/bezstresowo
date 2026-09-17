@@ -623,6 +623,23 @@ const plPL = {
 					button: 'Pobierz PDF'
 				}
 			},
+			materials: {
+				guide: {
+					compactEyebrow: 'Bezpłatny praktyczny przewodnik',
+					eyebrow: '14 stron pytań, ćwiczeń i praktycznych wskazówek',
+					title: '17 pytań, które pokażą, co naprawdę dzieje się w Twojej relacji',
+					description:
+						'Oddziel fakty od nadziei, lęku i przyzwyczajenia i spójrz na swoją relację bez złudzeń.',
+					benefits: [
+						'Pytania i praktyczne ćwiczenia',
+						'Cena zostania i cena odejścia',
+						'Mapa słów, zachowań i schematów'
+					],
+					cta: 'Pobierz bezpłatny przewodnik',
+					note: 'Przejdziesz do bezpiecznego formularza pobrania przewodnika.',
+					coverTitle: 'PYTAŃ O RELACJĘ'
+				}
+			},
 			registrations: {
 				title: 'Rejestracja konsultacji',
 				titleDescription: 'Wypełnij formularz, aby zarejestrować konsultację.',
@@ -709,6 +726,7 @@ const plPL = {
 				home: 'Strona główna',
 				blog: 'Blog',
 				shop: 'Sklep',
+				materials: 'Materiały',
 				registrations: 'Konsultacje'
 			}
 		},
@@ -718,6 +736,7 @@ const plPL = {
 			followMeHeader: 'Śledź mnie',
 			copyright: '© {{ year }} Bezstresowo. Wszystkie prawa zastrzeżone.',
 			fastLinks: {
+				materials: 'Bezpłatne materiały',
 				termsOfService: 'Regulamin',
 				gdpr: 'RODO',
 				priceList: 'Cennik'
@@ -1196,6 +1215,11 @@ const plPL = {
 			title: 'Sklep | Materiały wspierające dobrostan | Bezstresowo',
 			description:
 				'Materiały psychoedukacyjne i produkty wspierające zdrowie psychiczne. Bezstresowo, Olesya Haiduk, psychoterapia w Łodzi i online.'
+		},
+		materials: {
+			title: 'Bezpłatne materiały o relacjach | Bezstresowo',
+			description:
+				'Pobierz bezpłatny przewodnik: 17 pytań, które pomagają uporządkować fakty, emocje i powtarzające się schematy w relacji.'
 		},
 		termsOfService: {
 			title: 'Regulamin | Bezstresowo',
