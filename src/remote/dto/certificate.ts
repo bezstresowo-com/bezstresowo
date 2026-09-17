@@ -78,6 +78,8 @@ export class CertificateListParamsDto {
 export type LocalizedCertificate = {
 	id: string;
 	imageUrl: string;
+	/** Lightweight gallery preview; the full image is loaded only in the dialog. */
+	thumbnailUrl?: string;
 	/** Alt in the requested language (default locale as fallback), may be empty. */
 	alt: string;
 };

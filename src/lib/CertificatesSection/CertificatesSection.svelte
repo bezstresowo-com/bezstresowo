@@ -100,9 +100,11 @@
 							onclick={() => openCertificate(certificate)}
 						>
 							<img
-								class="aspect-video object-contain"
-								src={certificate.imageUrl}
+								class="aspect-video w-full object-contain"
+								src={certificate.thumbnailUrl ?? certificate.imageUrl}
 								alt={certificateAlt(certificate, i)}
+								width="640"
+								height="360"
 								loading="lazy"
 								decoding="async"
 							/>
@@ -138,7 +140,7 @@
 				class="h-full w-full object-contain"
 				src={selectedCertificate.imageUrl}
 				alt={selectedCertificate.alt || t.user.a11y.certificatePreview}
-				loading="lazy"
+				decoding="async"
 			/>
 		</button>
 	</div>
