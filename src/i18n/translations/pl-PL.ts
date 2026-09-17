@@ -961,6 +961,39 @@ const plPL = {
 				}
 			}
 		},
+		siteSettings: {
+			label: 'Ustawienia strony',
+			description: 'Edytuj dane kontaktowe, godziny pracy i linki społecznościowe',
+			back: 'Wróć',
+			title: 'Ustawienia strony',
+			intro: 'Zmiany pojawią się jednocześnie w sekcji kontaktowej i w stopce strony.',
+			sections: {
+				contact: 'Dane kontaktowe',
+				hours: 'Godziny pracy',
+				social: 'Media społecznościowe'
+			},
+			fields: {
+				phone: 'Numer telefonu',
+				email: 'Adres e-mail',
+				locationPl: 'Lokalizacja po polsku',
+				locationUk: 'Lokalizacja po ukraińsku',
+				hoursWeek: 'Poniedziałek-piątek',
+				hoursSaturday: 'Sobota',
+				facebookUrl: 'Facebook',
+				instagramPlUrl: 'Instagram po polsku',
+				instagramUkUrl: 'Instagram po ukraińsku',
+				telegramUkUrl: 'Telegram po ukraińsku'
+			},
+			hoursHint: 'Wpisz sam przedział godzinowy, np. 9:00 - 18:00.',
+			socialHint: 'Wklej pełny link zaczynający się od https://.',
+			submit: 'Zapisz zmiany',
+			submitLoading: 'Zapisywanie...',
+			cancel: 'Anuluj',
+			notifications: {
+				updateSuccess: 'Ustawienia strony zostały zapisane!',
+				updateError: 'Nie udało się zapisać ustawień. Sprawdź pola i spróbuj ponownie.'
+			}
+		},
 		certificates: {
 			label: 'Certyfikaty',
 			description: 'Dodawaj, usuwaj i zmieniaj kolejność certyfikatów na stronie głównej',

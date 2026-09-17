@@ -1,10 +1,10 @@
 <script lang="ts">
 	import { getLocale, t } from '$i18n';
-	import { FOLLOW_ME_LINKS } from '../model';
+	import type { PublicSiteSettings } from '$shared/global/config/site-settings';
+	import { followMeLinks } from '../model';
 
-	const links = $derived(
-		FOLLOW_ME_LINKS.filter(({ locales }) => locales.some((locale) => locale === getLocale()))
-	);
+	let { settings }: { settings: PublicSiteSettings } = $props();
+	const links = $derived(followMeLinks(settings, getLocale()));
 </script>
 
 <div>

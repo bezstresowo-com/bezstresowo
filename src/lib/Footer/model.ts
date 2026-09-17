@@ -1,24 +1,32 @@
 import { Locale } from '$i18n';
+import {
+	localizedLocation,
+	phoneHref,
+	type PublicSiteSettings
+} from '$shared/global/config/site-settings';
 
-export const CONTACT_ELEMENTS = [
-	{
-		id: 'email',
-		label: 'bezstresowo.org@gmail.com',
-		icon: 'fa-regular fa-envelope',
-		href: 'mailto:bezstresowo.org@gmail.com'
-	},
-	{
-		id: 'phone',
-		label: '+48 795 819 910',
-		icon: 'fa fa-phone',
-		href: 'tel:+48795819910'
-	},
-	{
-		id: 'location',
-		label: 'Łódź, Polska',
-		icon: 'fa fa-location-dot'
-	}
-];
+export function contactElements(settings: PublicSiteSettings, locale: Locale) {
+	return [
+		{
+			id: 'email',
+			label: settings.email,
+			icon: 'fa-regular fa-envelope',
+			href: `mailto:${settings.email}`
+		},
+		{
+			id: 'phone',
+			label: settings.phone,
+			icon: 'fa fa-phone',
+			href: phoneHref(settings.phone)
+		},
+		{
+			id: 'location',
+			label: localizedLocation(settings, locale),
+			icon: 'fa fa-location-dot',
+			href: undefined
+		}
+	];
+}
 
 /** `name` indexes the `t.user.footer.fastLinks` dictionary section. */
 export const FAST_LINKS = [
@@ -27,33 +35,36 @@ export const FAST_LINKS = [
 	{ id: 'priceList', name: 'priceList', path: '/price-list' }
 ] as const;
 
-export const FOLLOW_ME_LINKS = [
-	{
-		id: 'facebook',
-		label: 'facebook',
-		icon: 'fa-brands fa-facebook-f',
-		href: 'https://www.facebook.com/profile.php?id=100088923916892',
-		locales: [Locale.plPL, Locale.ukUA]
-	},
-	{
-		id: 'instagram-pl',
-		label: 'Instagram Bezstresowo po polsku',
-		icon: 'fa-brands fa-instagram',
-		href: 'https://www.instagram.com/_bezstresowo_/',
-		locales: [Locale.plPL]
-	},
-	{
-		id: 'instagram-uk',
-		label: 'Instagram Bezstresowo українською',
-		icon: 'fa-brands fa-instagram',
-		href: 'https://www.instagram.com/_bezstresovo_psychology/',
-		locales: [Locale.ukUA]
-	},
-	{
-		id: 'telegram-uk',
-		label: 'Telegram Bezstresowo українською',
-		icon: 'fa-brands fa-telegram',
-		href: 'https://t.me/zhinochi_spravy_psychologia',
-		locales: [Locale.ukUA]
-	}
-] as const;
+export function followMeLinks(settings: PublicSiteSettings, locale: Locale) {
+	return [
+		{
+			id: 'facebook',
+			label: 'Facebook',
+			icon: 'fa-brands fa-facebook-f',
+			href: settings.facebookUrl
+		},
+		...(locale === Locale.plPL
+			? [
+					{
+						id: 'instagram-pl',
+						label: 'Instagram Bezstresowo po polsku',
+						icon: 'fa-brands fa-instagram',
+						href: settings.instagramPlUrl
+					}
+				]
+			: [
+					{
+						id: 'instagram-uk',
+						label: 'Instagram Bezstresowo українською',
+						icon: 'fa-brands fa-instagram',
+						href: settings.instagramUkUrl
+					},
+					{
+						id: 'telegram-uk',
+						label: 'Telegram Bezstresowo українською',
+						icon: 'fa-brands fa-telegram',
+						href: settings.telegramUkUrl
+					}
+				])
+	];
+}

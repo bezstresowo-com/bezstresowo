@@ -961,6 +961,39 @@ const ukUA: Translation = {
 				}
 			}
 		},
+		siteSettings: {
+			label: 'Налаштування сайту',
+			description: 'Редагуйте контакти, години роботи та посилання на соцмережі',
+			back: 'Назад',
+			title: 'Налаштування сайту',
+			intro: 'Зміни одночасно з’являться у контактному блоці та нижній частині сайту.',
+			sections: {
+				contact: 'Контактні дані',
+				hours: 'Години роботи',
+				social: 'Соціальні мережі'
+			},
+			fields: {
+				phone: 'Номер телефону',
+				email: 'Адреса e-mail',
+				locationPl: 'Місце польською',
+				locationUk: 'Місце українською',
+				hoursWeek: 'Понеділок-п’ятниця',
+				hoursSaturday: 'Субота',
+				facebookUrl: 'Facebook',
+				instagramPlUrl: 'Instagram польською',
+				instagramUkUrl: 'Instagram українською',
+				telegramUkUrl: 'Telegram українською'
+			},
+			hoursHint: 'Вкажіть лише проміжок часу, наприклад 9:00 - 18:00.',
+			socialHint: 'Вставте повне посилання, яке починається з https://.',
+			submit: 'Зберегти зміни',
+			submitLoading: 'Збереження...',
+			cancel: 'Скасувати',
+			notifications: {
+				updateSuccess: 'Налаштування сайту збережено!',
+				updateError: 'Не вдалося зберегти налаштування. Перевірте поля та спробуйте ще раз.'
+			}
+		},
 		certificates: {
 			label: 'Сертифікати',
 			description: 'Додавайте, видаляйте та змінюйте порядок сертифікатів на головній сторінці',

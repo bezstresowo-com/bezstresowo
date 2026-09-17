@@ -4,12 +4,13 @@
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
 	import { sendContactRequest } from '$remote/contact.remote';
+	import { getSiteSettings } from '$remote/site-settings.remote';
 	import { CONTACT_FORM_CAPTCHA_ENABLED } from '$shared/global/config/feature-flags';
+	import { phoneHref } from '$shared/global/config/site-settings';
 	import { remoteErrorIssues, remoteErrorMessage } from '$shared/global/functions/remote-error';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 	import { createForm } from 'svelte-forms-lib';
 
-	import { CONTACT_INFO } from './contactInfo';
 	import {
 		FIELD_MAP,
 		FORM_FIELDS,
@@ -22,6 +23,7 @@
 	const TURNSTILE_SRC = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
 
 	let isLoading = $state(false);
+	const siteSettings = $derived(getSiteSettings());
 	let captchaToken = $state<string | null>(null);
 	let captchaContainer = $state<HTMLDivElement>();
 	let captchaWidgetId: string | undefined;
@@ -160,65 +162,72 @@
 	<!-- Content -->
 	<div class="mx-auto grid grid-cols-1 gap-10 lg:grid-cols-2">
 		<!-- Left: Contact info -->
-		<div class="flex flex-col justify-center space-y-6">
-			<h2 class="px-5 text-lg font-medium text-slate-700">
-				{t.user.contactForm.infoTitle}
-			</h2>
+		<svelte:boundary>
+			{#snippet pending()}
+				<div class="h-64 animate-pulse rounded-xl bg-slate-100"></div>
+			{/snippet}
 
-			<!-- Phone -->
-			<div class="flex items-start gap-4 px-5">
-				<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
-					<i class="fa-solid fa-phone text-xl" aria-hidden="true"></i>
-				</div>
-				<div>
-					<div class="text-sm font-semibold text-slate-700">
-						{t.user.contactForm.contactInformation.phone}
+			{@const contactInfo = await siteSettings}
+			<div class="flex flex-col justify-center space-y-6">
+				<h2 class="px-5 text-lg font-medium text-slate-700">
+					{t.user.contactForm.infoTitle}
+				</h2>
+
+				<!-- Phone -->
+				<div class="flex items-start gap-4 px-5">
+					<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
+						<i class="fa-solid fa-phone text-xl" aria-hidden="true"></i>
 					</div>
-					<div class="mt-1 text-slate-600">
-						<a class="underline-offset-4 hover:underline" href={`tel:${CONTACT_INFO.phone}`}
-							>{CONTACT_INFO.phone}</a
-						>
+					<div>
+						<div class="text-sm font-semibold text-slate-700">
+							{t.user.contactForm.contactInformation.phone}
+						</div>
+						<div class="mt-1 text-slate-600">
+							<a class="underline-offset-4 hover:underline" href={phoneHref(contactInfo.phone)}
+								>{contactInfo.phone}</a
+							>
+						</div>
+					</div>
+				</div>
+
+				<!-- Email -->
+				<div class="flex items-start gap-4 px-5">
+					<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
+						<i class="fa-solid fa-envelope text-xl" aria-hidden="true"></i>
+					</div>
+					<div>
+						<div class="text-sm font-semibold text-slate-700">
+							{t.user.contactForm.contactInformation.email}
+						</div>
+						<div class="mt-1 break-all text-slate-600">
+							<a class="underline-offset-4 hover:underline" href={`mailto:${contactInfo.email}`}
+								>{contactInfo.email}</a
+							>
+						</div>
+					</div>
+				</div>
+
+				<!-- Hours -->
+				<div class="flex items-start gap-4 px-5">
+					<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
+						<i class="fa-solid fa-clock text-xl" aria-hidden="true"></i>
+					</div>
+					<div>
+						<div class="text-sm font-semibold text-slate-700">
+							{t.user.contactForm.contactInformation.hours}
+						</div>
+						<div class="mt-1 text-slate-600">
+							{t.user.contactForm.contactInformation.hoursWeek}
+							{contactInfo.hoursWeek}
+						</div>
+						<div class="text-slate-600">
+							{t.user.contactForm.contactInformation.hoursSat}
+							{contactInfo.hoursSaturday}
+						</div>
 					</div>
 				</div>
 			</div>
-
-			<!-- Email -->
-			<div class="flex items-start gap-4 px-5">
-				<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
-					<i class="fa-solid fa-envelope text-xl" aria-hidden="true"></i>
-				</div>
-				<div>
-					<div class="text-sm font-semibold text-slate-700">
-						{t.user.contactForm.contactInformation.email}
-					</div>
-					<div class="mt-1 break-all text-slate-600">
-						<a class="underline-offset-4 hover:underline" href={`mailto:${CONTACT_INFO.email}`}
-							>{CONTACT_INFO.email}</a
-						>
-					</div>
-				</div>
-			</div>
-
-			<!-- Hours -->
-			<div class="flex items-start gap-4 px-5">
-				<div class="grid h-12 w-12 place-content-center rounded-xl bg-secondary text-slate-800">
-					<i class="fa-solid fa-clock text-xl" aria-hidden="true"></i>
-				</div>
-				<div>
-					<div class="text-sm font-semibold text-slate-700">
-						{t.user.contactForm.contactInformation.hours}
-					</div>
-					<div class="mt-1 text-slate-600">
-						{t.user.contactForm.contactInformation.hoursWeek}
-						{CONTACT_INFO.hoursWeek}
-					</div>
-					<div class="text-slate-600">
-						{t.user.contactForm.contactInformation.hoursSat}
-						{CONTACT_INFO.hoursSat}
-					</div>
-				</div>
-			</div>
-		</div>
+		</svelte:boundary>
 
 		<!-- Right: Form -->
 		<form onsubmit={handleSubmit} class="p-6 sm:p-8">
