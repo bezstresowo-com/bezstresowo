@@ -69,9 +69,21 @@
 	<Select.Trigger
 		class="flex cursor-pointer items-center gap-2 rounded-xl bg-accent px-3 py-1 text-primary transition hover:bg-accent/80"
 	>
-		<span>
-			<i class="fa fa-globe"></i>
-		</span>
+		<svg
+			class="h-5 w-5 shrink-0"
+			viewBox="0 0 24 24"
+			fill="none"
+			stroke="currentColor"
+			stroke-width="2"
+			stroke-linecap="round"
+			stroke-linejoin="round"
+			aria-hidden="true"
+		>
+			<circle cx="12" cy="12" r="10"></circle>
+			<path d="M2 12h20"></path>
+			<path d="M12 2a15.3 15.3 0 0 1 0 20"></path>
+			<path d="M12 2a15.3 15.3 0 0 0 0 20"></path>
+		</svg>
 		{selectedLabel}
 	</Select.Trigger>
 
