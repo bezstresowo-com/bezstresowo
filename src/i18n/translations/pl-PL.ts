@@ -483,7 +483,7 @@ const plPL = {
 					},
 					recipients: {
 						title:
-							'4. Dane nie są przekazywane osobom trzecim, z wyjątkiem podmiotów uprawnionych na mocy prawa.'
+							'4. Dane mogą być powierzane podmiotom wspierającym działanie strony i firmy, między innymi dostawcom hostingu, poczty, płatności, księgowości i obsługi technicznej, wyłącznie w niezbędnym zakresie. Dane związane z Meta Pixel są przekazywane Meta tylko po udzieleniu zgody, na zasadach opisanych w punkcie 7.'
 					},
 					rights: {
 						title:
@@ -492,11 +492,23 @@ const plPL = {
 					complaint: {
 						title:
 							'6. Klient ma prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych.'
+					},
+					metaPixel: {
+						title: '7. Meta Pixel i opcjonalne pliki cookie',
+						paragraphs: [
+							'Po dobrowolnym wyrażeniu zgody strona uruchamia Meta Pixel firmy Meta Platforms Ireland Limited. Narzędzie służy do mierzenia skuteczności reklam i sprawdzania, które działania na stronie prowadzą do kontaktu.',
+							'Rejestrowane mogą być ogólne zdarzenia: wyświetlenie strony, kliknięcie linku kontaktowego, skuteczne wysłanie formularza kontaktowego oraz otwarcie bezpłatnego materiału.',
+							'Meta może otrzymać informacje techniczne, takie jak adres IP, identyfikatory plików cookie, adres odwiedzonej strony, dane przeglądarki i czas zdarzenia. Nie przekazujemy Meta treści formularzy, wybranej usługi ani informacji dotyczących zdrowia.',
+							'Podstawą przetwarzania jest zgoda zgodnie z art. 6 ust. 1 lit. a RODO. Zgodę można w każdej chwili zmienić lub wycofać przez „Ustawienia plików cookie” w stopce strony.'
+						],
+						privacyPrefix: 'Więcej informacji o przetwarzaniu danych przez Meta znajduje się w',
+						privacyLink: 'Polityce prywatności Meta'
 					}
 				},
 				download: {
-					title: 'Pobierz pełną klauzulę',
-					description: 'Możesz pobrać pełną klauzulę informacyjną RODO w formacie PDF.',
+					title: 'Klauzula RODO dotycząca usług',
+					description:
+						'Pobierz klauzulę dotyczącą danych przetwarzanych w związku z usługami psychoterapeutycznymi. Informacje o plikach cookie i Meta Pixel znajdują się powyżej.',
 					languageNote: 'Dokument PDF dostępny jest w języku polskim.',
 					button: 'Pobierz PDF'
 				}
@@ -738,6 +750,7 @@ const plPL = {
 			fastLinksHeader: 'Szybkie linki',
 			followMeHeader: 'Śledź mnie',
 			copyright: '© {{ year }} Bezstresowo. Wszystkie prawa zastrzeżone.',
+			cookieSettings: 'Ustawienia plików cookie',
 			fastLinks: {
 				materials: 'Bezpłatne materiały',
 				termsOfService: 'Regulamin',
