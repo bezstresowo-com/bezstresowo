@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getLocale, t } from '$i18n';
+	import { trackMetaCustomEvent } from '$lib/Tracking/meta-events';
 	import { RELATIONSHIP_GUIDE_URLS } from '$shared/global/config/guide';
 
 	const guideUrl = $derived(RELATIONSHIP_GUIDE_URLS[getLocale()]);
@@ -39,6 +40,7 @@
 
 		<a
 			href={guideUrl}
+			onclick={() => trackMetaCustomEvent('FreeMaterialOpen')}
 			class="mt-6 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-center font-bold text-primary transition hover:bg-secondary focus:ring-2 focus:ring-accent focus:ring-offset-2 focus:outline-none"
 		>
 			{t.user.pages.materials.guide.cta}

@@ -3,10 +3,15 @@
 	import { browser } from '$app/environment';
 	import { getLocale, Locale, path } from '$i18n';
 	import { onMount } from 'svelte';
+	import {
+		COOKIE_SETTINGS_EVENT,
+		isAllowedMetaPixelEvent,
+		META_PIXEL_EVENT,
+		type MetaPixelEventDetail
+	} from './meta-events';
 
 	const PIXEL_ID = '2269646353881533';
 	const CONSENT_STORAGE_KEY = 'bezstresowo:marketing-consent:v1';
-	const COOKIE_SETTINGS_EVENT = 'bezstresowo:cookie-settings';
 
 	type Consent = 'granted' | 'denied' | null;
 	type Fbq = ((...args: unknown[]) => void) & {
@@ -28,16 +33,14 @@
 		getLocale() === Locale.ukUA
 			? {
 					title: 'Налаштування файлів cookie',
-					body:
-						'Ми використовуємо необов’язкові файли cookie Meta, щоб вимірювати ефективність реклами. Вони запускаються лише після твоєї згоди. Ми не передаємо Meta дані з форм або інформацію про здоров’я.',
+					body: 'Ми використовуємо необов’язкові файли cookie Meta, щоб вимірювати ефективність реклами. Вони запускаються лише після твоєї згоди. Ми не передаємо Meta дані з форм або інформацію про здоров’я.',
 					accept: 'Прийняти',
 					reject: 'Відхилити',
 					privacy: 'Політика конфіденційності'
 				}
 			: {
 					title: 'Ustawienia plików cookie',
-					body:
-						'Używamy opcjonalnych plików cookie Meta do pomiaru skuteczności reklam. Uruchamiamy je wyłącznie po Twojej zgodzie. Nie przekazujemy Meta danych z formularzy ani informacji o zdrowiu.',
+					body: 'Używamy opcjonalnych plików cookie Meta do pomiaru skuteczności reklam. Uruchamiamy je wyłącznie po Twojej zgodzie. Nie przekazujemy Meta danych z formularzy ani informacji o zdrowiu.',
 					accept: 'Akceptuję',
 					reject: 'Odrzucam',
 					privacy: 'Polityka prywatności'
@@ -136,6 +139,14 @@
 		showBanner = true;
 	}
 
+	function trackRequestedEvent(event: Event) {
+		const detail = (event as CustomEvent<MetaPixelEventDetail>).detail;
+		if (!isAllowedMetaPixelEvent(detail)) return;
+
+		const fbq = initializePixel();
+		fbq?.(detail.command, detail.eventName);
+	}
+
 	onMount(() => {
 		const stored = localStorage.getItem(CONSENT_STORAGE_KEY);
 		consent = stored === 'granted' || stored === 'denied' ? stored : null;
@@ -147,7 +158,11 @@
 		}
 
 		window.addEventListener(COOKIE_SETTINGS_EVENT, openSettings);
-		return () => window.removeEventListener(COOKIE_SETTINGS_EVENT, openSettings);
+		window.addEventListener(META_PIXEL_EVENT, trackRequestedEvent);
+		return () => {
+			window.removeEventListener(COOKIE_SETTINGS_EVENT, openSettings);
+			window.removeEventListener(META_PIXEL_EVENT, trackRequestedEvent);
+		};
 	});
 
 	afterNavigate(() => {
@@ -158,13 +173,23 @@
 </script>
 
 {#if ready && showBanner}
-	<div class="fixed inset-x-0 bottom-0 z-[100] p-4 sm:p-6" role="dialog" aria-live="polite" aria-label={copy.title}>
-		<div class="mx-auto max-w-4xl rounded-2xl border border-primary/15 bg-background p-5 shadow-2xl sm:p-6">
+	<div
+		class="fixed inset-x-0 bottom-0 z-[100] p-4 sm:p-6"
+		role="dialog"
+		aria-live="polite"
+		aria-label={copy.title}
+	>
+		<div
+			class="mx-auto max-w-4xl rounded-2xl border border-primary/15 bg-background p-5 shadow-2xl sm:p-6"
+		>
 			<div class="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
 				<div class="max-w-2xl">
 					<h2 class="mb-2 text-lg font-semibold text-primary">{copy.title}</h2>
 					<p class="text-sm leading-6 text-primary/80">{copy.body}</p>
-					<a class="mt-2 inline-block text-sm font-medium text-primary underline underline-offset-2" href={path('/gdpr')}>
+					<a
+						class="mt-2 inline-block text-sm font-medium text-primary underline underline-offset-2"
+						href={path('/gdpr')}
+					>
 						{copy.privacy}
 					</a>
 				</div>

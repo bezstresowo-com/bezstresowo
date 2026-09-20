@@ -6,6 +6,7 @@
 	const pdfUrl = asset(
 		'/documents/Klauzula RODO - Centrum Psychoterapii Bezstresowo - Olesya Haiduk.pdf'
 	);
+	const metaPrivacyUrl = 'https://www.facebook.com/privacy/policy/';
 </script>
 
 <!-- Legal pages carry no search value - keep them out of the index. -->
@@ -72,6 +73,29 @@
 				<p class="text-lg text-primary">
 					{t.user.pages.gdpr.sections.complaint.title}
 				</p>
+			</section>
+
+			<!-- Section 7: Meta Pixel and optional marketing cookies -->
+			<section class="mb-8">
+				<h2 class="mb-4 text-xl font-bold text-primary">
+					{t.user.pages.gdpr.sections.metaPixel.title}
+				</h2>
+				<div class="space-y-3 text-primary">
+					{#each t.user.pages.gdpr.sections.metaPixel.paragraphs as paragraph (paragraph)}
+						<p>{paragraph}</p>
+					{/each}
+					<p>
+						{t.user.pages.gdpr.sections.metaPixel.privacyPrefix}
+						<a
+							href={metaPrivacyUrl}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="font-medium underline underline-offset-2"
+						>
+							{t.user.pages.gdpr.sections.metaPixel.privacyLink}</a
+						>.
+					</p>
+				</div>
 			</section>
 
 			<!-- Download PDF Section -->
