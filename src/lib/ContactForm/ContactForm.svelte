@@ -3,6 +3,7 @@
 	import { getLocale, LOCALE_HTML_LANG, path, t, translateKey } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
+	import { trackMetaStandardEvent } from '$lib/Tracking/meta-events';
 	import { sendContactRequest } from '$remote/contact.remote';
 	import { getSiteSettings } from '$remote/site-settings.remote';
 	import { CONTACT_FORM_CAPTCHA_ENABLED } from '$shared/global/config/feature-flags';
@@ -117,6 +118,7 @@
 					captchaToken: captchaToken ?? undefined
 				});
 
+				trackMetaStandardEvent('Lead');
 				handleReset();
 				toast.success(t.user.contactForm.toast.success);
 			} catch (error) {
@@ -183,8 +185,10 @@
 							{t.user.contactForm.contactInformation.phone}
 						</div>
 						<div class="mt-1 text-slate-600">
-							<a class="underline-offset-4 hover:underline" href={phoneHref(contactInfo.phone)}
-								>{contactInfo.phone}</a
+							<a
+								class="underline-offset-4 hover:underline"
+								href={phoneHref(contactInfo.phone)}
+								onclick={() => trackMetaStandardEvent('Contact')}>{contactInfo.phone}</a
 							>
 						</div>
 					</div>
@@ -200,8 +204,10 @@
 							{t.user.contactForm.contactInformation.email}
 						</div>
 						<div class="mt-1 break-all text-slate-600">
-							<a class="underline-offset-4 hover:underline" href={`mailto:${contactInfo.email}`}
-								>{contactInfo.email}</a
+							<a
+								class="underline-offset-4 hover:underline"
+								href={`mailto:${contactInfo.email}`}
+								onclick={() => trackMetaStandardEvent('Contact')}>{contactInfo.email}</a
 							>
 						</div>
 					</div>

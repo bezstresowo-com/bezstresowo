@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { getLocale, t } from '$i18n';
+	import { trackMetaStandardEvent } from '$lib/Tracking/meta-events';
 	import type { PublicSiteSettings } from '$shared/global/config/site-settings';
 	import { isNil } from 'lodash-es';
 	import { contactElements } from '../model';
@@ -16,7 +17,9 @@
 			{#if isNil(href)}
 				<span class="font-thin text-white">{label}</span>
 			{:else}
-				<a class="font-thin text-white" {href}>{label}</a>
+				<a class="font-thin text-white" {href} onclick={() => trackMetaStandardEvent('Contact')}
+					>{label}</a
+				>
 			{/if}
 		</div>
 	{/each}

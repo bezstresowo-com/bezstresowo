@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { t } from '$i18n';
+	import { openCookieSettings } from '$lib/Tracking/meta-events';
 	import { getSiteSettings } from '$remote/site-settings.remote';
 	import ContactSection from './components/ContactSection.svelte';
 	import FastLinksSection from './components/FastLinksSection.svelte';
@@ -21,7 +22,14 @@
 			<FollowMeSection settings={current} />
 		</div>
 	</svelte:boundary>
-	<div class="py-4 text-center font-thin text-white">
-		{t.user.footer.copyright({ year: new Date(Date.now()).getFullYear() })}
+	<div class="flex flex-col items-center gap-2 py-4 text-center font-thin text-white">
+		<div>{t.user.footer.copyright({ year: new Date(Date.now()).getFullYear() })}</div>
+		<button
+			type="button"
+			onclick={openCookieSettings}
+			class="text-sm text-white/80 underline underline-offset-4 transition hover:text-secondary"
+		>
+			{t.user.footer.cookieSettings}
+		</button>
 	</div>
 </footer>
