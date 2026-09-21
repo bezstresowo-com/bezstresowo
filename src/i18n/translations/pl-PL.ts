@@ -45,6 +45,9 @@ const plPL = {
 							title: 'Psychoterapia par',
 							description:
 								'Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.',
+							seoTitle: 'Psychoterapia par Łódź i online | Bezstresowo',
+							seoDescription:
+								'Psychoterapia par w Łodzi i online. Wsparcie w komunikacji, konfliktach, odbudowie zaufania i bliskości. Umów pierwszą konsultację.',
 							extended: {
 								section0: {
 									title: 'Czym jest terapia dla par?',
@@ -87,12 +90,15 @@ const plPL = {
 							title: 'Psychoterapia dla kobiet',
 							description:
 								'Indywidualna terapia wspierająca kobiety w budowaniu poczucia własnej wartości, stawianiu granic i odzyskiwaniu wewnętrznej równowagi w bezpiecznej atmosferze zrozumienia.',
+							seoTitle: 'Psychoterapia dla kobiet Łódź i online | Bezstresowo',
+							seoDescription:
+								'Psychoterapia dla kobiet w Łodzi i online. Wsparcie w relacjach, stawianiu granic, samoocenie, stresie i kryzysach życiowych.',
 							extended: {
 								section0: {
 									paragraph0:
 										'Psychoterapia dla kobiet to indywidualny proces terapeutyczny skierowany do kobiet, które doświadczają trudności emocjonalnych, relacyjnych lub kryzysów życiowych. To forma profesjonalnej pomocy psychologicznej, w której możesz bezpiecznie przyjrzeć się swoim emocjom, schematom zachowań oraz relacjom w atmosferze zrozumienia, poufności i szacunku.',
 									paragraph1:
-										'eśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą - psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu.'
+										'Jeśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą, psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia dla kobiet?',
@@ -109,7 +115,7 @@ const plPL = {
 										'Psychoterapia dla kobiet jest także dla tych, które „funkcjonują dobrze”, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
 								},
 								section2: {
-									title: 'Obszary pracy w psychoterapii dla kobiet</b>',
+									title: 'Obszary pracy w psychoterapii dla kobiet',
 									paragraph0: '<b>Relacje i schematy emocjonalne</b>',
 									paragraph1:
 										'Praca nad powtarzającymi się wzorcami w relacjach, trudnościami w bliskości, lękiem przed odrzuceniem, relacjami toksycznymi oraz współuzależnieniem.',
@@ -142,6 +148,9 @@ const plPL = {
 							title: 'Psychoterapia depresji i zaburzeń lękowych',
 							description:
 								'To profesjonalne wsparcie w odzyskiwaniu równowagi emocjonalnej i budowaniu skutecznych narzędzi radzenia sobie z lękiem oraz depresją.',
+							seoTitle: 'Psychoterapia depresji i lęku Łódź | Bezstresowo',
+							seoDescription:
+								'Psychoterapia depresji i zaburzeń lękowych w Łodzi i online. Wsparcie przy obniżonym nastroju, napięciu, lęku i napadach paniki.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -214,6 +223,9 @@ const plPL = {
 							title: 'Psychoterapia dla osób LGBTQ+',
 							description:
 								'Afirmatywne wsparcie psychologiczne dla osób LGBTQ+, pomagające budować samoakceptację i dobrostan w bezpiecznej, wolnej od ocen atmosferze.',
+							seoTitle: 'Psychoterapia LGBTQ+ Łódź i online | Bezstresowo',
+							seoDescription:
+								'Afirmatywna psychoterapia dla osób LGBTQ+ w Łodzi i online. Bezpieczne wsparcie w obszarze emocji, relacji, tożsamości i samoakceptacji.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -283,6 +295,9 @@ const plPL = {
 							title: 'Psychoterapia i konsultacje dla rodziców',
 							description:
 								'Profesjonalne wsparcie pomagające rodzicom zrozumieć emocje dziecka, radzić sobie z trudnościami wychowawczymi i budować zdrowsze relacje rodzinne w atmosferze bez oceniania.',
+							seoTitle: 'Konsultacje dla rodziców Łódź i online | Bezstresowo',
+							seoDescription:
+								'Konsultacje i psychoterapia dla rodziców w Łodzi i online. Wsparcie w relacji z dzieckiem, granicach, komunikacji i trudnościach wychowawczych.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -351,6 +366,9 @@ const plPL = {
 							title: 'Psychoterapia zaburzeń odżywiania',
 							description:
 								'Specjalistyczna terapia pomagająca zrozumieć emocjonalne przyczyny zaburzeń odżywiania oraz odbudować bezpieczną relację z jedzeniem i własnym ciałem.',
+							seoTitle: 'Psychoterapia zaburzeń odżywiania Łódź | Bezstresowo',
+							seoDescription:
+								'Psychoterapia zaburzeń odżywiania w Łodzi i online. Wsparcie w budowaniu bezpieczniejszej relacji z jedzeniem, ciałem, emocjami i kontrolą.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -459,6 +477,22 @@ const plPL = {
 						'Masz pytania po lekturze? Umów konsultację - porozmawiamy spokojnie i bez oceniania.'
 				},
 				readMore: 'Czytaj dalej'
+			},
+			service: {
+				eyebrow: 'Psychoterapia w Łodzi i online',
+				formatLabel: 'Forma spotkań',
+				formatValue: 'Online oraz stacjonarnie w Łodzi',
+				languagesLabel: 'Języki spotkań',
+				languagesValue: 'Polski i ukraiński',
+				bookConsultation: 'Umów konsultację',
+				backToServices: 'Wróć do wszystkich usług',
+				firstMeetingTitle: 'Od czego zaczynamy?',
+				firstMeetingDescription:
+					'Nie musisz od razu dokładnie nazywać problemu. Pierwsza konsultacja służy spokojnemu omówieniu Twojej sytuacji, potrzeb i możliwej formy współpracy.',
+				confidentiality: 'Spotkania odbywają się w atmosferze poufności, szacunku i bez oceniania.',
+				finalCtaTitle: 'Chcesz sprawdzić, czy ta forma wsparcia jest dla Ciebie?',
+				finalCtaDescription:
+					'Umów konsultację. Podczas pierwszego spotkania porozmawiamy o tym, z czym przychodzisz i czego potrzebujesz.'
 			},
 			gdpr: {
 				title: 'Klauzula informacyjna RODO',
