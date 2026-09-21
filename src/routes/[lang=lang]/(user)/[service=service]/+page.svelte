@@ -48,7 +48,7 @@
 				{t.user.pages.service.backToServices}
 			</a>
 
-			<div class="mt-8 grid items-center gap-9 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-14">
+			<div class="mt-8 grid items-center gap-9 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
 				<div>
 					<div
 						class="flex items-center gap-3 text-sm font-semibold tracking-wide text-secondary uppercase"
@@ -74,18 +74,11 @@
 				<aside
 					class="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-sm"
 				>
-					<div class="flex gap-4 border-b border-white/15 pb-5">
+					<div class="flex gap-4">
 						<i class="fa-solid fa-video mt-1 text-xl text-secondary" aria-hidden="true"></i>
 						<div>
 							<div class="text-sm text-white/65">{t.user.pages.service.formatLabel}</div>
 							<div class="mt-1 font-semibold">{t.user.pages.service.formatValue}</div>
-						</div>
-					</div>
-					<div class="flex gap-4 pt-5">
-						<i class="fa-solid fa-language mt-1 text-xl text-secondary" aria-hidden="true"></i>
-						<div>
-							<div class="text-sm text-white/65">{t.user.pages.service.languagesLabel}</div>
-							<div class="mt-1 font-semibold">{t.user.pages.service.languagesValue}</div>
 						</div>
 					</div>
 				</aside>

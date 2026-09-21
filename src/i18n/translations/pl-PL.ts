@@ -104,7 +104,7 @@ const plPL = {
 									title: 'Dla kogo jest psychoterapia dla kobiet?',
 									paragraph0: 'Z psychoterapii dla kobiet korzystają osoby, które m.in.:',
 									list0: [
-										'zmagają się z obniżonym poczuciem własnej wartości',
+										'mają obniżone poczucie własnej wartości',
 										'doświadczają trudności w relacjach partnerskich lub rodzinnych',
 										'mają problem z wyznaczaniem granic i stawianiem siebie na pierwszym miejscu',
 										'czują przewlekły stres, lęk, napięcie emocjonalne lub pustkę',
@@ -112,7 +112,7 @@ const plPL = {
 										'doświadczają trudnej relacji z ciałem lub jedzeniem'
 									],
 									paragraph1:
-										'Psychoterapia dla kobiet jest także dla tych, które „funkcjonują dobrze”, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
+										'Psychoterapia może być pomocna również kobietom, które z zewnątrz dobrze sobie radzą, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii dla kobiet',
@@ -130,7 +130,7 @@ const plPL = {
 										'Praca terapeutyczna w obszarze zaburzeń odżywiania, kompulsywnego jedzenia, restrykcji, kontroli oraz trudnej relacji z własnym ciałem.',
 									paragraph8: '<b>Rola silnej kobiety</b>',
 									paragraph9:
-										'Psychoterapia dla kobiet, które czują przymus bycia silnymi, samodzielnymi i odpowiedzialnymi kosztem własnych potrzeb, odpoczynku i emocji.',
+										'Psychoterapia dla kobiet, które czują, że muszą być silne, samodzielne i odpowiedzialne, często kosztem własnych potrzeb, odpoczynku i emocji.',
 									paragraph10: '<b>Kryzysy życiowe i momenty przejścia</b>',
 									paragraph11:
 										'Wsparcie w czasie rozstań, wypalenia zawodowego, zmiany ról życiowych, poczucia utknięcia lub utraty sensu.'
@@ -171,7 +171,7 @@ const plPL = {
 										'unikają sytuacji z powodu lęku lub wyczerpania psychicznego'
 									],
 									paragraph1:
-										'Psychoterapia jest również dla osób, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia.'
+										'Psychoterapia może być pomocna również osobom, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii depresji i zaburzeń lękowych:',
@@ -231,7 +231,7 @@ const plPL = {
 									paragraph0:
 										'Psychoterapia dla osób LGBTQ+ to indywidualna forma wsparcia psychologicznego skierowana do osób nieheteronormatywnych i transpłciowych, które chcą pracować nad swoim dobrostanem psychicznym, relacjami, tożsamością lub trudnymi doświadczeniami życiowymi. To bezpieczna przestrzeń wolna od ocen, patologizowania i prób „naprawiania”.',
 									paragraph1:
-										'Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w radzeniu sobie z emocjami, stresem mniejszościowym, relacjami oraz skutkami doświadczeń dyskryminacji lub odrzucenia.'
+										'Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w pracy z emocjami, stresem mniejszościowym, trudnościami w relacjach oraz skutkami dyskryminacji lub odrzucenia.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia dla osób LGBTQ+?',
@@ -245,7 +245,7 @@ const plPL = {
 										'czują przeciążenie związane z ciągłym „tłumaczeniem się” lub ukrywaniem siebie'
 									],
 									paragraph1:
-										'Psychoterapia jest także dla tych, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą.'
+										'Psychoterapia może być pomocna także osobom, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii dla osób LGBTQ+',
@@ -311,8 +311,8 @@ const plPL = {
 									list0: [
 										'doświadczają trudności wychowawczych z dzieckiem lub nastolatkiem',
 										'czują bezradność, złość, lęk lub przeciążenie rolą rodzica',
-										'zmagają się z problemami komunikacji w rodzinie',
-										'martwią się zachowaniem, emocjami lub funkcjonowaniem dziecka',
+										'mają trudności w komunikacji w rodzinie',
+										'martwią się zachowaniem, emocjami lub samopoczuciem dziecka',
 										'chcą lepiej stawiać granice bez poczucia winy',
 										'przechodzą przez kryzys rodzinny, rozstanie lub zmianę sytuacji życiowej'
 									],
@@ -388,7 +388,7 @@ const plPL = {
 										'czują utratę kontroli nad jedzeniem lub przeciwnie - sztywną potrzebę kontroli'
 									],
 									paragraph1:
-										'Terapia jest również dla osób, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu.'
+										'Terapia może być pomocna również osobom, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu.'
 								},
 								section2: {
 									title: 'Obszary pracy w terapii zaburzeń odżywiania',
@@ -482,8 +482,6 @@ const plPL = {
 				eyebrow: 'Psychoterapia w Łodzi i online',
 				formatLabel: 'Forma spotkań',
 				formatValue: 'Online oraz stacjonarnie w Łodzi',
-				languagesLabel: 'Języki spotkań',
-				languagesValue: 'Polski i ukraiński',
 				bookConsultation: 'Umów konsultację',
 				backToServices: 'Wróć do wszystkich usług',
 				firstMeetingTitle: 'Od czego zaczynamy?',
@@ -773,6 +771,7 @@ const plPL = {
 		header: {
 			items: {
 				home: 'Strona główna',
+				services: 'Usługi',
 				blog: 'Blog',
 				shop: 'Sklep',
 				materials: 'Materiały',
