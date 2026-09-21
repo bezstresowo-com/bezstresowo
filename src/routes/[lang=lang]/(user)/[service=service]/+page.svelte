@@ -139,15 +139,17 @@
 			</div>
 
 			<section
-				class="mt-10 rounded-2xl bg-primary px-6 py-9 text-center text-white shadow-lg sm:px-10"
+				class="mt-10 rounded-2xl bg-primary px-6 py-7 text-center text-white shadow-lg sm:px-8"
 			>
-				<h2 class="text-2xl font-bold sm:text-3xl">{t.user.pages.service.finalCtaTitle}</h2>
-				<p class="mx-auto mt-3 max-w-2xl leading-relaxed text-white/80">
+				<h2 class="text-xl leading-snug font-bold sm:text-2xl lg:whitespace-nowrap">
+					{t.user.pages.service.finalCtaTitle}
+				</h2>
+				<p class="mx-auto mt-2 max-w-2xl leading-relaxed text-white/80">
 					{t.user.pages.service.finalCtaDescription}
 				</p>
 				<Button
 					href={path('/registrations')}
-					tailwind="mt-6 inline-flex items-center justify-center px-7 text-primary"
+					tailwind="mt-5 inline-flex items-center justify-center px-7 text-primary"
 				>
 					{t.user.pages.service.bookConsultation}
 				</Button>
