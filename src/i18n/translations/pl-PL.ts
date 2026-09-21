@@ -45,6 +45,9 @@ const plPL = {
 							title: 'Psychoterapia par',
 							description:
 								'Pomoc w rozwiązywaniu konfliktów, poprawie komunikacji i odbudowie więzi w związku. Sesje prowadzone w bezpiecznej i wspierającej atmosferze.',
+							seoTitle: 'Psychoterapia par Łódź i online | Bezstresowo',
+							seoDescription:
+								'Psychoterapia par w Łodzi i online. Wsparcie w komunikacji, konfliktach, odbudowie zaufania i bliskości. Umów pierwszą konsultację.',
 							extended: {
 								section0: {
 									title: 'Czym jest terapia dla par?',
@@ -87,18 +90,21 @@ const plPL = {
 							title: 'Psychoterapia dla kobiet',
 							description:
 								'Indywidualna terapia wspierająca kobiety w budowaniu poczucia własnej wartości, stawianiu granic i odzyskiwaniu wewnętrznej równowagi w bezpiecznej atmosferze zrozumienia.',
+							seoTitle: 'Psychoterapia dla kobiet Łódź i online | Bezstresowo',
+							seoDescription:
+								'Psychoterapia dla kobiet w Łodzi i online. Wsparcie w relacjach, stawianiu granic, samoocenie, stresie i kryzysach życiowych.',
 							extended: {
 								section0: {
 									paragraph0:
 										'Psychoterapia dla kobiet to indywidualny proces terapeutyczny skierowany do kobiet, które doświadczają trudności emocjonalnych, relacyjnych lub kryzysów życiowych. To forma profesjonalnej pomocy psychologicznej, w której możesz bezpiecznie przyjrzeć się swoim emocjom, schematom zachowań oraz relacjom w atmosferze zrozumienia, poufności i szacunku.',
 									paragraph1:
-										'eśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą - psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu.'
+										'Jeśli czujesz, że jesteś zmęczona ciągłym napięciem, nadmierną odpowiedzialnością, trudnymi relacjami lub walką z samą sobą, psychoterapia może pomóc Ci odzyskać kontakt ze sobą i wprowadzić realne zmiany w codziennym życiu.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia dla kobiet?',
 									paragraph0: 'Z psychoterapii dla kobiet korzystają osoby, które m.in.:',
 									list0: [
-										'zmagają się z obniżonym poczuciem własnej wartości',
+										'mają obniżone poczucie własnej wartości',
 										'doświadczają trudności w relacjach partnerskich lub rodzinnych',
 										'mają problem z wyznaczaniem granic i stawianiem siebie na pierwszym miejscu',
 										'czują przewlekły stres, lęk, napięcie emocjonalne lub pustkę',
@@ -106,10 +112,10 @@ const plPL = {
 										'doświadczają trudnej relacji z ciałem lub jedzeniem'
 									],
 									paragraph1:
-										'Psychoterapia dla kobiet jest także dla tych, które „funkcjonują dobrze”, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
+										'Psychoterapia może być pomocna również kobietom, które z zewnątrz dobrze sobie radzą, ale wewnętrznie czują, że coś jest nie tak i chcą lepiej zrozumieć siebie.'
 								},
 								section2: {
-									title: 'Obszary pracy w psychoterapii dla kobiet</b>',
+									title: 'Obszary pracy w psychoterapii dla kobiet',
 									paragraph0: '<b>Relacje i schematy emocjonalne</b>',
 									paragraph1:
 										'Praca nad powtarzającymi się wzorcami w relacjach, trudnościami w bliskości, lękiem przed odrzuceniem, relacjami toksycznymi oraz współuzależnieniem.',
@@ -124,7 +130,7 @@ const plPL = {
 										'Praca terapeutyczna w obszarze zaburzeń odżywiania, kompulsywnego jedzenia, restrykcji, kontroli oraz trudnej relacji z własnym ciałem.',
 									paragraph8: '<b>Rola silnej kobiety</b>',
 									paragraph9:
-										'Psychoterapia dla kobiet, które czują przymus bycia silnymi, samodzielnymi i odpowiedzialnymi kosztem własnych potrzeb, odpoczynku i emocji.',
+										'Psychoterapia dla kobiet, które czują, że muszą być silne, samodzielne i odpowiedzialne, często kosztem własnych potrzeb, odpoczynku i emocji.',
 									paragraph10: '<b>Kryzysy życiowe i momenty przejścia</b>',
 									paragraph11:
 										'Wsparcie w czasie rozstań, wypalenia zawodowego, zmiany ról życiowych, poczucia utknięcia lub utraty sensu.'
@@ -142,6 +148,9 @@ const plPL = {
 							title: 'Psychoterapia depresji i zaburzeń lękowych',
 							description:
 								'To profesjonalne wsparcie w odzyskiwaniu równowagi emocjonalnej i budowaniu skutecznych narzędzi radzenia sobie z lękiem oraz depresją.',
+							seoTitle: 'Psychoterapia depresji i lęku Łódź | Bezstresowo',
+							seoDescription:
+								'Psychoterapia depresji i zaburzeń lękowych w Łodzi i online. Wsparcie przy obniżonym nastroju, napięciu, lęku i napadach paniki.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -162,7 +171,7 @@ const plPL = {
 										'unikają sytuacji z powodu lęku lub wyczerpania psychicznego'
 									],
 									paragraph1:
-										'Psychoterapia jest również dla osób, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia.'
+										'Psychoterapia może być pomocna również osobom, które nie mają formalnej diagnozy, ale czują, że ich stan psychiczny znacząco wpływa na jakość życia.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii depresji i zaburzeń lękowych:',
@@ -214,12 +223,15 @@ const plPL = {
 							title: 'Psychoterapia dla osób LGBTQ+',
 							description:
 								'Afirmatywne wsparcie psychologiczne dla osób LGBTQ+, pomagające budować samoakceptację i dobrostan w bezpiecznej, wolnej od ocen atmosferze.',
+							seoTitle: 'Psychoterapia LGBTQ+ Łódź i online | Bezstresowo',
+							seoDescription:
+								'Afirmatywna psychoterapia dla osób LGBTQ+ w Łodzi i online. Bezpieczne wsparcie w obszarze emocji, relacji, tożsamości i samoakceptacji.',
 							extended: {
 								section0: {
 									paragraph0:
 										'Psychoterapia dla osób LGBTQ+ to indywidualna forma wsparcia psychologicznego skierowana do osób nieheteronormatywnych i transpłciowych, które chcą pracować nad swoim dobrostanem psychicznym, relacjami, tożsamością lub trudnymi doświadczeniami życiowymi. To bezpieczna przestrzeń wolna od ocen, patologizowania i prób „naprawiania”.',
 									paragraph1:
-										'Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w radzeniu sobie z emocjami, stresem mniejszościowym, relacjami oraz skutkami doświadczeń dyskryminacji lub odrzucenia.'
+										'Terapia nie polega na zmianie orientacji ani tożsamości. Jej celem jest wsparcie w pracy z emocjami, stresem mniejszościowym, trudnościami w relacjach oraz skutkami dyskryminacji lub odrzucenia.'
 								},
 								section1: {
 									title: 'Dla kogo jest psychoterapia dla osób LGBTQ+?',
@@ -233,7 +245,7 @@ const plPL = {
 										'czują przeciążenie związane z ciągłym „tłumaczeniem się” lub ukrywaniem siebie'
 									],
 									paragraph1:
-										'Psychoterapia jest także dla tych, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą.'
+										'Psychoterapia może być pomocna także osobom, które nie przechodzą kryzysu, ale chcą lepiej zrozumieć siebie i żyć w większej zgodzie ze sobą.'
 								},
 								section2: {
 									title: 'Obszary pracy w psychoterapii dla osób LGBTQ+',
@@ -283,6 +295,9 @@ const plPL = {
 							title: 'Psychoterapia i konsultacje dla rodziców',
 							description:
 								'Profesjonalne wsparcie pomagające rodzicom zrozumieć emocje dziecka, radzić sobie z trudnościami wychowawczymi i budować zdrowsze relacje rodzinne w atmosferze bez oceniania.',
+							seoTitle: 'Konsultacje dla rodziców Łódź i online | Bezstresowo',
+							seoDescription:
+								'Konsultacje i psychoterapia dla rodziców w Łodzi i online. Wsparcie w relacji z dzieckiem, granicach, komunikacji i trudnościach wychowawczych.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -296,8 +311,8 @@ const plPL = {
 									list0: [
 										'doświadczają trudności wychowawczych z dzieckiem lub nastolatkiem',
 										'czują bezradność, złość, lęk lub przeciążenie rolą rodzica',
-										'zmagają się z problemami komunikacji w rodzinie',
-										'martwią się zachowaniem, emocjami lub funkcjonowaniem dziecka',
+										'mają trudności w komunikacji w rodzinie',
+										'martwią się zachowaniem, emocjami lub samopoczuciem dziecka',
 										'chcą lepiej stawiać granice bez poczucia winy',
 										'przechodzą przez kryzys rodzinny, rozstanie lub zmianę sytuacji życiowej'
 									],
@@ -351,6 +366,9 @@ const plPL = {
 							title: 'Psychoterapia zaburzeń odżywiania',
 							description:
 								'Specjalistyczna terapia pomagająca zrozumieć emocjonalne przyczyny zaburzeń odżywiania oraz odbudować bezpieczną relację z jedzeniem i własnym ciałem.',
+							seoTitle: 'Psychoterapia zaburzeń odżywiania Łódź | Bezstresowo',
+							seoDescription:
+								'Psychoterapia zaburzeń odżywiania w Łodzi i online. Wsparcie w budowaniu bezpieczniejszej relacji z jedzeniem, ciałem, emocjami i kontrolą.',
 							extended: {
 								section0: {
 									paragraph0:
@@ -370,7 +388,7 @@ const plPL = {
 										'czują utratę kontroli nad jedzeniem lub przeciwnie - sztywną potrzebę kontroli'
 									],
 									paragraph1:
-										'Terapia jest również dla osób, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu.'
+										'Terapia może być pomocna również osobom, które formalnie nie mają diagnozy, ale czują, że jedzenie i ciało zajmują zbyt dużo miejsca w ich życiu.'
 								},
 								section2: {
 									title: 'Obszary pracy w terapii zaburzeń odżywiania',
@@ -459,6 +477,20 @@ const plPL = {
 						'Masz pytania po lekturze? Umów konsultację - porozmawiamy spokojnie i bez oceniania.'
 				},
 				readMore: 'Czytaj dalej'
+			},
+			service: {
+				eyebrow: 'Psychoterapia w Łodzi i online',
+				formatLabel: 'Forma spotkań',
+				formatValue: 'Online oraz stacjonarnie w Łodzi',
+				bookConsultation: 'Umów konsultację',
+				backToServices: 'Wróć do wszystkich usług',
+				firstMeetingTitle: 'Od czego zaczynamy?',
+				firstMeetingDescription:
+					'Nie musisz od razu dokładnie nazywać problemu. Pierwsza konsultacja służy spokojnemu omówieniu Twojej sytuacji, potrzeb i możliwej formy współpracy.',
+				confidentiality: 'Spotkania odbywają się w atmosferze poufności, szacunku i bez oceniania.',
+				finalCtaTitle: 'Chcesz sprawdzić, czy ta forma wsparcia jest dla Ciebie?',
+				finalCtaDescription:
+					'Umów konsultację. Podczas pierwszego spotkania porozmawiamy o tym, z czym przychodzisz i czego potrzebujesz.'
 			},
 			gdpr: {
 				title: 'Klauzula informacyjna RODO',
@@ -739,6 +771,7 @@ const plPL = {
 		header: {
 			items: {
 				home: 'Strona główna',
+				services: 'Usługi',
 				blog: 'Blog',
 				shop: 'Sklep',
 				materials: 'Materiały',

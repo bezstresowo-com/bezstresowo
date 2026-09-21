@@ -1,5 +1,6 @@
 import { Locale } from '$i18n';
 import { alternateUrl, hreflang, xDefaultUrl, type SeoAlternate } from '$lib/Seo/model';
+import { SERVICE_SLUGS } from '$lib/ServicesSection/model';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 
 import type { RequestHandler } from './$types';
@@ -8,7 +9,15 @@ import type { RequestHandler } from './$types';
  * Indexable static pages; everything rendered with `noindex` (gdpr, regulamin,
  * payment results) intentionally stays out of the sitemap.
  */
-const STATIC_PAGES = ['/home', '/materials', '/registrations', '/blog', '/price-list', '/shop'];
+const STATIC_PAGES = [
+	'/home',
+	'/materials',
+	'/registrations',
+	'/blog',
+	'/price-list',
+	'/shop',
+	...SERVICE_SLUGS.map((slug) => `/${slug}`)
+];
 
 /**
  * The sitemap is computed at request time so articles published from the admin

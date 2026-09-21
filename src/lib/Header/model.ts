@@ -4,6 +4,7 @@
  */
 export const HEADER_PATHS = [
 	{ name: 'home', path: '/home' },
+	{ name: 'services', path: '/home#services' },
 	{ name: 'blog', path: '/blog' },
 	{ name: 'shop', path: '/shop' },
 	{ name: 'materials', path: '/materials' },
