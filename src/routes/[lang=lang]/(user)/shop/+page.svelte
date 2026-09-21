@@ -4,6 +4,7 @@
 	import Button from '$lib/Button/Button.svelte';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
+	import JsonLd from '$lib/Seo/JsonLd.svelte';
 	import Seo from '$lib/Seo/Seo.svelte';
 	import { productListJsonLd } from '$lib/Seo/model';
 	import { createShopCheckout } from '$remote/checkout.remote';
@@ -49,6 +50,8 @@
 	}
 </script>
 
+<Seo title={t.meta.shop.title} description={t.meta.shop.description} />
+
 <Toaster />
 
 <div>
@@ -72,7 +75,6 @@
 			{/snippet}
 
 			{#snippet failed(error, reset)}
-				<Seo title={t.meta.shop.title} description={t.meta.shop.description} />
 				<div class="col-span-full">
 					<ErrorNotice {error} {reset} />
 				</div>
@@ -80,12 +82,7 @@
 
 			{@const shopProducts = await products}
 
-			<!-- Inside the boundary so the product `ItemList` makes it into the SSR head. -->
-			<Seo
-				title={t.meta.shop.title}
-				description={t.meta.shop.description}
-				jsonLd={productListJsonLd(shopProducts.map((product) => product.metadataJsonLD))}
-			/>
+			<JsonLd value={productListJsonLd(shopProducts.map((product) => product.metadataJsonLD))} />
 
 			{#if shopProducts.length === 0}
 				<div class="col-span-full mt-10 text-center text-lg text-slate-700">
