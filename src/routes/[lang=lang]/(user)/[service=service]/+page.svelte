@@ -39,7 +39,7 @@
 	<Seo title={seoTitle} description={seoDescription} {jsonLd} />
 
 	<section class="overflow-hidden bg-linear-150 from-primary via-primary to-primary/90 text-white">
-		<div class="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-18">
+		<div class="mx-auto max-w-5xl px-4 py-8 sm:px-6 sm:py-10 lg:px-8 lg:py-11">
 			<a
 				href={path('/home#services')}
 				class="inline-flex items-center gap-2 text-sm font-medium text-secondary transition hover:text-white"
@@ -48,7 +48,7 @@
 				{t.user.pages.service.backToServices}
 			</a>
 
-			<div class="mt-8 grid items-center gap-9 lg:grid-cols-[minmax(0,1fr)_20rem] lg:gap-14">
+			<div class="mt-5 grid items-center gap-6 lg:grid-cols-[minmax(0,1fr)_17rem] lg:gap-10">
 				<div>
 					<div
 						class="flex items-center gap-3 text-sm font-semibold tracking-wide text-secondary uppercase"
@@ -56,15 +56,15 @@
 						<i class={`${service.icon} text-xl`} aria-hidden="true"></i>
 						{t.user.pages.service.eyebrow}
 					</div>
-					<h1 class="mt-4 max-w-4xl text-4xl leading-tight font-bold sm:text-5xl">
+					<h1 class="mt-3 max-w-3xl text-3xl leading-tight font-bold sm:text-4xl lg:text-[2.75rem]">
 						{serviceTitle}
 					</h1>
-					<p class="mt-5 max-w-3xl text-lg leading-relaxed text-white/85 sm:text-xl">
+					<p class="mt-3 max-w-2xl text-base leading-relaxed text-white/85 sm:text-lg">
 						{serviceDescription}
 					</p>
 					<Button
 						href={path('/registrations')}
-						tailwind="mt-7 inline-flex items-center justify-center px-7 text-primary shadow-lg"
+						tailwind="mt-5 inline-flex items-center justify-center px-6 text-primary shadow-lg"
 					>
 						{t.user.pages.service.bookConsultation}
 						<i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
@@ -72,7 +72,7 @@
 				</div>
 
 				<aside
-					class="rounded-2xl border border-white/15 bg-white/10 p-6 shadow-xl backdrop-blur-sm"
+					class="rounded-2xl border border-white/15 bg-white/10 p-5 shadow-xl backdrop-blur-sm"
 				>
 					<div class="flex gap-4">
 						<i class="fa-solid fa-video mt-1 text-xl text-secondary" aria-hidden="true"></i>
