@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale, t } from '$i18n';
+	import { getLocale, Locale, t } from '$i18n';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import { getCertificates } from '$remote/certificates.remote';
@@ -7,9 +7,12 @@
 	import { isNil } from 'lodash-es';
 	import { onDestroy } from 'svelte';
 
+	let { compact = false }: { compact?: boolean } = $props();
 	const certificates = $derived(getCertificates({ lang: getLocale() }));
+	const isUkrainian = $derived(getLocale() === Locale.ukUA);
 
 	let selectedCertificate: LocalizedCertificate | null = $state(null);
+	let showAll = $state(false);
 	let isBodyScrollLocked = false;
 	let previousBodyOverflow = '';
 	let previousBodyPaddingRight = '';
@@ -70,7 +73,11 @@
 	}}
 />
 
-<section class="bg-white pt-12 text-primary max-2xl:px-4">
+<section
+	class={compact
+		? 'bg-white pt-10 pb-3 text-primary max-2xl:px-4'
+		: 'bg-white pt-12 text-primary max-2xl:px-4'}
+>
 	<svelte:boundary>
 		{#snippet pending()}
 			<div class="flex items-center justify-center">
@@ -92,11 +99,17 @@
 				</h2>
 			</div>
 			<div class="mx-auto mt-6 w-full">
-				<div class="grid w-full [grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))] gap-4">
-					{#each certificateList as certificate, i (certificate.id)}
+				<div
+					class={compact
+						? 'grid w-full grid-cols-2 gap-3 md:grid-cols-4'
+						: 'grid w-full [grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))] gap-4'}
+				>
+					{#each showAll ? certificateList : certificateList.slice(0, 4) as certificate, i (certificate.id)}
 						<button
 							type="button"
-							class="max-w-120 rounded-lg border-2 border-accent bg-primary p-4 transition hover:cursor-pointer hover:border-secondary hover:shadow-md"
+							class={compact
+								? 'rounded-xl border border-accent/50 bg-primary p-2 transition hover:cursor-pointer hover:border-accent hover:shadow-md sm:p-3'
+								: 'max-w-120 rounded-lg border-2 border-accent bg-primary p-4 transition hover:cursor-pointer hover:border-secondary hover:shadow-md'}
 							onclick={() => openCertificate(certificate)}
 						>
 							<img
@@ -111,6 +124,21 @@
 						</button>
 					{/each}
 				</div>
+				{#if certificateList.length > 4}
+					<div class="mt-6 flex justify-center">
+						<button
+							type="button"
+							class="rounded-lg bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary/90"
+							onclick={() => (showAll = !showAll)}
+						>
+							{#if isUkrainian}
+								{showAll ? 'Згорнути сертифікати' : 'Переглянути всі сертифікати'}
+							{:else}
+								{showAll ? 'Zwiń certyfikaty' : 'Zobacz wszystkie certyfikaty'}
+							{/if}
+						</button>
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</svelte:boundary>

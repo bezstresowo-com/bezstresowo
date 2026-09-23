@@ -5,6 +5,7 @@ import { createTransport } from 'nodemailer';
 import type {
 	ConsultationRegistrationMessageArgs,
 	ContactRequestMessageArgs,
+	GroupApplicationMessageArgs,
 	ShopBuyMessageArgs
 } from './model';
 
@@ -119,6 +120,37 @@ export class EmailService {
 			tProductLabel: shopBuy.productLabel,
 			tPriceLabel: shopBuy.priceLabel
 		});
+	}
+
+	async groupApplicationMessage(args: GroupApplicationMessageArgs) {
+		const ownerHtml = (
+			await import('./email-templates/group-application/group-application-owner.html?raw')
+		).default;
+		const userHtml = (
+			await import('./email-templates/group-application/group-application-user.html?raw')
+		).default;
+		const replacements = {
+			...args,
+			age: String(args.age),
+			attendanceConfirmed: args.attendanceConfirmed === 'yes' ? 'Так' : 'Ні',
+			privatePlaceConfirmed: args.privatePlaceConfirmed === 'yes' ? 'Так' : 'Ні',
+			additionalInfo: args.additionalInfo || 'Не вказано',
+			consent: args.consent ? 'Так' : 'Ні'
+		};
+
+		await this._send(
+			EMAIL_SENDER,
+			`${EMAIL_SUBJECT_PREFIX} Заявка до групи «Залишитись чи піти?» — ${args.name}`,
+			ownerHtml,
+			replacements
+		);
+
+		await this._send(
+			args.email,
+			`${EMAIL_SUBJECT_PREFIX} Дякую за заявку до групи`,
+			userHtml,
+			replacements
+		);
 	}
 
 	private async _send(to: string, subject: string, html: string, args: Record<string, string>) {
