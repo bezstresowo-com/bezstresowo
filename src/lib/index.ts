@@ -9,6 +9,7 @@ export { default as Blog } from './Blog/Blog.svelte';
 export { default as Button } from './Button/Button.svelte';
 export { default as CertificatesSection } from './CertificatesSection/CertificatesSection.svelte';
 export { default as ContactForm } from './ContactForm/ContactForm.svelte';
+export { default as CurrentEventSection } from './CurrentEventSection/CurrentEventSection.svelte';
 export { default as ErrorNotice } from './ErrorNotice/ErrorNotice.svelte';
 export { default as GuideSection } from './GuideSection/GuideSection.svelte';
 export { default as HeroSection } from './HeroSection/HeroSection.svelte';
