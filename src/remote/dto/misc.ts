@@ -15,6 +15,7 @@ const {
 	IsOptional,
 	IsPhoneNumber,
 	IsString,
+	Max,
 	MaxLength,
 	Min,
 	MinLength
@@ -61,6 +62,74 @@ export class ContactRequestDto {
 	@IsString()
 	@MaxLength(4096)
 	captchaToken?: string;
+}
+
+export class GroupApplicationDto {
+	@IsDefined()
+	@IsString()
+	@MinLength(1)
+	@MaxLength(100)
+	name: string;
+
+	@IsDefined()
+	@Type(() => Number)
+	@IsInt()
+	@Min(1)
+	@Max(120)
+	age: number;
+
+	@IsDefined()
+	@IsEmail(undefined)
+	email: string;
+
+	@IsDefined()
+	@IsString()
+	@MinLength(2)
+	@MaxLength(250)
+	contact: string;
+
+	@IsDefined()
+	@IsString()
+	@MinLength(10)
+	@MaxLength(5000)
+	relationshipSituation: string;
+
+	@IsDefined()
+	@IsString()
+	@MinLength(10)
+	@MaxLength(5000)
+	hardestPart: string;
+
+	@IsDefined()
+	@IsString()
+	@MinLength(10)
+	@MaxLength(5000)
+	expectations: string;
+
+	@IsDefined()
+	@IsString()
+	@MinLength(2)
+	@MaxLength(2000)
+	currentHelp: string;
+
+	@IsDefined()
+	@IsString()
+	@IsIn(['yes', 'no'])
+	attendanceConfirmed: 'yes' | 'no';
+
+	@IsDefined()
+	@IsString()
+	@IsIn(['yes', 'no'])
+	privatePlaceConfirmed: 'yes' | 'no';
+
+	@IsOptional()
+	@IsString()
+	@MaxLength(5000)
+	additionalInfo?: string;
+
+	@IsDefined()
+	@IsIn([true])
+	consent: boolean;
 }
 
 /**

@@ -19,6 +19,8 @@ const STATIC_PAGES = [
 	...SERVICE_SLUGS.map((slug) => `/${slug}`)
 ];
 
+const UKRAINIAN_ONLY_PAGES = ['/zalyshytys-chy-pity'];
+
 /**
  * The sitemap is computed at request time so articles published from the admin
  * panel show up without a redeploy; the response is cached for an hour.
@@ -32,6 +34,11 @@ export const GET: RequestHandler = async () => {
 		for (const alternate of alternates) {
 			entries.push(urlEntry(alternate, alternates));
 		}
+	}
+
+	for (const path of UKRAINIAN_ONLY_PAGES) {
+		const alternates = [{ locale: Locale.ukUA, path }];
+		entries.push(urlEntry(alternates[0], alternates));
 	}
 
 	const articles = await prisma.internationalizedBlogArticle.findMany({
