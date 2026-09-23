@@ -8,6 +8,7 @@
 		ContactForm,
 		Blog,
 		CertificatesSection,
+		CurrentEventSection,
 		GuideSection
 	} from '$lib';
 	import Seo from '$lib/Seo/Seo.svelte';
@@ -18,8 +19,9 @@
 <HeroSection />
 <HowCanIHelpSection />
 <AboutMeSection />
-<CertificatesSection />
 <ServicesSection />
+<CurrentEventSection />
 <GuideSection compact />
+<CertificatesSection compact />
 <ContactForm />
 <Blog siteLocation="home" />
