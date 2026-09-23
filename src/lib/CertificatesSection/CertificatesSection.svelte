@@ -10,6 +10,7 @@
 	const certificates = $derived(getCertificates({ lang: getLocale() }));
 
 	let selectedCertificate: LocalizedCertificate | null = $state(null);
+	let showAll = $state(false);
 	let isBodyScrollLocked = false;
 	let previousBodyOverflow = '';
 	let previousBodyPaddingRight = '';
@@ -93,7 +94,7 @@
 			</div>
 			<div class="mx-auto mt-6 w-full">
 				<div class="grid w-full [grid-template-columns:repeat(auto-fit,minmax(15rem,1fr))] gap-4">
-					{#each certificateList as certificate, i (certificate.id)}
+					{#each (showAll ? certificateList : certificateList.slice(0, 4)) as certificate, i (certificate.id)}
 						<button
 							type="button"
 							class="max-w-120 rounded-lg border-2 border-accent bg-primary p-4 transition hover:cursor-pointer hover:border-secondary hover:shadow-md"
@@ -111,6 +112,13 @@
 						</button>
 					{/each}
 				</div>
+				{#if certificateList.length > 4}
+					<div class="mt-6 flex justify-center">
+						<button type="button" class="rounded-lg bg-primary px-6 py-3 font-semibold text-white transition hover:bg-primary/90" onclick={() => (showAll = !showAll)}>
+							{showAll ? 'Згорнути' : `Переглянути всі (${certificateList.length})`}
+						</button>
+					</div>
+				{/if}
 			</div>
 		{/if}
 	</svelte:boundary>
