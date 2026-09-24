@@ -14,8 +14,12 @@
 		if (localStorage.getItem('bezstresowo:marketing-consent:v1') !== 'granted') return;
 		const key = `bezstresowo:tracked-schedule:${data.sessionId}`;
 		if (sessionStorage.getItem(key)) return;
-		trackMetaStandardEvent('Schedule');
-		sessionStorage.setItem(key, '1');
+		// Defer until the layout Pixel listener has mounted.
+		const timeout = setTimeout(() => {
+			trackMetaStandardEvent('Schedule');
+			sessionStorage.setItem(key, '1');
+		}, 0);
+		return () => clearTimeout(timeout);
 	});
 </script>
 
