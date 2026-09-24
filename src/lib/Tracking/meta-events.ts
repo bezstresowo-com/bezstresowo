@@ -1,7 +1,7 @@
 export const COOKIE_SETTINGS_EVENT = 'bezstresowo:cookie-settings';
 export const META_PIXEL_EVENT = 'bezstresowo:meta-pixel-event';
 
-export const META_STANDARD_EVENTS = ['Contact', 'Lead'] as const;
+export const META_STANDARD_EVENTS = ['Contact', 'Lead', 'Schedule'] as const;
 export const META_CUSTOM_EVENTS = ['FreeMaterialOpen'] as const;
 
 export type MetaStandardEvent = (typeof META_STANDARD_EVENTS)[number];

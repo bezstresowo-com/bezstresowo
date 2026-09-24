@@ -87,6 +87,11 @@
 			return null;
 		}
 
+		// Stripe session IDs in the return URL must not reach Meta through the Pixel.
+		if (window.location.pathname.endsWith('/registration-success') && window.location.search.includes('session_id=')) {
+			return null;
+		}
+
 		const fbq = ensureFbq();
 		if (!fbq.__bezstresowoInitialized) {
 			fbq('init', PIXEL_ID);
@@ -107,8 +112,10 @@
 		}
 
 		const fbq = initializePixel();
-		fbq?.('track', 'PageView');
-		lastTrackedUrl = currentUrl;
+		if (fbq) {
+			fbq('track', 'PageView');
+			lastTrackedUrl = currentUrl;
+		}
 	}
 
 	function persistConsent(value: Exclude<Consent, null>) {

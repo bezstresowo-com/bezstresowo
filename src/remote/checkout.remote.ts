@@ -25,7 +25,7 @@ export const createRegistrationCheckout = command(
 		const session = await stripe().checkout.sessions.create({
 			line_items: [buildLineItem(product, translation, 1)],
 			mode: 'payment',
-			success_url: pageUrl('/registration-success', dto.lang),
+			success_url: `${pageUrl('/registration-success', dto.lang)}?session_id={CHECKOUT_SESSION_ID}`,
 			cancel_url: pageUrl('/registration-cancel', dto.lang),
 			locale: stripeLocale(dto.lang),
 			phone_number_collection: { enabled: true },
