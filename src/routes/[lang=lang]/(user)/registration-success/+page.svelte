@@ -9,6 +9,10 @@
 	let { data }: { data: PageData } = $props();
 
 	onMount(() => {
+		// Remove the Stripe session identifier before the Meta Pixel can load.
+		const cleanUrl = new URL(window.location.href);
+		cleanUrl.searchParams.delete('session_id');
+		window.history.replaceState(window.history.state, '', cleanUrl);
 		if (!data.paidConsultation || !data.sessionId) return;
 		// The Pixel loads only after the visitor opts in to optional marketing cookies.
 		if (localStorage.getItem('bezstresowo:marketing-consent:v1') !== 'granted') return;
