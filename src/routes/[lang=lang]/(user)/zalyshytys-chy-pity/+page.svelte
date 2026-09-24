@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Locale, path } from '$i18n';
 	import Seo from '$lib/Seo/Seo.svelte';
+	import { trackMetaStandardEvent } from '$lib/Tracking/meta-events';
 	import { sendGroupApplication } from '$remote/group-application.remote';
 	import { remoteErrorIssues, remoteErrorMessage } from '$shared/global/functions/remote-error';
 	import { tick } from 'svelte';
@@ -107,6 +108,7 @@
 					privatePlaceConfirmed: values.privatePlaceConfirmed as 'yes' | 'no',
 					additionalInfo: values.additionalInfo || undefined
 				});
+				trackMetaStandardEvent('Lead');
 				handleReset();
 				submitted = true;
 				await tick();
@@ -199,12 +201,11 @@
 		</h2>
 		<div class="mt-6 space-y-4 text-lg leading-relaxed text-primary/80">
 			<p>
-				Моє завдання не в тому, щоб переконувати тебе розлучатися або, навпаки, зберігати
-				стосунки.
+				Моє завдання не в тому, щоб переконувати тебе розлучатися або, навпаки, зберігати стосунки.
 			</p>
 			<p>
-				За ці сім тижнів ми будемо більше дивитися не на питання «який він?», а на «що
-				відбувається зі мною в цих стосунках?»
+				За ці сім тижнів ми будемо більше дивитися не на питання «який він?», а на «що відбувається
+				зі мною в цих стосунках?»
 			</p>
 			<p>
 				Що я терплю і чому? Про що мовчу? Що відбувається зі мною під час конфлікту? Чого боюся
