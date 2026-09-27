@@ -140,7 +140,7 @@ export const PROGRAM_LANDING_COPY = {
 		title: 'Криза чи кінець?',
 		description: '7 модулів · Workbook · Мапа рішення · 5 аудіо · доступ у власному темпі',
 		priceLabel: 'Стартова ціна',
-		price: '79 zł',
+		price: '19 €',
 		button: 'Купити програму',
 		note: 'Продаж відкриється після підключення оплати та завершення програми в SendPulse.'
 	},

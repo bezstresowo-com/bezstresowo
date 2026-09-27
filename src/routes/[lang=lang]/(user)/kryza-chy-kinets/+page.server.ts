@@ -20,8 +20,8 @@ export const load: PageServerLoad = async ({ params }) => {
 			env.COURSE_UA_SALES_ENABLED === 'true' &&
 			isCoursePurchaseEventConfigured() &&
 			product?.active === true &&
-			product.price.currency === 'PLN' &&
-			product.price.inMinorUnits === 7900 &&
+			product.price.currency === 'EUR' &&
+			product.price.inMinorUnits === 1900 &&
 			product.internationalizedProducts.some((translation) => translation.lang === 'uk-UA')
 	};
 };

@@ -90,8 +90,8 @@ export const createUkrainianCourseCheckout = command(async (): Promise<CheckoutS
 	if (
 		!product ||
 		!translation ||
-		product.price.currency !== 'PLN' ||
-		product.price.inMinorUnits !== 7900
+		product.price.currency !== 'EUR' ||
+		product.price.inMinorUnits !== 1900
 	) {
 		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
 	}

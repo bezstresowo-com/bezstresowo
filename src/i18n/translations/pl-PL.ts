@@ -937,10 +937,11 @@ const plPL = {
 					hint: 'Małe litery, myślniki, bez znaków diakrytycznych i spacji, po angielsku.'
 				},
 				price: {
-					label: 'Cena (PLN)',
+					label: 'Cena',
 					placeholder: '0,00',
-					hint: 'Cena przechowywana jest w groszach - podaj kwotę w złotych.'
+					hint: 'Podaj kwotę w wybranej walucie; system przechowuje grosze lub centy.'
 				},
+				currency: { label: 'Waluta' },
 				active: {
 					label: 'Produkt aktywny'
 				},
