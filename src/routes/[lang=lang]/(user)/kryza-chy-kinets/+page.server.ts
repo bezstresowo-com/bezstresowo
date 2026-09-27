@@ -1,11 +1,27 @@
+import { env } from '$env/dynamic/private';
+import { prisma } from '$shared/server/services/prisma/prisma-service';
+import { isCoursePurchaseEventConfigured } from '$shared/server/services/sendpulse/course-purchase-event';
 import { redirect } from '@sveltejs/kit';
 
 import type { PageServerLoad } from './$types';
 
-export const load: PageServerLoad = ({ params }) => {
+export const load: PageServerLoad = async ({ params }) => {
 	if (params.lang !== 'uk') {
 		redirect(307, '/pl/shop');
 	}
 
-	return {};
+	const product = await prisma.product.findUnique({
+		where: { slug: 'kryza-chy-kinets' },
+		include: { price: true, internationalizedProducts: true }
+	});
+
+	return {
+		purchaseReady:
+			env.COURSE_UA_SALES_ENABLED === 'true' &&
+			isCoursePurchaseEventConfigured() &&
+			product?.active === true &&
+			product.price.currency === 'PLN' &&
+			product.price.inMinorUnits === 7900 &&
+			product.internationalizedProducts.some((translation) => translation.lang === 'uk-UA')
+	};
 };

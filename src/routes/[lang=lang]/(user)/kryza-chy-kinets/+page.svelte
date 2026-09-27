@@ -2,12 +2,30 @@
 	import { Locale } from '$i18n';
 	import Seo from '$lib/Seo/Seo.svelte';
 	import { trackMetaCustomEvent } from '$lib/Tracking/meta-events';
+	import { createUkrainianCourseCheckout } from '$remote/checkout.remote';
 	import { RELATIONSHIP_GUIDE_URLS } from '$shared/global/config/guide';
 
 	import { PROGRAM_LANDING_COPY } from './copy';
 
 	const copy = PROGRAM_LANDING_COPY;
 	const guideUrl = RELATIONSHIP_GUIDE_URLS[Locale.ukUA];
+	let { data } = $props();
+	let checkoutLoading = $state(false);
+	let checkoutError = $state(false);
+
+	async function buyProgram() {
+		checkoutLoading = true;
+		checkoutError = false;
+		try {
+			const session = await createUkrainianCourseCheckout();
+			if (!session.url) throw new Error('No Stripe checkout URL');
+			window.location.href = session.url;
+		} catch (error) {
+			console.error('Course checkout failed:', error);
+			checkoutError = true;
+			checkoutLoading = false;
+		}
+	}
 </script>
 
 <Seo
@@ -157,8 +175,21 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<button class="cta primary" type="button" disabled>{copy.purchase.button}</button>
-			<small>{copy.purchase.note}</small>
+			<button
+				class="cta primary"
+				type="button"
+				disabled={!data.purchaseReady || checkoutLoading}
+				onclick={buyProgram}
+				>{checkoutLoading ? 'Відкриваємо оплату…' : copy.purchase.button}</button
+			>
+			<small
+				>{data.purchaseReady
+					? 'Після оплати доступ надійде на вашу електронну пошту.'
+					: copy.purchase.note}</small
+			>
+			{#if checkoutError}<p role="alert">
+					Не вдалося відкрити оплату. Спробуйте ще раз трохи пізніше.
+				</p>{/if}
 		</div>
 	</section>
 
@@ -679,6 +710,10 @@
 
 	.price-card button {
 		width: 100%;
+		cursor: pointer;
+	}
+
+	.price-card button:disabled {
 		cursor: not-allowed;
 		opacity: 0.72;
 	}
