@@ -2,12 +2,30 @@
 	import { Locale } from '$i18n';
 	import Seo from '$lib/Seo/Seo.svelte';
 	import { trackMetaCustomEvent } from '$lib/Tracking/meta-events';
+	import { createUkrainianCourseCheckout } from '$remote/checkout.remote';
 	import { RELATIONSHIP_GUIDE_URLS } from '$shared/global/config/guide';
 
 	import { PROGRAM_LANDING_COPY } from './copy';
 
 	const copy = PROGRAM_LANDING_COPY;
 	const guideUrl = RELATIONSHIP_GUIDE_URLS[Locale.ukUA];
+	let { data } = $props();
+	let checkoutLoading = $state(false);
+	let checkoutError = $state(false);
+
+	async function buyProgram() {
+		checkoutLoading = true;
+		checkoutError = false;
+		try {
+			const session = await createUkrainianCourseCheckout();
+			if (!session.url) throw new Error('No Stripe checkout URL');
+			window.location.href = session.url;
+		} catch (error) {
+			console.error('Course checkout failed:', error);
+			checkoutError = true;
+			checkoutLoading = false;
+		}
+	}
 </script>
 
 <Seo
@@ -138,6 +156,19 @@
 		</div>
 	</section>
 
+	<section class="faq" aria-labelledby="faq-title">
+		<div class="section-label">{copy.faq.eyebrow}</div>
+		<h2 id="faq-title">{copy.faq.title}</h2>
+		<div class="faq-list">
+			{#each copy.faq.items as item (item.question)}
+				<details>
+					<summary>{item.question}</summary>
+					<p>{item.answer}</p>
+				</details>
+			{/each}
+		</div>
+	</section>
+
 	<section class="author">
 		<div class="author-mark" aria-hidden="true">OH</div>
 		<div>
@@ -157,8 +188,21 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<button class="cta primary" type="button" disabled>{copy.purchase.button}</button>
-			<small>{copy.purchase.note}</small>
+			<button
+				class="cta primary"
+				type="button"
+				disabled={!data.purchaseReady || checkoutLoading}
+				onclick={buyProgram}
+				>{checkoutLoading ? 'Відкриваємо оплату…' : copy.purchase.button}</button
+			>
+			<small
+				>{data.purchaseReady
+					? 'Після оплати доступ надійде на вашу електронну пошту.'
+					: copy.purchase.note}</small
+			>
+			{#if checkoutError}<p role="alert">
+					Не вдалося відкрити оплату. Спробуйте ще раз трохи пізніше.
+				</p>{/if}
 		</div>
 	</section>
 
@@ -418,10 +462,39 @@
 
 	.recognition,
 	.program,
+	.faq,
 	.author,
 	.purchase,
 	.safety {
 		padding: 100px clamp(24px, 7vw, 110px);
+	}
+
+	.faq {
+		background: #fff;
+	}
+	.faq h2 {
+		margin: 0 0 36px;
+		font-family: Georgia, serif;
+		font-size: clamp(38px, 4.5vw, 64px);
+		font-weight: 400;
+	}
+	.faq-list {
+		max-width: 900px;
+		border-top: 1px solid rgb(34 52 78 / 22%);
+	}
+	.faq details {
+		border-bottom: 1px solid rgb(34 52 78 / 22%);
+		padding: 20px 0;
+	}
+	.faq summary {
+		cursor: pointer;
+		font-size: 19px;
+		font-weight: 600;
+	}
+	.faq details p {
+		max-width: 740px;
+		margin: 14px 0 0;
+		line-height: 1.7;
 	}
 
 	.recognition {
@@ -679,6 +752,10 @@
 
 	.price-card button {
 		width: 100%;
+		cursor: pointer;
+	}
+
+	.price-card button:disabled {
 		cursor: not-allowed;
 		opacity: 0.72;
 	}

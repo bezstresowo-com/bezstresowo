@@ -4,6 +4,7 @@ import type { StripeSessionMetadata } from '$remote/dto/stripe-metadata';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { EmailService } from '$shared/server/services/email/email-service';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
+import { sendUkrainianCoursePurchaseEvent } from '$shared/server/services/sendpulse/course-purchase-event';
 import { json, text } from '@sveltejs/kit';
 import { isNil } from 'lodash-es';
 import Stripe from 'stripe';
@@ -35,9 +36,18 @@ export async function POST({ request }) {
 		);
 	}
 
-	if (event.type === 'checkout.session.completed') {
+	if (
+		event.type === 'checkout.session.completed' ||
+		event.type === 'checkout.session.async_payment_succeeded'
+	) {
 		const session = event.data.object as Stripe.Checkout.Session;
 		const metadata = session.metadata as StripeSessionMetadata;
+		if (
+			event.type === 'checkout.session.async_payment_succeeded' &&
+			metadata?.type !== 'course-ua'
+		) {
+			return text('OK', { status: HttpStatus.OK });
+		}
 
 		if (!isNil(metadata)) {
 			// Stripe delivers at least once - skip events whose emails already went out.
@@ -51,6 +61,16 @@ export async function POST({ request }) {
 
 			try {
 				switch (metadata.type) {
+					case 'course-ua': {
+						// A completed Checkout Session can precede settlement for delayed payment methods.
+						if (session.payment_status !== 'paid') return text('OK', { status: HttpStatus.OK });
+
+						const email = session.customer_details?.email || session.customer_email;
+						if (!email) throw new Error('Paid course checkout has no customer email');
+
+						await sendUkrainianCoursePurchaseEvent(email, session.id);
+						break;
+					}
 					case 'consultation-registration': {
 						// The customer's email follows the language they checked out in.
 						await new EmailService().consultationRegistrationMessage(toLocale(metadata.lang), {

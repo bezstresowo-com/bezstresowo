@@ -1,8 +1,8 @@
 import type { Locale } from '$i18n';
 
 /**
- * Amounts are stored as integers in minor units (grosze); the currency is
- * always PLN, but the formatting follows the language of the page.
+ * Amounts are stored as integers in minor units (grosze or euro cents),
+ * with formatting based on the currency and language of the page.
  */
 export function formatMoney(inMinorUnits: number, currency: string, locale: Locale): string {
 	return new Intl.NumberFormat(locale, {

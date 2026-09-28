@@ -18,7 +18,14 @@ export interface ShopCheckoutMetadata {
 	productName: string;
 }
 
+export interface CourseCheckoutMetadata {
+	type: 'course-ua';
+	lang: 'uk';
+	productId: string;
+}
+
 export type StripeSessionMetadata =
 	| ConsultationRegistrationCheckoutMetadata
 	| ShopCheckoutMetadata
+	| CourseCheckoutMetadata
 	| null;
