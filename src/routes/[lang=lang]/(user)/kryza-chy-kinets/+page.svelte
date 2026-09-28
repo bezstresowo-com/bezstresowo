@@ -156,6 +156,19 @@
 		</div>
 	</section>
 
+	<section class="faq" aria-labelledby="faq-title">
+		<div class="section-label">{copy.faq.eyebrow}</div>
+		<h2 id="faq-title">{copy.faq.title}</h2>
+		<div class="faq-list">
+			{#each copy.faq.items as item (item.question)}
+				<details>
+					<summary>{item.question}</summary>
+					<p>{item.answer}</p>
+				</details>
+			{/each}
+		</div>
+	</section>
+
 	<section class="author">
 		<div class="author-mark" aria-hidden="true">OH</div>
 		<div>
@@ -449,10 +462,39 @@
 
 	.recognition,
 	.program,
+	.faq,
 	.author,
 	.purchase,
 	.safety {
 		padding: 100px clamp(24px, 7vw, 110px);
+	}
+
+	.faq {
+		background: #fff;
+	}
+	.faq h2 {
+		margin: 0 0 36px;
+		font-family: Georgia, serif;
+		font-size: clamp(38px, 4.5vw, 64px);
+		font-weight: 400;
+	}
+	.faq-list {
+		max-width: 900px;
+		border-top: 1px solid rgb(34 52 78 / 22%);
+	}
+	.faq details {
+		border-bottom: 1px solid rgb(34 52 78 / 22%);
+		padding: 20px 0;
+	}
+	.faq summary {
+		cursor: pointer;
+		font-size: 19px;
+		font-weight: 600;
+	}
+	.faq details p {
+		max-width: 740px;
+		margin: 14px 0 0;
+		line-height: 1.7;
 	}
 
 	.recognition {
