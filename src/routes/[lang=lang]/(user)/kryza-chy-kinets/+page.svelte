@@ -391,12 +391,13 @@
 	}
 
 	.statement h2 {
-		max-width: 760px;
+		max-width: none;
 		margin: 0 auto;
 		font-family: Georgia, serif;
-		font-size: clamp(36px, 4vw, 56px);
+		font-size: clamp(36px, 3.6vw, 54px);
 		font-weight: 400;
 		line-height: 1.05;
+		white-space: nowrap;
 	}
 
 	.program {
@@ -522,18 +523,20 @@
 	}
 
 	.result h2 {
+		margin-bottom: 28px;
 		font-size: clamp(36px, 4vw, 54px);
 	}
 
 	.result-box > p {
 		max-width: 850px;
+		margin-top: 0;
 		margin-right: auto;
 		margin-left: auto;
 		font-size: 18px;
 		line-height: 1.7;
 	}
 
-	.quote {
+	.result-box > .quote {
 		max-width: 850px;
 		margin-top: 40px;
 		border-top: 1px solid var(--gold);
@@ -640,6 +643,9 @@
 	}
 
 	@media (max-width: 850px) {
+		.statement h2 {
+			white-space: normal;
+		}
 		.hero {
 			grid-template-columns: 1fr;
 			padding-top: 70px;
