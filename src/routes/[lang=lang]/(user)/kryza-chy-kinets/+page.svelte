@@ -1,13 +1,10 @@
 <script lang="ts">
 	import { Locale } from '$i18n';
 	import Seo from '$lib/Seo/Seo.svelte';
-	import { trackMetaCustomEvent } from '$lib/Tracking/meta-events';
-	import { RELATIONSHIP_GUIDE_URLS } from '$shared/global/config/guide';
 
 	import { PROGRAM_LANDING_COPY } from './copy';
 
 	const copy = PROGRAM_LANDING_COPY;
-	const guideUrl = RELATIONSHIP_GUIDE_URLS[Locale.ukUA];
 </script>
 
 <Seo
@@ -29,46 +26,14 @@
 			<p class="micro">{copy.hero.meta}</p>
 		</div>
 
-		<div class="hero-card" aria-hidden="true">
-			<div class="card-line"></div>
-			<span>{copy.hero.workbookLabel}</span>
-			<strong>{copy.hero.titleFirst}<br />{copy.hero.titleSecond}</strong>
-			<p>{copy.hero.workbookSubtitle}</p>
-			<div class="gold-dot"></div>
+		<div class="workbook-preview">
+			<img
+				src="/assets/kryza-chy-kinets-workbook-cover.webp"
+				alt="Обкладинка робочого зошита «Криза чи кінець?»"
+				width="909"
+				height="1287"
+			/>
 		</div>
-	</section>
-
-	<section class="guide-bridge" aria-labelledby="guide-bridge-title">
-		<div class="section-label" id="guide-bridge-title">{copy.guideBridge.eyebrow}</div>
-		<div class="bridge-grid">
-			<article class="bridge-stage guide-stage">
-				<div class="stage-number">17</div>
-				<div>
-					<p class="stage-label">{copy.guideBridge.guideLabel}</p>
-					<h2>{copy.guideBridge.guideTitle}</h2>
-					<p>{copy.guideBridge.guideDescription}</p>
-				</div>
-			</article>
-
-			<div class="bridge-arrow" aria-hidden="true">
-				<span></span>
-				<i class="fa-solid fa-arrow-right"></i>
-			</div>
-
-			<article class="bridge-stage program-stage">
-				<div class="stage-number">7</div>
-				<div>
-					<p class="stage-label">{copy.guideBridge.programLabel}</p>
-					<h2>{copy.guideBridge.programTitle}</h2>
-					<p>{copy.guideBridge.programDescription}</p>
-				</div>
-			</article>
-		</div>
-
-		<a class="guide-link" href={guideUrl} onclick={() => trackMetaCustomEvent('FreeMaterialOpen')}>
-			{copy.guideBridge.guideCta}
-			<i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
-		</a>
 	</section>
 
 	<section class="recognition">
@@ -90,15 +55,14 @@
 	</section>
 
 	<section class="statement">
-		<p>{copy.statement.intro} <em>{copy.statement.emphasis}</em></p>
 		<h2>{copy.statement.title}</h2>
+		<p>{copy.statement.description}</p>
 	</section>
 
 	<section class="program" id="program">
 		<div class="section-label">{copy.program.eyebrow}</div>
 		<div class="program-head">
 			<h2>{copy.program.title}</h2>
-			<p>{copy.program.description}</p>
 		</div>
 		<div class="modules">
 			{#each copy.program.modules as module (module.number)}
@@ -124,6 +88,11 @@
 					<b>{item.number}</b>
 					<h3>{item.title}</h3>
 					<p>{item.description}</p>
+					<ul>
+						{#each item.benefits as benefit (benefit)}
+							<li>{benefit}</li>
+						{/each}
+					</ul>
 				</div>
 			{/each}
 		</div>
@@ -135,6 +104,19 @@
 			<h2>{copy.result.title}</h2>
 			<p>{copy.result.description}</p>
 			<p class="quote">{copy.result.quote}</p>
+		</div>
+	</section>
+
+	<section class="faq" aria-labelledby="faq-title">
+		<div class="section-label">{copy.faq.eyebrow}</div>
+		<h2 id="faq-title">{copy.faq.title}</h2>
+		<div class="faq-list">
+			{#each copy.faq.items as item (item.question)}
+				<details>
+					<summary>{item.question}</summary>
+					<p>{item.answer}</p>
+				</details>
+			{/each}
 		</div>
 	</section>
 
@@ -157,8 +139,15 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<button class="cta primary" type="button" disabled>{copy.purchase.button}</button>
-			<small>{copy.purchase.note}</small>
+			<button
+				class="cta primary"
+				type="button"
+				disabled
+				>{copy.purchase.button}</button
+			>
+			<small
+				>{copy.purchase.note}</small
+			>
 		</div>
 	</section>
 
@@ -206,222 +195,54 @@
 	}
 
 	.hero-inner,
-	.hero-card {
-		position: relative;
-		z-index: 1;
-	}
-
-	.eyebrow,
-	.section-label {
-		margin-bottom: 24px;
-		color: var(--gold);
-		font-size: 12px;
-		font-weight: 700;
-		letter-spacing: 0.18em;
-	}
-
-	h1 {
-		margin: 0 0 36px;
-		font-family: Georgia, serif;
-		font-size: clamp(64px, 8vw, 118px);
-		font-weight: 400;
-		line-height: 0.86;
-		letter-spacing: -0.055em;
-	}
-
-	h1 em {
-		color: var(--sand);
-		font-weight: 400;
-	}
-
-	.hero-copy {
-		max-width: 700px;
-		margin: 0 0 20px;
-		font-family: Georgia, serif;
-		font-size: clamp(25px, 3vw, 39px);
-		line-height: 1.18;
-	}
-
-	.hero-sub {
-		max-width: 680px;
-		margin-bottom: 32px;
-		color: #e8e6e0;
-		font-size: 17px;
-		line-height: 1.7;
-	}
-
-	.cta {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		border: 0;
-		border-radius: 2px;
-		padding: 16px 26px;
-		font-size: 15px;
-		font-weight: 700;
-		text-decoration: none;
-	}
-
-	.primary {
-		background: var(--gold);
-		color: var(--navy);
-	}
-
-	.micro {
-		margin-top: 17px;
-		color: #c8c9cc;
-		font-size: 12px;
-		letter-spacing: 0.03em;
-	}
-
-	.hero-card {
-		display: flex;
-		width: min(340px, 100%);
-		aspect-ratio: 3 / 4;
-		flex-direction: column;
-		justify-content: center;
+	.workbook-preview {
+		width: min(360px, 100%);
 		justify-self: center;
-		padding: 44px 34px;
-		background: linear-gradient(145deg, #f7f3e9, #eadfca);
 		box-shadow: 0 30px 80px rgb(0 0 0 / 30%);
-		color: var(--navy);
+		transform: rotate(2deg);
 	}
 
-	.hero-card span {
-		font-size: 11px;
-		letter-spacing: 0.18em;
-	}
-
-	.hero-card strong {
-		margin: 22px 0;
-		font-family: Georgia, serif;
-		font-size: 45px;
-		font-weight: 400;
-		line-height: 0.98;
-	}
-
-	.hero-card p {
-		font-size: 14px;
-	}
-
-	.card-line {
-		width: 55px;
-		height: 1px;
-		margin-bottom: 30px;
-		background: var(--gold);
-	}
-
-	.gold-dot {
-		position: absolute;
-		right: 30px;
-		bottom: 30px;
-		width: 13px;
-		height: 13px;
-		border: 1px solid var(--gold);
-		border-radius: 50%;
-	}
-
-	.guide-bridge {
-		padding: 72px clamp(24px, 7vw, 110px);
-		background: #fff;
-	}
-
-	.bridge-grid {
-		display: grid;
-		grid-template-columns: 1fr 82px 1fr;
-		align-items: stretch;
-	}
-
-	.bridge-stage {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 22px;
-		padding: 28px;
-		border: 1px solid rgb(34 52 78 / 16%);
-		border-radius: 18px;
-	}
-
-	.guide-stage {
-		background: var(--cream);
-	}
-
-	.program-stage {
-		border-color: rgb(229 174 49 / 55%);
-		background: var(--navy);
-		color: white;
-	}
-
-	.stage-number {
-		color: var(--gold);
-		font-family: Georgia, serif;
-		font-size: 45px;
-		line-height: 1;
-	}
-
-	.stage-label {
-		margin: 0 0 10px;
-		color: #7b5d17;
-		font-size: 10px;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-	}
-
-	.program-stage .stage-label {
-		color: var(--sand);
-	}
-
-	.bridge-stage h2 {
-		margin: 0 0 10px;
-		font-family: Georgia, serif;
-		font-size: clamp(25px, 2.4vw, 34px);
-		font-weight: 400;
-		line-height: 1.08;
-	}
-
-	.bridge-stage p:last-child {
-		margin: 0;
-		font-size: 14px;
-		line-height: 1.6;
-	}
-
-	.program-stage p:last-child {
-		color: #d7dce2;
-	}
-
-	.bridge-arrow {
-		display: flex;
-		align-items: center;
-		color: var(--gold);
-	}
-
-	.bridge-arrow span {
+	.workbook-preview img {
+		display: block;
 		width: 100%;
-		height: 1px;
-		background: var(--gold);
-	}
-
-	.bridge-arrow i {
-		margin-left: -1px;
-	}
-
-	.guide-link {
-		display: inline-flex;
-		align-items: center;
-		gap: 9px;
-		margin-top: 22px;
-		color: var(--navy);
-		font-size: 14px;
-		font-weight: 700;
-		text-decoration-color: var(--gold);
-		text-underline-offset: 4px;
+		height: auto;
 	}
 
 	.recognition,
 	.program,
+	.faq,
 	.author,
 	.purchase,
 	.safety {
 		padding: 100px clamp(24px, 7vw, 110px);
+	}
+
+	.faq {
+		background: #fff;
+	}
+	.faq h2 {
+		margin: 0 0 36px;
+		font-family: Georgia, serif;
+		font-size: clamp(38px, 4.5vw, 64px);
+		font-weight: 400;
+	}
+	.faq-list {
+		max-width: 900px;
+		border-top: 1px solid rgb(34 52 78 / 22%);
+	}
+	.faq details {
+		border-bottom: 1px solid rgb(34 52 78 / 22%);
+		padding: 20px 0;
+	}
+	.faq summary {
+		cursor: pointer;
+		font-size: 19px;
+		font-weight: 600;
+	}
+	.faq details p {
+		max-width: 740px;
+		margin: 14px 0 0;
+		line-height: 1.7;
 	}
 
 	.recognition {
@@ -476,26 +297,25 @@
 	}
 
 	.statement {
-		padding: 95px clamp(24px, 12vw, 180px);
+		padding: 76px clamp(24px, 12vw, 180px);
 		background: var(--sand);
 		text-align: center;
 	}
 
 	.statement p {
-		margin: 0 0 20px;
+		max-width: 680px;
+		margin: 22px auto 0;
 		font-size: 18px;
+		line-height: 1.6;
 	}
 
 	.statement h2 {
-		margin: 0;
+		max-width: 760px;
+		margin: 0 auto;
 		font-family: Georgia, serif;
-		font-size: clamp(40px, 5vw, 72px);
+		font-size: clamp(36px, 4vw, 56px);
 		font-weight: 400;
 		line-height: 1.05;
-	}
-
-	.statement em {
-		color: #6e5420;
 	}
 
 	.program {
@@ -504,14 +324,10 @@
 
 	.program-head {
 		display: grid;
-		grid-template-columns: 1.4fr 0.6fr;
+		grid-template-columns: 1fr;
 		align-items: end;
 		gap: 50px;
 		margin-bottom: 55px;
-	}
-
-	.program-head p {
-		line-height: 1.6;
 	}
 
 	.modules {
@@ -556,16 +372,20 @@
 		color: var(--sand);
 	}
 
+	.inside h2 {
+		font-size: clamp(32px, 3.6vw, 48px);
+	}
+
 	.format-grid {
 		display: grid;
-		grid-template-columns: repeat(4, 1fr);
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 1px;
 		margin-top: 60px;
 		background: rgb(255 255 255 / 18%);
 	}
 
 	.format-grid > div {
-		padding: 34px;
+		padding: 36px;
 		background: var(--navy);
 	}
 
@@ -582,9 +402,31 @@
 	}
 
 	.format-grid p {
-		color: #d5d9df;
-		font-size: 14px;
+		color: white;
+		font-size: 17px;
 		line-height: 1.55;
+	}
+
+	.format-grid ul {
+		margin: 22px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.format-grid li {
+		position: relative;
+		border-top: 1px solid rgb(255 255 255 / 15%);
+		padding: 12px 0 12px 23px;
+		color: #d5d9df;
+		font-size: 15px;
+		line-height: 1.45;
+	}
+
+	.format-grid li::before {
+		position: absolute;
+		left: 0;
+		color: var(--gold);
+		content: '✦';
 	}
 
 	.result {
@@ -593,9 +435,13 @@
 	}
 
 	.result-box {
-		max-width: 900px;
+		max-width: 1080px;
 		margin: auto;
 		text-align: center;
+	}
+
+	.result h2 {
+		font-size: clamp(36px, 4vw, 54px);
 	}
 
 	.result-box > p {
@@ -679,6 +525,10 @@
 
 	.price-card button {
 		width: 100%;
+		cursor: pointer;
+	}
+
+	.price-card button:disabled {
 		cursor: not-allowed;
 		opacity: 0.72;
 	}
@@ -713,31 +563,8 @@
 			padding-top: 70px;
 		}
 
-		.hero-card {
+		.workbook-preview {
 			width: 280px;
-		}
-
-		.bridge-grid {
-			grid-template-columns: 1fr;
-			gap: 0;
-		}
-
-		.bridge-arrow {
-			width: 44px;
-			height: 54px;
-			flex-direction: column;
-			justify-self: center;
-		}
-
-		.bridge-arrow span {
-			width: 1px;
-			height: 100%;
-		}
-
-		.bridge-arrow i {
-			margin-top: -2px;
-			margin-left: 0;
-			transform: rotate(90deg);
 		}
 
 		.recognition-grid,
@@ -769,22 +596,16 @@
 			padding: 70px 22px;
 		}
 
-		.hero-card {
+		.workbook-preview {
 			width: 245px;
 		}
 
-		.guide-bridge,
 		.recognition,
 		.program,
 		.inside,
 		.author,
 		.purchase {
 			padding: 70px 22px;
-		}
-
-		.bridge-stage {
-			grid-template-columns: 1fr;
-			padding: 24px;
 		}
 
 		.format-grid {
