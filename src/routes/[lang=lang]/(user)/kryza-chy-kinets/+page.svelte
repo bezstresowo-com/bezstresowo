@@ -121,7 +121,14 @@
 	</section>
 
 	<section class="author">
-		<div class="author-mark" aria-hidden="true">OH</div>
+		<img
+			class="author-photo"
+			src="/assets/about-me.jpg"
+			alt="Олеся Гайдук"
+			width="528"
+			height="500"
+			loading="lazy"
+		/>
 		<div>
 			<div class="section-label">{copy.author.eyebrow}</div>
 			<h2>{copy.author.name}</h2>
@@ -196,10 +203,78 @@
 
 	.hero-inner,
 	.workbook-preview {
-		width: min(360px, 100%);
 		justify-self: center;
+	}
+
+	.hero-inner {
+		width: min(650px, 100%);
+	}
+
+	.workbook-preview {
+		width: min(360px, 100%);
 		box-shadow: 0 30px 80px rgb(0 0 0 / 30%);
-		transform: rotate(2deg);
+	}
+
+	.eyebrow,
+	.section-label {
+		font-size: 13px;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		line-height: 1.45;
+	}
+
+	.section-label {
+		margin-bottom: 24px;
+		color: #a5791e;
+	}
+
+	.hero h1 {
+		margin: 20px 0 28px;
+		font-family: Georgia, serif;
+		font-size: clamp(58px, 6vw, 94px);
+		font-weight: 400;
+		line-height: 0.98;
+	}
+
+	.hero h1 em {
+		color: var(--sand);
+		font-weight: 400;
+	}
+
+	.hero-copy {
+		max-width: 590px;
+		margin: 0 0 18px;
+		font-size: clamp(23px, 2.3vw, 32px);
+		line-height: 1.3;
+	}
+
+	.hero-sub {
+		max-width: 570px;
+		margin: 0 0 32px;
+		color: #e0e4e9;
+		font-size: 18px;
+		line-height: 1.6;
+	}
+
+	.cta.primary {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 52px;
+		border: 0;
+		border-radius: 4px;
+		padding: 13px 24px;
+		background: var(--gold);
+		color: var(--navy);
+		font-size: 16px;
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.micro {
+		margin: 22px 0 0;
+		color: #cbd3dd;
+		font-size: 14px;
 	}
 
 	.workbook-preview img {
@@ -253,6 +328,12 @@
 		display: grid;
 		grid-template-columns: 0.9fr 1.1fr;
 		gap: 90px;
+	}
+
+	.recognition h2 {
+		max-width: 620px;
+		font-size: clamp(40px, 4.3vw, 64px);
+		line-height: 1.14;
 	}
 
 	.recognition h2,
@@ -445,17 +526,22 @@
 	}
 
 	.result-box > p {
+		max-width: 850px;
+		margin-right: auto;
+		margin-left: auto;
 		font-size: 18px;
 		line-height: 1.7;
 	}
 
 	.quote {
+		max-width: 850px;
 		margin-top: 40px;
 		border-top: 1px solid var(--gold);
 		padding-top: 32px;
 		color: #745817;
 		font-family: Georgia, serif !important;
-		font-size: 28px !important;
+		font-size: clamp(22px, 2.5vw, 30px) !important;
+		line-height: 1.4 !important;
 	}
 
 	.author {
@@ -466,16 +552,12 @@
 		background: #fff;
 	}
 
-	.author-mark {
-		display: grid;
+	.author-photo {
+		display: block;
 		width: 180px;
 		height: 180px;
-		place-items: center;
-		border-radius: 50%;
-		background: var(--navy);
-		color: var(--gold);
-		font-family: Georgia, serif;
-		font-size: 52px;
+		border-radius: 8px;
+		object-fit: cover;
 	}
 
 	.author p {
@@ -579,10 +661,9 @@
 			grid-template-columns: 1fr 1fr;
 		}
 
-		.author-mark {
+		.author-photo {
 			width: 120px;
 			height: 120px;
-			font-size: 38px;
 		}
 
 		.price-card {
@@ -594,6 +675,10 @@
 		.hero {
 			min-height: auto;
 			padding: 70px 22px;
+		}
+
+		.hero h1 {
+			font-size: clamp(52px, 13vw, 70px);
 		}
 
 		.workbook-preview {
