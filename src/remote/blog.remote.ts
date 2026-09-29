@@ -1,5 +1,5 @@
 import { query } from '$app/server';
-import type { Locale } from '$i18n';
+import { Locale } from '$i18n';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { dtoSchema } from '$shared/server/functions/dto-schema';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
@@ -81,7 +81,7 @@ export const getBlogArticle = query(
 			// The where clause matched the parent's slug against this exact value.
 			slug,
 			title: normalizeLegacyArticleText(translation.title),
-			content: normalizeLegacyArticleText(translation.content),
+			content: normalizeArticleContent(translation.content, lang),
 			metaTitle: normalizeLegacyArticleText(translation.metaTitle),
 			metaDescription: normalizeLegacyArticleText(translation.metaDescription),
 			featuredImageId: translation.featuredImageId,
@@ -133,6 +133,17 @@ function normalizeLegacyArticleText(value: string): string {
 		(result, [legacyValue, currentValue]) => result.replaceAll(legacyValue, currentValue),
 		value
 	);
+}
+
+/** An imported Ukrainian article linked the Polish Facebook page as its site link. */
+function normalizeArticleContent(value: string, locale: Locale): string {
+	const content = normalizeLegacyArticleText(value);
+	return locale === Locale.ukUA
+		? content.replaceAll(
+				'href="https://www.facebook.com/p/Olesya-Haiduk-Psychoterapeuta-100088923916892/"',
+				'href="/uk/home"'
+			)
+		: content;
 }
 
 function normalizeLegacyArticleValue(value: unknown): unknown {
