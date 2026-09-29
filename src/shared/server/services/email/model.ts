@@ -21,3 +21,18 @@ export type ShopBuyMessageArgs = {
 	currency: string;
 	tel: string;
 };
+
+export type GroupApplicationMessageArgs = {
+	name: string;
+	age: number;
+	email: string;
+	contact: string;
+	relationshipSituation: string;
+	hardestPart: string;
+	expectations: string;
+	currentHelp: string;
+	attendanceConfirmed: 'yes' | 'no';
+	privatePlaceConfirmed: 'yes' | 'no';
+	additionalInfo?: string;
+	consent: boolean;
+};

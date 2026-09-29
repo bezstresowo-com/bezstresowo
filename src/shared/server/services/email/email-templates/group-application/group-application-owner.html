@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="uk">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>{{ subject }}</title>
+	</head>
+	<body
+		style="
+			margin: 0;
+			padding: 24px;
+			background: #f3f0e7;
+			font-family: Arial, sans-serif;
+			color: #22344e;
+		"
+	>
+		<table
+			role="presentation"
+			width="100%"
+			cellspacing="0"
+			cellpadding="0"
+			border="0"
+			style="
+				max-width: 720px;
+				margin: 0 auto;
+				background: #ffffff;
+				border: 1px solid #eadfca;
+				border-radius: 16px;
+			"
+		>
+			<tr>
+				<td style="padding: 28px">
+					<h1 style="margin: 0 0 6px; font-size: 22px">
+						Нова заявка до групи «Залишитись чи піти?»
+					</h1>
+					<p style="margin: 0 0 24px; color: #64748b">Анкета з української сторінки Bezstresowo</p>
+					<p><strong>Ім'я:</strong> {{ name }}</p>
+					<p><strong>Вік:</strong> {{ age }}</p>
+					<p><strong>E-mail:</strong> <a href="mailto:{{ email }}">{{ email }}</a></p>
+					<p><strong>Telegram або телефон:</strong> {{ contact }}</p>
+					<hr style="border: 0; border-top: 1px solid #eadfca; margin: 22px 0" />
+					<p><strong>Що відбувається у стосунках:</strong></p>
+					<p style="white-space: pre-line">{{ relationshipSituation }}</p>
+					<p><strong>Що зараз найскладніше:</strong></p>
+					<p style="white-space: pre-line">{{ hardestPart }}</p>
+					<p><strong>Очікування від групи:</strong></p>
+					<p style="white-space: pre-line">{{ expectations }}</p>
+					<p><strong>Поточна психологічна / психотерапевтична / психіатрична допомога:</strong></p>
+					<p style="white-space: pre-line">{{ currentHelp }}</p>
+					<p><strong>Може брати участь у всіх 7 зустрічах:</strong> {{ attendanceConfirmed }}</p>
+					<p><strong>Матиме приватне місце:</strong> {{ privatePlaceConfirmed }}</p>
+					<p><strong>Додаткова інформація:</strong></p>
+					<p style="white-space: pre-line">{{ additionalInfo }}</p>
+					<p><strong>Згода на обробку даних:</strong> {{ consent }}</p>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>

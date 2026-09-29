@@ -3,14 +3,14 @@
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import Seo from '$lib/Seo/Seo.svelte';
-	import { OFFERED_SERVICES } from '$lib/ServicesSection/model';
+	import { CONSULTATION_SLUG, serviceCards } from '$lib/ServicesSection/catalog';
 	import { createShopCheckout } from '$remote/checkout.remote';
 	import { getProducts } from '$remote/products.remote';
 	import { formatMoney } from '$shared/global/functions/format-money';
 	import toast, { Toaster } from 'svelte-5-french-toast';
 
 	const isUkrainian = $derived(getLocale() === Locale.ukUA);
-	const products = $derived(getProducts({ lang: getLocale(), siteLocation: 'registrations' }));
+	const products = $derived(getProducts({ lang: getLocale() }));
 	let purchaseLoadingId: string | null = $state(null);
 
 	async function payForAgreedSession(productId: string) {
@@ -72,35 +72,55 @@
 			{/snippet}
 
 			{@const serviceProducts = await products}
-			<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-				{#each OFFERED_SERVICES as service (service.slug)}
-					{@const product = serviceProducts.find((item) => item.slug === service.productSlug)}
+			<div class="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+				{#each serviceCards(serviceProducts) as card (card.key)}
+					{@const service = card.service}
+					{@const product = card.product}
+					{@const title = service
+						? translateKey(`${service.prefix}.title`)
+						: (product?.name.replace(/\s*\([^)]*\)\s*$/, '') ?? '')}
+					{@const description = service
+						? translateKey(`${service.prefix}.description`)
+						: product?.description ||
+							(product?.slug === CONSULTATION_SLUG
+								? isUkrainian
+									? 'Зустріч, щоб обговорити те, що тебе турбує, та визначити, яка підтримка зараз потрібна.'
+									: 'Spotkanie, aby porozmawiać o tym, co Cię niepokoi, i ustalić, jakiego wsparcia potrzebujesz.'
+								: '')}
 					{@const duration = product?.name.match(/\(([^)]+)\)/)?.[1]}
 					<article
-						class="flex h-full flex-col overflow-hidden rounded-3xl border border-accent/45 bg-white shadow-sm"
+						class="flex h-full flex-col overflow-hidden rounded-2xl border border-accent/45 bg-white shadow-sm"
 					>
-						<a href={path(`/${service.slug}`)} tabindex="-1" aria-hidden="true">
-							<img
-								src={product?.imageUrl ?? service.imageUrl}
-								alt=""
-								class="aspect-[16/9] w-full object-cover"
-								width="640"
-								height="360"
-								loading="lazy"
-								decoding="async"
-							/>
+						<a href={path(card.href)} tabindex="-1" aria-hidden="true">
+							{#if card.imageUrl}
+								<img
+									src={card.imageUrl}
+									alt=""
+									class="h-36 w-full object-cover sm:h-40"
+									width="640"
+									height="360"
+									loading="lazy"
+									decoding="async"
+								/>
+							{:else}
+								<div
+									class="flex h-36 items-center justify-center bg-primary text-5xl text-secondary sm:h-40"
+								>
+									<i class="fa-regular fa-comments" aria-hidden="true"></i>
+								</div>
+							{/if}
 						</a>
-						<div class="flex flex-1 flex-col p-6">
+						<div class="flex flex-1 flex-col p-5">
 							<h2 class="text-xl leading-snug font-semibold">
-								<a href={path(`/${service.slug}`)} class="hover:underline">
-									{translateKey(`${service.prefix}.title`)}
+								<a href={path(card.href)} class="hover:underline">
+									{title}
 								</a>
 							</h2>
-							<p class="mt-3 flex-1 leading-relaxed text-slate-600">
-								{translateKey(`${service.prefix}.description`)}
+							<p class="mt-3 line-clamp-3 flex-1 text-sm leading-relaxed text-slate-600">
+								{description}
 							</p>
 							<a
-								href={path(`/${service.slug}`)}
+								href={path(card.href)}
 								class="mt-4 inline-flex w-fit items-center gap-2 font-semibold text-primary underline decoration-accent underline-offset-4"
 							>
 								{isUkrainian ? 'Дізнатися більше' : 'Dowiedz się więcej'}
@@ -108,7 +128,7 @@
 							</a>
 							{#if product}
 								<div
-									class="mt-6 flex flex-wrap items-baseline justify-between gap-2 border-t border-primary/10 pt-5"
+									class="mt-4 flex flex-wrap items-baseline justify-between gap-2 border-t border-primary/10 pt-4"
 								>
 									<p class="text-2xl font-semibold">
 										{formatMoney(product.priceInMinorUnits, product.currency, getLocale())}

@@ -1,6 +1,7 @@
 import { Locale } from '$i18n';
 import { alternateUrl, hreflang, xDefaultUrl, type SeoAlternate } from '$lib/Seo/model';
-import { SERVICE_SLUGS } from '$lib/ServicesSection/model';
+import { isCatalogService } from '$lib/ServicesSection/catalog';
+import { OFFERED_SERVICES, SERVICE_SLUGS } from '$lib/ServicesSection/model';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 
 import type { RequestHandler } from './$types';
@@ -32,6 +33,31 @@ export const GET: RequestHandler = async () => {
 		for (const alternate of alternates) {
 			entries.push(urlEntry(alternate, alternates));
 		}
+	}
+
+	const groupAlternate = { locale: Locale.ukUA, path: '/zalyshytys-chy-pity' };
+	entries.push(urlEntry(groupAlternate, [groupAlternate]));
+	const products = await prisma.product.findMany({
+		where: { active: true },
+		select: {
+			slug: true,
+			siteLocations: true,
+			internationalizedProducts: { select: { lang: true } }
+		}
+	});
+	for (const product of products) {
+		if (
+			!isCatalogService(product) ||
+			OFFERED_SERVICES.some((service) => service.productSlug === product.slug)
+		)
+			continue;
+		const alternates = product.internationalizedProducts
+			.filter((translation) => (Object.values(Locale) as string[]).includes(translation.lang))
+			.map((translation) => ({
+				locale: translation.lang as Locale,
+				path: `/services/${product.slug}`
+			}));
+		for (const alternate of alternates) entries.push(urlEntry(alternate, alternates));
 	}
 
 	const articles = await prisma.internationalizedBlogArticle.findMany({

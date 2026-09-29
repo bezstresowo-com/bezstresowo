@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { Locale, path, t, translateKey } from '$i18n';
+	import { getLocale, Locale, path, t, translateKey } from '$i18n';
 	import { localeTabLabel } from '$lib/admin/blog/AdminBlogForm/model';
 	import { uploadMedia } from '$remote/admin-media.remote';
 	import { SITE_LOCATIONS, type UpsertProductDto } from '$remote/dto/product';
@@ -182,7 +182,11 @@
 						checked={draft.siteLocations.includes(location)}
 						onchange={(event) => toggleSiteLocation(location, event.currentTarget.checked)}
 					/>
-					{location === 'shop' ? t.user.header.items.shop : t.user.header.items.registrations}
+					{location === 'shop'
+						? getLocale() === Locale.ukUA
+							? 'Послуги (каталог і оплата)'
+							: 'Usługi (katalog i płatność)'
+						: t.user.header.items.registrations}
 				</label>
 			{/each}
 		</div>
