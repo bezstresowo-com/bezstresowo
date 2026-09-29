@@ -26,11 +26,11 @@
 
 		{#if isUkrainian}
 			<p class="mt-8 max-w-2xl leading-relaxed text-slate-600">
-				Якщо після гайду хочеться глибше розібратися у стосунках,
+				Для глибшої роботи зі стосунками є
 				<a
 					href={programUrl}
 					class="font-semibold text-primary underline decoration-accent underline-offset-4 hover:text-accent focus:outline-offset-4"
-					>переглянь програму «Криза чи кінець?»</a
+					>програма «Криза чи кінець?»</a
 				>.
 			</p>
 		{/if}
