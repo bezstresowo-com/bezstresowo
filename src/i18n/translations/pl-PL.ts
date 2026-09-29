@@ -435,7 +435,7 @@ const plPL = {
 					cancelTitle: 'Zakup anulowany',
 					successDescription: 'Dziękujemy za zakup, zostaniesz wkrótce przekierowany do sklepu.',
 					cancelDescription: 'Anulowałeś proces zakupu. Możesz kontynuować zakupy w sklepie.',
-					backToShop: 'Powrót do sklepu',
+					backToShop: 'Wróć do usług',
 					autoRedirect: 'Zostaniesz automatycznie przekierowany za {{ time }} sekund...'
 				}
 			},
@@ -636,9 +636,9 @@ const plPL = {
 				}
 			},
 			materials: {
-				pageTitle: 'Bezpłatne materiały',
+				pageTitle: 'Materiały',
 				pageDescription:
-					'Przewodniki i praktyczne materiały, które pomagają lepiej rozumieć siebie, swoje relacje i powtarzające się schematy.',
+					'Bezpłatne przewodniki oraz płatne książki i programy do samodzielnej pracy. Wybierz temat i format, które Ci odpowiadają.',
 				guide: {
 					compactEyebrow: 'Bezpłatny praktyczny przewodnik',
 					eyebrow: '14 stron pytań, ćwiczeń i praktycznych wskazówek',
@@ -657,8 +657,9 @@ const plPL = {
 			},
 			registrations: {
 				title: 'Rejestracja konsultacji',
-				titleDescription: 'Wypełnij formularz, aby zarejestrować konsultację.',
-				submit: 'Zarejestruj',
+				titleDescription:
+					'Wybierz rodzaj konsultacji. Po opłaceniu skontaktuję się z Tobą, aby ustalić termin.',
+				submit: 'Przejdź do płatności',
 				privacyNotice: {
 					text: 'Dane z formularza wykorzystam wyłącznie do obsługi Twojego zapisu. Szczegóły znajdziesz w',
 					link: 'polityce prywatności'
@@ -741,8 +742,9 @@ const plPL = {
 				home: 'Strona główna',
 				blog: 'Blog',
 				shop: 'Sklep',
+				services: 'Usługi',
 				materials: 'Materiały',
-				registrations: 'Konsultacje'
+				registrations: 'Umów konsultację'
 			}
 		},
 		footer: {
@@ -752,7 +754,7 @@ const plPL = {
 			copyright: '© {{ year }} Bezstresowo. Wszystkie prawa zastrzeżone.',
 			cookieSettings: 'Ustawienia plików cookie',
 			fastLinks: {
-				materials: 'Bezpłatne materiały',
+				materials: 'Materiały',
 				termsOfService: 'Regulamin',
 				gdpr: 'RODO',
 				priceList: 'Cennik'
@@ -1233,9 +1235,9 @@ const plPL = {
 				'Materiały psychoedukacyjne i produkty wspierające zdrowie psychiczne. Bezstresowo, Olesya Haiduk, psychoterapia w Łodzi i online.'
 		},
 		materials: {
-			title: 'Bezpłatne materiały o relacjach | Bezstresowo',
+			title: 'Materiały: przewodniki i programy | Bezstresowo',
 			description:
-				'Pobierz bezpłatny przewodnik: 17 pytań, które pomagają uporządkować fakty, emocje i powtarzające się schematy w relacji.'
+				'Przewodniki i materiały do samodzielnej pracy. Pobierz bezpłatny przewodnik: 17 pytań o relację.'
 		},
 		termsOfService: {
 			title: 'Regulamin | Bezstresowo',

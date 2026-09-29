@@ -10,6 +10,6 @@
 	type="cancel"
 	labels={t.user.pages.shop.checkoutMessages}
 	buttonText={t.user.pages.shop.checkoutMessages.backToShop}
-	redirectPath={path('/shop')}
+	redirectPath={path('/services')}
 	redirectDelay={5}
 />
