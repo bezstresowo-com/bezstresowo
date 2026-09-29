@@ -91,7 +91,7 @@
 			</div>
 			<div class="mt-8 flex flex-col gap-3 xl:flex-row">
 				<a
-					href={path('/registrations')}
+					href={`${path('/home')}#contact`}
 					class="inline-flex min-h-12 items-center justify-center rounded-xl bg-primary px-5 py-3 text-center font-semibold text-white transition hover:bg-primary/90"
 					>{uk ? 'Записатися на консультацію' : 'Umów konsultację'}</a
 				>
