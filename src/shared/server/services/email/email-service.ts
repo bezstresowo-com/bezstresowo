@@ -1,6 +1,7 @@
 import { EMAIL_APP_PASSWORD, EMAIL_SENDER, EMAIL_SUBJECT_PREFIX } from '$env/static/private';
 import { Locale, LOCALE_HTML_LANG, translationsFor } from '$i18n';
 import { htmlKeyValueReplacer } from '$shared/global/functions/html-key-value-replacer';
+import { absoluteUrl } from '$shared/global/functions/site-url';
 import { createTransport } from 'nodemailer';
 import type {
 	ConsultationRegistrationMessageArgs,
@@ -137,6 +138,7 @@ function userTemplateVars(locale: Locale): Record<string, string> {
 
 	return {
 		emailLang: LOCALE_HTML_LANG[locale],
+		siteUrl: absoluteUrl(locale === Locale.ukUA ? '/uk/home' : '/pl/home'),
 		tYourMessage: common.yourMessage,
 		tYourData: common.yourData,
 		tNameLabel: common.nameLabel,
