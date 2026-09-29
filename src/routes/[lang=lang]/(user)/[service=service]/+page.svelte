@@ -2,6 +2,9 @@
 	import { page } from '$app/state';
 	import { getLocale, path, t, translateKey } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
+	import ServiceHero from '$lib/ServicesSection/ServiceHero.svelte';
+	import FirstMeeting from '$lib/ServicesSection/FirstMeeting.svelte';
+	let { data } = $props();
 	import Seo from '$lib/Seo/Seo.svelte';
 	import { getServiceBySlug, getServiceContentSections } from '$lib/ServicesSection/model';
 	import { absoluteUrl } from '$shared/global/functions/site-url';
@@ -38,69 +41,20 @@
 {#if service}
 	<Seo title={seoTitle} description={seoDescription} {jsonLd} />
 
-	<section class="overflow-hidden bg-linear-150 from-primary via-primary to-primary/90 text-white">
-		<div class="mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-8 lg:px-8 lg:py-9">
-			<a
-				href={path('/services')}
-				class="mx-auto flex w-fit items-center gap-2 text-sm font-medium text-secondary transition hover:text-white"
-			>
-				<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
-				{t.user.pages.service.backToServices}
-			</a>
-
-			<div class="mt-4 text-center">
-				<div
-					class="flex items-center justify-center gap-3 text-sm font-semibold tracking-wide text-secondary uppercase"
-				>
-					<i class={`${service.icon} text-xl`} aria-hidden="true"></i>
-					{t.user.pages.service.eyebrow}
-				</div>
-				<h1
-					class="mx-auto mt-3 max-w-4xl text-3xl leading-tight font-bold sm:text-4xl lg:text-[2.75rem]"
-				>
-					{serviceTitle}
-				</h1>
-				<p class="mx-auto mt-3 max-w-3xl text-base leading-relaxed text-white/85 sm:text-lg">
-					{serviceDescription}
-				</p>
-				<Button
-					href={path('/registrations')}
-					tailwind="mt-5 inline-flex items-center justify-center px-6 text-primary shadow-lg"
-				>
-					{t.user.pages.service.bookConsultation}
-					<i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
-				</Button>
-			</div>
-		</div>
-	</section>
+	<ServiceHero
+		title={serviceTitle}
+		description={serviceDescription}
+		imageUrl={data.product?.imageUrl ?? service.imageUrl}
+		product={data.product}
+		couples={service.slug === 'psychoterapia-par'}
+	/>
+	<FirstMeeting couples={service.slug === 'psychoterapia-par'} />
 
 	<main class="bg-background/35 px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-		<div class="mx-auto max-w-4xl">
-			<aside class="rounded-2xl border border-accent/45 bg-white p-6 shadow-sm sm:p-8">
-				<div class="flex flex-col gap-5 sm:flex-row sm:items-start">
-					<div
-						class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-accent/20 text-xl text-primary"
-					>
-						<i class="fa-regular fa-comments" aria-hidden="true"></i>
-					</div>
-					<div>
-						<h2 class="text-2xl font-bold text-primary">
-							{t.user.pages.service.firstMeetingTitle}
-						</h2>
-						<p class="mt-3 leading-relaxed text-slate-600">
-							{t.user.pages.service.firstMeetingDescription}
-						</p>
-						<p class="mt-3 flex items-start gap-2 text-sm font-medium text-primary/80">
-							<i class="fa-solid fa-shield-heart mt-1 text-accent" aria-hidden="true"></i>
-							<span>{t.user.pages.service.confidentiality}</span>
-						</p>
-					</div>
-				</div>
-			</aside>
-
+		<div class="mx-auto max-w-5xl">
 			<div class="mt-10 space-y-7">
 				{#each contentSections as contentSection, sectionIndex (sectionIndex)}
-					<section class="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-primary/8 sm:p-8">
+					<section class="border-t border-primary/10 py-7 sm:py-9">
 						{#if contentSection.titleKey}
 							<h2
 								class="border-l-4 border-accent pl-4 text-2xl leading-snug font-bold text-primary"

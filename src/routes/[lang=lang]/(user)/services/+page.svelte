@@ -87,7 +87,13 @@
 									? 'Зустріч, щоб обговорити те, що тебе турбує, та визначити, яка підтримка зараз потрібна.'
 									: 'Spotkanie, aby porozmawiać o tym, co Cię niepokoi, i ustalić, jakiego wsparcia potrzebujesz.'
 								: '')}
-					{@const duration = product?.name.match(/\(([^)]+)\)/)?.[1]}
+					{@const duration =
+						product?.name.match(/\(([^)]+)\)/)?.[1] ??
+						(product?.slug === CONSULTATION_SLUG
+							? isUkrainian
+								? '50 хвилин'
+								: '50 minut'
+							: undefined)}
 					<article
 						class="flex h-full flex-col overflow-hidden rounded-2xl border border-accent/45 bg-white shadow-sm"
 					>
@@ -142,7 +148,7 @@
 							>
 								{isUkrainian ? 'Записатися' : 'Umów konsultację'}
 							</a>
-							{#if product?.siteLocations.includes('shop')}
+							{#if product && (product.siteLocations.includes('shop') || product.slug === CONSULTATION_SLUG)}
 								<button
 									type="button"
 									class="mt-3 min-h-11 cursor-pointer rounded-xl border border-primary/25 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-background disabled:cursor-wait disabled:opacity-60"

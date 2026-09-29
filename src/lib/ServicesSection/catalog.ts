@@ -2,6 +2,8 @@ import type { LocalizedProduct } from '$remote/dto/product';
 import { OFFERED_SERVICES, type OfferedService } from './model';
 
 export const CONSULTATION_SLUG = 'psychotherapy-consultation';
+export const CONSULTATION_IMAGE_URL =
+	'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/4ac87e07-7396-43c1-bc89-4515f8e67d03';
 
 export function isCatalogService(product: Pick<LocalizedProduct, 'slug' | 'siteLocations'>) {
 	return (
@@ -36,7 +38,8 @@ export function serviceCards(products: LocalizedProduct[]): ServiceCard[] {
 			key: product.slug,
 			href: `/services/${product.slug}`,
 			product,
-			imageUrl: product.imageUrl
+			imageUrl:
+				product.imageUrl ?? (product.slug === CONSULTATION_SLUG ? CONSULTATION_IMAGE_URL : null)
 		};
 		if (product.slug === CONSULTATION_SLUG) cards.unshift(card);
 		else cards.push(card);

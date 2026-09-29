@@ -3,8 +3,8 @@
 	const isUkrainian = $derived(getLocale() === Locale.ukUA);
 </script>
 
-<section id="services" class="scroll-mt-24 px-4 pt-12 pb-4 text-primary sm:px-6">
-	<div class="mx-auto max-w-5xl rounded-3xl bg-background px-6 py-8 text-center sm:px-10 sm:py-10">
+<section id="services" class="scroll-mt-24 bg-background px-4 py-12 text-primary sm:px-6 sm:py-14">
+	<div class="mx-auto max-w-6xl text-center">
 		<p class="text-sm font-semibold tracking-wide text-primary/70">
 			{isUkrainian
 				? 'Індивідуально та для пар · онлайн і в Лодзі'
