@@ -1,67 +1,10 @@
 <script lang="ts">
-	import { t, translateKey } from '$i18n';
+	import { path, t, translateKey } from '$i18n';
 	import Button from '$lib/Button/Button.svelte';
-	import { isNil } from 'lodash-es';
-	import { onDestroy } from 'svelte';
-	import { ExtendedTranslationType, getExtendedTranslations, OFFERED_SERVICES } from './model';
-
-	let selectedIndex: number | null = $state(null);
-	let isBodyScrollLocked = false;
-	let previousBodyOverflow = '';
-	let previousBodyPaddingRight = '';
-
-	function openPopup(index: number) {
-		selectedIndex = index;
-	}
-
-	function closePopup() {
-		selectedIndex = null;
-	}
-
-	function lockBodyScroll() {
-		if (isBodyScrollLocked || typeof document === 'undefined') return;
-		const body = document.body;
-		previousBodyOverflow = body.style.overflow;
-		previousBodyPaddingRight = body.style.paddingRight;
-		const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-		body.style.overflow = 'hidden';
-		if (scrollbarWidth > 0) {
-			body.style.paddingRight = `${scrollbarWidth}px`;
-		}
-		isBodyScrollLocked = true;
-	}
-
-	function unlockBodyScroll() {
-		if (!isBodyScrollLocked || typeof document === 'undefined') return;
-		const body = document.body;
-		body.style.overflow = previousBodyOverflow;
-		body.style.paddingRight = previousBodyPaddingRight;
-		isBodyScrollLocked = false;
-	}
-
-	$effect(() => {
-		if (isNil(selectedIndex)) {
-			unlockBodyScroll();
-			return;
-		}
-		lockBodyScroll();
-		return () => {
-			unlockBodyScroll();
-		};
-	});
-
-	onDestroy(() => {
-		unlockBodyScroll();
-	});
+	import { OFFERED_SERVICES } from './model';
 </script>
 
-<svelte:window
-	onkeydown={(event) => {
-		if (event.key === 'Escape') closePopup();
-	}}
-/>
-
-<section class="bg-white pt-12 text-primary max-2xl:px-4">
+<section id="services" class="scroll-mt-24 bg-white pt-12 text-primary max-2xl:px-4">
 	<div class="pb-8 text-center">
 		<h2 class="text-3xl font-semibold sm:text-4xl">
 			{t.user.pages.home.offeredServices.title}
@@ -69,7 +12,7 @@
 	</div>
 
 	<div class="grid grid-cols-2 gap-5 max-md:flex max-md:flex-col">
-		{#each OFFERED_SERVICES as { prefix, icon }, i (i)}
+		{#each OFFERED_SERVICES as { prefix, icon, slug } (slug)}
 			<div class="flex flex-1 flex-col gap-7 rounded-lg border border-accent p-10 text-left">
 				<span class="flex items-center gap-6">
 					<i class={`text-4xl text-accent ${icon}`}></i>
@@ -77,68 +20,14 @@
 				</span>
 				<p>{translateKey(`${prefix}.description`)}</p>
 				<span class="flex-auto"></span>
-				<Button tailwind="w-full bg-white border border-accent" onclick={() => openPopup(i)}>
+				<Button
+					href={path(`/${slug}`)}
+					tailwind="inline-flex w-full items-center justify-center border border-accent bg-white px-5"
+				>
 					{t.user.pages.home.offeredServices.learnMore}
+					<i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
 				</Button>
 			</div>
 		{/each}
 	</div>
 </section>
-
-{#if !isNil(selectedIndex)}
-	{@const selectedOffer = OFFERED_SERVICES[selectedIndex]}
-	{@const extendedTranslations = getExtendedTranslations(selectedIndex)}
-
-	<div
-		tabindex="0"
-		class="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-		role="dialog"
-		aria-modal="true"
-		aria-label={t.user.a11y.serviceDetails}
-		onclick={closePopup}
-		onkeydown={(event) => {
-			if (event.key === 'Enter' || event.key === ' ') {
-				event.preventDefault();
-				closePopup();
-			}
-		}}
-	>
-		<div
-			class="relative flex max-h-[80dvh] max-w-[min(80dvw,40rem)] flex-col rounded-2xl border-2 border-primary bg-white p-4 pt-12"
-		>
-			<button
-				onclick={closePopup}
-				aria-label={t.user.a11y.close}
-				class="absolute top-4 right-4 cursor-pointer rounded-full bg-white p-1 hover:shadow-lg"
-			>
-				<i class="fa-solid fa-xmark"></i>
-			</button>
-
-			<div
-				class="min-h-0 flex-1 overflow-auto"
-				onclick={(e) => e.stopPropagation()}
-				onkeydown={(e) => e.preventDefault()}
-				role="none"
-			>
-				<span>
-					<i class={`text-2xl text-accent ${selectedOffer.icon}`}></i>
-					<span class="my-6 ml-4 text-2xl font-bold"
-						>{translateKey(`${selectedOffer.prefix}.title`)}</span
-					>
-				</span>
-
-				{#each extendedTranslations as { type, value }, i (i)}
-					{#if type === ExtendedTranslationType.title}
-						<div class="mt-6 mb-2 text-lg font-bold">{@html translateKey(value)}</div>
-					{:else if type === ExtendedTranslationType.paragraph}
-						<div class="my-2">{@html translateKey(value)}</div>
-					{:else if type === ExtendedTranslationType.listItem}
-						<div class="ml-2">
-							• {@html translateKey(value)}
-						</div>
-					{/if}
-				{/each}
-			</div>
-		</div>
-	</div>
-{/if}

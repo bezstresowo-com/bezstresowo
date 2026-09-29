@@ -1,8 +1,9 @@
 <script lang="ts">
-	import { getLocale, Locale, path } from '$i18n';
+	import { getLocale, Locale, path, translateKey } from '$i18n';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import Seo from '$lib/Seo/Seo.svelte';
+	import { OFFERED_SERVICES } from '$lib/ServicesSection/model';
 	import { createShopCheckout } from '$remote/checkout.remote';
 	import { getProducts } from '$remote/products.remote';
 	import { formatMoney } from '$shared/global/functions/format-money';
@@ -49,14 +50,36 @@
 			<h1 class="mt-4 font-serif text-4xl sm:text-5xl">{isUkrainian ? 'Послуги' : 'Usługi'}</h1>
 			<p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
 				{isUkrainian
-					? 'Індивідуальна робота, консультації для пар і батьків. Обери напрям, щоб побачити вартість і перейти до запису.'
-					: 'Psychoterapia indywidualna, terapia par i konsultacje dla rodziców. Wybierz formę pracy, sprawdź cenę i przejdź do zapisu.'}
+					? 'Обери напрям роботи, щоб прочитати докладний опис. Нижче знайдеш формати консультацій, вартість і запис.'
+					: 'Wybierz obszar pracy, aby przeczytać szczegółowy opis. Niżej znajdziesz formy konsultacji, ceny i zapisy.'}
 			</p>
 		</div>
 	</section>
 
 	<section class="mx-auto max-w-7xl px-5 py-14 sm:px-8">
-		<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+		<h2 class="font-serif text-3xl">{isUkrainian ? 'Напрями роботи' : 'Obszary pracy'}</h2>
+		<div class="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+			{#each OFFERED_SERVICES as service (service.slug)}
+				<article class="flex h-full flex-col rounded-3xl border border-accent/50 bg-white p-7 shadow-sm">
+					<i class={`text-3xl text-accent ${service.icon}`} aria-hidden="true"></i>
+					<h3 class="mt-5 text-xl font-semibold">{translateKey(`${service.prefix}.title`)}</h3>
+					<p class="mt-3 flex-1 leading-relaxed text-slate-600">
+						{translateKey(`${service.prefix}.description`)}
+					</p>
+					<a
+						href={path(`/${service.slug}`)}
+						class="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-accent px-5 py-2.5 text-center font-semibold text-primary hover:bg-background"
+					>
+						{isUkrainian ? 'Дізнатися більше' : 'Dowiedz się więcej'}
+						<i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
+					</a>
+				</article>
+			{/each}
+		</div>
+		<h2 class="mt-16 font-serif text-3xl">
+			{isUkrainian ? 'Формати та вартість консультацій' : 'Formy i ceny konsultacji'}
+		</h2>
+		<div class="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
 			<svelte:boundary>
 				{#snippet pending()}
 					<div class="col-span-full flex justify-center py-12"><LoadingSpinner size="lg" /></div>

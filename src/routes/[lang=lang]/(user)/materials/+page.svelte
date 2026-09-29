@@ -74,7 +74,7 @@
 						/>
 					</div>
 					<div class="flex flex-1 flex-col p-6">
-						<p class="text-sm font-semibold text-accent">Програма · 19 €</p>
+						<p class="text-sm font-semibold text-accent">Програма · 79 zł</p>
 						<h3 class="mt-3 text-xl leading-snug font-bold text-primary sm:text-2xl">
 							Криза чи кінець?
 						</h3>

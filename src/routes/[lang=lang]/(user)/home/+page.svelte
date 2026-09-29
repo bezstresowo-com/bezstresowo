@@ -18,8 +18,8 @@
 <HeroSection />
 <HowCanIHelpSection />
 <AboutMeSection />
-<CertificatesSection />
 <ServicesSection />
+<CertificatesSection compact />
 <GuideSection compact />
 <ContactForm />
 <Blog siteLocation="home" />
