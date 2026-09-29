@@ -460,6 +460,7 @@
 	}
 
 	.benefits-grid h3 {
+		min-height: 2.4em;
 		margin: 18px 0 12px;
 		font-family: Georgia, serif;
 		font-size: 28px;
@@ -743,6 +744,10 @@
 		.benefits-grid {
 			grid-template-columns: 1fr;
 			gap: 32px;
+		}
+
+		.benefits-grid h3 {
+			min-height: 0;
 		}
 
 		.author-photo {
