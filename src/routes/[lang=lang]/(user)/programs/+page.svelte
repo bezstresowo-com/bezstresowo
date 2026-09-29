@@ -37,7 +37,9 @@
 					/>
 				</div>
 				<div class="flex min-w-0 flex-1 flex-col p-6 md:py-8">
-					<p class="text-sm font-semibold text-accent">Самостійна програма · 7 модулів</p>
+					<p class="text-sm font-semibold text-accent">
+						Самостійна програма · 7 послідовних модулів
+					</p>
 					<h2 class="mt-3 text-xl leading-snug font-bold text-primary sm:text-2xl">
 						Криза чи кінець?
 					</h2>
