@@ -3,7 +3,10 @@
 	const isUkrainian = $derived(getLocale() === Locale.ukUA);
 </script>
 
-<section id="services" class="scroll-mt-24 bg-background px-4 py-12 text-primary sm:px-6 sm:py-14">
+<section
+	id="services"
+	class="full-width-background scroll-mt-24 bg-background px-4 py-12 text-primary sm:px-6 sm:py-14"
+>
 	<div class="mx-auto max-w-6xl text-center">
 		<p class="text-sm font-semibold tracking-wide text-primary/70">
 			{isUkrainian
@@ -27,3 +30,10 @@
 		</a>
 	</div>
 </section>
+
+<style>
+	.full-width-background {
+		box-shadow: 0 0 0 100vmax var(--color-background);
+		clip-path: inset(0 -100vmax);
+	}
+</style>

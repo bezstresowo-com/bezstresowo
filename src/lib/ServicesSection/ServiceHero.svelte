@@ -50,16 +50,18 @@
 </script>
 
 <Toaster />
-<section class="bg-background text-primary">
+<section class="service-hero bg-background text-primary">
 	<div class="mx-auto grid max-w-7xl lg:grid-cols-2">
 		{#if picture}
-			<img
-				src={picture}
-				alt=""
-				width="720"
-				height="600"
-				class="h-64 w-full object-cover sm:h-96 lg:h-full lg:min-h-[32rem]"
-			/>
+			<div class="relative h-64 sm:h-96 lg:h-auto lg:min-h-[32rem]">
+				<img
+					src={picture}
+					alt=""
+					width="720"
+					height="600"
+					class="absolute inset-0 h-full w-full object-cover"
+				/>
+			</div>
 		{/if}
 		<div class="px-5 py-8 sm:px-9 sm:py-10 lg:px-10 lg:py-12">
 			<a href={path('/services')} class="text-sm text-primary/70 underline underline-offset-4"
@@ -113,3 +115,10 @@
 		</div>
 	</div>
 </section>
+
+<style>
+	.service-hero {
+		box-shadow: 0 0 0 100vmax var(--color-background);
+		clip-path: inset(0 -100vmax);
+	}
+</style>

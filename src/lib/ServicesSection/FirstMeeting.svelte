@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { getLocale, Locale } from '$i18n';
+	import { getLocale, Locale, t } from '$i18n';
 	let { couples = false } = $props<{ couples?: boolean }>();
 	const uk = $derived(getLocale() === Locale.ukUA);
 </script>
@@ -18,6 +18,7 @@
 				? 'Poznajemy się, dajemy każdej osobie przestrzeń na przedstawienie swojego punktu widzenia i rozmawiamy o tym, nad czym chcecie pracować. Wspólnie ustalamy możliwe kolejne kroki.'
 				: 'Poznajemy się, rozmawiamy o tym, co Cię niepokoi, i wspólnie zastanawiamy się, jakie wsparcie może być pomocne. Nie musisz wcześniej wiedzieć, od czego zacząć, ani mieć jasno sformułowanego celu.'}
 	</p>
+	<p class="mt-4 text-sm leading-relaxed text-primary/70">{t.user.pages.service.confidentiality}</p>
 	<div class="mt-8 grid gap-7 md:grid-cols-3 md:gap-8">
 		<div class="md:border-r md:border-accent/40 md:pr-7">
 			<h3 class="font-serif text-xl font-semibold">
