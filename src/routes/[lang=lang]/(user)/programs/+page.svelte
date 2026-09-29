@@ -12,7 +12,7 @@
 />
 
 <section class="min-h-[60vh] bg-background/40 px-4 py-12 sm:px-6 sm:py-16">
-	<div class="mx-auto max-w-7xl">
+	<div class="mx-auto max-w-3xl">
 		<header class="max-w-2xl">
 			<h1 class="text-3xl leading-tight font-bold text-primary sm:text-4xl">
 				Програми для самостійної роботи
@@ -22,19 +22,21 @@
 			</p>
 		</header>
 
-		<div class="mt-9 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+		<div class="mt-9">
 			<article
-				class="flex h-full max-w-md flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+				class="flex flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-md transition duration-300 hover:shadow-xl md:flex-row"
 			>
-				<div class="flex h-56 items-center justify-center bg-primary/5 px-6 py-4">
+				<div
+					class="flex h-56 items-center justify-center bg-primary/5 px-6 py-4 md:h-auto md:w-2/5 md:shrink-0"
+				>
 					<img
 						src={asset('/assets/kryza-chy-kinets-workbook-cover.webp')}
 						alt="Обкладинка робочого зошита «Криза чи кінець?»"
-						class="h-full max-w-full object-contain"
+						class="h-full max-h-64 max-w-full object-contain"
 						loading="lazy"
 					/>
 				</div>
-				<div class="flex flex-1 flex-col p-6">
+				<div class="flex min-w-0 flex-1 flex-col p-6 md:py-8">
 					<p class="text-sm font-semibold text-accent">Самостійна програма · 7 модулів</p>
 					<h2 class="mt-3 text-xl leading-snug font-bold text-primary sm:text-2xl">
 						Криза чи кінець?
