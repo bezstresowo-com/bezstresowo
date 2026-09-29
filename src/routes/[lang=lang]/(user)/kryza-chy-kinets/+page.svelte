@@ -378,7 +378,7 @@
 	}
 
 	.statement {
-		padding: 76px clamp(24px, 12vw, 180px);
+		padding: 76px clamp(24px, 4vw, 64px);
 		background: var(--sand);
 		text-align: center;
 	}
@@ -394,10 +394,16 @@
 		max-width: none;
 		margin: 0 auto;
 		font-family: Georgia, serif;
-		font-size: clamp(36px, 3.6vw, 54px);
+		font-size: clamp(34px, 3vw, 42px);
 		font-weight: 400;
 		line-height: 1.05;
-		white-space: nowrap;
+		white-space: normal;
+	}
+
+	@media (min-width: 1320px) {
+		.statement h2 {
+			white-space: nowrap;
+		}
 	}
 
 	.program {
