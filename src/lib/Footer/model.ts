@@ -38,14 +38,14 @@ export const FAST_LINKS = [
 
 export function followMeLinks(settings: PublicSiteSettings, locale: Locale) {
 	return [
-		{
-			id: 'facebook',
-			label: 'Facebook',
-			icon: 'fa-brands fa-facebook-f',
-			href: settings.facebookUrl
-		},
 		...(locale === Locale.plPL
 			? [
+					{
+						id: 'facebook',
+						label: 'Facebook',
+						icon: 'fa-brands fa-facebook-f',
+						href: settings.facebookUrl
+					},
 					{
 						id: 'instagram-pl',
 						label: 'Instagram Bezstresowo po polsku',
