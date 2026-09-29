@@ -59,6 +59,21 @@
 		<p>{copy.statement.description}</p>
 	</section>
 
+	<section class="benefits" aria-labelledby="benefits-title">
+		<div class="section-label">{copy.benefits.eyebrow}</div>
+		<h2 id="benefits-title">{copy.benefits.title}</h2>
+		<p class="benefits-intro">{copy.benefits.intro}</p>
+		<div class="benefits-grid">
+			{#each copy.benefits.items as item, index (item.title)}
+				<article>
+					<span>0{index + 1}</span>
+					<h3>{item.title}</h3>
+					<p>{item.description}</p>
+				</article>
+			{/each}
+		</div>
+	</section>
+
 	<section class="program" id="program">
 		<div class="section-label">{copy.program.eyebrow}</div>
 		<div class="program-head">
@@ -284,6 +299,7 @@
 	}
 
 	.recognition,
+	.benefits,
 	.program,
 	.faq,
 	.author,
@@ -404,6 +420,57 @@
 		.statement h2 {
 			white-space: nowrap;
 		}
+	}
+
+	.benefits {
+		background: var(--cream);
+	}
+
+	.benefits h2 {
+		max-width: 820px;
+		margin: 0;
+		font-family: Georgia, serif;
+		font-size: clamp(38px, 4.5vw, 60px);
+		font-weight: 400;
+		line-height: 1.08;
+	}
+
+	.benefits-intro {
+		max-width: 760px;
+		margin: 25px 0 48px;
+		font-size: 18px;
+		line-height: 1.65;
+	}
+
+	.benefits-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 24px;
+	}
+
+	.benefits-grid article {
+		border-top: 2px solid var(--gold);
+		padding: 26px 0 0;
+	}
+
+	.benefits-grid span {
+		color: #8a681e;
+		font-family: Georgia, serif;
+		font-size: 22px;
+	}
+
+	.benefits-grid h3 {
+		margin: 18px 0 12px;
+		font-family: Georgia, serif;
+		font-size: 28px;
+		font-weight: 400;
+		line-height: 1.2;
+	}
+
+	.benefits-grid p {
+		max-width: 370px;
+		margin: 0;
+		line-height: 1.65;
 	}
 
 	.program {
@@ -673,6 +740,11 @@
 			grid-template-columns: 1fr 1fr;
 		}
 
+		.benefits-grid {
+			grid-template-columns: 1fr;
+			gap: 32px;
+		}
+
 		.author-photo {
 			width: 120px;
 			height: 120px;
@@ -698,6 +770,7 @@
 		}
 
 		.recognition,
+		.benefits,
 		.program,
 		.inside,
 		.author,
