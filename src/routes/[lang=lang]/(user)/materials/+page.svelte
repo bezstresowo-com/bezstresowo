@@ -71,7 +71,7 @@
 						<img
 							src="/assets/kryza-chy-kinets-workbook-cover.webp"
 							alt="Обкладинка робочого зошита «Криза чи кінець?»"
-							class="h-full max-w-full rounded-sm object-contain shadow-lg"
+							class="h-full w-auto max-w-full rounded-sm object-contain shadow-lg"
 							width="900"
 							height="1270"
 							loading="lazy"
@@ -102,7 +102,7 @@
 						<img
 							src="/assets/koly-tryvoha-atakuie-cover-ua.webp"
 							alt="Обкладинка книги «Коли тривога атакує»"
-							class="h-full max-w-full rounded-sm object-contain shadow-lg"
+							class="h-full w-auto max-w-full rounded-sm object-contain shadow-lg"
 							width="900"
 							height="1270"
 							loading="lazy"
