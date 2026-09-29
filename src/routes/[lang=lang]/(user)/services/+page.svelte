@@ -44,116 +44,112 @@
 <Toaster />
 
 <div class="bg-background/40 text-primary">
-	<section class="bg-primary px-5 py-16 text-white sm:px-8">
-		<div class="mx-auto max-w-7xl">
+	<section class="bg-primary px-5 py-12 text-center text-white sm:px-8 sm:py-14">
+		<div class="mx-auto max-w-5xl">
 			<p class="text-xs font-bold tracking-[.18em] text-secondary uppercase">Bezstresowo</p>
 			<h1 class="mt-4 font-serif text-4xl sm:text-5xl">{isUkrainian ? 'Послуги' : 'Usługi'}</h1>
-			<p class="mt-5 max-w-2xl text-lg leading-relaxed text-white/85">
+			<p class="mx-auto mt-5 max-w-4xl text-lg leading-relaxed text-white/85">
 				{isUkrainian
-					? 'Обери напрям роботи, щоб прочитати докладний опис. Нижче знайдеш формати консультацій, вартість і запис.'
-					: 'Wybierz obszar pracy, aby przeczytać szczegółowy opis. Niżej znajdziesz formy konsultacji, ceny i zapisy.'}
+					? 'Індивідуальна психотерапія, зустрічі для пар і консультації для батьків. Обери напрям, щоб дізнатися більше про роботу зі мною, переглянути вартість і записатися.'
+					: 'Psychoterapia indywidualna, spotkania dla par i konsultacje dla rodziców. Wybierz obszar pracy, aby dowiedzieć się więcej, sprawdzić cenę i umówić spotkanie.'}
 			</p>
 		</div>
 	</section>
 
-	<section class="mx-auto max-w-7xl px-5 py-14 sm:px-8">
-		<h2 class="font-serif text-3xl">{isUkrainian ? 'Напрями роботи' : 'Obszary pracy'}</h2>
-		<div class="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-			{#each OFFERED_SERVICES as service (service.slug)}
-				<article class="flex h-full flex-col rounded-3xl border border-accent/50 bg-white p-7 shadow-sm">
-					<i class={`text-3xl text-accent ${service.icon}`} aria-hidden="true"></i>
-					<h3 class="mt-5 text-xl font-semibold">{translateKey(`${service.prefix}.title`)}</h3>
-					<p class="mt-3 flex-1 leading-relaxed text-slate-600">
-						{translateKey(`${service.prefix}.description`)}
-					</p>
-					<a
-						href={path(`/${service.slug}`)}
-						class="mt-6 inline-flex min-h-11 items-center justify-center rounded-xl border border-accent px-5 py-2.5 text-center font-semibold text-primary hover:bg-background"
-					>
-						{isUkrainian ? 'Дізнатися більше' : 'Dowiedz się więcej'}
-						<i class="fa-solid fa-arrow-right ml-2 text-sm" aria-hidden="true"></i>
-					</a>
-				</article>
-			{/each}
-		</div>
-		<h2 class="mt-16 font-serif text-3xl">
-			{isUkrainian ? 'Формати та вартість консультацій' : 'Formy i ceny konsultacji'}
-		</h2>
-		<div class="mt-7 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-			<svelte:boundary>
-				{#snippet pending()}
-					<div class="col-span-full flex justify-center py-12"><LoadingSpinner size="lg" /></div>
-				{/snippet}
-				{#snippet failed(error, reset)}
-					<div class="col-span-full"><ErrorNotice {error} {reset} /></div>
-				{/snippet}
+	<section class="mx-auto max-w-7xl px-5 py-12 sm:px-8 sm:py-14">
+		<svelte:boundary>
+			{#snippet pending()}
+				<div class="flex justify-center py-12"><LoadingSpinner size="lg" /></div>
+			{/snippet}
+			{#snippet failed(error, reset)}
+				<ErrorNotice {error} {reset} />
+				<a
+					href={path('/registrations')}
+					class="mt-6 inline-flex rounded-xl bg-accent px-6 py-3 font-semibold"
+				>
+					{isUkrainian ? 'Перейти до запису' : 'Przejdź do zapisu'}
+				</a>
+			{/snippet}
 
-				{@const serviceProducts = await products}
-				{#each serviceProducts as product, index (product.id)}
+			{@const serviceProducts = await products}
+			<div class="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+				{#each OFFERED_SERVICES as service (service.slug)}
+					{@const product = serviceProducts.find((item) => item.slug === service.productSlug)}
+					{@const duration = product?.name.match(/\(([^)]+)\)/)?.[1]}
 					<article
-						class="flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-sm"
+						class="flex h-full flex-col overflow-hidden rounded-3xl border border-accent/45 bg-white shadow-sm"
 					>
-						<div
-							class="relative h-36 overflow-hidden bg-primary px-7 py-6 text-white"
-							aria-hidden="true"
-						>
-							<div
-								class="absolute -top-16 -right-6 size-48 rounded-full border border-secondary/45"
-							></div>
-							<div
-								class="absolute -top-8 right-2 size-36 rounded-full border border-white/35"
-							></div>
-							<div
-								class="absolute top-7 right-10 size-24 rounded-full border border-secondary/50"
-							></div>
-							<span class="relative text-xs font-semibold tracking-[.16em] text-secondary uppercase"
-								>{isUkrainian ? 'Консультація' : 'Konsultacja'}</span
-							>
-							<span class="relative mt-5 block font-serif text-4xl text-white/90"
-								>{String(index + 1).padStart(2, '0')}</span
-							>
-						</div>
+						<a href={path(`/${service.slug}`)} tabindex="-1" aria-hidden="true">
+							<img
+								src={product?.imageUrl ?? service.imageUrl}
+								alt=""
+								class="aspect-[16/9] w-full object-cover"
+								width="640"
+								height="360"
+								loading="lazy"
+								decoding="async"
+							/>
+						</a>
 						<div class="flex flex-1 flex-col p-6">
-							<h2 class="text-xl leading-snug font-semibold">{product.name}</h2>
-							{#if product.description}
-								<p class="mt-3 flex-1 leading-relaxed text-slate-600">{product.description}</p>
-							{:else}
-								<div class="flex-1"></div>
-							{/if}
-							<p class="mt-5 text-2xl font-semibold text-primary">
-								{formatMoney(product.priceInMinorUnits, product.currency, getLocale())}
+							<h2 class="text-xl leading-snug font-semibold">
+								<a href={path(`/${service.slug}`)} class="hover:underline">
+									{translateKey(`${service.prefix}.title`)}
+								</a>
+							</h2>
+							<p class="mt-3 flex-1 leading-relaxed text-slate-600">
+								{translateKey(`${service.prefix}.description`)}
 							</p>
+							<a
+								href={path(`/${service.slug}`)}
+								class="mt-4 inline-flex w-fit items-center gap-2 font-semibold text-primary underline decoration-accent underline-offset-4"
+							>
+								{isUkrainian ? 'Дізнатися більше' : 'Dowiedz się więcej'}
+								<i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
+							</a>
+							{#if product}
+								<div
+									class="mt-6 flex flex-wrap items-baseline justify-between gap-2 border-t border-primary/10 pt-5"
+								>
+									<p class="text-2xl font-semibold">
+										{formatMoney(product.priceInMinorUnits, product.currency, getLocale())}
+									</p>
+									{#if duration}<p class="text-sm text-slate-500">{duration}</p>{/if}
+								</div>
+							{/if}
 							<a
 								href={path('/registrations')}
 								class="mt-5 inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-5 py-2.5 text-center font-bold text-primary hover:bg-secondary"
-								>{isUkrainian ? 'Записатися' : 'Umów konsultację'}</a
 							>
-							{#if product.siteLocations.includes('shop')}
+								{isUkrainian ? 'Записатися' : 'Umów konsultację'}
+							</a>
+							{#if product?.siteLocations.includes('shop')}
 								<button
 									type="button"
 									class="mt-3 min-h-11 cursor-pointer rounded-xl border border-primary/25 px-4 py-2.5 text-sm font-semibold text-primary hover:bg-background disabled:cursor-wait disabled:opacity-60"
 									disabled={purchaseLoadingId === product.id}
 									onclick={() => payForAgreedSession(product.id)}
-									>{purchaseLoadingId === product.id
+								>
+									{purchaseLoadingId === product.id
 										? '…'
 										: isUkrainian
 											? 'Оплатити узгоджену зустріч'
-											: 'Opłać uzgodnione spotkanie'}</button
-								>
+											: 'Opłać uzgodnione spotkanie'}
+								</button>
 							{/if}
 						</div>
 					</article>
 				{/each}
-			</svelte:boundary>
-		</div>
-		<div class="mt-12 rounded-3xl border border-primary/10 bg-white p-7 sm:p-9">
+			</div>
+		</svelte:boundary>
+
+		<div class="mt-12 rounded-3xl border border-primary/10 bg-white p-7 text-center sm:p-9">
 			<h2 class="font-serif text-2xl">
 				{isUkrainian ? 'Як відбувається запис' : 'Jak wygląda zapis'}
 			</h2>
-			<p class="mt-3 max-w-3xl leading-relaxed text-slate-600">
+			<p class="mx-auto mt-3 max-w-4xl leading-relaxed text-slate-600">
 				{isUkrainian
-					? 'У чинній формі ти обираєш консультацію, залишаєш контакт і переходиш до оплати. Після підтвердження я зв’яжуся з тобою, щоб узгодити час. Якщо зустріч уже домовлена, її можна оплатити окремою кнопкою на картці послуги.'
-					: 'W obecnym formularzu wybierasz konsultację, podajesz kontakt i przechodzisz do płatności. Po jej potwierdzeniu skontaktuję się z Tobą, aby ustalić termin. Uzgodnione wcześniej spotkanie możesz opłacić osobnym przyciskiem na karcie usługi.'}
+					? 'Обери консультацію у формі, залиш контактні дані й перейди до оплати. Після її підтвердження я зв’яжуся з тобою, щоб узгодити час. Якщо ми вже домовилися про зустріч, скористайся кнопкою «Оплатити узгоджену зустріч».'
+					: 'W formularzu wybierz konsultację, podaj dane kontaktowe i przejdź do płatności. Po jej potwierdzeniu skontaktuję się z Tobą, aby ustalić termin. Jeśli spotkanie jest już uzgodnione, skorzystaj z przycisku „Opłać uzgodnione spotkanie”.'}
 			</p>
 		</div>
 	</section>

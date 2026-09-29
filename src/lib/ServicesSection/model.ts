@@ -21,6 +21,8 @@ export type ServiceSlug = (typeof SERVICE_SLUGS)[number];
 
 export type OfferedService = {
 	slug: ServiceSlug;
+	productSlug: string;
+	imageUrl: string;
 	prefix: string;
 	icon: string;
 	extended: {
@@ -31,6 +33,9 @@ export type OfferedService = {
 export const OFFERED_SERVICES: OfferedService[] = [
 	{
 		slug: 'psychoterapia-par',
+		productSlug: 'couples-psychotherapy',
+		imageUrl:
+			'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/23851870-2963-4843-a908-3189f9c0cc96',
 		prefix: 'user.pages.home.offeredServices.services.couplesTherapy',
 		icon: 'fa-solid fa-people-arrows',
 		extended: [
@@ -42,6 +47,9 @@ export const OFFERED_SERVICES: OfferedService[] = [
 	},
 	{
 		slug: 'psychoterapia-dla-kobiet',
+		productSlug: 'psychotherapy-for-women',
+		imageUrl:
+			'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/14f477e0-2fde-4197-8278-7b92df327507',
 		prefix: 'user.pages.home.offeredServices.services.womenTherapy',
 		icon: 'fa-solid fa-venus',
 		extended: [
@@ -53,6 +61,9 @@ export const OFFERED_SERVICES: OfferedService[] = [
 	},
 	{
 		slug: 'psychoterapia-depresji-i-leku',
+		productSlug: 'depression-and-anxiety-psychotherapy',
+		imageUrl:
+			'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/1cf1bfaf-4e6d-42b6-ac95-b334f099621a',
 		prefix: 'user.pages.home.offeredServices.services.depressionTherapy',
 		icon: 'fa-solid fa-brain',
 		extended: [
@@ -65,6 +76,9 @@ export const OFFERED_SERVICES: OfferedService[] = [
 	},
 	{
 		slug: 'psychoterapia-lgbt',
+		productSlug: 'lgbtq-psychotherapy',
+		imageUrl:
+			'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/dfca4eee-884e-4dbe-8ea9-e44f479f501b',
 		prefix: 'user.pages.home.offeredServices.services.lgbtTherapy',
 		icon: 'fa-solid fa-mars-and-venus-burst',
 		extended: [
@@ -77,6 +91,9 @@ export const OFFERED_SERVICES: OfferedService[] = [
 	},
 	{
 		slug: 'konsultacje-dla-rodzicow',
+		productSlug: 'psychotherapy-for-parents',
+		imageUrl:
+			'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/8e86d54d-fca9-4468-8111-8a2700f8e0a8',
 		prefix: 'user.pages.home.offeredServices.services.parentTherapy',
 		icon: 'fa-solid fa-hands-holding-child',
 		extended: [
@@ -89,6 +106,9 @@ export const OFFERED_SERVICES: OfferedService[] = [
 	},
 	{
 		slug: 'psychoterapia-zaburzen-odzywiania',
+		productSlug: 'eating-disorders-psychotherapy',
+		imageUrl:
+			'https://s3-bezstresowo.s3.eu-central-1.amazonaws.com/550b2e1c-7a57-4eb1-9018-494ad24a456c',
 		prefix: 'user.pages.home.offeredServices.services.eatingDisorderTherapy',
 		icon: 'fa-solid fa-apple-whole',
 		extended: [

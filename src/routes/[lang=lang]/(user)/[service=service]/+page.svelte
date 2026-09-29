@@ -41,7 +41,7 @@
 	<section class="overflow-hidden bg-linear-150 from-primary via-primary to-primary/90 text-white">
 		<div class="mx-auto max-w-5xl px-4 py-7 sm:px-6 sm:py-8 lg:px-8 lg:py-9">
 			<a
-				href={path('/home#services')}
+				href={path('/services')}
 				class="mx-auto flex w-fit items-center gap-2 text-sm font-medium text-secondary transition hover:text-white"
 			>
 				<i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
