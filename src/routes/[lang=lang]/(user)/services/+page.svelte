@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { asset } from '$app/paths';
 	import { getLocale, Locale, path } from '$i18n';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
@@ -67,19 +66,37 @@
 				{/snippet}
 
 				{@const serviceProducts = await products}
-				{#each serviceProducts as product (product.id)}
+				{#each serviceProducts as product, index (product.id)}
 					<article
 						class="flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-sm"
 					>
-						<img
-							src={product.imageUrl ?? asset('/assets/shop-image-placeholder.svg')}
-							alt=""
-							class="h-44 w-full object-cover"
-							loading="lazy"
-						/>
+						<div
+							class="relative h-36 overflow-hidden bg-primary px-7 py-6 text-white"
+							aria-hidden="true"
+						>
+							<div
+								class="absolute -top-16 -right-6 size-48 rounded-full border border-secondary/45"
+							></div>
+							<div
+								class="absolute -top-8 right-2 size-36 rounded-full border border-white/35"
+							></div>
+							<div
+								class="absolute top-7 right-10 size-24 rounded-full border border-secondary/50"
+							></div>
+							<span class="relative text-xs font-semibold tracking-[.16em] text-secondary uppercase"
+								>{isUkrainian ? 'Консультація' : 'Konsultacja'}</span
+							>
+							<span class="relative mt-5 block font-serif text-4xl text-white/90"
+								>{String(index + 1).padStart(2, '0')}</span
+							>
+						</div>
 						<div class="flex flex-1 flex-col p-6">
 							<h2 class="text-xl leading-snug font-semibold">{product.name}</h2>
-							<p class="mt-3 flex-1 leading-relaxed text-slate-600">{product.description}</p>
+							{#if product.description}
+								<p class="mt-3 flex-1 leading-relaxed text-slate-600">{product.description}</p>
+							{:else}
+								<div class="flex-1"></div>
+							{/if}
 							<p class="mt-5 text-2xl font-semibold text-primary">
 								{formatMoney(product.priceInMinorUnits, product.currency, getLocale())}
 							</p>
