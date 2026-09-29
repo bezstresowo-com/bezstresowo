@@ -63,16 +63,9 @@
 								<div class="text-base text-primary sm:text-lg">
 									{product.slug === CONSULTATION_SLUG
 										? getLocale() === Locale.ukUA
-											? 'Психотерапевтична консультація'
-											: 'Konsultacja psychoterapeutyczna'
+											? 'Психотерапевтична консультація (50 хвилин)'
+											: 'Konsultacja psychoterapeutyczna (50 minut)'
 										: product.name}
-									{#if product.slug === CONSULTATION_SLUG}
-										<p class="mt-1 text-sm text-primary/70">
-											{getLocale() === Locale.ukUA
-												? 'Індивідуальна зустріч · 50 хвилин'
-												: 'Spotkanie indywidualne · 50 minut'}
-										</p>
-									{/if}
 								</div>
 								<div class="text-base font-semibold text-primary sm:text-lg">
 									{formatMoney(product.priceInMinorUnits, product.currency, getLocale())}
