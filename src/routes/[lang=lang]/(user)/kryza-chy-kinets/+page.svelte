@@ -1,34 +1,16 @@
 <script lang="ts">
 	import { Locale } from '$i18n';
 	import Seo from '$lib/Seo/Seo.svelte';
-	import { createUkrainianCourseCheckout } from '$remote/checkout.remote';
 
 	import { PROGRAM_LANDING_COPY } from './copy';
 
 	const copy = PROGRAM_LANDING_COPY;
-	let { data } = $props();
-	let checkoutLoading = $state(false);
-	let checkoutError = $state(false);
-
-	async function buyProgram() {
-		checkoutLoading = true;
-		checkoutError = false;
-		try {
-			const session = await createUkrainianCourseCheckout();
-			if (!session.url) throw new Error('No Stripe checkout URL');
-			window.location.href = session.url;
-		} catch (error) {
-			console.error('Course checkout failed:', error);
-			checkoutError = true;
-			checkoutLoading = false;
-		}
-	}
+	const enrollmentUrl = 'https://bezstresowo.sendpulse.courses/kryza-chy-kinets';
 </script>
 
 <Seo
 	title={copy.seo.title}
 	description={copy.seo.description}
-	noindex
 	alternates={[{ locale: Locale.ukUA, path: '/kryza-chy-kinets' }]}
 />
 
@@ -179,21 +161,8 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<button
-				class="cta primary"
-				type="button"
-				disabled={!data.purchaseReady || checkoutLoading}
-				onclick={buyProgram}
-				>{checkoutLoading ? 'Відкриваємо оплату…' : copy.purchase.button}</button
-			>
-			<small
-				>{data.purchaseReady
-					? 'Після оплати доступ надійде на вашу електронну пошту.'
-					: copy.purchase.note}</small
-			>
-			{#if checkoutError}<p role="alert">
-					Не вдалося відкрити оплату. Спробуйте ще раз трохи пізніше.
-				</p>{/if}
+			<a class="cta primary" href={enrollmentUrl}>{copy.purchase.button}</a>
+			<small>Після оплати доступ надійде на вашу електронну пошту.</small>
 		</div>
 	</section>
 
@@ -706,14 +675,8 @@
 		font-weight: 400;
 	}
 
-	.price-card button {
+	.price-card .cta {
 		width: 100%;
-		cursor: pointer;
-	}
-
-	.price-card button:disabled {
-		cursor: not-allowed;
-		opacity: 0.72;
 	}
 
 	.price-card small {
