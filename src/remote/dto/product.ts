@@ -24,8 +24,9 @@ const {
 	ValidateNested
 } = validators;
 
-/** The only currency the shop supports - amounts are always stored in grosze. */
-export const PRODUCT_CURRENCY = 'PLN';
+/** Products may be charged in PLN or EUR; both use two decimal places. */
+export const PRODUCT_CURRENCIES = ['PLN', 'EUR'] as const;
+export type ProductCurrency = (typeof PRODUCT_CURRENCIES)[number];
 
 export const SITE_LOCATIONS = ['shop', 'registrations'] as const;
 export type SiteLocation = (typeof SITE_LOCATIONS)[number];
@@ -86,7 +87,12 @@ export class UpsertProductDto {
 	@MaxLength(250)
 	imageId?: string;
 
-	/** Always PLN, always an integer amount of grosze. */
+	@IsDefined()
+	@IsString()
+	@IsIn(PRODUCT_CURRENCIES)
+	currency: ProductCurrency;
+
+	/** An integer amount in the selected currency's minor units. */
 	@IsDefined()
 	@Type(() => Number)
 	@IsInt()

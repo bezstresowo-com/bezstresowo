@@ -2,7 +2,7 @@
 	import { Locale, path, t, translateKey } from '$i18n';
 	import { localeTabLabel } from '$lib/admin/blog/AdminBlogForm/model';
 	import { uploadMedia } from '$remote/admin-media.remote';
-	import { SITE_LOCATIONS, type UpsertProductDto } from '$remote/dto/product';
+	import { PRODUCT_CURRENCIES, SITE_LOCATIONS, type UpsertProductDto } from '$remote/dto/product';
 	import { toBase64 } from '$shared/global/functions/to-base64';
 	import { Separator } from 'bits-ui';
 	import { toast } from 'svelte-sonner';
@@ -112,6 +112,7 @@
 				orderKey: draft.orderKey.trim() || undefined,
 				imageId: draft.imageId || undefined,
 				priceInMinorUnits,
+				currency: draft.currency,
 				translations: toTranslationPayload(draft)
 			});
 		} finally {
@@ -152,7 +153,7 @@
 
 			<div>
 				<label class="mb-1 block text-sm font-medium text-gray-700" for="product-price">
-					{t.admin.shop.fields.price.label}
+					{t.admin.shop.fields.price.label} ({draft.currency})
 				</label>
 				<input
 					id="product-price"
@@ -166,6 +167,20 @@
 				{#if showIssues && issues.price}
 					<small class="text-sm text-danger">{translateKey(issues.price)}</small>
 				{/if}
+			</div>
+			<div>
+				<label class="mb-1 block text-sm font-medium text-gray-700" for="product-currency">
+					{t.admin.shop.fields.currency.label}
+				</label>
+				<select
+					id="product-currency"
+					bind:value={draft.currency}
+					class="w-full rounded-md border border-gray-300"
+				>
+					{#each PRODUCT_CURRENCIES as currency (currency)}
+						<option value={currency}>{currency}</option>
+					{/each}
+				</select>
 			</div>
 		</div>
 

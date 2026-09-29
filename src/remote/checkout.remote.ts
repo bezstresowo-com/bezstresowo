@@ -1,10 +1,12 @@
 import { command, getRequestEvent } from '$app/server';
+import { env } from '$env/dynamic/private';
 import { STRIPE_SK } from '$env/static/private';
 import { Locale, LOCALE_PREFIXES } from '$i18n';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { toStripeCurrency } from '$shared/global/functions/to-stripe-currency';
 import { dtoSchema } from '$shared/server/functions/dto-schema';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
+import { isCoursePurchaseEventConfigured } from '$shared/server/services/sendpulse/course-purchase-event';
 import { error } from '@sveltejs/kit';
 import { isNil } from 'lodash-es';
 import Stripe from 'stripe';
@@ -12,6 +14,7 @@ import Stripe from 'stripe';
 import { RegistrationCheckoutDto, ShopCheckoutDto, type CheckoutSession } from './dto/misc';
 import type {
 	ConsultationRegistrationCheckoutMetadata,
+	CourseCheckoutMetadata,
 	ShopCheckoutMetadata
 } from './dto/stripe-metadata';
 
@@ -71,6 +74,43 @@ export const createShopCheckout = command(
 		return { sessionId: session.id, url: session.url };
 	}
 );
+
+/** The course has a dedicated checkout so a normal shop purchase cannot grant course access. */
+export const createUkrainianCourseCheckout = command(async (): Promise<CheckoutSession> => {
+	if (env.COURSE_UA_SALES_ENABLED !== 'true' || !isCoursePurchaseEventConfigured()) {
+		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
+	}
+
+	const product = await prisma.product.findFirst({
+		where: { slug: 'kryza-chy-kinets', active: true },
+		include: { price: true, internationalizedProducts: true }
+	});
+	const translation = product?.internationalizedProducts.find((item) => item.lang === Locale.ukUA);
+
+	if (
+		!product ||
+		!translation ||
+		product.price.currency !== 'EUR' ||
+		product.price.inMinorUnits !== 1900
+	) {
+		error(HttpStatus.NOT_FOUND, { message: 'api.errors.NOT_FOUND' });
+	}
+
+	const session = await stripe().checkout.sessions.create({
+		line_items: [buildLineItem(product, translation, 1)],
+		mode: 'payment',
+		success_url: pageUrl('/kryza-chy-kinets/success', Locale.ukUA),
+		cancel_url: pageUrl('/kryza-chy-kinets', Locale.ukUA),
+		locale: stripeLocale(Locale.ukUA),
+		metadata: {
+			type: 'course-ua',
+			lang: 'uk',
+			productId: product.id
+		} satisfies CourseCheckoutMetadata
+	});
+
+	return { sessionId: session.id, url: session.url };
+});
 
 function stripe() {
 	return new Stripe(STRIPE_SK, { apiVersion: STRIPE_API_VERSION as never });

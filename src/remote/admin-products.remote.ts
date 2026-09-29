@@ -11,7 +11,6 @@ import { error } from '@sveltejs/kit';
 import { isNil } from 'lodash-es';
 
 import {
-	PRODUCT_CURRENCY,
 	ProductIdDto,
 	UpdateProductDto,
 	UpsertProductDto,
@@ -73,7 +72,7 @@ export const createProduct = command(dtoSchema(UpsertProductDto), async (dto) =>
 			imageId: dto.imageId ?? null,
 			price: {
 				create: {
-					currency: PRODUCT_CURRENCY,
+					currency: dto.currency,
 					inMinorUnits: dto.priceInMinorUnits
 				}
 			},
@@ -120,7 +119,7 @@ export const updateProduct = command(dtoSchema(UpdateProductDto), async (dto) =>
 			imageId: dto.imageId ?? null,
 			price: {
 				update: {
-					currency: PRODUCT_CURRENCY,
+					currency: dto.currency,
 					inMinorUnits: dto.priceInMinorUnits
 				}
 			},
@@ -181,7 +180,13 @@ async function assertFreeSlug(slug: string, ignoreProductId?: string) {
 
 function toTranslationRow(
 	translation: InternationalizedProductDto,
-	product: { slug: string; active?: boolean; priceInMinorUnits: number; imageId?: string }
+	product: {
+		slug: string;
+		active?: boolean;
+		priceInMinorUnits: number;
+		currency: string;
+		imageId?: string;
+	}
 ) {
 	return {
 		lang: translation.lang,
@@ -195,7 +200,7 @@ function toTranslationRow(
 			name: translation.name,
 			description: translation.description,
 			priceInMinorUnits: product.priceInMinorUnits,
-			currency: PRODUCT_CURRENCY,
+			currency: product.currency,
 			// The one image shared by every language version of the product.
 			imageUrl: isNil(product.imageId) ? null : new S3Service().buildUrl(product.imageId),
 			available: product.active ?? true

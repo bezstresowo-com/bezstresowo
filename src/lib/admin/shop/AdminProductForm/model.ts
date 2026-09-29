@@ -1,5 +1,9 @@
 import { Locale } from '$i18n';
-import type { InternationalizedProductDto, SiteLocation } from '$remote/dto/product';
+import type {
+	InternationalizedProductDto,
+	ProductCurrency,
+	SiteLocation
+} from '$remote/dto/product';
 import { SLUG_REGEX } from '$shared/global/functions/slug';
 
 export type ProductTranslationDraft = {
@@ -11,8 +15,9 @@ export type ProductTranslationDraft = {
 export type ProductDraft = {
 	/** English, entered by hand - see `t.admin.shop.fields.slug.hint`. */
 	slug: string;
-	/** Entered in złoty, stored in grosze. */
+	/** Entered in the chosen currency, stored in its minor units. */
 	price: string;
+	currency: ProductCurrency;
 	active: boolean;
 	orderKey: string;
 	siteLocations: SiteLocation[];
@@ -30,7 +35,7 @@ export type ExistingProduct = {
 	siteLocations: string[];
 	imageId: string | null;
 	imageUrl: string | null;
-	price: { inMinorUnits: number };
+	price: { inMinorUnits: number; currency: string };
 	internationalizedProducts: { lang: string; name: string; description: string }[];
 };
 
@@ -38,6 +43,7 @@ export function emptyProductDraft(): ProductDraft {
 	return {
 		slug: '',
 		price: '',
+		currency: 'PLN',
 		active: true,
 		orderKey: '',
 		siteLocations: ['shop'],
@@ -55,6 +61,7 @@ export function productDraftFrom(product: ExistingProduct): ProductDraft {
 
 	draft.slug = product.slug;
 	draft.price = (product.price.inMinorUnits / 100).toFixed(2);
+	draft.currency = product.price.currency === 'EUR' ? 'EUR' : 'PLN';
 	draft.active = product.active;
 	draft.orderKey = product.orderKey ?? '';
 	draft.siteLocations = product.siteLocations as SiteLocation[];
@@ -76,7 +83,7 @@ export function productDraftFrom(product: ExistingProduct): ProductDraft {
 	return draft;
 }
 
-/** `12,50` and `12.50` both mean 1250 grosze. */
+/** `12,50` and `12.50` both mean 1250 minor units. */
 export function toMinorUnits(price: string): number | null {
 	const normalized = price.replace(',', '.').trim();
 

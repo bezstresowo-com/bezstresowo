@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { path, t } from '$i18n';
+	import { getLocale, Locale, path, t } from '$i18n';
 	import { LanguageSelect } from '$lib';
 	import { asset } from '$app/paths';
 	import { HEADER_PATHS } from './model';
@@ -7,6 +7,13 @@
 
 	let menuOpen = $state(false);
 	let selectedPath = $derived(page.url.pathname);
+	let navigation = $derived(
+		HEADER_PATHS.map((item) =>
+			item.name === 'shop' && getLocale() === Locale.ukUA
+				? ({ name: 'programs', path: '/programs' } as const)
+				: item
+		)
+	);
 </script>
 
 <!-- Desktop: header -->
@@ -18,7 +25,7 @@
 
 		<span class="flex-auto"></span>
 
-		{#each HEADER_PATHS as { path: target, name } (target)}
+		{#each navigation as { path: target, name } (target)}
 			{@const href = path(target)}
 			<a
 				{href}
@@ -84,7 +91,7 @@
 		</div>
 
 		<nav class="flex flex-col gap-3 px-4 pb-6">
-			{#each HEADER_PATHS as { path: target, name }, i (i)}
+			{#each navigation as { path: target, name }, i (i)}
 				{@const href = path(target)}
 				<a
 					{href}
