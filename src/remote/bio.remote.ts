@@ -57,7 +57,11 @@ export const getBio = query(
 		}
 
 		return {
-			imageUrl: isNil(bio.imageId) ? null : new S3Service().buildUrl(bio.imageId),
+			imageUrl: isNil(bio.imageId)
+				? null
+				: bio.imageId === 'seed-about-me.jpg'
+					? '/assets/about-me.jpg'
+					: new S3Service().buildUrl(bio.imageId),
 			content: translation.content
 		};
 	}
