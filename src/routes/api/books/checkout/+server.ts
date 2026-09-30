@@ -1,4 +1,5 @@
 import { STRIPE_SK } from '$env/static/private';
+import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { createRateLimiter } from '$shared/server/functions/rate-limit';
 import {
 	BOOK_NAME,
@@ -17,7 +18,7 @@ export async function POST({ request, url, getClientAddress }) {
 	if (!bookSalesReady()) error(503, 'Продаж книги ще готується.');
 	// Check privacy and the actual PDF before allowing a customer to pay.
 	try {
-		await readPrivateBook();
+		await Promise.all([readPrivateBook(), prisma.bookDownload.count()]);
 	} catch {
 		error(503, 'Книга тимчасово недоступна для покупки.');
 	}
