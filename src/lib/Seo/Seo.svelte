@@ -4,6 +4,7 @@
 	import { absoluteUrl } from '$shared/global/functions/site-url';
 
 	import { getPageAlternates } from './alternates-context.svelte';
+	import JsonLd from './JsonLd.svelte';
 	import {
 		alternateUrl,
 		defaultAlternates,
@@ -95,12 +96,4 @@
 	<meta name="twitter:image:alt" content={previewImageAlt} />
 </svelte:head>
 
-{#if jsonLd}
-	<!--
-		JSON-LD is valid in the document body. Keeping it outside `svelte:head`
-		avoids a Svelte hydration mismatch when this component resolves inside an
-		async boundary (blog article, shop and price list).
-	-->
-	<!-- eslint-disable-next-line no-useless-escape -- `<\/script>` must stay escaped inside the template literal -->
-	{@html `<script type="application/ld+json" data-seo-json-ld>${JSON.stringify(jsonLd).replaceAll('<', '\\u003c')}<\/script>`}
-{/if}
+<JsonLd value={jsonLd} />

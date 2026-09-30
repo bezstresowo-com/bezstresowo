@@ -3,6 +3,7 @@
 	import { CONSULTATION_SLUG } from '$lib/ServicesSection/catalog';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
+	import JsonLd from '$lib/Seo/JsonLd.svelte';
 	import Seo from '$lib/Seo/Seo.svelte';
 	import { productListJsonLd } from '$lib/Seo/model';
 	import { getProducts } from '$remote/products.remote';
@@ -12,6 +13,8 @@
 	// of the page - Stripe no longer holds any product or price.
 	const products = $derived(getProducts({ lang: getLocale() }));
 </script>
+
+<Seo title={t.meta.priceList.title} description={t.meta.priceList.description} />
 
 <div class="min-h-screen">
 	<!-- Header Section -->
@@ -37,18 +40,12 @@
 				{/snippet}
 
 				{#snippet failed(error, reset)}
-					<Seo title={t.meta.priceList.title} description={t.meta.priceList.description} />
 					<ErrorNotice {error} {reset} />
 				{/snippet}
 
 				{@const priceList = await products}
 
-				<!-- Inside the boundary so the product `ItemList` makes it into the SSR head. -->
-				<Seo
-					title={t.meta.priceList.title}
-					description={t.meta.priceList.description}
-					jsonLd={productListJsonLd(priceList.map((product) => product.metadataJsonLD))}
-				/>
+				<JsonLd value={productListJsonLd(priceList.map((product) => product.metadataJsonLD))} />
 
 				{#if priceList.length === 0}
 					<div class="py-8 text-center text-primary">

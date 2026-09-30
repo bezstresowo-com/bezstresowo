@@ -64,11 +64,6 @@ export class ContactRequestDto {
 	captchaToken?: string;
 }
 
-/**
- * Checkout is created from a product that lives in our database - the client
- * only ever sends our own product id, never a Stripe price id. The therapy
- * name shown in emails comes from that product row, not from this payload.
- */
 export class GroupApplicationDto {
 	@IsDefined()
 	@IsString()

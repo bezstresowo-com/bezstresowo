@@ -22,18 +22,18 @@
 			{@const href = path(target)}
 			<a
 				{href}
-				class={`${selectedPath.startsWith(href) ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-lg:hidden`}
+				class={`${selectedPath.startsWith(href) ? 'text-secondary' : 'text-white'} decoration-secondary decoration-2 underline-offset-4 hover:underline max-xl:hidden`}
 				>{t.user.header.items[name]}</a
 			>
 		{/each}
 
-		<div class="max-lg:hidden">
+		<div class="max-xl:hidden">
 			<LanguageSelect />
 		</div>
 
 		<!-- Mobile: hamburger button-->
 		<button
-			class="w-10 cursor-pointer p-2 text-accent lg:hidden"
+			class="w-10 cursor-pointer p-2 text-accent xl:hidden"
 			aria-label={t.user.a11y.openMenu}
 			onclick={() => (menuOpen = !menuOpen)}
 		>
@@ -54,10 +54,10 @@
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<div
-		class="fixed inset-0 z-1000 bg-black/30 backdrop-blur-sm lg:hidden"
+		class="fixed inset-0 z-1000 bg-black/30 backdrop-blur-sm xl:hidden"
 		onclick={() => (menuOpen = false)}
 	></div>
-	<div class="fixed top-0 right-0 z-1000 h-full w-80 max-w-[85vw] bg-primary shadow-xl lg:hidden">
+	<div class="fixed top-0 right-0 z-1000 h-full w-80 max-w-[85vw] bg-primary shadow-xl xl:hidden">
 		<div class="flex items-center justify-between p-4">
 			<a
 				class="text-2xl font-bold text-accent"
