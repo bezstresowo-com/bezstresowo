@@ -17,6 +17,17 @@ import type {
 export class EmailService {
 	private readonly _transport;
 
+	async bookDeliveryMessage(email: string, downloadUrl: string) {
+		const safeUrl = downloadUrl.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+		await this._transport.sendMail({
+			from: EMAIL_SENDER,
+			to: email,
+			subject: `${EMAIL_SUBJECT_PREFIX} Твоя книга «Коли тривога атакує»`,
+			text: `Дякую за покупку!\n\nТвоя книга «Коли тривога атакує»: ${downloadUrl}\n\nЗавантаж PDF протягом 30 днів і збережи його на своєму пристрої. Користуватися завантаженою книгою можна без обмеження часу. Якщо потрібно відновити посилання, напиши на bezstresowo.org@gmail.com.\n\nОлеся Гайдук · Bezstresowo`,
+			html: `<div lang="uk" style="background:#F3F0E7;padding:32px;font:16px/1.6 Arial,sans-serif;color:#22344E"><p>BEZSTRESOWO</p><h1>Твоя книга вже тут</h1><p>Дякую за покупку «Коли тривога атакує»!</p><p>Завантаж PDF і збережи його на телефоні, планшеті чи комп’ютері. Можеш читати у своєму темпі й друкувати сторінки для вправ.</p><p><a href="${safeUrl}" style="display:inline-block;background:#22344E;color:white;padding:14px 24px;text-decoration:none;border-radius:8px">Завантажити книгу</a></p><p>Посилання діє 30 днів. Завантажена книга залишається з тобою без обмеження часу.</p><p>Якщо потрібне нове посилання або виникла проблема, напиши на <a href="mailto:bezstresowo.org@gmail.com">bezstresowo.org@gmail.com</a>.</p><p>Олеся Гайдук<br>Психолог і психотерапевт</p><p style="font-size:12px">Це лист про твоє замовлення, а не підписка на рекламні повідомлення.</p></div>`
+		});
+	}
+
 	constructor() {
 		this._transport = createTransport({
 			service: 'gmail',

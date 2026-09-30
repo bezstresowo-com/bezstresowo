@@ -1,5 +1,23 @@
 <script lang="ts">
 	import Seo from '$lib/Seo/Seo.svelte';
+	let { data } = $props();
+	let buying = $state(false);
+	let checkoutError = $state('');
+	async function buyBook() {
+		if (buying) return;
+		buying = true;
+		checkoutError = '';
+		try {
+			const response = await fetch('/api/books/checkout', { method: 'POST' });
+			const result = await response.json();
+			if (!response.ok || !result.url) throw new Error('Checkout unavailable');
+			window.location.assign(result.url);
+		} catch {
+			checkoutError =
+				'Не вдалося відкрити оплату. Спробуй пізніше або напиши на bezstresowo.org@gmail.com.';
+			buying = false;
+		}
+	}
 
 	const topics = [
 		{
@@ -60,13 +78,19 @@
 				</div>
 				<button
 					type="button"
-					disabled
-					class="mt-6 min-h-12 cursor-not-allowed rounded-xl bg-accent px-8 py-3 font-bold text-primary opacity-65"
-					>Купити книгу за 49 zł</button
+					disabled={!data.bookSalesReady || buying}
+					onclick={buyBook}
+					class="mt-6 min-h-12 rounded-xl bg-accent px-8 py-3 font-bold text-primary disabled:cursor-not-allowed disabled:opacity-65"
+					>{buying ? 'Відкриваю оплату…' : 'Купити книгу за 49 zł'}</button
 				>
 				<p class="mt-3 text-sm text-slate-500">
-					Прев’ю сторінки. Оплату та видачу PDF підключимо перед публікацією.
+					{data.bookSalesReady
+						? 'Після підтвердження оплати на твій email надійде посилання на завантаження PDF.'
+						: 'Продаж книги готується. Незабаром тут можна буде оплатити й отримати PDF на email.'}
 				</p>
+				{#if checkoutError}<p role="alert" class="mt-3 text-sm text-red-700">
+						{checkoutError}
+					</p>{/if}
 			</div>
 		</div>
 	</section>

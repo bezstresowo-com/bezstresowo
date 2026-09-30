@@ -2,6 +2,7 @@ import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { toLocale } from '$i18n';
 import type { StripeSessionMetadata } from '$remote/dto/stripe-metadata';
 import { HttpStatus } from '$shared/global/enums/http-status';
+import { downloadLink, isPaidBook, readPrivateBook } from '$shared/server/services/book-delivery';
 import { EmailService } from '$shared/server/services/email/email-service';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { json, text } from '@sveltejs/kit';
@@ -33,6 +34,34 @@ export async function POST({ request }) {
 			{ error: 'Webhook signature verification failed' },
 			{ status: HttpStatus.BAD_REQUEST }
 		);
+	}
+
+	// Book delivery is isolated from the existing consultation/shop flow.
+	if (
+		event.type === 'checkout.session.completed' ||
+		event.type === 'checkout.session.async_payment_succeeded'
+	) {
+		const incoming = event.data.object as Stripe.Checkout.Session;
+		if (incoming.metadata?.type === 'book') {
+			try {
+				const session = await stripe.checkout.sessions.retrieve(incoming.id);
+				if (!isPaidBook(session)) return text('OK');
+				const marker = `book:${session.id}`;
+				if (await prisma.processedStripeEvent.findUnique({ where: { eventId: marker } }))
+					return text('OK');
+				const email = session.customer_details?.email;
+				const origin = session.metadata?.deliveryOrigin;
+				if (!email || !origin || !/^https:\/\//.test(origin))
+					throw new Error('Missing book delivery details');
+				await readPrivateBook();
+				await new EmailService().bookDeliveryMessage(email, downloadLink(session.id, origin));
+				await prisma.processedStripeEvent.create({ data: { eventId: marker } });
+				return text('OK');
+			} catch (cause) {
+				console.error('Book delivery failed:', cause);
+				return text('Book delivery failed', { status: 500 });
+			}
+		}
 	}
 
 	if (event.type === 'checkout.session.completed') {
