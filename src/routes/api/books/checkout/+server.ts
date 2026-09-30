@@ -26,6 +26,7 @@ export async function POST({ request, url, getClientAddress }) {
 		mode: 'payment',
 		locale: 'auto',
 		allow_promotion_codes: true,
+		adaptive_pricing: { enabled: false },
 		line_items: [
 			{
 				quantity: 1,
