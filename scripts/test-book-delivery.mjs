@@ -80,10 +80,22 @@ const paid = {
 	amount_total: 4900
 };
 assert.equal(book.isPaidBook(paid), true);
-assert.equal(book.isPaidBook({ ...paid, amount_total: 200, total_details: { amount_discount: 4700 } }), true);
-assert.equal(book.isPaidBook({ ...paid, amount_total: 100, total_details: { amount_discount: 4800 } }), true);
-assert.equal(book.isPaidBook({ ...paid, amount_total: 0, total_details: { amount_discount: 4900 } }), false);
-assert.equal(book.isPaidBook({ ...paid, amount_total: 200, total_details: { amount_discount: 4600 } }), false);
+assert.equal(
+	book.isPaidBook({ ...paid, amount_total: 200, total_details: { amount_discount: 4700 } }),
+	true
+);
+assert.equal(
+	book.isPaidBook({ ...paid, amount_total: 100, total_details: { amount_discount: 4800 } }),
+	true
+);
+assert.equal(
+	book.isPaidBook({ ...paid, amount_total: 0, total_details: { amount_discount: 4900 } }),
+	false
+);
+assert.equal(
+	book.isPaidBook({ ...paid, amount_total: 200, total_details: { amount_discount: 4600 } }),
+	false
+);
 assert.equal(book.isPaidBook({ ...paid, amount_subtotal: 200, amount_total: 200 }), false);
 for (const change of [
 	{ payment_status: 'unpaid' },

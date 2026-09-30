@@ -1,5 +1,4 @@
 import { STRIPE_SK } from '$env/static/private';
-import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { createRateLimiter } from '$shared/server/functions/rate-limit';
 import {
 	BOOK_NAME,
@@ -8,6 +7,7 @@ import {
 	bookSalesReady,
 	readPrivateBook
 } from '$shared/server/services/book-delivery';
+import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { error, json } from '@sveltejs/kit';
 import Stripe from 'stripe';
 

@@ -120,7 +120,7 @@
 			<p class="text-xs font-bold tracking-[.18em] text-accent uppercase">Що всередині</p>
 			<h2 class="mt-3 font-serif text-3xl sm:text-4xl">Три частини, 21 практика</h2>
 			<div class="mt-9 grid gap-6 md:grid-cols-3">
-				{#each topics as topic}
+				{#each topics as topic (topic)}
 					<article class="rounded-3xl border border-primary/15 bg-white p-7 shadow-sm">
 						<span class="font-serif text-4xl text-accent">{topic.number}</span>
 						<h3 class="mt-5 text-xl leading-snug font-semibold">{topic.title}</h3>

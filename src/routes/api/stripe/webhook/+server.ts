@@ -1,5 +1,5 @@
-import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { env } from '$env/dynamic/private';
+import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { toLocale } from '$i18n';
 import type { StripeSessionMetadata } from '$remote/dto/stripe-metadata';
 import { HttpStatus } from '$shared/global/enums/http-status';
@@ -44,7 +44,8 @@ export async function POST({ request }) {
 		if (
 			incoming.metadata?.type !== 'book' ||
 			incoming.metadata?.deliveryOrigin !== new URL(request.url).origin
-		) return text('OK');
+		)
+			return text('OK');
 	}
 
 	// Book delivery is isolated from the existing consultation/shop flow.
