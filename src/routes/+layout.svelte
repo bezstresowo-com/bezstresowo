@@ -1,6 +1,5 @@
 <script lang="ts">
-	import '@fontsource/roboto/400.css';
-	import '@fontsource/roboto/700.css';
+	import '../roboto.css';
 	import '../app.css';
 
 	import { Toaster } from 'svelte-sonner';
