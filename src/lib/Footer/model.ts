@@ -16,13 +16,13 @@ export function contactElements(settings: PublicSiteSettings, locale: Locale) {
 		{
 			id: 'phone',
 			label: settings.phone,
-			icon: 'fa fa-phone',
+			icon: 'fa-solid fa-phone',
 			href: phoneHref(settings.phone)
 		},
 		{
 			id: 'location',
 			label: localizedLocation(settings, locale),
-			icon: 'fa fa-location-dot',
+			icon: 'fa-solid fa-location-dot',
 			href: undefined
 		}
 	];
