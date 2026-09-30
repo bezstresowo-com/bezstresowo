@@ -10,16 +10,16 @@
 
 <section class="min-h-[60vh] bg-background/40 px-4 py-12 sm:px-6 sm:py-16">
 	<div class="mx-auto max-w-7xl">
-		<header class="mx-auto max-w-5xl text-center">
+		<header class="mx-auto max-w-full text-center">
 			<h1 class="text-3xl leading-tight font-bold text-primary sm:text-4xl">
 				{t.user.pages.materials.pageTitle}
 			</h1>
-			<p class="mx-auto mt-4 max-w-4xl text-lg leading-relaxed text-slate-600">
+			<p class="mx-auto mt-4 max-w-full text-base leading-relaxed text-slate-600">
 				{t.user.pages.materials.pageDescription}
 			</p>
 		</header>
 
-		<h2 class="mt-12 font-serif text-3xl text-primary">
+		<h2 class="mt-12 text-center font-serif text-3xl font-semibold text-primary sm:text-4xl">
 			{isUkrainian ? 'Безкоштовно' : 'Bezpłatnie'}
 		</h2>
 		<div class="mt-6 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
@@ -56,8 +56,10 @@
 		</div>
 
 		{#if isUkrainian}
-			<h2 class="mt-16 font-serif text-3xl text-primary">Книги та програми</h2>
-			<p class="mt-3 max-w-2xl text-slate-600">
+			<h2 class="mt-16 text-center font-serif text-3xl font-semibold text-primary sm:text-4xl">
+				Книги та програми
+			</h2>
+			<p class="mx-auto mt-3 max-w-2xl text-center text-slate-600">
 				Матеріали для самостійної роботи у власному темпі. На сторінці кожного є докладний опис
 				формату й вмісту.
 			</p>
@@ -78,9 +80,11 @@
 						/>
 					</div>
 					<div class="flex flex-1 flex-col px-6 pt-6 pb-7 sm:px-7">
-						<p class="text-sm font-semibold tracking-wide text-primary/70">Програма · 19 €</p>
+						<p class="text-sm font-semibold tracking-wide text-primary/70">Програма · 79 zł</p>
 						<h3 class="mt-3 font-serif text-3xl leading-snug text-primary lg:text-4xl">
-							Криза чи кінець?
+							<a href={path('/kryza-chy-kinets')} class="underline-offset-4 hover:underline"
+								>Криза чи кінець?</a
+							>
 						</h3>
 						<p class="mt-3 flex-1 leading-relaxed text-slate-600">
 							Коли знову повертаєшся до питання «залишитися чи піти»: 7 послідовних модулів, робочий
@@ -111,7 +115,10 @@
 					<div class="flex flex-1 flex-col px-6 pt-6 pb-7 sm:px-7">
 						<p class="text-sm font-semibold tracking-wide text-primary/70">Книга · PDF · 49 zł</p>
 						<h3 class="mt-3 font-serif text-3xl leading-snug text-primary lg:text-4xl">
-							Коли тривога атакує
+							<a
+								href={path('/materials/koly-tryvoha-atakuie')}
+								class="underline-offset-4 hover:underline">Коли тривога атакує</a
+							>
 						</h3>
 						<p class="mt-3 flex-1 leading-relaxed text-slate-600">
 							21 практика, щоб придивитися до тривожних думок і напруги та знайти способи підтримки.

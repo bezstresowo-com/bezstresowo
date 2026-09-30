@@ -161,15 +161,10 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<button
-				class="cta primary"
-				type="button"
-				disabled
-				>{copy.purchase.button}</button
+			<a class="cta primary" href="https://bezstresowo.sendpulse.courses/kryza-chy-kinets"
+				>{copy.purchase.button}</a
 			>
-			<small
-				>{copy.purchase.note}</small
-			>
+			<small>{copy.purchase.note}</small>
 		</div>
 	</section>
 
@@ -682,14 +677,9 @@
 		font-weight: 400;
 	}
 
-	.price-card button {
+	.price-card .cta {
 		width: 100%;
 		cursor: pointer;
-	}
-
-	.price-card button:disabled {
-		cursor: not-allowed;
-		opacity: 0.72;
 	}
 
 	.price-card small {

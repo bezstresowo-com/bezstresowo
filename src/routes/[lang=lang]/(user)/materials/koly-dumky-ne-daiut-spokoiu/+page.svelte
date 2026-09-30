@@ -151,7 +151,13 @@
 				<p class="text-xs font-bold tracking-[.18em] text-secondary uppercase">
 					Якщо хочеш продовжити
 				</p>
-				<h2 class="mt-3 font-serif text-3xl sm:text-4xl">Коли тривога атакує</h2>
+				<h2 class="mt-3 font-serif text-3xl sm:text-4xl">
+					<a
+						href={book}
+						class="underline decoration-secondary/60 underline-offset-4 hover:decoration-secondary"
+						>Коли тривога атакує</a
+					>
+				</h2>
 				<p class="mt-5 max-w-2xl leading-relaxed text-white/85">
 					У книзі-практикумі є 21 докладна практика про тривожні думки, напругу в тілі, вимоги до
 					себе й підтримку в повсякденному житті. Вона також може бути додатковим матеріалом для
