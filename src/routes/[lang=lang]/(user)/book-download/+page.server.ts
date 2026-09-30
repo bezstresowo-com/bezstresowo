@@ -11,7 +11,8 @@ import Stripe from 'stripe';
 export async function load({ url, setHeaders }) {
 	setHeaders({
 		'cache-control': 'private, no-store',
-		'referrer-policy': 'no-referrer',
+		// Keep same-origin POST identity in Safari; never send the token to other sites.
+		'referrer-policy': 'same-origin',
 		'x-robots-tag': 'noindex, nofollow'
 	});
 	const token = url.searchParams.get('token') ?? '';
