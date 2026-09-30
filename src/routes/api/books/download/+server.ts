@@ -38,7 +38,7 @@ export async function POST({ request, url, getClientAddress }) {
 	return new Response(new Uint8Array(pdf), {
 		headers: {
 			'Content-Type': 'application/pdf',
-			'Content-Disposition': 'attachment; filename="Koly-tryvoha-atakuie.pdf"',
+			'Content-Disposition': `attachment; filename="Koly-tryvoha-atakuie.pdf"; filename*=UTF-8''${encodeURIComponent('Коли тривога атакує.pdf')}`,
 			'Cache-Control': 'private, no-store',
 			'Referrer-Policy': 'no-referrer',
 			'X-Robots-Tag': 'noindex, nofollow',
