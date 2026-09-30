@@ -90,13 +90,20 @@ export function verifyBookToken(token: string): string | null {
 }
 
 export function isPaidBook(session: Stripe.Checkout.Session) {
+	const discount = session.total_details?.amount_discount ?? 0;
 	return (
 		session.mode === 'payment' &&
 		session.payment_status === 'paid' &&
 		session.metadata?.type === 'book' &&
 		session.metadata?.book === BOOK_SLUG &&
 		session.currency === 'pln' &&
-		session.amount_total === BOOK_PRICE
+		session.amount_subtotal === BOOK_PRICE &&
+		Number.isInteger(discount) &&
+		discount >= 0 &&
+		discount <= BOOK_PRICE - 100 &&
+		session.amount_total === BOOK_PRICE - discount &&
+		(session.total_details?.amount_tax ?? 0) === 0 &&
+		(session.total_details?.amount_shipping ?? 0) === 0
 	);
 }
 
