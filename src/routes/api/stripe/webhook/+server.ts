@@ -1,4 +1,5 @@
 import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
+import { env } from '$env/dynamic/private';
 import { toLocale } from '$i18n';
 import type { StripeSessionMetadata } from '$remote/dto/stripe-metadata';
 import { HttpStatus } from '$shared/global/enums/http-status';
@@ -10,6 +11,8 @@ import { isNil } from 'lodash-es';
 import Stripe from 'stripe';
 
 export async function POST({ request }) {
+	const bookPreview = new URL(request.url).pathname === '/api/books/preview-webhook';
+	const webhookSecret = bookPreview ? env.BOOK_PREVIEW_WEBHOOK_SECRET : STRIPE_WHSEC;
 	const stripe = new Stripe(STRIPE_SK, {
 		apiVersion: '2025-11-17.clover' as never
 	});
@@ -17,7 +20,7 @@ export async function POST({ request }) {
 	const body = await request.text();
 	const signature = request.headers.get('stripe-signature');
 
-	if (!signature || !STRIPE_WHSEC) {
+	if (!signature || !webhookSecret) {
 		return json(
 			{ error: 'Missing signature or webhook secret' },
 			{ status: HttpStatus.BAD_REQUEST }
@@ -27,13 +30,21 @@ export async function POST({ request }) {
 	let event: Stripe.Event;
 
 	try {
-		event = stripe.webhooks.constructEvent(body, signature, STRIPE_WHSEC);
+		event = stripe.webhooks.constructEvent(body, signature, webhookSecret);
 	} catch (err) {
 		console.error('Webhook signature verification failed:', err);
 		return json(
 			{ error: 'Webhook signature verification failed' },
 			{ status: HttpStatus.BAD_REQUEST }
 		);
+	}
+
+	if (bookPreview) {
+		const incoming = event.data.object as Stripe.Checkout.Session;
+		if (
+			incoming.metadata?.type !== 'book' ||
+			incoming.metadata?.deliveryOrigin !== new URL(request.url).origin
+		) return text('OK');
 	}
 
 	// Book delivery is isolated from the existing consultation/shop flow.
