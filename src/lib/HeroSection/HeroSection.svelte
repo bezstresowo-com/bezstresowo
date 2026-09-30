@@ -4,6 +4,10 @@
 	import { t } from '$i18n';
 </script>
 
+<svelte:head>
+	<link rel="preload" as="image" href={asset('/assets/hero-image.jpg')} fetchpriority="high" />
+</svelte:head>
+
 <div
 	class="relative h-96 bg-cover bg-center"
 	style={`background-image: url(${asset('/assets/hero-image.jpg')});`}
