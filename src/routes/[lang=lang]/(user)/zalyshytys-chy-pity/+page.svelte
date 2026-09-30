@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Locale, path } from '$i18n';
 	import Seo from '$lib/Seo/Seo.svelte';
+	import { trackMetaStandardEvent } from '$lib/Tracking/meta-events';
 	import { sendGroupApplication } from '$remote/group-application.remote';
 	import { remoteErrorIssues, remoteErrorMessage } from '$shared/global/functions/remote-error';
 	import { tick } from 'svelte';
@@ -107,6 +108,7 @@
 					privatePlaceConfirmed: values.privatePlaceConfirmed as 'yes' | 'no',
 					additionalInfo: values.additionalInfo || undefined
 				});
+				trackMetaStandardEvent('Lead');
 				handleReset();
 				submitted = true;
 				await tick();
@@ -199,12 +201,11 @@
 		</h2>
 		<div class="mt-6 space-y-4 text-lg leading-relaxed text-primary/80">
 			<p>
-				Моє завдання не в тому, щоб переконувати тебе розлучатися або, навпаки, зберігати
-				стосунки.
+				Моє завдання не в тому, щоб переконувати тебе розлучатися або, навпаки, зберігати стосунки.
 			</p>
 			<p>
-				За ці сім тижнів ми будемо більше дивитися не на питання «який він?», а на «що
-				відбувається зі мною в цих стосунках?»
+				За ці сім тижнів ми будемо більше дивитися не на питання «який він?», а на «що відбувається
+				зі мною в цих стосунках?»
 			</p>
 			<p>
 				Що я терплю і чому? Про що мовчу? Що відбувається зі мною під час конфлікту? Чого боюся
@@ -245,7 +246,7 @@
 	<div class="mx-auto max-w-6xl">
 		<h2 class="text-3xl font-bold sm:text-4xl">Формат</h2>
 		<div class="mt-7 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
-			{#each ['7 щотижневих зустрічей', '90 хвилин', 'Google Meet', '6–8 учасниць', 'закрита група', 'без записів'] as item}
+			{#each ['7 щотижневих зустрічей', '90 хвилин', 'Google Meet', '6–8 учасниць', 'закрита група', 'без записів'] as item (item)}
 				<div
 					class="flex min-h-24 items-center justify-center rounded-2xl bg-primary px-4 py-5 text-center font-semibold text-white"
 				>
@@ -268,7 +269,7 @@
 		<div>
 			<h2 class="text-3xl font-bold sm:text-4xl">Дати і вартість</h2>
 			<div class="mt-6 flex flex-wrap gap-2">
-				{#each dates as date}
+				{#each dates as date (date)}
 					<span
 						class="rounded-full border border-white/20 bg-white/10 px-4 py-2 text-sm font-semibold"
 						>{date}</span
@@ -295,7 +296,7 @@
 	<div class="mx-auto max-w-4xl">
 		<h2 class="text-3xl font-bold sm:text-4xl">Поширені запитання</h2>
 		<div class="mt-7 space-y-3">
-			{#each faqs as faq}
+			{#each faqs as faq (faq.question)}
 				<details
 					class="group rounded-2xl border border-primary/10 bg-background px-5 py-4 open:border-accent/50"
 				>
@@ -411,7 +412,7 @@
 				</div>
 
 				<div class="mt-6 space-y-6">
-					{#each [{ name: 'relationshipSituation', label: 'Розкажи коротко, що зараз відбувається у твоїх стосунках.' }, { name: 'hardestPart', label: 'Що в цій ситуації зараз найскладніше для тебе?' }, { name: 'expectations', label: 'Чого ти очікуєш від участі в групі?' }, { name: 'currentHelp', label: 'Чи отримуєш ти зараз психологічну, психотерапевтичну або психіатричну допомогу? Якщо так, напиши коротко, яку саме.' }] as field}
+					{#each [{ name: 'relationshipSituation', label: 'Розкажи коротко, що зараз відбувається у твоїх стосунках.' }, { name: 'hardestPart', label: 'Що в цій ситуації зараз найскладніше для тебе?' }, { name: 'expectations', label: 'Чого ти очікуєш від участі в групі?' }, { name: 'currentHelp', label: 'Чи отримуєш ти зараз психологічну, психотерапевтичну або психіатричну допомогу? Якщо так, напиши коротко, яку саме.' }] as field (field.name)}
 						<div>
 							<label for={field.name} class={labelClass}>{field.label}</label>
 							<textarea

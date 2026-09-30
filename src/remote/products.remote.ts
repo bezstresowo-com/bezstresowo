@@ -1,5 +1,6 @@
 import { query } from '$app/server';
 import { DEFAULT_LOCALE } from '$i18n';
+import { CONSULTATION_SLUG } from '$lib/ServicesSection/catalog';
 import { dtoSchema } from '$shared/server/functions/dto-schema';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { S3Service } from '$shared/server/services/s3/s3-service';
@@ -17,7 +18,9 @@ export const getProducts = query(
 		const products = await prisma.product.findMany({
 			where: {
 				active: true,
-				...(isNil(siteLocation) ? {} : { siteLocations: { has: siteLocation } })
+				...(isNil(siteLocation)
+					? {}
+					: { OR: [{ siteLocations: { has: siteLocation } }, { slug: CONSULTATION_SLUG }] })
 			},
 			include: { price: true, internationalizedProducts: true }
 		});

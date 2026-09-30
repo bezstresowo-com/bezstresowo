@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { path, t } from '$i18n';
+	import { page } from '$app/state';
 	import {
 		HeroSection,
 		HowCanIHelpSection,
@@ -11,7 +12,6 @@
 		GuideSection
 	} from '$lib';
 	import Seo from '$lib/Seo/Seo.svelte';
-	import { page } from '$app/state';
 </script>
 
 <Seo title={t.meta.home.title} description={t.meta.home.description} />
@@ -36,9 +36,9 @@
 							повертаються до сумнівів.
 						</p>
 						<div class="mt-3 flex flex-wrap gap-x-2 gap-y-1.5 text-sm font-medium text-secondary">
-							<span>7 зустрічей</span><span aria-hidden="true">·</span>
-							<span>онлайн</span><span aria-hidden="true">·</span>
-							<span>6–8 учасниць</span>
+							<span>7 зустрічей</span><span aria-hidden="true">·</span><span>онлайн</span><span
+								aria-hidden="true">·</span
+							><span>6–8 учасниць</span>
 						</div>
 					</div>
 					<div class="shrink-0 lg:min-w-80 lg:text-right">

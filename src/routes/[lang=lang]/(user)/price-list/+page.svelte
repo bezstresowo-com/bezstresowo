@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getLocale, t } from '$i18n';
+	import { getLocale, Locale, t } from '$i18n';
+	import { CONSULTATION_SLUG } from '$lib/ServicesSection/catalog';
 	import ErrorNotice from '$lib/ErrorNotice/ErrorNotice.svelte';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
 	import JsonLd from '$lib/Seo/JsonLd.svelte';
@@ -52,12 +53,16 @@
 					</div>
 				{:else}
 					<div class="space-y-4">
-						{#each priceList as product (product.id)}
+						{#each [...priceList].sort((a, b) => Number(b.slug === CONSULTATION_SLUG) - Number(a.slug === CONSULTATION_SLUG)) as product (product.id)}
 							<div
 								class="grid grid-cols-[1fr_auto] items-center gap-4 border-b border-primary/10 pb-4 last:border-b-0"
 							>
 								<div class="text-base text-primary sm:text-lg">
-									{product.name}
+									{product.slug === CONSULTATION_SLUG
+										? getLocale() === Locale.ukUA
+											? 'Психотерапевтична консультація (50 хвилин)'
+											: 'Konsultacja psychoterapeutyczna (50 minut)'
+										: product.name}
 								</div>
 								<div class="text-base font-semibold text-primary sm:text-lg">
 									{formatMoney(product.priceInMinorUnits, product.currency, getLocale())}

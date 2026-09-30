@@ -88,7 +88,10 @@
 		}
 
 		// Stripe session IDs in the return URL must not reach Meta through the Pixel.
-		if (window.location.pathname.endsWith('/registration-success') && window.location.search.includes('session_id=')) {
+		if (
+			window.location.pathname.endsWith('/registration-success') &&
+			window.location.search.includes('session_id=')
+		) {
 			return null;
 		}
 

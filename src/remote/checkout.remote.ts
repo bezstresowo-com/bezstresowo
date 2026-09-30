@@ -1,6 +1,7 @@
 import { command, getRequestEvent } from '$app/server';
 import { STRIPE_SK } from '$env/static/private';
 import { Locale, LOCALE_PREFIXES } from '$i18n';
+import { CONSULTATION_SLUG } from '$lib/ServicesSection/catalog';
 import { HttpStatus } from '$shared/global/enums/http-status';
 import { toStripeCurrency } from '$shared/global/functions/to-stripe-currency';
 import { dtoSchema } from '$shared/server/functions/dto-schema';
@@ -78,7 +79,11 @@ function stripe() {
 
 async function loadProduct(productId: string, lang: Locale, siteLocation: string) {
 	const product = await prisma.product.findFirst({
-		where: { id: productId, active: true, siteLocations: { has: siteLocation } },
+		where: {
+			id: productId,
+			active: true,
+			OR: [{ siteLocations: { has: siteLocation } }, { slug: CONSULTATION_SLUG }]
+		},
 		include: { price: true, internationalizedProducts: true }
 	});
 

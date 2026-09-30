@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { getLocale, path, t, translateKey } from '$i18n';
+	import { getLocale, Locale, path, t, translateKey } from '$i18n';
+	import { CONSULTATION_SLUG } from '$lib/ServicesSection/catalog';
 	import Button from '$lib/Button/Button.svelte';
 	import { ButtonTypes } from '$lib/Button/model';
 	import LoadingSpinner from '$lib/LoadingSpinner/LoadingSpinner.svelte';
@@ -137,7 +138,12 @@
 
 						{#each registrationProducts as registrationProduct (registrationProduct.id)}
 							<option value={registrationProduct.id}>
-								{registrationProduct.name} - {formatMoney(
+								{registrationProduct.name}{registrationProduct.slug === CONSULTATION_SLUG &&
+								!/50\s*(хв|min)/i.test(registrationProduct.name)
+									? getLocale() === Locale.ukUA
+										? ' (50 хв.)'
+										: ' (50 min)'
+									: ''} - {formatMoney(
 									registrationProduct.priceInMinorUnits,
 									registrationProduct.currency,
 									getLocale()
