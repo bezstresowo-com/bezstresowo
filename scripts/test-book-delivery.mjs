@@ -25,18 +25,45 @@ js = js.replace(
  export { env as testEnv, fixture };`
 );
 const book = await import(`data:text/javascript;base64,${Buffer.from(js).toString('base64')}`);
-const id = 'cs_test_example123';
-const token = book.bookToken(id, 2000);
-assert.equal(book.verifyBookToken(token, 1000), id);
-assert.equal(book.verifyBookToken(token, 2000), null);
-assert.equal(book.verifyBookToken(token.replace('example', 'other') + 'x', 1000), null);
-assert.equal(book.verifyBookToken(token.split('.')[0] + '.AAAA', 1000), null);
-assert.equal(book.verifyBookToken('malformed', 1000), null);
-assert.equal(
-	book.verifyBookToken(book.bookToken('cs_test_other456', 2000), 1000),
-	'cs_test_other456'
+const counterSource = await readFile('src/shared/server/services/book-download-counter.ts', 'utf8');
+const counterJs = ts
+	.transpileModule(counterSource, {
+		compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ES2022 }
+	})
+	.outputText.replace(
+		/import \{ MAX_BOOK_DOWNLOADS \} from ['"].*?['"];?/,
+		'const MAX_BOOK_DOWNLOADS = 3;'
+	);
+const counter = await import(
+	`data:text/javascript;base64,${Buffer.from(counterJs).toString('base64')}`
 );
-assert.equal(book.verifyBookToken(book.bookToken('bad-id', 2000), 1000), null);
+let downloadCount = 0;
+const store = {
+	async updateMany({ where, data }) {
+		assert.equal(where.id, 'paid-order');
+		assert.equal(where.downloads.lt, 3);
+		assert.equal(data.downloads.increment, 1);
+		if (downloadCount >= where.downloads.lt) return { count: 0 };
+		downloadCount += data.downloads.increment;
+		return { count: 1 };
+	}
+};
+assert.equal(downloadCount, 0); // GET/page reads do not call the counter
+const claims = await Promise.all(
+	Array.from({ length: 10 }, () => counter.consumeBookDownload(store, 'paid-order'))
+);
+assert.equal(claims.filter(Boolean).length, 3);
+assert.equal(downloadCount, 3);
+assert.equal(await counter.consumeBookDownload(store, 'paid-order'), false);
+const id = 'cs_test_example123';
+const token = book.bookToken(id);
+assert.equal(book.verifyBookToken(token), id);
+assert.equal(book.verifyBookToken(token), id); // no time-based expiry
+assert.equal(book.verifyBookToken(token.replace('example', 'other') + 'x'), null);
+assert.equal(book.verifyBookToken(token.split('.')[0] + '.AAAA'), null);
+assert.equal(book.verifyBookToken('malformed'), null);
+assert.equal(book.verifyBookToken(book.bookToken('cs_test_other456')), 'cs_test_other456');
+assert.equal(book.verifyBookToken(book.bookToken('bad-id')), null);
 assert.equal(book.bookSalesReady(), false);
 Object.assign(book.testEnv, {
 	BOOK_SALES_ENABLED: 'true',
@@ -67,5 +94,5 @@ book.fixture.publicAccess.BlockPublicPolicy = true;
 book.fixture.bytes = Buffer.from('not a PDF');
 await assert.rejects(book.readPrivateBook(), /must be a PDF/);
 console.log(
-	'Book delivery: token, expiry, unpaid/wrong-product access, activation, private storage and PDF validation passed.'
+	'Book delivery: token, no-expiry, unpaid/wrong-product access, activation, private storage and PDF validation passed.'
 );

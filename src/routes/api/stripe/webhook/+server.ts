@@ -54,6 +54,11 @@ export async function POST({ request }) {
 				if (!email || !origin || !/^https:\/\//.test(origin))
 					throw new Error('Missing book delivery details');
 				await readPrivateBook();
+				await prisma.bookDownload.upsert({
+					where: { id: session.id },
+					create: { id: session.id },
+					update: {}
+				});
 				await new EmailService().bookDeliveryMessage(email, downloadLink(session.id, origin));
 				await prisma.processedStripeEvent.create({ data: { eventId: marker } });
 				return text('OK');

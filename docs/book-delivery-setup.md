@@ -17,7 +17,9 @@ The book checkout and download routes are staged in the preview branch. Existing
 - Price is fixed server-side at PLN 49.00, quantity one. Client input cannot change the product or amount.
 - Checkout checks that storage blocks public access and that the object is a PDF before creating a payment session.
 - Delivery runs on verified webhook events and rechecks the actual Stripe session for payment, product, currency and amount.
-- Emails contain a signed download link valid for 30 days. Downloads recheck the paid session, never reveal the S3 URL, and use `private, no-store` response headers.
+- Emails contain a signed link with no expiry, allowing three download attempts. Downloads recheck the paid session, never reveal the S3 URL, and use `private, no-store` response headers.
+- Run `prisma generate` and deploy the `BookDownload` schema before activation. The counter uses the checkout session id as its Mongo `_id`; retries do not reset it.
+- GET requests only display the download page. A same-origin form POST atomically increments the counter, preventing four parallel requests from exceeding three successful claims. A network failure after the claim can consume an attempt.
 - Downloads are ordinary PDF copies, without a personalized watermark at this stage. They can be saved/printed/shared.
 - The success page never claims payment confirmation on its own.
 - Email failures return HTTP 500 for Stripe retry. Successful book delivery is recorded by checkout-session id to suppress sequential duplicate events. Concurrent retries can still duplicate an email; they do not duplicate a charge or expose unpaid content. Before high-volume launch, add a durable delivery queue with lease-based concurrency handling.
@@ -25,4 +27,4 @@ The book checkout and download routes are staged in the preview branch. Existing
 
 ## End-to-end launch checks
 
-Test successful payment and delivery, failed/unpaid checkout, tampered/expired download tokens, duplicate webhooks, delayed successful payments, absent/private-file misconfiguration, mail failure/retry and existing consultation checkout. Inspect the actual delivered PDF on a phone and desktop. No production purchase was performed by the agent.
+Test successful payment and delivery, failed/unpaid checkout, tampered download tokens and the three-download limit, duplicate webhooks, delayed successful payments, absent/private-file misconfiguration, mail failure/retry and existing consultation checkout. Inspect the actual delivered PDF on a phone and desktop. No production purchase was performed by the agent.

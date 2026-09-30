@@ -1,0 +1,6 @@
+/// One durable counter per paid checkout. Opening the email/page never changes it.
+model BookDownload {
+  id String @id @map("_id")
+  downloads Int @default(0)
+  createdAt DateTime @default(now())
+}

@@ -7,7 +7,7 @@ import type Stripe from 'stripe';
 export const BOOK_SLUG = 'koly-tryvoha-atakuie-ua';
 export const BOOK_NAME = 'Коли тривога атакує';
 export const BOOK_PRICE = 4900;
-const TOKEN_LIFETIME = 30 * 24 * 60 * 60;
+export const MAX_BOOK_DOWNLOADS = 3;
 
 export function bookSalesReady() {
 	return (
@@ -61,15 +61,13 @@ function signingKey() {
 	return key;
 }
 
-export function bookToken(sessionId: string, expires: number) {
-	const payload = Buffer.from(JSON.stringify({ sessionId, expires, book: BOOK_SLUG })).toString(
-		'base64url'
-	);
+export function bookToken(sessionId: string) {
+	const payload = Buffer.from(JSON.stringify({ sessionId, book: BOOK_SLUG })).toString('base64url');
 	const signature = createHmac('sha256', signingKey()).update(payload).digest('base64url');
 	return `${payload}.${signature}`;
 }
 
-export function verifyBookToken(token: string, now = Math.floor(Date.now() / 1000)): string | null {
+export function verifyBookToken(token: string): string | null {
 	if (token.length > 2048) return null;
 	const parts = token.split('.');
 	if (parts.length !== 2) return null;
@@ -82,9 +80,7 @@ export function verifyBookToken(token: string, now = Math.floor(Date.now() / 100
 		if (
 			data.book !== BOOK_SLUG ||
 			typeof data.sessionId !== 'string' ||
-			!/^cs_(test|live)_[A-Za-z0-9]+$/.test(data.sessionId) ||
-			!Number.isSafeInteger(data.expires) ||
-			data.expires <= now
+			!/^cs_(test|live)_[A-Za-z0-9]+$/.test(data.sessionId)
 		)
 			return null;
 		return data.sessionId;
@@ -104,13 +100,6 @@ export function isPaidBook(session: Stripe.Checkout.Session) {
 	);
 }
 
-export function downloadLink(
-	sessionId: string,
-	origin: string,
-	now = Math.floor(Date.now() / 1000)
-) {
-	return new URL(
-		`/api/books/download?token=${bookToken(sessionId, now + TOKEN_LIFETIME)}`,
-		origin
-	).toString();
+export function downloadLink(sessionId: string, origin: string) {
+	return new URL(`/uk/book-download?token=${bookToken(sessionId)}`, origin).toString();
 }
