@@ -11,7 +11,7 @@
 	title={copy.seo.title}
 	description={copy.seo.description}
 	noindex
-	alternates={[{ locale: Locale.plPL, path: '/kryzys-czy-koniec' }]}
+	alternates={[{ locale: Locale.ukUA, path: '/kryza-chy-kinets' }, { locale: Locale.plPL, path: '/kryzys-czy-koniec' }]}
 />
 
 <div class="landing">
