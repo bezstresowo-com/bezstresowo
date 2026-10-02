@@ -17,8 +17,18 @@ import type {
 export class EmailService {
 	private readonly _transport;
 
-	async bookDeliveryMessage(email: string, downloadUrl: string) {
+	async bookDeliveryMessage(email: string, downloadUrl: string, lang: string = 'uk') {
 		const safeUrl = downloadUrl.replace(/&/g, '&amp;').replace(/"/g, '&quot;');
+		if (lang === 'pl') {
+			await this._transport.sendMail({
+				from: EMAIL_SENDER,
+				to: email,
+				subject: `${EMAIL_SUBJECT_PREFIX} Twoja książka „Kiedy lęk atakuje”`,
+				text: `Dziękuję za zakup!\n\nPobierz książkę „Kiedy lęk atakuje”: ${downloadUrl}\n\nLink nie ma terminu ważności i pozwala na trzy pobrania. Zapisz PDF na swoim urządzeniu. Z pobranej książki możesz korzystać bez ograniczenia czasu. Jeśli potrzebujesz pomocy, napisz na bezstresowo.org@gmail.com.\n\nOlesya Haiduk · Bezstresowo`,
+				html: `<div lang="pl" style="background:#F3F0E7;padding:32px;font:16px/1.6 Arial,sans-serif;color:#22344E"><p>BEZSTRESOWO</p><h1>Twoja książka już tu jest</h1><p>Dziękuję za zakup książki „Kiedy lęk atakuje”!</p><p>Pobierz PDF i zapisz go na telefonie, tablecie lub komputerze. Możesz czytać we własnym tempie i drukować strony z ćwiczeniami.</p><p><a href="${safeUrl}" style="display:inline-block;background:#22344E;color:white;padding:14px 24px;text-decoration:none;border-radius:8px">Pobierz książkę</a></p><p>Link nie ma terminu ważności. Pozwala na trzy pobrania, na przykład na telefon i komputer. Samo otwarcie wiadomości lub strony nie zużywa pobrania.</p><p>Jeśli potrzebujesz pomocy lub nowego linku, napisz na <a href="mailto:bezstresowo.org@gmail.com">bezstresowo.org@gmail.com</a>.</p><p>Olesya Haiduk<br>Psychoterapeutka · Bezstresowo</p><p style="font-size:12px">Ta wiadomość dotyczy Twojego zamówienia. Zakup nie zapisuje Cię na newsletter.</p></div>`
+			});
+			return;
+		}
 		await this._transport.sendMail({
 			from: EMAIL_SENDER,
 			to: email,

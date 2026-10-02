@@ -28,8 +28,8 @@
 
 		<div class="workbook-preview">
 			<img
-				src="/assets/kryza-chy-kinets-workbook-cover.webp"
-				alt="Обкладинка робочого зошита «Криза чи кінець?»"
+				src="/assets/kryzys-czy-koniec-workbook-cover.webp"
+				alt="Okładka zeszytu ćwiczeń „Kryzys czy koniec?”"
 				width="909"
 				height="1287"
 			/>
@@ -139,7 +139,7 @@
 		<img
 			class="author-photo"
 			src="/assets/about-me.jpg"
-			alt="Олеся Гайдук"
+			alt="Olesya Haiduk"
 			width="528"
 			height="500"
 			loading="lazy"
@@ -161,8 +161,11 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<a class="cta primary" href="https://bezstresowo.sendpulse.courses/kryza-chy-kinets"
-				>{copy.purchase.button}</a
+			<a
+				class="cta primary"
+				href="#purchase"
+				aria-disabled="true"
+				onclick={(event) => event.preventDefault()}>Wkrótce dostępny</a
 			>
 			<small>{copy.purchase.note}</small>
 		</div>
