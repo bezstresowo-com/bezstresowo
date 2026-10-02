@@ -3,7 +3,12 @@ import { STRIPE_SK, STRIPE_WHSEC } from '$env/static/private';
 import { toLocale } from '$i18n';
 import type { StripeSessionMetadata } from '$remote/dto/stripe-metadata';
 import { HttpStatus } from '$shared/global/enums/http-status';
-import { downloadLink, isPaidBook, readPrivateBook } from '$shared/server/services/book-delivery';
+import {
+	downloadLink,
+	isPaidBook,
+	readPrivateBook,
+	resolveBook
+} from '$shared/server/services/book-delivery';
 import { EmailService } from '$shared/server/services/email/email-service';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { json, text } from '@sveltejs/kit';
@@ -57,7 +62,8 @@ export async function POST({ request }) {
 		if (incoming.metadata?.type === 'book') {
 			try {
 				const session = await stripe.checkout.sessions.retrieve(incoming.id);
-				if (!isPaidBook(session)) return text('OK');
+				const book = resolveBook(session.metadata?.book);
+				if (!book || !isPaidBook(session, book)) return text('OK');
 				const marker = `book:${session.id}`;
 				if (await prisma.processedStripeEvent.findUnique({ where: { eventId: marker } }))
 					return text('OK');
@@ -65,13 +71,17 @@ export async function POST({ request }) {
 				const origin = session.metadata?.deliveryOrigin;
 				if (!email || !origin || !/^https:\/\//.test(origin))
 					throw new Error('Missing book delivery details');
-				await readPrivateBook();
+				await readPrivateBook(book);
 				await prisma.bookDownload.upsert({
 					where: { id: session.id },
 					create: { id: session.id },
 					update: {}
 				});
-				await new EmailService().bookDeliveryMessage(email, downloadLink(session.id, origin));
+				await new EmailService().bookDeliveryMessage(
+					email,
+					downloadLink(session.id, origin, book),
+					book.lang
+				);
 				await prisma.processedStripeEvent.create({ data: { eventId: marker } });
 				return text('OK');
 			} catch (cause) {

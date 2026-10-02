@@ -53,6 +53,21 @@
 					</div>
 				</article>
 			{/if}
+			{#if !isUkrainian}<article
+					class="flex flex-col rounded-3xl border border-primary/10 bg-white p-7 shadow-md"
+				>
+					<p class="text-sm font-semibold text-accent">Przewodnik i karta · PDF</p>
+					<h3 class="mt-4 font-serif text-3xl text-primary">Kiedy myśli nie dają spokoju</h3>
+					<p class="mt-4 flex-1 leading-relaxed text-slate-600">
+						Krótki materiał z przykładem i ćwiczeniem oraz karta, którą możesz zapisać w telefonie
+						lub wydrukować.
+					</p>
+					<a
+						href="/pl/materials/kiedy-mysli-nie-daja-spokoju"
+						class="mt-6 rounded-xl bg-accent px-5 py-3 text-center font-semibold text-primary"
+						>Zobacz materiały</a
+					>
+				</article>{/if}
 		</div>
 
 		{#if isUkrainian}
@@ -133,5 +148,63 @@
 				</article>
 			</div>
 		{/if}
+		{#if !isUkrainian}<h2
+				class="mt-16 text-center font-serif text-3xl font-semibold text-primary sm:text-4xl"
+			>
+				Książki i programy
+			</h2>
+			<div class="mt-6 grid gap-6 md:grid-cols-2">
+				<article class="flex flex-col overflow-hidden rounded-2xl border border-accent/40 bg-white">
+					<div class="flex h-96 items-center justify-center bg-background p-6">
+						<img
+							src="/assets/kiedy-lek-atakuje-cover-pl.webp"
+							alt="Kiedy lęk atakuje — okładka książki"
+							class="h-full w-auto max-w-full object-contain shadow-lg"
+							width="893"
+							height="1263"
+							loading="lazy"
+						/>
+					</div>
+					<div class="p-7">
+						<p class="text-sm text-primary/70">Książka · PDF · 49 zł</p>
+						<h3 class="mt-3 font-serif text-3xl text-primary">
+							<a href="/pl/materials/kiedy-lek-atakuje">Kiedy lęk atakuje</a>
+						</h3>
+						<p class="mt-4 leading-relaxed text-slate-600">
+							21 ćwiczeń, wyjaśnienia i miejsce na notatki. 75 stron do pracy we własnym tempie.
+						</p>
+						<a
+							href="/pl/materials/kiedy-lek-atakuje"
+							class="mt-6 block rounded-xl bg-primary px-5 py-3 text-center font-semibold text-white"
+							>Zobacz książkę</a
+						>
+					</div>
+				</article>
+				<article class="flex flex-col overflow-hidden rounded-2xl border border-accent/40 bg-white">
+					<div class="flex h-96 items-center justify-center bg-background p-6">
+						<img
+							src="/assets/kryzys-czy-koniec-workbook-cover.webp"
+							alt="Kryzys czy koniec — okładka zeszytu ćwiczeń"
+							class="h-full w-auto max-w-full object-contain shadow-lg"
+							width="900"
+							height="1270"
+							loading="lazy"
+						/>
+					</div>
+					<div class="p-7">
+						<p class="text-sm text-primary/70">Program · 79 zł</p>
+						<h3 class="mt-3 font-serif text-3xl text-primary">Kryzys czy koniec?</h3>
+						<p class="mt-4 leading-relaxed text-slate-600">
+							7 modułów, zeszyt ćwiczeń i nagrania audio. Uporządkuj to, co dzieje się w Twojej
+							relacji, bez presji na natychmiastową decyzję.
+						</p>
+						<a
+							href="/pl/kryzys-czy-koniec"
+							class="mt-6 block rounded-xl bg-primary px-5 py-3 text-center font-semibold text-white"
+							>Zobacz program</a
+						>
+					</div>
+				</article>
+			</div>{/if}
 	</div>
 </section>
