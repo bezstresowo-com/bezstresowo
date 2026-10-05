@@ -5,6 +5,7 @@
 	let { data } = $props();
 	let buying = $state(false);
 	let checkoutError = $state('');
+	let promoCode = $state('');
 	async function buyBook() {
 		if (buying) return;
 		buying = true;
@@ -12,9 +13,18 @@
 		try {
 			const response = await fetch(
 				isUkrainian ? '/api/books/checkout' : '/api/books/checkout?book=kiedy-lek-atakuje-pl',
-				{ method: 'POST' }
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({ promoCode: promoCode.trim() })
+				}
 			);
 			const result = await response.json();
+			if (response.status === 400 && result.message) {
+				checkoutError = result.message;
+				buying = false;
+				return;
+			}
 			if (!response.ok || !result.url) throw new Error('Checkout unavailable');
 			window.location.assign(result.url);
 		} catch {
@@ -114,6 +124,29 @@
 							: '75 stron · książka elektroniczna PDF'}</span
 					>
 				</div>
+				{#if data.bookSalesReady}
+					<details class="mt-5 max-w-sm text-sm">
+						<summary class="cursor-pointer font-semibold underline underline-offset-4">
+							{isUkrainian ? 'Маєш промокод?' : 'Masz kod promocyjny?'}
+						</summary>
+						<label for="book-promo-code" class="mt-3 block font-semibold">
+							{isUkrainian ? 'Промокод' : 'Kod promocyjny'}
+						</label>
+						<input
+							id="book-promo-code"
+							bind:value={promoCode}
+							maxlength="64"
+							autocomplete="off"
+							disabled={buying}
+							class="mt-2 w-full rounded-lg border border-primary/25 bg-white px-4 py-3 text-base"
+						/>
+						<p class="mt-2 text-slate-500">
+							{isUkrainian
+								? 'Знижка з’явиться на сторінці оплати. Перевір кінцеву суму перед платежем.'
+								: 'Rabat pojawi się na stronie płatności. Sprawdź końcową kwotę przed zapłaceniem.'}
+						</p>
+					</details>
+				{/if}
 				<button
 					type="button"
 					disabled={!data.bookSalesReady || buying}
@@ -124,8 +157,12 @@
 							? 'Відкриваю оплату…'
 							: 'Otwieram płatność…'
 						: isUkrainian
-							? 'Купити книгу за 49 zł'
-							: 'Kup książkę za 49 zł'}</button
+							? promoCode.trim()
+								? 'Перейти до оплати з промокодом'
+								: 'Купити книгу за 49 zł'
+							: promoCode.trim()
+								? 'Przejdź do płatności z kodem'
+								: 'Kup książkę za 49 zł'}</button
 				>
 				<p class="mt-3 text-sm text-slate-500">
 					{data.bookSalesReady
@@ -309,8 +346,8 @@
 					</h3>
 					<p class="mt-2 text-slate-600">
 						{isUkrainian
-							? 'Так. Якщо маєш дійсний код, введи його на сторінці оплати та перевір кінцеву суму перед платежем.'
-							: 'Tak. Jeśli masz ważny kod, wpisz go na stronie płatności i sprawdź końcową kwotę przed zapłaceniem.'}
+							? 'Так. Відкрий поле «Маєш промокод?» біля кнопки покупки й введи код. Знижка з’явиться на сторінці оплати. Перевір кінцеву суму перед платежем.'
+							: 'Tak. Otwórz pole „Masz kod promocyjny?” przy przycisku zakupu i wpisz kod. Rabat pojawi się na stronie płatności. Sprawdź końcową kwotę przed zapłaceniem.'}
 					</p>
 				</div>
 			</div>
