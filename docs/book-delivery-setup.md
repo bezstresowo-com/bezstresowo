@@ -1,5 +1,14 @@
 # Book delivery activation
 
+## Polish edition
+
+- Approved customer filename: `Kiedy-lek-atakuje.pdf` (75 pages); price: 49 PLN.
+- Upload the final Polish PDF to the existing private books bucket as `pl/Kiedy-lek-atakuje.pdf`. Never replace the Ukrainian object.
+- Set `BOOK_PL_OBJECT_KEY=pl/Kiedy-lek-atakuje.pdf` for the preview environment; leave `BOOK_PL_SALES_ENABLED=false` until that object is present and private storage access has been verified.
+- The Polish checkout uses `kiedy-lek-atakuje-pl` metadata, Polish Stripe locale, Polish success/download pages and the Polish book email. The email is sent by the website's existing Gmail transport, not SendPulse course notifications.
+- Test the paid flow in the preview with a discount before enabling production. The Polish and Ukrainian activation flags are independent. Keep the download signing secret unchanged.
+- Publish the website changes and enable `BOOK_PL_SALES_ENABLED=true` in production only after the preview is approved and a paid Polish delivery test succeeds.
+
 The book checkout and download routes are staged in the preview branch. Existing shop and consultation checkouts are unchanged. No paid PDF is committed to the public repository.
 
 ## Required production configuration

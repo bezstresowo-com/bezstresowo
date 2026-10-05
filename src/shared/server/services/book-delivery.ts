@@ -9,12 +9,49 @@ export const BOOK_NAME = 'Коли тривога атакує';
 export const BOOK_PRICE = 4900;
 export const MAX_BOOK_DOWNLOADS = 3;
 
-export function bookSalesReady() {
+export const BOOKS = {
+	'koly-tryvoha-atakuie-ua': {
+		slug: BOOK_SLUG,
+		name: BOOK_NAME,
+		lang: 'uk',
+		objectKeyEnv: 'BOOK_UA_OBJECT_KEY',
+		enabledEnv: 'BOOK_SALES_ENABLED',
+		path: '/uk/materials/koly-tryvoha-atakuie',
+		filename: 'Коли тривога атакує.pdf',
+		fallbackFilename: 'Koly-tryvoha-atakuie.pdf'
+	},
+	'kiedy-lek-atakuje-pl': {
+		slug: 'kiedy-lek-atakuje-pl',
+		name: 'Kiedy lęk atakuje',
+		lang: 'pl',
+		objectKeyEnv: 'BOOK_PL_OBJECT_KEY',
+		enabledEnv: 'BOOK_PL_SALES_ENABLED',
+		path: '/pl/materials/kiedy-lek-atakuje',
+		filename: 'Kiedy-lek-atakuje.pdf',
+		fallbackFilename: 'Kiedy-lek-atakuje.pdf'
+	}
+} as const;
+export type Book = (typeof BOOKS)[keyof typeof BOOKS];
+export function resolveBook(slug: string | undefined | null): Book | null {
+	return Object.prototype.hasOwnProperty.call(BOOKS, slug ?? '')
+		? BOOKS[slug as keyof typeof BOOKS]
+		: null;
+}
+export function tokenBook(token: string): Book | null {
+	if (!verifyBookToken(token)) return null;
+	try {
+		return resolveBook(JSON.parse(Buffer.from(token.split('.')[0], 'base64url').toString()).book);
+	} catch {
+		return null;
+	}
+}
+
+export function bookSalesReady(book: Book = BOOKS[BOOK_SLUG]) {
 	return (
-		env.BOOK_SALES_ENABLED === 'true' &&
+		env[book.enabledEnv] === 'true' &&
 		Boolean(
 			env.AWS_BOOKS_BUCKET_NAME &&
-				env.BOOK_UA_OBJECT_KEY &&
+				env[book.objectKeyEnv] &&
 				env.BOOK_DOWNLOAD_SECRET &&
 				env.BOOK_DOWNLOAD_SECRET.length >= 32
 		)
@@ -30,8 +67,8 @@ function storage() {
 }
 
 /** A separate bucket prevents the existing public media cleanup from touching books. */
-export async function readPrivateBook() {
-	if (!env.AWS_BOOKS_BUCKET_NAME || !env.BOOK_UA_OBJECT_KEY)
+export async function readPrivateBook(book: Book = BOOKS[BOOK_SLUG]) {
+	if (!env.AWS_BOOKS_BUCKET_NAME || !env[book.objectKeyEnv])
 		throw new Error('Book storage is not configured');
 	const client = storage();
 	const { PublicAccessBlockConfiguration: access } = await client.send(
@@ -45,7 +82,7 @@ export async function readPrivateBook() {
 	)
 		throw new Error('Book bucket must block all public access');
 	const object = await client.send(
-		new GetObjectCommand({ Bucket: env.AWS_BOOKS_BUCKET_NAME, Key: env.BOOK_UA_OBJECT_KEY })
+		new GetObjectCommand({ Bucket: env.AWS_BOOKS_BUCKET_NAME, Key: env[book.objectKeyEnv] })
 	);
 	if (!object.Body || (object.ContentLength ?? 0) > 25 * 1024 * 1024)
 		throw new Error('Invalid book object');
@@ -61,8 +98,8 @@ function signingKey() {
 	return key;
 }
 
-export function bookToken(sessionId: string) {
-	const payload = Buffer.from(JSON.stringify({ sessionId, book: BOOK_SLUG })).toString('base64url');
+export function bookToken(sessionId: string, book: Book = BOOKS[BOOK_SLUG]) {
+	const payload = Buffer.from(JSON.stringify({ sessionId, book: book.slug })).toString('base64url');
 	const signature = createHmac('sha256', signingKey()).update(payload).digest('base64url');
 	return `${payload}.${signature}`;
 }
@@ -78,7 +115,7 @@ export function verifyBookToken(token: string): string | null {
 	try {
 		const data = JSON.parse(Buffer.from(payload, 'base64url').toString());
 		if (
-			data.book !== BOOK_SLUG ||
+			!resolveBook(data.book) ||
 			typeof data.sessionId !== 'string' ||
 			!/^cs_(test|live)_[A-Za-z0-9]+$/.test(data.sessionId)
 		)
@@ -89,13 +126,20 @@ export function verifyBookToken(token: string): string | null {
 	}
 }
 
-export function isPaidBook(session: Stripe.Checkout.Session) {
+export function isPaidBook(session: Stripe.Checkout.Session, expectedBook?: Book) {
+	const book = resolveBook(session.metadata?.book);
+	if (
+		!book ||
+		(expectedBook && expectedBook.slug !== book.slug) ||
+		(session.metadata?.lang && session.metadata.lang !== book.lang)
+	)
+		return false;
 	const discount = session.total_details?.amount_discount ?? 0;
 	return (
 		session.mode === 'payment' &&
 		session.payment_status === 'paid' &&
 		session.metadata?.type === 'book' &&
-		session.metadata?.book === BOOK_SLUG &&
+		session.metadata?.book === book.slug &&
 		session.currency === 'pln' &&
 		session.amount_subtotal === BOOK_PRICE &&
 		Number.isInteger(discount) &&
@@ -107,6 +151,9 @@ export function isPaidBook(session: Stripe.Checkout.Session) {
 	);
 }
 
-export function downloadLink(sessionId: string, origin: string) {
-	return new URL(`/uk/book-download?token=${bookToken(sessionId)}`, origin).toString();
+export function downloadLink(sessionId: string, origin: string, book: Book = BOOKS[BOOK_SLUG]) {
+	return new URL(
+		`/${book.lang}/book-download?token=${bookToken(sessionId, book)}`,
+		origin
+	).toString();
 }

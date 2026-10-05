@@ -7,9 +7,9 @@
 </script>
 
 <article
-	class="flex h-full max-w-md flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+	class="flex h-full flex-col overflow-hidden rounded-3xl border border-primary/10 bg-white shadow-md transition duration-300 hover:-translate-y-1 hover:shadow-xl"
 >
-	<div class="relative overflow-hidden bg-primary px-6 py-7 text-white">
+	<div class="relative h-52 overflow-hidden bg-primary px-6 py-7 text-white">
 		<div
 			class="pointer-events-none absolute -top-20 -right-16 size-48 rounded-full bg-accent/25 blur-2xl"
 		></div>
@@ -31,9 +31,9 @@
 
 	<div class="flex flex-1 flex-col p-6">
 		<p class="text-sm font-semibold text-accent">{t.user.pages.materials.guide.eyebrow}</p>
-		<h2 class="mt-3 text-xl leading-snug font-bold text-primary sm:text-2xl">
+		<h3 class="mt-3 text-xl leading-snug font-bold text-primary sm:text-2xl">
 			{t.user.pages.materials.guide.title}
-		</h2>
+		</h3>
 		<p class="mt-3 flex-1 leading-relaxed text-slate-600">
 			{t.user.pages.materials.guide.description}
 		</p>

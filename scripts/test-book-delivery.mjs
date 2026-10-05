@@ -106,6 +106,43 @@ for (const change of [
 ])
 	assert.equal(book.isPaidBook({ ...paid, ...change }), false);
 assert.equal((await book.readPrivateBook()).toString(), '%PDF-test');
+const polish = book.resolveBook('kiedy-lek-atakuje-pl');
+assert.equal(book.resolveBook('unknown'), null);
+assert.equal(book.bookSalesReady(polish), false);
+Object.assign(book.testEnv, { BOOK_PL_OBJECT_KEY: 'pl/book.pdf', BOOK_PL_SALES_ENABLED: 'true' });
+assert.equal(book.bookSalesReady(polish), true);
+book.testEnv.BOOK_SALES_ENABLED = 'false';
+assert.equal(book.bookSalesReady(), false);
+assert.equal(book.bookSalesReady(polish), true);
+book.testEnv.BOOK_SALES_ENABLED = 'true';
+const plToken = book.bookToken(id, polish);
+assert.equal(book.tokenBook(plToken).slug, polish.slug);
+assert.equal(book.tokenBook(token).lang, 'uk');
+assert.equal(book.tokenBook(plToken + 'x'), null);
+const plPaid = { ...paid, metadata: { type: 'book', book: polish.slug, lang: 'pl' } };
+assert.equal(book.isPaidBook(plPaid, polish), true);
+assert.equal(book.isPaidBook(paid, polish), false);
+assert.equal(book.isPaidBook(plPaid, book.resolveBook(book.BOOK_SLUG)), false);
+assert.equal(
+	book.isPaidBook({ ...plPaid, metadata: { ...plPaid.metadata, lang: 'uk' } }, polish),
+	false
+);
+assert.equal(
+	book.isPaidBook(
+		{ ...plPaid, amount_total: 100, total_details: { amount_discount: 4800 } },
+		polish
+	),
+	true
+);
+assert.equal(
+	book.isPaidBook(
+		{ ...plPaid, amount_total: 200, total_details: { amount_discount: 4700 } },
+		polish
+	),
+	true
+);
+assert.match(book.downloadLink(id, 'https://example.com', polish), /\/pl\/book-download\?token=/);
+assert.equal((await book.readPrivateBook(polish)).toString(), '%PDF-test');
 book.fixture.publicAccess.BlockPublicPolicy = false;
 await assert.rejects(book.readPrivateBook(), /block all public access/);
 book.fixture.publicAccess.BlockPublicPolicy = true;
