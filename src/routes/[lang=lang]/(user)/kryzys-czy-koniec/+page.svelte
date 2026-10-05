@@ -163,10 +163,9 @@
 			<strong>{copy.purchase.price}</strong>
 			<a
 				class="cta primary"
-				href="#purchase"
-				aria-disabled="true"
-				onclick={(event) => event.preventDefault()}>Wkrótce dostępny</a
+				href="https://bezstresowo.sendpulse.courses/kryzys-czy-koniec">{copy.purchase.button}</a
 			>
+			<small>Kod promocyjny możesz wpisać w formularzu zakupu w SendPulse.</small>
 			<small>{copy.purchase.note}</small>
 		</div>
 	</section>
