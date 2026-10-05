@@ -1,3 +1,4 @@
+import { env } from '$env/dynamic/private';
 import { STRIPE_SK } from '$env/static/private';
 import { createRateLimiter } from '$shared/server/functions/rate-limit';
 import {
@@ -33,10 +34,21 @@ export async function POST({ request, url, getClientAddress }) {
 		);
 	}
 	const stripe = new Stripe(STRIPE_SK, { apiVersion: '2025-11-17.clover' as never });
+	// A single-use live discount for the owner's Polish delivery test only.
+	// Production always keeps the ordinary promotion-code entry field.
+	const previewTest = env.VERCEL_ENV === 'preview' && pl;
+	let previewPromotionId: string | undefined;
+	if (previewTest) {
+		const codes = await stripe.promotionCodes.list({ code: 'KSIAZKAPL2', active: true, limit: 1 });
+		previewPromotionId = codes.data[0]?.id;
+		if (!previewPromotionId) error(503, 'Jednorazowy kod testowy jest już niedostępny.');
+	}
 	const session = await stripe.checkout.sessions.create({
 		mode: 'payment',
 		locale: pl ? 'pl' : 'auto',
-		allow_promotion_codes: true,
+		...(previewPromotionId
+			? { discounts: [{ promotion_code: previewPromotionId }] }
+			: { allow_promotion_codes: true }),
 		adaptive_pricing: { enabled: false },
 		line_items: [
 			{
