@@ -4,7 +4,7 @@ import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ params }) => {
 	if (params.lang !== 'uk') {
-		redirect(307, '/pl/materials');
+		redirect(307, '/pl/kryzys-czy-koniec');
 	}
 
 	return {};
