@@ -9,7 +9,11 @@
 			? '/documents/koly-dumky-ne-daiut-spokoiu-ua.pdf'
 			: '/downloads/Kiedy-mysli-nie-daja-spokoju.pdf'
 	);
-	const card = '/documents/moia-korotka-opora-pry-tryvozi-ua.pdf';
+	const card = $derived(
+		isUkrainian
+			? '/documents/moia-korotka-opora-pry-tryvozi-ua.pdf'
+			: '/downloads/Moja-karta-wsparcia-przy-leku.pdf'
+	);
 	const book = $derived(
 		isUkrainian ? '/uk/materials/koly-tryvoha-atakuie' : '/pl/materials/kiedy-lek-atakuje'
 	);
@@ -135,21 +139,15 @@
 							? 'Картка з трьома запитаннями: що я помічаю, що відбувається насправді й що мені потрібно зараз. Збережи в телефоні або роздрукуй.'
 							: 'Karta z trzema pytaniami: co zauważam, co naprawdę się dzieje i czego teraz potrzebuję. Możesz zapisać ją w telefonie lub wydrukować.'}
 					</p>
-					{#if isUkrainian}
-						<a
-							href={card}
-							download
-							class="mt-7 inline-flex min-h-12 items-center justify-center rounded-xl border border-primary px-6 py-3 font-bold text-primary hover:bg-primary hover:text-white"
-							>{isUkrainian ? 'Завантажити картку' : 'Pobierz kartę'}<span
-								class="ml-3"
-								aria-hidden="true">↓</span
-							></a
-						>
-					{:else}<button
-							disabled
-							class="mt-7 min-h-12 rounded-xl border border-primary/30 px-6 py-3 font-bold text-primary/50"
-							>Pobieranie karty w przygotowaniu</button
-						>{/if}
+					<a
+						href={card}
+						download
+						class="mt-7 inline-flex min-h-12 items-center justify-center rounded-xl border border-primary px-6 py-3 font-bold text-primary hover:bg-primary hover:text-white"
+						>{isUkrainian ? 'Завантажити картку' : 'Pobierz kartę'}<span
+							class="ml-3"
+							aria-hidden="true">↓</span
+						></a
+					>
 				</article>
 			</div>
 		</div>
