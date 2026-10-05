@@ -21,8 +21,6 @@ const config = {
 		// Note: adapter-auto accepts no options - for per-function control
 		// (runtime, split) switch to an explicit `@sveltejs/adapter-vercel`.
 		adapter: adapter(),
-		// Avoid a separate render-blocking CSS request on first visits.
-		inlineStyleThreshold: 200_000,
 		experimental: {
 			// `*.remote.ts` files replace the old `/api` + `fetch-methods` pairs
 			remoteFunctions: true

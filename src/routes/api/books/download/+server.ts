@@ -23,11 +23,12 @@ export async function POST({ request, url, getClientAddress }) {
 	if (request.headers.get('origin') !== url.origin) error(403, 'Forbidden');
 	if (Number(request.headers.get('content-length') ?? 0) > 4096) error(413, 'Payload too large');
 	const form = await request.formData();
-	if (!limiter.consume(getClientAddress())) error(429, 'Спробуй ще раз за хвилину.');
 	const token = String(form.get('token') ?? '');
 	const book = tokenBook(token);
 	const sessionId = verifyBookToken(token);
 	const pl = book?.lang === 'pl';
+	if (!limiter.consume(getClientAddress()))
+		error(429, pl ? 'Spróbuj ponownie za minutę.' : 'Спробуй ще раз за хвилину.');
 	if (!sessionId || !book)
 		error(
 			403,
