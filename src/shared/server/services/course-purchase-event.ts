@@ -7,7 +7,7 @@ export function validWebhookSecret(actual: string | null, expected: string | und
 	return a.length === b.length && timingSafeEqual(a, b);
 }
 
-export function coursePurchaseEvent(payload: unknown, descriptions: string[], now = Date.now()) {
+export function coursePurchaseOrder(payload: unknown, descriptions: string[], now = Date.now()) {
 	if (!payload || typeof payload !== 'object') return null;
 	const p = payload as Record<string, unknown>;
 	const o = p.order as Record<string, unknown> | undefined;
@@ -16,7 +16,6 @@ export function coursePurchaseEvent(payload: unknown, descriptions: string[], no
 		!o ||
 		o.status !== 200 ||
 		o.service !== 200 ||
-		o.paymentMethodType !== 6 ||
 		o.type !== 1 ||
 		typeof o.description !== 'string' ||
 		!descriptions.includes(o.description) ||
@@ -30,23 +29,54 @@ export function coursePurchaseEvent(payload: unknown, descriptions: string[], no
 		return null;
 	const time = typeof o.updatedAt === 'string' ? Date.parse(o.updatedAt) : NaN;
 	if (!Number.isFinite(time) || time > now + 60_000 || time < now - 7 * 86400_000) return null;
-	const variables = Array.isArray(o.variables) ? o.variables : [];
-	const email = variables
-		.find((v) => v?.valueType === 6 && typeof v.value === 'string')
-		?.value.trim()
-		.toLowerCase();
-	if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
+	return { id: o.id, description: o.description, totalCost: o.totalCost, time };
+}
+
+export interface VerifiedCoursePayment {
+	status: string;
+	livemode: boolean;
+	currency: string;
+	amountReceived: number;
+	orderId: string | undefined;
+	email: string | null | undefined;
+	refunded: boolean;
+	disputed: boolean;
+}
+
+export function coursePurchaseEvent(
+	payload: unknown,
+	descriptions: string[],
+	payment: VerifiedCoursePayment,
+	now = Date.now()
+) {
+	const order = coursePurchaseOrder(payload, descriptions, now);
+	if (
+		!order ||
+		!payment ||
+		payment.status !== 'succeeded' ||
+		!payment.livemode ||
+		payment.currency !== 'pln' ||
+		payment.orderId !== order.id ||
+		!Number.isSafeInteger(payment.amountReceived) ||
+		payment.amountReceived <= 0 ||
+		payment.amountReceived !== Math.round(order.totalCost * 100) ||
+		payment.refunded ||
+		payment.disputed
+	)
+		return null;
+	const email = typeof payment.email === 'string' ? payment.email.trim().toLowerCase() : '';
+	if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return null;
 	return {
 		event_name: 'Purchase',
-		event_time: Math.floor(time / 1000),
-		event_id: `sendpulse:${o.id}`,
+		event_time: Math.floor(order.time / 1000),
+		event_id: `sendpulse:${order.id}`,
 		action_source: 'system_generated',
 		user_data: { em: [createHash('sha256').update(email).digest('hex')] },
 		custom_data: {
 			currency: 'PLN',
-			value: o.totalCost,
-			content_name: o.description,
-			order_id: o.id
+			value: payment.amountReceived / 100,
+			content_name: order.description,
+			order_id: order.id
 		}
 	};
 }

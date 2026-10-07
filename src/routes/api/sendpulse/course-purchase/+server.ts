@@ -1,10 +1,12 @@
 import { env } from '$env/dynamic/private';
 import {
 	coursePurchaseEvent,
+	coursePurchaseOrder,
 	validWebhookSecret
 } from '$shared/server/services/course-purchase-event';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { json } from '@sveltejs/kit';
+import Stripe from 'stripe';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request, url }) => {
@@ -24,8 +26,8 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		return json({ error: 'Invalid JSON' }, { status: 400 });
 	}
 	const descriptions = (env.SENDPULSE_PL_COURSE_DESCRIPTIONS || '').split('\n').filter(Boolean);
-	const event = coursePurchaseEvent(payload, descriptions);
-	if (!event) {
+	const order = coursePurchaseOrder(payload, descriptions);
+	if (!order) {
 		// Test diagnostics contain only enum values and field presence, never buyer data.
 		if (env.META_CAPI_TEST_EVENT_CODE) {
 			const p = payload && typeof payload === 'object' ? (payload as Record<string, unknown>) : {};
@@ -52,12 +54,48 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		}
 		return json({ received: true, skipped: true });
 	}
-	if (!env.META_CAPI_ACCESS_TOKEN || !env.META_GRAPH_API_VERSION || !env.META_PIXEL_ID)
+	if (
+		!env.META_CAPI_ACCESS_TOKEN ||
+		!env.META_GRAPH_API_VERSION ||
+		!env.META_PIXEL_ID ||
+		!env.STRIPE_SK
+	)
 		return json({ error: 'Integration not configured' }, { status: 503 });
-	const marker = `meta:${event.event_id}`;
+	const marker = `meta:sendpulse:${order.id}`;
 	try {
 		if (await prisma.processedStripeEvent.findUnique({ where: { eventId: marker } }))
 			return json({ received: true, duplicate: true });
+		const stripe = new Stripe(env.STRIPE_SK, {
+			apiVersion: '2025-11-17.clover' as never,
+			timeout: 10000,
+			maxNetworkRetries: 1
+		});
+		const matches = await stripe.paymentIntents.search({
+			query: `metadata['order_id']:'${order.id}'`,
+			limit: 2,
+			expand: ['data.latest_charge', 'data.customer']
+		});
+		// Search indexing can lag; a non-2xx response allows the sender to retry.
+		if (matches.data.length !== 1 || matches.has_more)
+			return json({ error: 'Payment verification pending' }, { status: 503 });
+		const payment = matches.data[0];
+		const charge = typeof payment.latest_charge === 'object' ? payment.latest_charge : null;
+		const customer =
+			typeof payment.customer === 'object' && payment.customer && !payment.customer.deleted
+				? (payment.customer as Stripe.Customer)
+				: null;
+		if (!charge) return json({ error: 'Payment verification pending' }, { status: 503 });
+		const event = coursePurchaseEvent(payload, descriptions, {
+			status: payment.status,
+			livemode: payment.livemode,
+			currency: payment.currency,
+			amountReceived: payment.amount_received,
+			orderId: payment.metadata.order_id,
+			email: charge.billing_details.email || payment.receipt_email || customer?.email,
+			refunded: charge.refunded || charge.amount_refunded > 0,
+			disputed: charge.disputed
+		});
+		if (!event) return json({ error: 'Paid order could not be verified' }, { status: 422 });
 		const response = await fetch(
 			`https://graph.facebook.com/${env.META_GRAPH_API_VERSION}/${env.META_PIXEL_ID}/events`,
 			{
@@ -74,7 +112,17 @@ export const POST: RequestHandler = async ({ request, url }) => {
 			}
 		);
 		const result = await response.json();
-		if (!response.ok || result.events_received !== 1) throw new Error('Meta rejected event');
+		if (!response.ok || result.events_received !== 1) {
+			console.error('Course Purchase rejected by Meta', {
+				status: response.status,
+				code: result.error?.code,
+				subcode: result.error?.error_subcode
+			});
+			return json(
+				{ error: 'Meta rejected event', providerCode: result.error?.code },
+				{ status: 502 }
+			);
+		}
 		// Repeated deliveries use the same event_id, including concurrent requests and retries.
 		await prisma.processedStripeEvent.upsert({
 			where: { eventId: marker },
