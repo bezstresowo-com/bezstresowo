@@ -25,7 +25,33 @@ export const POST: RequestHandler = async ({ request, url }) => {
 	}
 	const descriptions = (env.SENDPULSE_PL_COURSE_DESCRIPTIONS || '').split('\n').filter(Boolean);
 	const event = coursePurchaseEvent(payload, descriptions);
-	if (!event) return json({ received: true, skipped: true });
+	if (!event) {
+		// Test diagnostics contain only enum values and field presence, never buyer data.
+		if (env.META_CAPI_TEST_EVENT_CODE) {
+			const p = payload && typeof payload === 'object' ? (payload as Record<string, unknown>) : {};
+			const o = p.order && typeof p.order === 'object' ? (p.order as Record<string, unknown>) : {};
+			const numeric = (value: unknown) =>
+				typeof value === 'number' && Number.isFinite(value) ? value : null;
+			console.info('Course Purchase skipped', {
+				paymentOrder: p.event === 'payment_order',
+				status: numeric(o.status),
+				service: numeric(o.service),
+				paymentMethodType: numeric(o.paymentMethodType),
+				type: numeric(o.type),
+				descriptionMatched: descriptions.includes(String(o.description)),
+				pln: o.currency === 'PLN',
+				positiveAmount: typeof o.totalCost === 'number' && o.totalCost > 0,
+				variablesPresent: Array.isArray(o.variables),
+				emailVariablePresent:
+					Array.isArray(o.variables) &&
+					o.variables.some(
+						(v) => v && typeof v === 'object' && v.valueType === 6 && typeof v.value === 'string'
+					),
+				contactVariablesPresent: Array.isArray(o.contactVariables)
+			});
+		}
+		return json({ received: true, skipped: true });
+	}
 	if (!env.META_CAPI_ACCESS_TOKEN || !env.META_GRAPH_API_VERSION || !env.META_PIXEL_ID)
 		return json({ error: 'Integration not configured' }, { status: 503 });
 	const marker = `meta:${event.event_id}`;
