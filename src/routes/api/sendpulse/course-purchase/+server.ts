@@ -54,6 +54,10 @@ export const POST: RequestHandler = async ({ request, url }) => {
 		}
 		return json({ received: true, skipped: true });
 	}
+	// Never transmit buyer details until consent/attribution and Meta category review are confirmed.
+	// Preview must remain non-transmitting by default, even when the basic enabled flag is set.
+	if (env.COURSE_META_PRIVACY_REVIEW_APPROVED !== 'true')
+		return json({ received: true, skipped: true, reason: 'Privacy review pending' });
 	if (
 		!env.META_CAPI_ACCESS_TOKEN ||
 		!env.META_GRAPH_API_VERSION ||
