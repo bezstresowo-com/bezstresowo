@@ -69,14 +69,12 @@ export function coursePurchaseEvent(
 	return {
 		event_name: 'Purchase',
 		event_time: Math.floor(order.time / 1000),
-		event_id: `sendpulse:${order.id}`,
+		event_id: createHash('sha256').update(`sendpulse:${order.id}`).digest('hex'),
 		action_source: 'system_generated',
 		user_data: { em: [createHash('sha256').update(email).digest('hex')] },
 		custom_data: {
 			currency: 'PLN',
-			value: payment.amountReceived / 100,
-			content_name: order.description,
-			order_id: order.id
+			value: payment.amountReceived / 100
 		}
 	};
 }
