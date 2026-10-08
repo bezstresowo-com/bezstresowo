@@ -1,12 +1,13 @@
-# Polish course Purchase integration (disabled by default)
+# Polish course Purchase integration (privacy-gated; NOT live)
 
 The native SendPulse pricing form sends its configured event before payment. Change that event to InitiateCheckout; do not use it as Purchase.
 
-The new `/api/sendpulse/course-purchase` endpoint accepts SendPulse payment_order webhooks. Only successful live EDU payments (status 200, service 200, type 1) with the exact configured Polish course description are eligible. The handler independently verifies Stripe: a unique PaymentIntent must carry the same SendPulse order_id, be successful and live, match PLN and the paid amount, and have no refund or dispute. Stripe Connect is not identified by the legacy SendPulse Stripe enum. Buyer email comes from the verified Stripe charge, receipt or customer, then is normalized and SHA-256 hashed. Amount comes from Stripe amount_received, including discounts. Stable payment IDs provide Meta deduplication; existing database records suppress redelivery after success. No credentials or payloads are logged.
+The new `/api/sendpulse/course-purchase` endpoint accepts SendPulse payment_order webhooks. Only successful live EDU payments (status 200, service 200, type 1) with the exact configured Polish course description are eligible. The handler independently verifies Stripe: a unique PaymentIntent must carry the same SendPulse order_id, be successful and live, match PLN and the paid amount, and have no refund or dispute. Stripe Connect is not identified by the legacy SendPulse Stripe enum. Buyer email comes from the verified Stripe charge, receipt or customer, then is normalized and SHA-256 hashed. Amount comes from Stripe amount_received, including discounts. The outbound event includes only an SHA-256 hashed buyer email, paid amount and currency, a one-way hashed stable event ID, and timestamp; neither the sensitive course title nor raw order ID is sent. Existing database records suppress redelivery after success. No credentials or payloads are logged.
 
 Required private deployment settings:
 
-- COURSE_META_PURCHASE_ENABLED=false until validated
+- COURSE_META_PURCHASE_ENABLED=false in production until validated
+- COURSE_META_PRIVACY_REVIEW_APPROVED: absent/false by default; must never be enabled until per-buyer marketing consent, browser attribution and Meta data-source eligibility have been verified
 - SENDPULSE_PAYMENT_WEBHOOK_SECRET: random secret of at least 32 characters
 - SENDPULSE_PL_COURSE_DESCRIPTIONS: exact description from an actual course payment, newline-separated
 - STRIPE_SK: existing server-side Stripe key with PaymentIntent search/read permissions
@@ -25,4 +26,4 @@ Verified test evidence on 2026-10-07: SendPulse CSV records a COMPLETE/LIVE EDU 
 
 Stripe search can lag indexing. Return 503 rather than acknowledging an unverified eligible order; confirm SendPulse retries or provide a durable replay mechanism before production. Current implementation has no durable retry queue. Browser consent/attribution and production approval remain unresolved.
 
-Temporary /api/sendpulse/course-purchase/check-payment is read-only, accepts the existing secret, is restricted to Preview with a Meta test code and one authorized test purchase, and returns no buyer email or credentials. Remove it after testing and before production merge.
+The temporary payment diagnostics route has been removed from the preview branch; there is no longer a hard-coded sample PaymentIntent or order ID in the branch's current source tree. Production deployment and any actual transmission to Meta remain explicitly pending approval.
