@@ -21,8 +21,13 @@
 			<div class="eyebrow">{copy.hero.eyebrow}</div>
 			<h1>{copy.hero.titleFirst}<br /><em>{copy.hero.titleSecond}</em></h1>
 			<p class="hero-copy">{copy.hero.lead}</p>
+			<div class="hero-actions">
+				<a class="cta primary" href="https://bezstresowo.sendpulse.courses/kryzys-czy-koniec">
+					Kup program — 79 zł
+				</a>
+				<a class="cta secondary" href="#program">{copy.hero.cta}</a>
+			</div>
 			<p class="hero-sub">{copy.hero.description}</p>
-			<a class="cta primary" href="#program">{copy.hero.cta}</a>
 			<p class="micro">{copy.hero.meta}</p>
 		</div>
 
@@ -262,7 +267,7 @@
 
 	.hero-sub {
 		max-width: 570px;
-		margin: 0 0 32px;
+		margin: 0;
 		color: #e0e4e9;
 		font-size: 18px;
 		line-height: 1.6;
@@ -281,6 +286,35 @@
 		font-size: 16px;
 		font-weight: 700;
 		text-decoration: none;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 12px;
+		margin-bottom: 24px;
+	}
+
+	.cta.secondary {
+		display: inline-flex;
+		min-height: 52px;
+		align-items: center;
+		justify-content: center;
+		border: 1px solid rgb(255 255 255 / 55%);
+		border-radius: 4px;
+		padding: 13px 22px;
+		color: white;
+		font-size: 16px;
+		font-weight: 600;
+		text-align: center;
+		text-decoration: none;
+	}
+
+	.cta.secondary:hover,
+	.cta.secondary:focus-visible {
+		border-color: var(--sand);
+		background: rgb(255 255 255 / 10%);
 	}
 
 	.micro {
@@ -753,6 +787,15 @@
 	}
 
 	@media (max-width: 520px) {
+		.hero-actions {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.hero-actions .cta {
+			width: 100%;
+		}
+
 		.hero {
 			min-height: auto;
 			padding: 70px 22px;
