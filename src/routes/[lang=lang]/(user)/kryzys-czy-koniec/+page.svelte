@@ -209,6 +209,7 @@
 	}
 
 	.hero-glow {
+		pointer-events: none;
 		position: absolute;
 		top: -180px;
 		right: -100px;
@@ -224,6 +225,8 @@
 	}
 
 	.hero-inner {
+		position: relative;
+		z-index: 1;
 		width: min(650px, 100%);
 	}
 
