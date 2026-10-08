@@ -38,6 +38,10 @@ const event = coursePurchaseEvent(fixture, ['PL course fixture'], payment, now);
 assert.equal(event.custom_data.value, 2);
 assert.equal(event.user_data.em[0].length, 64);
 assert.ok(!JSON.stringify(event).includes('example.com'));
+assert.equal(event.event_id.length, 64);
+assert.ok(!JSON.stringify(event).includes(fixture.order.description));
+assert.ok(!JSON.stringify(event).includes(fixture.order.id));
+assert.deepEqual(Object.keys(event.custom_data).sort(), ['currency', 'value']);
 assert.equal(
 	coursePurchaseEvent(fixture, ['PL course fixture'], payment, now).event_id,
 	event.event_id
