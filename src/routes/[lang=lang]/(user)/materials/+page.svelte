@@ -8,6 +8,16 @@
 	const paidMaterials = $derived(
 		isUkrainian
 			? [
+                    {
+                        title: 'Чужі бажання',
+                        eyebrow: 'Серія збірок · від 19 zł',
+                        cover: '/assets/collections/1.webp',
+                        alt: 'Обкладинка збірки «Зручна мішень» із серії «Чужі бажання»',
+                        href: '/uk/materials/chuzhi-bazhannia',
+                        description: 'Вісім збірок про контроль, провину, знецінення та власний вибір. Одна — 19 zł, будь-які три — 49 zł, уся серія — 99 zł.',
+                        cta: 'Обрати збірки'
+                    },
+
 					{
 						title: 'Криза чи кінець?',
 						eyebrow: 'Програма · 79 zł',
@@ -152,3 +162,4 @@
 		</div>
 	</div>
 </section>
+
