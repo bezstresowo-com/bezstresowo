@@ -3,6 +3,7 @@
  import Seo from '$lib/Seo/Seo.svelte';
  import CollectionPurchase from '$lib/Materials/CollectionPurchase.svelte';
  import { COLLECTIONS, SERIES_PATH, collectionPath } from '$lib/Materials/collections-catalog';
+ import { COLLECTIONS_PL, collectionPathPL } from '$lib/Materials/collections-catalog-pl';
  import { absoluteUrl } from '$shared/global/functions/site-url';
  import type { PageData } from './$types';
  let { data }: { data: PageData } = $props();
@@ -25,7 +26,7 @@
  });
 </script>
 
-<Seo title={`${item.seoTitle} | Bezstresowo`} description={`${item.desc} 8 життєвих історій, відповіді та вправи. 19 zł.`} noindex={data.noindex} alternates={[{locale:Locale.ukUA,path:path.replace('/uk','')}]} image={absoluteUrl(`/assets/collections/${item.id + 1}.webp`)} imageAlt={`Обкладинка збірки «${item.name}»`} {jsonLd}/>
+<Seo title={`${item.seoTitle} | Bezstresowo`} description={`${item.desc} 8 життєвих історій, відповіді та вправи. 19 zł.`} noindex={data.noindex} alternates={[{locale:Locale.ukUA,path:path.replace('/uk','')},{locale:Locale.plPL,path:collectionPathPL(COLLECTIONS_PL[item.id]).replace('/pl','')}]} image={absoluteUrl(`/assets/collections/${item.id + 1}.webp`)} imageAlt={`Обкладинка збірки «${item.name}»`} {jsonLd}/>
 
 <div class="collection-page">
  <div class="shell">

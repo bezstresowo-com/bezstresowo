@@ -5,11 +5,11 @@ import Seo from '$lib/Seo/Seo.svelte';
 import { COLLECTIONS, collectionPath } from './collections-catalog';
 let { noindex = true }: { noindex?: boolean } = $props();
 let root: HTMLDivElement;
-const runtimeModulePath = '/assets/collections/app.js?v=details-20261012';
+const runtimeModulePath = '/assets/collections/app.js?v=bilingual-20261012';
 onMount(() => { let active=true; import(/* @vite-ignore */ runtimeModulePath).then(m => {if(active) m.init(root, COLLECTIONS);}); return () => {active=false;}; });
 </script>
-<Seo title="Чужі бажання — 8 збірок | Bezstresowo" description="Збірки про контроль, провину, знецінення й власний вибір. Одна за 19 zł, три за 49 zł або всі вісім за 99 zł." {noindex} alternates={[{locale:Locale.ukUA,path:'/materials/chuzhi-bazhannia'}]} />
-<svelte:head><link rel="stylesheet" href="/assets/collections/style.css?v=details-20261012" /></svelte:head>
+<Seo title="Чужі бажання — 8 збірок | Bezstresowo" description="Збірки про контроль, провину, знецінення й власний вибір. Одна за 19 zł, три за 49 zł або всі вісім за 99 zł." {noindex} alternates={[{locale:Locale.ukUA,path:'/materials/chuzhi-bazhannia'},{locale:Locale.plPL,path:'/materials/cudze-oczekiwania'}]} />
+<svelte:head><link rel="stylesheet" href="/assets/collections/style.css?v=bilingual-20261012" /></svelte:head>
 <div class="collections-series" bind:this={root}>
 <div class="crumb"><a href="/uk/materials">← Матеріали</a></div><main><section class="hero"><div><p class="eyebrow">СЕРІЯ ПСИХООСВІТНІХ ЗБІРОК</p><h1>Чужі бажання.<br><em>Твій вибір.</em></h1><p class="lead">Ти вже пояснила. Поступилася. Перепросила.<br>А незручно все одно тобі.</p><p class="intro">Вісім збірок про знайомий тиск у стосунках, родині, дружбі й роботі. Щоб ясніше побачити, що відбувається, і обрати свій наступний крок.</p><a class="button" href="#collections">Знайти свою тему ↓</a><p class="micro">У кожній: 20 сторінок · 8 історій · відповіді та вправи</p></div><div class="hero-art" aria-hidden="true"><img src="/assets/collections/7.webp" alt=""><img src="/assets/collections/8.webp" alt=""></div></section>
 <section class="pricing" aria-labelledby="price-title"><div class="section-top"><p class="eyebrow">ПОЧНИ З ТОГО, ЩО ВІДГУКУЄТЬСЯ</p><h2 id="price-title">Одна тема чи більше?</h2></div><div class="plans" role="group" aria-label="Варіант покупки"><button class="plan active" data-mode="one" aria-pressed="true"><span>Одна збірка</span><strong>19 <small>zł</small></strong><p>Обери одну близьку тему.</p></button><button class="plan" data-mode="three" aria-pressed="false"><span>Будь-які три</span><strong>49 <small>zł</small></strong><p>Твій комплект. Вигода 8 zł.</p></button><button class="plan" data-mode="all" aria-pressed="false"><span>Уся серія</span><strong>99 <small>zł</small></strong><p>Усі вісім. Вигода 53 zł.</p></button></div></section>

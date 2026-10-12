@@ -40,6 +40,7 @@
 					}
 				]
 			: [
+                    {title:'Cudze oczekiwania',eyebrow:'Seria zeszytów · od 19 zł',cover:'/assets/collections/pl/1.webp',alt:'Okładka zeszytu „Wygodny cel” z serii „Cudze oczekiwania”',href:'/pl/materials/cudze-oczekiwania',description:'Osiem zeszytów o kontroli, poczuciu winy, dewaluacji i własnym wyborze. Jeden — 19 zł, dowolne trzy — 49 zł, cała seria — 99 zł.',cta:'Wybierz zeszyty'},
 					{
 						title: 'Kryzys czy koniec?',
 						eyebrow: 'Program · 79 zł',

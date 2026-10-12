@@ -1,5 +1,5 @@
 <script lang="ts">
- let { id, ready }: { id: number; ready: boolean } = $props();
+ let { id, ready, lang = 'uk' }: { id: number; ready: boolean; lang?: 'uk' | 'pl' } = $props();
  let pending = $state(false);
  let message = $state('');
  async function buy() {
@@ -9,20 +9,20 @@
   try {
    const response = await fetch('/api/collections/checkout', {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ plan: 'one', ids: [id] })
+    body: JSON.stringify({ plan: 'one', ids: [id], lang })
    });
    const result = await response.json();
-   if (!response.ok || !result.url) throw new Error(result.message || 'Не вдалося перейти до оплати. Спробуй ще раз.');
+   if (!response.ok || !result.url) throw new Error(result.message || (lang === 'pl' ? 'Nie udało się przejść do płatności. Spróbuj ponownie.' : 'Не вдалося перейти до оплати. Спробуй ще раз.'));
    window.location.assign(result.url);
   } catch (error) {
-   message = error instanceof Error ? error.message : 'Не вдалося перейти до оплати. Спробуй ще раз.';
+   message = error instanceof Error ? error.message : (lang === 'pl' ? 'Nie udało się przejść do płatności. Spróbuj ponownie.' : 'Не вдалося перейти до оплати. Спробуй ще раз.');
    pending = false;
   }
  }
 </script>
 
-<button class="collection-buy" onclick={buy} disabled={pending || !ready} aria-busy={pending}>Купити збірку</button>
-<p class="purchase-message" aria-live="polite">{pending ? 'Готуємо перехід до оплати…' : message}</p>
+<button class="collection-buy" onclick={buy} disabled={pending || !ready} aria-busy={pending}>{lang === 'pl' ? 'Kup zeszyt' : 'Купити збірку'}</button>
+<p class="purchase-message" aria-live="polite">{pending ? (lang === 'pl' ? 'Przygotowujemy płatność…' : 'Готуємо перехід до оплати…') : message}</p>
 
 <style>
  .collection-buy{width:100%;background:#22344e;color:white;border:0;border-radius:5px;padding:17px 22px;font:700 15px Arial,sans-serif;cursor:pointer;transition:background .15s}
