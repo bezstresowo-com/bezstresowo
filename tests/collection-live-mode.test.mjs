@@ -5,7 +5,7 @@ const preview = { VERCEL_ENV: 'preview', COLLECTIONS_PREVIEW_ENABLED: 'true', CO
 const production = { VERCEL_ENV: 'production', COLLECTIONS_LIVE_ENABLED: 'true', COLLECTIONS_STRIPE_LIVE_SK: 'sk_live_fixture', COLLECTIONS_LIVE_WEBHOOK_SECRET: 'whsec_live_fixture' };
 assert.equal(collectionPaymentConfig(preview).live, false);
 assert.equal(collectionPaymentConfig(production).live, true);
-assert.equal(collectionPaymentConfig({ ...production, COLLECTIONS_STRIPE_LIVE_SK: undefined, STRIPE_SK: 'sk_live_fixture' }).live, true);
+assert.equal(collectionPaymentConfig({ ...production, COLLECTIONS_STRIPE_LIVE_SK: undefined, COLLECTIONS_LIVE_WEBHOOK_SECRET: undefined, STRIPE_SK: 'sk_live_fixture', STRIPE_WHSEC: 'whsec_existing' }).live, true);
 for (const bad of [
  { ...preview, COLLECTIONS_STRIPE_TEST_SK: 'sk_live_fixture' },
  { ...production, COLLECTIONS_STRIPE_LIVE_SK: 'sk_test_fixture' },

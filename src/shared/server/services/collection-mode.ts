@@ -2,7 +2,7 @@ export function collectionPaymentConfig(env: Record<string, string | undefined>)
  const live = env.VERCEL_ENV === 'production';
  const enabled = live ? env.COLLECTIONS_LIVE_ENABLED === 'true' : env.VERCEL_ENV === 'preview' && env.COLLECTIONS_PREVIEW_ENABLED === 'true';
  const key = live ? env.COLLECTIONS_STRIPE_LIVE_SK || env.STRIPE_SK : env.COLLECTIONS_STRIPE_TEST_SK || env.STRIPE_SK;
- const webhookSecret = live ? env.COLLECTIONS_LIVE_WEBHOOK_SECRET : env.COLLECTIONS_WEBHOOK_SECRET;
+ const webhookSecret = live ? env.COLLECTIONS_LIVE_WEBHOOK_SECRET || env.STRIPE_WHSEC : env.COLLECTIONS_WEBHOOK_SECRET;
  if (!enabled || !key?.startsWith(live ? 'sk_live_' : 'sk_test_') || /placeholder|dummy|example/i.test(key) || !webhookSecret?.startsWith('whsec_')) throw new Error('Collection payments are not configured');
  return { live, key, webhookSecret };
 }

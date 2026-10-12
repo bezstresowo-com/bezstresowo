@@ -10,6 +10,7 @@ import {
 	resolveBook
 } from '$shared/server/services/book-delivery';
 import { EmailService } from '$shared/server/services/email/email-service';
+import { collectionConfig, deliverCollections } from '$shared/server/services/collection-delivery';
 import { prisma } from '$shared/server/services/prisma/prisma-service';
 import { json, text } from '@sveltejs/kit';
 import { isNil } from 'lodash-es';
@@ -59,6 +60,16 @@ export async function POST({ request }) {
 		event.type === 'checkout.session.async_payment_succeeded'
 	) {
 		const incoming = event.data.object as Stripe.Checkout.Session;
+		if (incoming.metadata?.type === 'collection_series') {
+			if (!event.livemode || incoming.payment_status !== 'paid' || incoming.metadata.deliveryOrigin !== new URL(request.url).origin) return text('OK');
+			try {
+				if (!collectionConfig().live) return text('Wrong payment mode', { status: 400 });
+				await deliverCollections(incoming.id, new URL(request.url).origin);
+				return text('OK');
+			} catch {
+				return text('Collection delivery not completed', { status: 500 });
+			}
+		}
 		if (incoming.metadata?.type === 'book') {
 			try {
 				const session = await stripe.checkout.sessions.retrieve(incoming.id);
@@ -80,7 +91,8 @@ export async function POST({ request }) {
 				await new EmailService().bookDeliveryMessage(
 					email,
 					downloadLink(session.id, origin, book),
-					book.lang
+					book.lang,
+					book.name
 				);
 				await prisma.processedStripeEvent.create({ data: { eventId: marker } });
 				return text('OK');
