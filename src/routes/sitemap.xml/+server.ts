@@ -1,3 +1,5 @@
+import { env } from '$env/dynamic/private';
+import { COLLECTIONS, SERIES_PATH, collectionPath } from '$lib/Materials/collections-catalog';
 import { Locale } from '$i18n';
 import { alternateUrl, hreflang, xDefaultUrl, type SeoAlternate } from '$lib/Seo/model';
 import { isCatalogService } from '$lib/ServicesSection/catalog';
@@ -32,6 +34,14 @@ export const GET: RequestHandler = async () => {
 
 		for (const alternate of alternates) {
 			entries.push(urlEntry(alternate, alternates));
+		}
+	}
+
+	// Preview pages remain noindex and are excluded from the sitemap.
+	if (env.VERCEL_ENV === 'production') {
+		for (const path of [SERIES_PATH, ...COLLECTIONS.map(collectionPath)]) {
+			const alternate = { locale: Locale.ukUA, path: path.replace('/uk', '') };
+			entries.push(urlEntry(alternate, [alternate]));
 		}
 	}
 
