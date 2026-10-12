@@ -6,12 +6,12 @@ import { COLLECTION_NAMES, paidCollectionOrder } from './collection-order';
 import { prisma } from './prisma/prisma-service';
 import { collectionDeliveryMessage } from './collection-email';
 export function collectionStripe() {
- const key=env.COLLECTIONS_STRIPE_TEST_SK;
+ const key=env.COLLECTIONS_STRIPE_TEST_SK || env.STRIPE_SK;
  if (env.VERCEL_ENV !== 'preview' || env.COLLECTIONS_PREVIEW_ENABLED !== 'true' || !key?.startsWith('sk_test_') || /placeholder|dummy|example/i.test(key)) throw new Error('Collection preview is not configured');
  return new Stripe(key);
 }
 function secret() {if (!env.BOOK_DOWNLOAD_SECRET || env.BOOK_DOWNLOAD_SECRET.length<32) throw new Error('Missing signing secret');return env.BOOK_DOWNLOAD_SECRET;}
-export function collectionConfigReady() {return env.VERCEL_ENV === 'preview' && env.COLLECTIONS_PREVIEW_ENABLED === 'true' && Boolean(env.COLLECTIONS_STRIPE_TEST_SK?.startsWith('sk_test_') && env.COLLECTIONS_WEBHOOK_SECRET && env.BOOK_DOWNLOAD_SECRET && env.BOOK_DOWNLOAD_SECRET.length >= 32 && env.AWS_BOOKS_BUCKET_NAME && env.EMAIL_SENDER && env.EMAIL_APP_PASSWORD && Array.from({length:8}, (_,i)=>env[`COLLECTION_${String(i+1).padStart(2,'0')}_OBJECT_KEY`]).every(Boolean));}
+export function collectionConfigReady() {return env.VERCEL_ENV === 'preview' && env.COLLECTIONS_PREVIEW_ENABLED === 'true' && Boolean((env.COLLECTIONS_STRIPE_TEST_SK || env.STRIPE_SK)?.startsWith('sk_test_') && env.COLLECTIONS_WEBHOOK_SECRET && env.BOOK_DOWNLOAD_SECRET && env.BOOK_DOWNLOAD_SECRET.length >= 32 && env.AWS_BOOKS_BUCKET_NAME && env.EMAIL_SENDER && env.EMAIL_APP_PASSWORD && Array.from({length:8}, (_,i)=>env[`COLLECTION_${String(i+1).padStart(2,'0')}_OBJECT_KEY`]).every(Boolean));}
 export async function readCollection(id:number) {
  if (!Number.isInteger(id)||id<0||id>7) throw new Error('Unknown collection');
  // Reuse the established S3 privacy and PDF validation without modifying other books.
