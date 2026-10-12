@@ -9,9 +9,9 @@ export function collectionOrder(plan: unknown, ids: unknown) {
  if (selected.length !== expected) throw new Error('Invalid selection size');
  return {plan: plan as CollectionPlan, ids: [...selected].sort((a,b)=>a-b), price: PLAN_PRICES[plan as CollectionPlan]};
 }
-export function paidCollectionOrder(session: { mode?: string | null; payment_status?: string; livemode?: boolean; currency?: string | null; amount_subtotal?: number | null; amount_total?: number | null; metadata?: Record<string,string> | null; }) {
+export function paidCollectionOrder(session: { mode?: string | null; payment_status?: string; livemode?: boolean; currency?: string | null; amount_subtotal?: number | null; amount_total?: number | null; metadata?: Record<string,string> | null; }, expectedLive = false) {
  try {
-  if (session.mode !== 'payment' || session.payment_status !== 'paid' || session.livemode !== false || session.currency !== 'pln' || session.metadata?.type !== 'collection_series' || session.metadata.version !== '1') return null;
+  if (session.mode !== 'payment' || session.payment_status !== 'paid' || session.livemode !== expectedLive || session.currency !== 'pln' || session.metadata?.type !== 'collection_series' || session.metadata.version !== '1') return null;
   const order=collectionOrder(session.metadata.plan, JSON.parse(session.metadata.collections));
   return session.amount_total === order.price && session.amount_subtotal === order.price ? order : null;
  } catch {return null;}

@@ -5,13 +5,14 @@ import { readPrivateBook, type Book } from './book-delivery';
 import { COLLECTION_NAMES, paidCollectionOrder } from './collection-order';
 import { prisma } from './prisma/prisma-service';
 import { collectionDeliveryMessage } from './collection-email';
+import { collectionPaymentConfig, isCollectionSessionId } from './collection-mode';
+export function collectionConfig() { return collectionPaymentConfig(env); }
+export function validCollectionSessionId(id: unknown) { try { return isCollectionSessionId(id, collectionConfig().live); } catch { return false; } }
 export function collectionStripe() {
- const key=env.COLLECTIONS_STRIPE_TEST_SK || env.STRIPE_SK;
- if (env.VERCEL_ENV !== 'preview' || env.COLLECTIONS_PREVIEW_ENABLED !== 'true' || !key?.startsWith('sk_test_') || /placeholder|dummy|example/i.test(key)) throw new Error('Collection preview is not configured');
- return new Stripe(key);
+ return new Stripe(collectionConfig().key);
 }
 function secret() {if (!env.BOOK_DOWNLOAD_SECRET || env.BOOK_DOWNLOAD_SECRET.length<32) throw new Error('Missing signing secret');return env.BOOK_DOWNLOAD_SECRET;}
-export function collectionConfigReady() {return env.VERCEL_ENV === 'preview' && env.COLLECTIONS_PREVIEW_ENABLED === 'true' && Boolean((env.COLLECTIONS_STRIPE_TEST_SK || env.STRIPE_SK)?.startsWith('sk_test_') && env.COLLECTIONS_WEBHOOK_SECRET && env.BOOK_DOWNLOAD_SECRET && env.BOOK_DOWNLOAD_SECRET.length >= 32 && env.AWS_BOOKS_BUCKET_NAME && env.EMAIL_SENDER && env.EMAIL_APP_PASSWORD && Array.from({length:8}, (_,i)=>env[`COLLECTION_${String(i+1).padStart(2,'0')}_OBJECT_KEY`]).every(Boolean));}
+export function collectionConfigReady() {try {collectionConfig(); return Boolean(env.BOOK_DOWNLOAD_SECRET && env.BOOK_DOWNLOAD_SECRET.length >= 32 && env.AWS_BOOKS_BUCKET_NAME && env.EMAIL_SENDER && env.EMAIL_APP_PASSWORD && Array.from({length:8}, (_,i)=>env[`COLLECTION_${String(i+1).padStart(2,'0')}_OBJECT_KEY`]).every(Boolean));} catch {return false;}}
 export async function readCollection(id:number) {
  if (!Number.isInteger(id)||id<0||id>7) throw new Error('Unknown collection');
  // Reuse the established S3 privacy and PDF validation without modifying other books.
@@ -19,17 +20,17 @@ export async function readCollection(id:number) {
  return readPrivateBook({objectKeyEnv} as Book);
 }
 export function collectionToken(sessionId:string) {
- if (!/^cs_test_[A-Za-z0-9]+$/.test(sessionId)) throw new Error('Invalid test session');
+ if (!validCollectionSessionId(sessionId)) throw new Error('Invalid collection session');
  const data=Buffer.from(JSON.stringify({type:'collection_series',sessionId})).toString('base64url');
  return data+'.'+createHmac('sha256',secret()).update(data).digest('base64url');
 }
 export function verifyCollectionToken(token:string) {
- try {if(token.length>1024)return null;const [data,sig,...extra]=token.split('.');if(!data||!sig||extra.length)return null;const expected=createHmac('sha256',secret()).update(data).digest();const actual=Buffer.from(sig,'base64url');if(actual.length!==expected.length||!timingSafeEqual(actual,expected))return null;const payload=JSON.parse(Buffer.from(data,'base64url').toString());return payload.type==='collection_series'&&/^cs_test_[A-Za-z0-9]+$/.test(payload.sessionId)?payload.sessionId:null;}catch{return null;}
+ try {if(token.length>1024)return null;const [data,sig,...extra]=token.split('.');if(!data||!sig||extra.length)return null;const expected=createHmac('sha256',secret()).update(data).digest();const actual=Buffer.from(sig,'base64url');if(actual.length!==expected.length||!timingSafeEqual(actual,expected))return null;const payload=JSON.parse(Buffer.from(data,'base64url').toString());return payload.type==='collection_series'&&validCollectionSessionId(payload.sessionId)?payload.sessionId:null;}catch{return null;}
 }
 export function collectionLink(sessionId:string,origin:string){return new URL('/uk/collections-download?token='+collectionToken(sessionId),origin).toString();}
 export async function collectionAccess(sessionId:string,origin:string) {
  const session=await collectionStripe().checkout.sessions.retrieve(sessionId);
- const order=paidCollectionOrder(session);
+ const order=paidCollectionOrder(session, collectionConfig().live);
  if(!order||session.metadata?.deliveryOrigin!==origin)throw new Error('Payment is not confirmed');
  for(const id of order.ids)await prisma.bookDownload.upsert({where:{id:`collections:${session.id}:${id}`},create:{id:`collections:${session.id}:${id}`},update:{}});
  return {session,order};
