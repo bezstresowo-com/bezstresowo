@@ -6,11 +6,11 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Wygodny cel",
     "slug": "wygodny-cel",
     "hook": "Znów odpowiadasz za cudze sprawy.",
-    "desc": "Krzyk, cudze zadania i odpowiedzialność bez prawa do decyzji. Zobacz swój udział i granice pomocy.",
+    "desc": "Krzyk, cudze zadania i odpowiedzialność bez prawa do decydowania. Sprawdź, za co naprawdę odpowiadasz i gdzie kończy się Twoja pomoc.",
     "topic": "Cudza odpowiedzialność",
     "seoTitle": "Wygodny cel — cudza odpowiedzialność",
     "intro": "Być może przywykłaś do roli osoby, która wysłucha, poprawi, przekaże, wyjaśni i wytrzyma. Inni już na to liczą. A Tobie coraz trudniej odróżnić pomoc od roli, którą Ci narzucono.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Twoim zadaniem jest dokładniej zobaczyć swój udział i odzyskać możliwość wyboru.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Przyjrzyj się temu, za co rzeczywiście odpowiadasz, i odzyskaj możliwość wyboru.",
     "quote": "Granica to także decyzja o tym, w czym bierzesz udział.",
     "examples": [
       {
@@ -27,9 +27,9 @@ export const COLLECTIONS_PL: Collection[] = [
       }
     ],
     "benefits": [
-      "Odróżnisz dobrowolną pomoc od narzuconej roli.",
-      "Określisz zakres odpowiedzialności, gdy decyzje podejmują inni.",
-      "Wybierzesz odpowiedź i możliwe działanie bez automatycznego „wszystko załatwię”."
+      "Odróżnisz dobrowolną pomoc od roli, którą narzucają Ci inni.",
+      "Sprawdzisz, za co odpowiadasz, gdy decyzje podejmuje ktoś inny.",
+      "Znajdziesz słowa i działania, które zastąpią odruchowe „wszystko załatwię”."
     ],
     "related": [
       3,
@@ -41,11 +41,11 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Czuła kontrola",
     "slug": "czula-kontrola",
     "hook": "Więcej troski. Mniej wolności.",
-    "desc": "Nadzór, sprawdzanie wiadomości i decyzje podejmowane za Ciebie. Odróżnij wsparcie od ingerencji.",
+    "desc": "Nadzór, sprawdzanie wiadomości i decyzje podejmowane za Ciebie. Zobacz, kiedy troska zaczyna ograniczać Twoją wolność.",
     "topic": "Kontrola pod pozorem troski",
     "seoTitle": "Czuła kontrola — kontrola pod pozorem troski",
-    "intro": "Najpierw ktoś się o Ciebie martwi, pomaga i podpowiada. Z czasem jednak Twoja decyzja musi przejść cudzą kontrolę. Ten zeszyt pomoże zauważyć, kiedy wsparcie zaczyna ograniczać Twój udział we własnym życiu.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Możesz wybierać, jaką troskę przyjmujesz. Zgoda na pomoc nie oznacza zgody na wszystko.",
+    "intro": "Najpierw ktoś się o Ciebie martwi, pomaga i podpowiada. Z czasem jednak każda Twoja decyzja wymaga jego aprobaty. Ten zeszyt pomoże Ci zauważyć, kiedy wsparcie zaczyna odbierać Ci możliwość decydowania o sobie.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Możesz zdecydować, jaką pomoc przyjmujesz. Zgoda na wsparcie nie oznacza zgody na wszystko.",
     "quote": "Twoja zgoda dotyczy konkretnej pomocy, a nie nieograniczonego dostępu do Twojego życia.",
     "examples": [
       {
@@ -62,9 +62,9 @@ export const COLLECTIONS_PL: Collection[] = [
       }
     ],
     "benefits": [
-      "Zauważysz, kiedy wsparcie zmienia się w nadzór lub ingerencję.",
-      "Nazwiesz pomoc, którą przyjmujesz, i jej warunki.",
-      "Znajdziesz słowa dla ochrony prywatności i prawa do własnej decyzji."
+      "Rozpoznasz, kiedy wsparcie zmienia się w nadzór lub ingerencję.",
+      "Określisz, jaką pomoc chcesz przyjmować i na jakich warunkach.",
+      "Znajdziesz słowa, żeby chronić prywatność i prawo do własnych decyzji."
     ],
     "related": [
       5,
@@ -76,12 +76,12 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Odebrana pewność siebie",
     "slug": "odebrana-pewnosc-siebie",
     "hook": "Cudze oceny stają się Twoimi wątpliwościami.",
-    "desc": "Pomniejszanie sukcesów, sprzeczne wymagania i błędy, które stały się wyrokiem. Wróć do faktów i własnego wkładu.",
-    "topic": "Dewaluacja i wątpliwości w sobie",
-    "seoTitle": "Odebrana pewność siebie — dewaluacja i wątpliwości w sobie",
+    "desc": "Umniejszanie sukcesów, sprzeczne wymagania i ciągłe wypominanie błędów. Wróć do faktów i dostrzeż to, co naprawdę potrafisz.",
+    "topic": "Umniejszanie i utrata pewności siebie",
+    "seoTitle": "Odebrana pewność siebie — umniejszanie i utrata pewności siebie",
     "intro": "Wciąż pamiętasz, co potrafiłaś i czego chciałaś. Ale przed nowym krokiem już słyszysz cudzy głos: „Nie dasz rady”, „Po prostu miałaś szczęście”, „Komu jesteś potrzebna?”. Ten zeszyt zawiera osiem historii o tym, jak cudze oceny stopniowo zastępują Twoje spojrzenie na siebie.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Możesz uwzględniać uwagi, a jednocześnie nie przyjmować poniżającego wniosku na swój temat.",
-    "quote": "Dokładniejsze spojrzenie na siebie zostawia miejsce na umiejętności i na to, czego jeszcze trzeba się nauczyć.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Możesz brać pod uwagę uwagi innych, nie zgadzając się na poniżające oceny.",
+    "quote": "Uczciwa ocena siebie uwzględnia zarówno Twoje umiejętności, jak i to, czego jeszcze się uczysz.",
     "examples": [
       {
         "title": "Zrobiłaś wszystko. Znowu za mało.",
@@ -97,9 +97,9 @@ export const COLLECTIONS_PL: Collection[] = [
       }
     ],
     "benefits": [
-      "Oddzielisz fakty o wyniku od poniżających uogólnień.",
-      "Zauważysz swój wkład pomijany w cudzym opisie sukcesu.",
-      "Wybierzesz odpowiedź bez niekończącego się dowodzenia swojej wartości."
+      "Oddzielisz konkretne uwagi od poniżających uogólnień.",
+      "Dostrzeżesz swój wkład, nawet gdy inni go pomijają.",
+      "Przećwiczysz odpowiedzi bez ciągłego udowadniania własnej wartości."
     ],
     "related": [
       6,
@@ -111,15 +111,15 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Czyjaś uraza. Moje przeprosiny",
     "slug": "czyjas-uraza-moje-przeprosiny",
     "hook": "Zraniono Ciebie. Przepraszasz Ty.",
-    "desc": "Narzucone poczucie winy, wymóg natychmiastowego wybaczenia i niekończący się dług po przeprosinach. Rozdziel odpowiedzialność.",
+    "desc": "Poczucie winy, wymuszanie wybaczenia i żądania, które nie kończą się po przeprosinach. Oddziel swoją odpowiedzialność od cudzych reakcji.",
     "topic": "Narzucone poczucie winy",
     "seoTitle": "Czyjaś uraza. Moje przeprosiny — narzucone poczucie winy",
     "intro": "Rozmowa zaczęła się od tego, co Cię zabolało. A skończyła Twoim „przepraszam”. Czasem stoi za nim uczciwe uznanie własnego błędu. Czasem strach, że czyjaś uraza nie minie, dopóki nie ustąpisz. Osiem historii pomoże dokładniej zobaczyć różnicę.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Cudze uczucia zasługują na uwagę. Jednak sama uraza nie dowodzi Twojej winy.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Cudze uczucia zasługują na uwagę. Jednak sama uraza nie dowodzi Twojej winy.",
     "quote": "Możesz przeprosić za swój udział i nie zgodzić się brać na siebie wszystkiego.",
     "examples": [
       {
-        "title": "Pytałaś o czyn. Przeprosiłaś za ton.",
+        "title": "Pytałaś o decyzję. Przeprosiłaś za ton.",
         "text": "Dowiadujesz się, że część wspólnych oszczędności pożyczono znajomemu bez rozmowy. Odkładaliście je na ważny zakup."
       },
       {
@@ -128,13 +128,13 @@ export const COLLECTIONS_PL: Collection[] = [
       },
       {
         "title": "Przeprosiłaś. Dług się nie skończył.",
-        "text": "Raz opuściłaś uzgodnioną rozmowę z klientem. Uznałaś błąd, przeprosiłaś i zaproponowałaś nowy termin. Rozmowa się odbyła, a praca została wykonana."
+        "text": "Raz nie pojawiłaś się na umówionej rozmowie z klientem. Przyznałaś się do błędu, przeprosiłaś i zaproponowałaś nowy termin. Rozmowa się odbyła, a praca została wykonana."
       }
     ],
     "benefits": [
-      "Nazwiesz własny czyn i oddzielisz go od cudzej reakcji.",
-      "Rozpoznasz zmianę tematu i nacisk po przeprosinach.",
-      "Znajdziesz odpowiedź zostawiającą miejsce odpowiedzialności i Twoim uczuciom."
+      "Określisz, za co rzeczywiście odpowiadasz, a co jest reakcją drugiej osoby.",
+      "Rozpoznasz zmianę tematu i nacisk, który nie ustaje po przeprosinach.",
+      "Znajdziesz odpowiedź, która uwzględnia odpowiedzialność i Twoje uczucia."
     ],
     "related": [
       0,
@@ -146,11 +146,11 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Cena mojego „nie”",
     "slug": "cena-mojego-nie",
     "hook": "Odmówiłaś — spotkała Cię kara.",
-    "desc": "Chłód, groźby, wykluczenie i wstrzymana zapłata po odmowie. Przemyśl działania na miarę możliwości i bezpieczeństwa.",
+    "desc": "Chłód, groźby, wykluczenie lub wstrzymanie zapłaty po odmowie. Zastanów się, jak zadbać o siebie z uwzględnieniem bezpieczeństwa.",
     "topic": "Karanie za odmowę",
     "seoTitle": "Cena mojego „nie” — karanie za odmowę",
-    "intro": "Czasem najtrudniej nie wypowiedzieć „nie”, lecz wytrzymać to, co zaczyna się później: milczenie, groźby, wykluczenie albo opóźnianie czegoś potrzebnego. W tych ośmiu historiach przyjrzymy się sytuacjom, w których następstwa decyzji służą wymuszeniu ustępstwa.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Granica musi uwzględniać Twoje bezpieczeństwo i zależność. Nie każdej odmowy trzeba bronić w otwartym sporze.",
+    "intro": "Czasem najtrudniej nie powiedzieć „nie”, lecz znieść to, co dzieje się później: milczenie, groźby, wykluczenie albo wstrzymywanie czegoś, czego potrzebujesz. W tych ośmiu historiach przyjrzymy się sytuacjom, w których reakcja na odmowę ma skłonić Cię do ustępstwa.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Granica musi uwzględniać Twoje bezpieczeństwo i zależność. Nie każdej odmowy trzeba bronić w otwartym sporze.",
     "quote": "Czasem pierwszym krokiem do swobodnej decyzji jest wsparcie, informacja albo wyjście awaryjne.",
     "examples": [
       {
@@ -162,14 +162,14 @@ export const COLLECTIONS_PL: Collection[] = [
         "text": "Przełożony prosi o jeszcze jedną zmianę w weekend. Wyjaśniasz, że tym razem nie możesz. Początkowo odpowiada: „Dobrze, masz prawo”."
       },
       {
-        "title": "Wypłatę wstrzymują do Twojego „tak”.",
+        "title": "Wstrzymują zapłatę, dopóki się nie zgodzisz.",
         "text": "Skończyłaś i przekazałaś uzgodnioną pracę. Klient dodatkowo prosi o nagranie entuzjastycznej rekomendacji jego firmy. Odmawiasz, bo nie korzystałaś z jej usług."
       }
     ],
     "benefits": [
-      "Zauważysz związek między odmową a późniejszym naciskiem.",
-      "Ocenisz zależność, możliwe następstwa i dostępne wsparcie.",
-      "Przemyślisz odpowiedź i działanie uwzględniające bezpieczeństwo."
+      "Zauważysz, co dzieje się po Twojej odmowie.",
+      "Przyjrzysz się swojej zależności, możliwym konsekwencjom i źródłom wsparcia.",
+      "Zastanowisz się, jak odpowiedzieć i działać, dbając o bezpieczeństwo."
     ],
     "related": [
       3,
@@ -181,11 +181,11 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Hojna pułapka",
     "slug": "hojna-pulapka",
     "hook": "Pomoc, którą trzeba odpracować.",
-    "desc": "Prezenty i wsparcie z warunkami, których nie podano na początku. Wyjaśnij ustalenia i granice wdzięczności.",
+    "desc": "Prezenty i pomoc, które później okazują się zobowiązaniem. Wyjaśnij warunki i zobacz, na co naprawdę się zgodziłaś.",
     "topic": "Ukryte warunki pomocy",
     "seoTitle": "Hojna pułapka — ukryte warunki pomocy",
-    "intro": "Najpierw otrzymujesz pomoc, prezent lub ratunek. Później słyszysz: „Po wszystkim, co dla Ciebie zrobiłam…”. Ten zeszyt zawiera osiem historii o warunkach, których nie widziałaś, przyjmując wsparcie, i o decyzjach trudnych do podjęcia z poczuciem długu.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Wdzięczność może być szczera. Warunki pomocy powinny przy tym pozostać zrozumiałe i uzgodnione.",
+    "intro": "Najpierw dostajesz pomoc, prezent lub wsparcie w kryzysie. Później słyszysz: „Po wszystkim, co dla Ciebie zrobiłam…”. Ten zeszyt zawiera osiem historii o warunkach, których nie znałaś, przyjmując pomoc, i o decyzjach, które trudno podjąć, gdy czujesz się komuś winna.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Możesz być szczerze wdzięczna. To nie zmienia potrzeby jasnego uzgodnienia warunków pomocy.",
     "quote": "Jasne warunki pomagają przyjmować wsparcie bez nieograniczonego długu.",
     "examples": [
       {
@@ -202,9 +202,9 @@ export const COLLECTIONS_PL: Collection[] = [
       }
     ],
     "benefits": [
-      "Odróżnisz uzgodnione zobowiązanie od późniejszego żądania.",
-      "Ustalisz warunki pomocy przed jej przyjęciem.",
-      "Nazwiesz granice wdzięczności i wybierzesz, na co naprawdę się zgadzasz."
+      "Odróżnisz uzgodnione zobowiązanie od żądania dodanego później.",
+      "Przećwiczysz rozmowę o warunkach pomocy przed jej przyjęciem.",
+      "Oddzielisz wdzięczność od obowiązku spełniania każdej prośby."
     ],
     "related": [
       1,
@@ -216,15 +216,15 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Warunkowa miłość",
     "slug": "warunkowa-milosc",
     "hook": "Ciepło, na które trzeba zasłużyć.",
-    "desc": "Akceptacja za wygląd, sukces, siłę lub posłuszeństwo. Zauważ, co ukrywasz, żeby zachować więź.",
+    "desc": "Akceptacja zależna od wyglądu, sukcesu, siły lub posłuszeństwa. Zauważ, co ukrywasz, żeby nie stracić bliskości.",
     "topic": "Akceptacja, na którą trzeba zasłużyć",
     "seoTitle": "Warunkowa miłość — akceptacja, na którą trzeba zasłużyć",
-    "intro": "Ciepło pojawia się, kiedy spełniasz oczekiwania. Znika, kiedy widać Twoje odrębne zdanie, zmęczenie lub niepowodzenie. W tym zeszycie znajdziesz osiem historii o akceptacji z warunkami i o dostrzeganiu ceny ciągłych prób zasłużenia na bliskość.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Relacje mają ustalenia i granice. Nie wymagają ciągłego egzaminu z Twojej wartości jako człowieka.",
+    "intro": "Czułość pojawia się, kiedy spełniasz oczekiwania. Znika, gdy masz inne zdanie, jesteś zmęczona lub coś Ci się nie uda. W tym zeszycie znajdziesz osiem historii o warunkowej akceptacji i o tym, ile kosztuje ciągłe zasługiwanie na bliskość.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Relacje mają ustalenia i granice. Nie wymagają ciągłego egzaminu z Twojej wartości jako człowieka.",
     "quote": "Możesz uwzględniać innych i jednocześnie zostawiać miejsce dla siebie.",
     "examples": [
       {
-        "title": "Ciepło po spadku wskazania wagi.",
+        "title": "Czułość dopiero wtedy, gdy schudniesz.",
         "text": "Proponujesz wspólne zdjęcie. Partner odpowiada: „Kiedy wrócisz do dawnej formy, zrobimy ładne zdjęcia”. Gdy mówisz, że to boli, słyszysz: „Chcę przecież znów Cię podziwiać”."
       },
       {
@@ -237,9 +237,9 @@ export const COLLECTIONS_PL: Collection[] = [
       }
     ],
     "benefits": [
-      "Zauważysz, co ukrywasz lub zmieniasz dla zachowania więzi.",
-      "Odróżnisz wspólne ustalenia od warunków akceptowania Ciebie.",
-      "Wybierzesz słowa i krok zostawiające miejsce Twoim potrzebom i uczuciom."
+      "Zauważysz, co ukrywasz lub zmieniasz, żeby zachować bliskość.",
+      "Odróżnisz wspólne ustalenia od warunków, pod którymi ktoś Cię akceptuje.",
+      "Znajdziesz słowa i działania, które uwzględniają także Twoje potrzeby."
     ],
     "related": [
       1,
@@ -251,15 +251,15 @@ export const COLLECTIONS_PL: Collection[] = [
     "name": "Głos nawyku",
     "slug": "glos-nawyku",
     "hook": "Nikt nie wymaga. I tak ustępujesz.",
-    "desc": "Automatyczne „nie komplikuj” i „najpierw zasłuż”. Sprawdź przyswojone zasady i spróbuj innego działania.",
-    "topic": "Przyswojone zasady",
-    "seoTitle": "Głos nawyku — przyswojone zasady",
-    "intro": "Czasem nikt już nie każe Ci znosić czegoś ani ustępować, ale w środku słyszysz znajome: „Nie komplikuj”, „Nie bądź chciwa”, „Najpierw zasłuż”. W tym zeszycie znajdziesz osiem historii o przyswojonych zasadach, które uruchamiają się przed własnym wyborem.",
-    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Każda zawiera analizę, ważne rozróżnienie, możliwe odpowiedzi, działania oraz ćwiczenie. Kiedyś ta zasada mogła pomagać Ci się przystosować. Teraz możesz sprawdzić, czy nadal jej potrzebujesz.",
-    "quote": "Nawyk może podpowiedzieć pierwszą reakcję. Następny krok możesz stopniowo wybierać.",
+    "desc": "Odruchowe „nie komplikuj” i „najpierw zasłuż”. Przyjrzyj się dawnym przekonaniom i spróbuj zareagować inaczej.",
+    "topic": "Dawne przekonania",
+    "seoTitle": "Głos nawyku — dawne przekonania i codzienne wybory",
+    "intro": "Czasem nikt już nie każe Ci ustępować ani czegoś znosić, ale w głowie nadal słyszysz: „Nie komplikuj”, „Nie bądź chciwa”, „Najpierw zasłuż”. W tym zeszycie znajdziesz osiem historii o dawnych zasadach, które odruchowo wpływają na Twoje decyzje.",
+    "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Kiedyś ta zasada mogła pomagać Ci się przystosować. Teraz możesz sprawdzić, czy nadal jej potrzebujesz.",
+    "quote": "Nawyk może podpowiedzieć pierwszą reakcję. Możesz jednak stopniowo uczyć się reagować inaczej.",
     "examples": [
       {
-        "title": "Odpoczywasz. W środku — nagana.",
+        "title": "Odpoczywasz, ale masz wyrzuty sumienia.",
         "text": "Masz wolną godzinę. Siadasz z herbatą, ale zauważasz nieumytą podłogę i od razu wstajesz. Nikt teraz nie robi Ci wyrzutów. W głowie brzmi jednak znajome: „Najpierw zrób wszystko, potem odpoczniesz”."
       },
       {
@@ -272,9 +272,9 @@ export const COLLECTIONS_PL: Collection[] = [
       }
     ],
     "benefits": [
-      "Rozpoznasz przyswojoną zasadę w konkretnej codziennej sytuacji.",
-      "Sprawdzisz ją według dzisiejszych faktów i rzeczywistych zobowiązań.",
-      "Wybierzesz niewielkie inne działanie bez wymogu zmiany wszystkich nawyków naraz."
+      "Rozpoznasz dawne przekonanie w codziennej sytuacji.",
+      "Sprawdzisz, czy nadal pasuje do Twojego życia i obecnych zobowiązań.",
+      "Spróbujesz jednej niewielkiej zmiany, bez poprawiania wszystkich nawyków naraz."
     ],
     "related": [
       0,
