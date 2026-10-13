@@ -16,3 +16,11 @@ for (const bad of [{status:'open'},{payment_status:'unpaid'},{amount_total:1},{a
 assert.equal(paidCollectionOrder({...free,livemode:true},true),null);
 assert.equal(paidCollectionOrder({...paid,amount_total:0,total_details:{amount_discount:4900}}),null);
 console.log('Completed 100% discounted test orders accepted; unpaid, incomplete, forged totals and live free orders rejected.');
+
+const completedZeroPaid={...free,payment_status:'paid'};
+assert.deepEqual(paidCollectionOrder(completedZeroPaid).ids,[0,4,7]);
+const fullZeroPaid={...completedZeroPaid,amount_subtotal:9900,total_details:{amount_discount:9900,amount_tax:0,amount_shipping:0},metadata:{...paid.metadata,plan:'all',collections:'[0,1,2,3,4,5,6,7]',lang:'pl'}};
+assert.equal(paidCollectionOrder(fullZeroPaid).ids.length,8);
+assert.equal(paidCollectionOrder({...fullZeroPaid,status:'open'}),null);
+assert.equal(paidCollectionOrder({...fullZeroPaid,livemode:true},true),null);
+console.log('Stripe completed zero-cost orders marked paid grant test entitlements; live and incomplete zero-cost orders remain rejected.');

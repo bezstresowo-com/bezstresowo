@@ -24,7 +24,7 @@ export function paidCollectionOrder(session: { mode?: string | null; payment_sta
   if (session.payment_status === 'paid' && session.amount_total === order.price && discount === 0) return order;
   // A completed Stripe test checkout with a genuine full discount needs no payment.
   // Live purchases still require the full paid price.
-  if (!expectedLive && session.status === 'complete' && session.payment_status === 'no_payment_required' && session.amount_total === 0 && discount === order.price) return order;
+  if (!expectedLive && session.status === 'complete' && (session.payment_status === 'paid' || session.payment_status === 'no_payment_required') && session.amount_total === 0 && discount === order.price) return order;
   return null;
  } catch {return null;}
 }
