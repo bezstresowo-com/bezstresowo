@@ -1,7 +1,9 @@
+/* eslint-disable @typescript-eslint/no-require-imports -- CommonJS test harness. */
 const fs = require('node:fs');
 const vm = require('node:vm');
 const assert = require('node:assert/strict');
 const ts = require('typescript');
+/* eslint-enable @typescript-eslint/no-require-imports */
 class InvalidRequest extends Error {}
 let records, available, rejection;
 class FakeStripe {

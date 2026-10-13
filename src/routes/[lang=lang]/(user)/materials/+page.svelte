@@ -8,15 +8,16 @@
 	const paidMaterials = $derived(
 		isUkrainian
 			? [
-                    {
-                        title: 'Чужі бажання',
-                        eyebrow: 'Серія збірок · від 19 zł',
-                        cover: '/assets/collections/1.webp',
-                        alt: 'Обкладинка збірки «Зручна мішень» із серії «Чужі бажання»',
-                        href: '/uk/materials/chuzhi-bazhannia',
-                        description: 'Вісім збірок про контроль, провину, знецінення та власний вибір. Одна — 19 zł, будь-які три — 49 zł, уся серія — 99 zł.',
-                        cta: 'Обрати збірки'
-                    },
+					{
+						title: 'Чужі бажання',
+						eyebrow: 'Серія збірок · від 19 zł',
+						cover: '/assets/collections/1.webp',
+						alt: 'Обкладинка збірки «Зручна мішень» із серії «Чужі бажання»',
+						href: '/uk/materials/chuzhi-bazhannia',
+						description:
+							'Вісім збірок про контроль, провину, знецінення та власний вибір. Одна — 19 zł, будь-які три — 49 zł, уся серія — 99 zł.',
+						cta: 'Обрати збірки'
+					},
 
 					{
 						title: 'Криза чи кінець?',
@@ -40,7 +41,16 @@
 					}
 				]
 			: [
-                    {title:'Cudze oczekiwania',eyebrow:'Seria zbiorów · od 19 zł',cover:'/assets/collections/pl/1.webp',alt:'Okładka zbioru „Wygodny cel” z serii „Cudze oczekiwania”',href:'/pl/materials/cudze-oczekiwania',description:'Osiem zbiorów o kontroli, poczuciu winy, dewaluacji i własnym wyborze. Jeden — 19 zł, dowolne trzy — 49 zł, cała seria — 99 zł.',cta:'Wybierz zbiory'},
+					{
+						title: 'Cudze oczekiwania',
+						eyebrow: 'Seria zbiorów · od 19 zł',
+						cover: '/assets/collections/pl/1.webp',
+						alt: 'Okładka zbioru „Wygodny cel” z serii „Cudze oczekiwania”',
+						href: '/pl/materials/cudze-oczekiwania',
+						description:
+							'Osiem zbiorów o kontroli, poczuciu winy, dewaluacji i własnym wyborze. Jeden — 19 zł, dowolne trzy — 49 zł, cała seria — 99 zł.',
+						cta: 'Wybierz zbiory'
+					},
 					{
 						title: 'Kryzys czy koniec?',
 						eyebrow: 'Program · 79 zł',
@@ -163,4 +173,3 @@
 		</div>
 	</div>
 </section>
-

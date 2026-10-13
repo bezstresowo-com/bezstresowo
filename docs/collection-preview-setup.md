@@ -5,6 +5,7 @@ Branch: preview/collections-series-2026-10-12. No production rollout authorized.
 The implementation reuses existing Stripe SDK, private S3 book reader, Mongo download counters and SMTP credentials. It does not provision another vendor or expose PDFs as static assets.
 
 Set only for this preview branch:
+
 - COLLECTIONS_STRIPE_TEST_SK: real Stripe test secret key (never live).
 - COLLECTIONS_PREVIEW_ENABLED=true after storage, email and webhook are verified.
 - COLLECTIONS_WEBHOOK_SECRET: signing secret for /api/collections/webhook on the exact preview origin.

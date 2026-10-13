@@ -11,7 +11,10 @@
 	title={copy.seo.title}
 	description={copy.seo.description}
 	noindex
-	alternates={[{ locale: Locale.ukUA, path: '/kryza-chy-kinets' }, { locale: Locale.plPL, path: '/kryzys-czy-koniec' }]}
+	alternates={[
+		{ locale: Locale.ukUA, path: '/kryza-chy-kinets' },
+		{ locale: Locale.plPL, path: '/kryzys-czy-koniec' }
+	]}
 />
 
 <div class="landing">
@@ -166,9 +169,8 @@
 		<div class="price-card">
 			<span>{copy.purchase.priceLabel}</span>
 			<strong>{copy.purchase.price}</strong>
-			<a
-				class="cta primary"
-				href="https://bezstresowo.sendpulse.courses/kryzys-czy-koniec">{copy.purchase.button}</a
+			<a class="cta primary" href="https://bezstresowo.sendpulse.courses/kryzys-czy-koniec"
+				>{copy.purchase.button}</a
 			>
 			<small>Kod promocyjny możesz wpisać w formularzu zakupu w SendPulse.</small>
 			<small>{copy.purchase.note}</small>
