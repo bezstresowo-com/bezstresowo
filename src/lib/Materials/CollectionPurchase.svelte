@@ -21,7 +21,7 @@
  }
 </script>
 
-<button class="collection-buy" onclick={buy} disabled={pending || !ready} aria-busy={pending}>{lang === 'pl' ? 'Kup zeszyt' : 'Купити збірку'}</button>
+<button class="collection-buy" onclick={buy} disabled={pending || !ready} aria-busy={pending}>{lang === 'pl' ? 'Kup zbiór' : 'Купити збірку'}</button>
 <p class="purchase-message" aria-live="polite">{pending ? (lang === 'pl' ? 'Przygotowujemy płatność…' : 'Готуємо перехід до оплати…') : message}</p>
 
 <style>

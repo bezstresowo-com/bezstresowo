@@ -26,7 +26,7 @@
  });
 </script>
 
-<Seo title={`${item.seoTitle} | Bezstresowo`} description={`${item.desc} 8 historii z życia, odpowiedzi i ćwiczenia. 19 zł.`} noindex={data.noindex} alternates={[{locale:Locale.ukUA,path:ukCollectionPath(UK_COLLECTIONS[item.id]).replace('/uk','')},{locale:Locale.plPL,path:path.replace('/pl','')}]} image={absoluteUrl(`/assets/collections/pl/${item.id + 1}.webp`)} imageAlt={`Okładka zeszytu «${item.name}»`} {jsonLd}/>
+<Seo title={`${item.seoTitle} | Bezstresowo`} description={`${item.desc} 8 historii z życia, odpowiedzi i ćwiczenia. 19 zł.`} noindex={data.noindex} alternates={[{locale:Locale.ukUA,path:ukCollectionPath(UK_COLLECTIONS[item.id]).replace('/uk','')},{locale:Locale.plPL,path:path.replace('/pl','')}]} image={absoluteUrl(`/assets/collections/pl/${item.id + 1}.webp`)} imageAlt={`Okładka zbioru «${item.name}»`} {jsonLd}/>
 
 <div class="collection-page">
  <div class="shell">
@@ -34,7 +34,7 @@
   <section class="product-hero" aria-labelledby="collection-title">
    <div class="art"><img src={`/assets/collections/pl/${item.id+1}.webp`} alt={`Okładka «${item.name}»`} fetchpriority="high" width="600" height="900"/></div>
    <div class="hero-copy">
-    <p class="eyebrow">CUDZE OCZEKIWANIA · ZESZYT {String(item.id+1).padStart(2,'0')}</p>
+    <p class="eyebrow">CUDZE OCZEKIWANIA · ZBIÓR {String(item.id+1).padStart(2,'0')}</p>
     <p class="topic">{item.topic}</p>
     <h1 id="collection-title">{item.name}</h1>
     <p class="hook">{item.hook}</p>
@@ -42,19 +42,19 @@
     <div class="purchase-box">
      <div class="price"><strong>19 <span>zł</span></strong><span>20 stron · 8 historii<br/>odpowiedzi i ćwiczenia</span></div>
      <CollectionPurchase id={item.id} ready={data.purchaseReady} lang="pl"/>
-     <p class="delivery">Zeszyt PDF. Po płatności — dostęp do pliku i e-mail z linkiem.</p>
+     <p class="delivery">Zbiór PDF. Po płatności — dostęp do pliku i e-mail z linkiem.</p>
     </div>
-    <a class="bundle-link" href={`${SERIES_PATH}?plan=three&select=${item.id}#collections`}>Wybierz trzy zeszyty za 49 zł <span aria-hidden="true">→</span></a>
+    <a class="bundle-link" href={`${SERIES_PATH}?plan=three&select=${item.id}#collections`}>Wybierz trzy zbiory za 49 zł <span aria-hidden="true">→</span></a>
    </div>
   </section>
 
   <section class="about section-rule" aria-labelledby="about-title">
-   <div><p class="eyebrow">O TYM ZESZYCIE</p><h2 id="about-title">Kiedy to, co znajome,<br/>staje się bardziej zrozumiałe.</h2></div>
+   <div><p class="eyebrow">O TYM ZBIORZE</p><h2 id="about-title">Kiedy to, co znajome,<br/>staje się bardziej zrozumiałe.</h2></div>
    <div><p>{item.body}</p><blockquote>{item.quote}</blockquote></div>
   </section>
 
   <section class="situations section-rule" aria-labelledby="situations-title">
-   <p class="eyebrow">KILKA SYTUACJI Z ZESZYTU</p><h2 id="situations-title">Może to rozpoznajesz.</h2>
+   <p class="eyebrow">KILKA SYTUACJI Z ZBIORU</p><h2 id="situations-title">Może to rozpoznajesz.</h2>
    <div class="scenario-grid">{#each item.examples as example,index}<article><span class="scenario-number">{String(index+1).padStart(2,'0')}</span><h3>{example.title}</h3><p>{example.text}</p></article>{/each}</div>
   </section>
 
@@ -68,11 +68,11 @@
    <div class="inside-grid"><article><span>01</span><h3>8 historii z życia</h3><p>Konkretne sytuacje, wyjaśnienie nacisku i ważne rozróżnienia pomagające dokładniej zrozumieć kontekst.</p></article><article><span>02</span><h3>Słowa i działania</h3><p>Warianty odpowiedzi i następnego kroku do dostosowania do własnych okoliczności.</p></article><article><span>03</span><h3>Ćwiczenia dla siebie</h3><p>Osobne zadanie po każdej historii i miejsce na notatki. Możesz pracować z jedną sytuacją we własnym tempie.</p></article></div>
   </section>
 
-  <section class="author section-rule"><div><p class="eyebrow">AUTOR</p><h2>Olesya Haiduk</h2><p class="profession">Psychoterapeuta</p></div><div><p>To zeszyt psychoedukacyjny do samodzielnego czytania i refleksji nad własnym doświadczeniem. Nie służy diagnozie i nie zastępuje psychoterapii.</p><p>W niebezpiecznej sytuacji priorytetem są Twoje bezpieczeństwo i dostępne wsparcie. Proponowane zdania nie zobowiązują do wchodzenia w konflikt.</p></div></section>
+  <section class="author section-rule"><div><p class="eyebrow">AUTOR</p><h2>Olesya Haiduk</h2><p class="profession">Psychoterapeuta</p></div><div><p>To zbiór psychoedukacyjny do samodzielnego czytania i refleksji nad własnym doświadczeniem. Nie służy diagnozie i nie zastępuje psychoterapii.</p><p>W niebezpiecznej sytuacji priorytetem są Twoje bezpieczeństwo i dostępne wsparcie. Proponowane zdania nie zobowiązują do wchodzenia w konflikt.</p></div></section>
 
-  <section class="closing"><div><p class="eyebrow">ZACZNIJ OD JEDNEGO BLISKIEGO TEMATU</p><h2>{item.name}</h2><p>{item.hook}</p></div><div class="closing-buy"><p class="closing-price">19 zł</p><CollectionPurchase id={item.id} ready={data.purchaseReady} lang="pl"/><a href={`${SERIES_PATH}?plan=all#collections`}>Cała seria: 8 zeszytów za 99 zł →</a></div></section>
+  <section class="closing"><div><p class="eyebrow">ZACZNIJ OD JEDNEGO BLISKIEGO TEMATU</p><h2>{item.name}</h2><p>{item.hook}</p></div><div class="closing-buy"><p class="closing-price">19 zł</p><CollectionPurchase id={item.id} ready={data.purchaseReady} lang="pl"/><a href={`${SERIES_PATH}?plan=all#collections`}>Cała seria: 8 zbiorów za 99 zł →</a></div></section>
 
-  <section class="related section-rule" aria-labelledby="related-title"><p class="eyebrow">INNE TEMATY SERII</p><h2 id="related-title">Jeśli coś jeszcze jest Ci bliskie.</h2><div class="related-grid">{#each item.related as id}{@const other=COLLECTIONS[id]}<a class="related-card" href={collectionPath(other)}><img src={`/assets/collections/pl/${id+1}.webp`} alt={`Okładka «${other.name}»`} loading="lazy" width="160" height="240"/><div><h3>{other.name}</h3><p>{other.hook}</p><span>Więcej o zeszycie →</span></div></a>{/each}</div><a class="back-link" href={`${SERIES_PATH}#collections`}>Zobacz wszystkie osiem zeszytów →</a></section>
+  <section class="related section-rule" aria-labelledby="related-title"><p class="eyebrow">INNE TEMATY SERII</p><h2 id="related-title">Jeśli coś jeszcze jest Ci bliskie.</h2><div class="related-grid">{#each item.related as id}{@const other=COLLECTIONS[id]}<a class="related-card" href={collectionPath(other)}><img src={`/assets/collections/pl/${id+1}.webp`} alt={`Okładka «${other.name}»`} loading="lazy" width="160" height="240"/><div><h3>{other.name}</h3><p>{other.hook}</p><span>Więcej o zbiorze →</span></div></a>{/each}</div><a class="back-link" href={`${SERIES_PATH}#collections`}>Zobacz wszystkie osiem zbiorów →</a></section>
  </div>
 </div>
 

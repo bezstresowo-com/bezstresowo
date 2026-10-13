@@ -44,7 +44,7 @@ export const COLLECTIONS_PL: Collection[] = [
     "desc": "Nadzór, sprawdzanie wiadomości i decyzje podejmowane za Ciebie. Zobacz, kiedy troska zaczyna ograniczać Twoją wolność.",
     "topic": "Kontrola pod pozorem troski",
     "seoTitle": "Czuła kontrola — kontrola pod pozorem troski",
-    "intro": "Najpierw ktoś się o Ciebie martwi, pomaga i podpowiada. Z czasem jednak każda Twoja decyzja wymaga jego aprobaty. Ten zeszyt pomoże Ci zauważyć, kiedy wsparcie zaczyna odbierać Ci możliwość decydowania o sobie.",
+    "intro": "Najpierw ktoś się o Ciebie martwi, pomaga i podpowiada. Z czasem jednak każda Twoja decyzja wymaga jego aprobaty. Ten zbiór pomoże Ci zauważyć, kiedy wsparcie zaczyna odbierać Ci możliwość decydowania o sobie.",
     "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Możesz zdecydować, jaką pomoc przyjmujesz. Zgoda na wsparcie nie oznacza zgody na wszystko.",
     "quote": "Twoja zgoda dotyczy konkretnej pomocy, a nie nieograniczonego dostępu do Twojego życia.",
     "examples": [
@@ -79,7 +79,7 @@ export const COLLECTIONS_PL: Collection[] = [
     "desc": "Umniejszanie sukcesów, sprzeczne wymagania i ciągłe wypominanie błędów. Wróć do faktów i dostrzeż to, co naprawdę potrafisz.",
     "topic": "Umniejszanie i utrata pewności siebie",
     "seoTitle": "Odebrana pewność siebie — umniejszanie i utrata pewności siebie",
-    "intro": "Wciąż pamiętasz, co potrafiłaś i czego chciałaś. Ale przed nowym krokiem już słyszysz cudzy głos: „Nie dasz rady”, „Po prostu miałaś szczęście”, „Komu jesteś potrzebna?”. Ten zeszyt zawiera osiem historii o tym, jak cudze oceny stopniowo zastępują Twoje spojrzenie na siebie.",
+    "intro": "Wciąż pamiętasz, co potrafiłaś i czego chciałaś. Ale przed nowym krokiem już słyszysz cudzy głos: „Nie dasz rady”, „Po prostu miałaś szczęście”, „Komu jesteś potrzebna?”. Ten zbiór zawiera osiem historii o tym, jak cudze oceny stopniowo zastępują Twoje spojrzenie na siebie.",
     "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Możesz brać pod uwagę uwagi innych, nie zgadzając się na poniżające oceny.",
     "quote": "Uczciwa ocena siebie uwzględnia zarówno Twoje umiejętności, jak i to, czego jeszcze się uczysz.",
     "examples": [
@@ -184,7 +184,7 @@ export const COLLECTIONS_PL: Collection[] = [
     "desc": "Prezenty i pomoc, które później okazują się zobowiązaniem. Wyjaśnij warunki i zobacz, na co naprawdę się zgodziłaś.",
     "topic": "Ukryte warunki pomocy",
     "seoTitle": "Hojna pułapka — ukryte warunki pomocy",
-    "intro": "Najpierw dostajesz pomoc, prezent lub wsparcie w kryzysie. Później słyszysz: „Po wszystkim, co dla Ciebie zrobiłam…”. Ten zeszyt zawiera osiem historii o warunkach, których nie znałaś, przyjmując pomoc, i o decyzjach, które trudno podjąć, gdy czujesz się komuś winna.",
+    "intro": "Najpierw dostajesz pomoc, prezent lub wsparcie w kryzysie. Później słyszysz: „Po wszystkim, co dla Ciebie zrobiłam…”. Ten zbiór zawiera osiem historii o warunkach, których nie znałaś, przyjmując pomoc, i o decyzjach, które trudno podjąć, gdy czujesz się komuś winna.",
     "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Możesz być szczerze wdzięczna. To nie zmienia potrzeby jasnego uzgodnienia warunków pomocy.",
     "quote": "Jasne warunki pomagają przyjmować wsparcie bez nieograniczonego długu.",
     "examples": [
@@ -219,7 +219,7 @@ export const COLLECTIONS_PL: Collection[] = [
     "desc": "Akceptacja zależna od wyglądu, sukcesu, siły lub posłuszeństwa. Zauważ, co ukrywasz, żeby nie stracić bliskości.",
     "topic": "Akceptacja, na którą trzeba zasłużyć",
     "seoTitle": "Warunkowa miłość — akceptacja, na którą trzeba zasłużyć",
-    "intro": "Czułość pojawia się, kiedy spełniasz oczekiwania. Znika, gdy masz inne zdanie, jesteś zmęczona lub coś Ci się nie uda. W tym zeszycie znajdziesz osiem historii o warunkowej akceptacji i o tym, ile kosztuje ciągłe zasługiwanie na bliskość.",
+    "intro": "Czułość pojawia się, kiedy spełniasz oczekiwania. Znika, gdy masz inne zdanie, jesteś zmęczona lub coś Ci się nie uda. W tym zbiorze znajdziesz osiem historii o warunkowej akceptacji i o tym, ile kosztuje ciągłe zasługiwanie na bliskość.",
     "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Relacje mają ustalenia i granice. Nie wymagają ciągłego egzaminu z Twojej wartości jako człowieka.",
     "quote": "Możesz uwzględniać innych i jednocześnie zostawiać miejsce dla siebie.",
     "examples": [
@@ -254,7 +254,7 @@ export const COLLECTIONS_PL: Collection[] = [
     "desc": "Odruchowe „nie komplikuj” i „najpierw zasłuż”. Przyjrzyj się dawnym przekonaniom i spróbuj zareagować inaczej.",
     "topic": "Dawne przekonania",
     "seoTitle": "Głos nawyku — dawne przekonania i codzienne wybory",
-    "intro": "Czasem nikt już nie każe Ci ustępować ani czegoś znosić, ale w głowie nadal słyszysz: „Nie komplikuj”, „Nie bądź chciwa”, „Najpierw zasłuż”. W tym zeszycie znajdziesz osiem historii o dawnych zasadach, które odruchowo wpływają na Twoje decyzje.",
+    "intro": "Czasem nikt już nie każe Ci ustępować ani czegoś znosić, ale w głowie nadal słyszysz: „Nie komplikuj”, „Nie bądź chciwa”, „Najpierw zasłuż”. W tym zbiorze znajdziesz osiem historii o dawnych zasadach, które odruchowo wpływają na Twoje decyzje.",
     "body": "W ośmiu historiach z relacji, rodziny, przyjaźni i pracy przyjrzysz się konkretnym zachowaniom. Przy każdej znajdziesz omówienie, przykładowe odpowiedzi, propozycje działania i ćwiczenie. Kiedyś ta zasada mogła pomagać Ci się przystosować. Teraz możesz sprawdzić, czy nadal jej potrzebujesz.",
     "quote": "Nawyk może podpowiedzieć pierwszą reakcję. Możesz jednak stopniowo uczyć się reagować inaczej.",
     "examples": [

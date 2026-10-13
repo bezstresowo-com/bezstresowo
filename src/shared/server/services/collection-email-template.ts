@@ -3,13 +3,13 @@ const escape = (value: string) => value.replace(/&/g, '&amp;').replace(/</g, '&l
 export function collectionEmail(downloadUrl: string,names: readonly string[],lang: CollectionLanguage='uk') {
  const url=new URL(downloadUrl);if(url.protocol!=='https:')throw new Error('Invalid delivery URL');
  const pl=lang==='pl';
- const subject=pl?'Twoje zeszyty „Cudze oczekiwania”':'Твої збірки «Чужі бажання»';
- const title=pl?'Twoje zeszyty już tutaj':'Твої збірки вже тут';
+ const subject=pl?'Twoje zbiory „Cudze oczekiwania”':'Твої збірки «Чужі бажання»';
+ const title=pl?'Twoje zbiory już tutaj':'Твої збірки вже тут';
  const thanks=pl?'Dziękuję za zakup!':'Дякую за покупку!';
- const list=pl?'Twoje zeszyty:':'Твої збірки:';
- const button=pl?'Pobierz zeszyty':'Завантажити збірки';
+ const list=pl?'Twoje zbiory:':'Твої збірки:';
+ const button=pl?'Pobierz zbiory':'Завантажити збірки';
  const download=pl?'Pobierz:':'Завантажити:';
- const instructions=pl?'Każdy zeszyt możesz pobrać do trzech razy. Otwarcie e-maila lub strony nie zużywa próby. Zapisz pliki na swoim urządzeniu.':'Кожну збірку можна завантажити до трьох разів. Відкриття листа чи сторінки не витрачає спробу. Збережи файли на своєму пристрої.';
+ const instructions=pl?'Każdy zbiór możesz pobrać do trzech razy. Otwarcie e-maila lub strony nie zużywa próby. Zapisz pliki na swoim urządzeniu.':'Кожну збірку можна завантажити до трьох разів. Відкриття листа чи сторінки не витрачає спробу. Збережи файли на своєму пристрої.';
  const help=pl?'Pomoc:':'Допомога:';
  const author=pl?'Olesya Haiduk':'Олеся Гайдук';
  const profession=pl?'Psychoterapeuta':'Психолог і психотерапевт';
