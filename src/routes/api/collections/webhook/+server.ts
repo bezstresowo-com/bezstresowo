@@ -1,4 +1,5 @@
 import { text } from '@sveltejs/kit';
+import { paidCollectionOrder } from '$shared/server/services/collection-order';
 import { collectionConfig, collectionStripe, deliverCollections } from '$shared/server/services/collection-delivery';
 export async function POST({request,url}) {
  let config; try { config=collectionConfig(); } catch { return text('Not configured',{status:503}); }
@@ -6,7 +7,7 @@ export async function POST({request,url}) {
  if(event.livemode!==config.live)return text('Wrong payment mode',{status:400});
  if(event.type==='checkout.session.completed'||event.type==='checkout.session.async_payment_succeeded') {
   const session=event.data.object;
-  if(session.metadata?.type!=='collection_series'||session.metadata.deliveryOrigin!==url.origin||session.payment_status!=='paid')return text('OK');
+  if(session.metadata?.type!=='collection_series'||session.metadata.deliveryOrigin!==url.origin||!paidCollectionOrder(session,config.live))return text('OK');
   try{await deliverCollections(session.id,url.origin);}catch{return text('Delivery not completed',{status:500});}
  }
  return text('OK');

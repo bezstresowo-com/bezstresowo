@@ -9,3 +9,10 @@ const paid={mode:'payment',payment_status:'paid',livemode:false,currency:'pln',a
 assert.deepEqual(paidCollectionOrder(paid).ids,[0,4,7]);
 for(const bad of [{payment_status:'unpaid'},{livemode:true},{amount_total:1900},{amount_subtotal:1900},{currency:'eur'},{mode:'subscription'},{metadata:{...paid.metadata,collections:'[0,0,7]'}},{metadata:{...paid.metadata,collections:'[0,4,7,6]'}},{metadata:{...paid.metadata,type:'book'}}])assert.equal(paidCollectionOrder({...paid,...bad}),null);
 console.log(`${count} one/triple orders, full series, invalid orders and payment forgery checks passed.`);
+
+const free={...paid,status:'complete',payment_status:'no_payment_required',amount_total:0,total_details:{amount_discount:4900,amount_tax:0,amount_shipping:0}};
+assert.deepEqual(paidCollectionOrder(free).ids,[0,4,7]);
+for (const bad of [{status:'open'},{payment_status:'unpaid'},{amount_total:1},{amount_subtotal:0},{total_details:{amount_discount:0}},{total_details:{amount_discount:4900,amount_tax:1}},{livemode:true}]) assert.equal(paidCollectionOrder({...free,...bad}),null);
+assert.equal(paidCollectionOrder({...free,livemode:true},true),null);
+assert.equal(paidCollectionOrder({...paid,amount_total:0,total_details:{amount_discount:4900}}),null);
+console.log('Completed 100% discounted test orders accepted; unpaid, incomplete, forged totals and live free orders rejected.');
